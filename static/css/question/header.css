@@ -1,0 +1,49 @@
+body {background-color:#eeeceb;}
+header {
+        background: transparent;
+}
+
+header {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:104px;
+	z-index:50;}
+
+header .center {padding-top:8px;}
+header, footer, h1, h2, h3 {font-family:QuicksandBook, Arial, Helvetica, sans-serif; font-weight:normal;}
+
+.header3 {
+	float:right;
+	margin:0px 0px 0px 10px;}
+
+.header1 {
+    float:left;
+    margin:0px 0px 0px 0px;
+}
+
+.heading {
+    font-size: xx-large;
+    color: cadetblue;
+}
+a {
+    color:indianred;
+}
+.header1 {width:380px;}
+
+.header3 {width:380px;}
+
+#logo {
+	margin:0px 0px 0px 0px;}
+
+.questiondiv {
+     margin:220px 300px 350px 400px;
+    width: 450px;
+    height: 300px;
+    background-color: deepskyblue;
+}
+
+.heading {
+
+}
