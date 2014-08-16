@@ -1,4 +1,4 @@
-
+import sys
 class Constant:
     STUDENT=1
     SCHOOL=2
@@ -18,6 +18,38 @@ class Constant:
     STATE_CONTAINED_TOPICS="contains_topic_keys"
     SEX_MALE=0
     SEX_FEMALE=1
+    ADDRESS_TYPE_HOME=0
+    ADDRESS_TYPE_WORK=1
+    ADDRESS_TYPE_OTHER=2
+    ERROR_BAD_VALUE=-1
+    ERROR_FAILED_QUERY=-2
+    ERROR_INCONSISTENT_STATE=-3
+    ERROR_OPERATION_FAIL=-4
+    ERROR_NO_DATA_FOUND=-4
+    ERROR_INVALID_USER=-5
+    UPDATION_SUCCESSFULL=0
+    
+    
+    
+
+class Subject:
+    TYPE_CLASS=0
+    TYPE_GLOBAL=1
+    SUBJECT_MATHS="Mathematics"
+    SUBJECT_ENGLISH="English"
+    SUBJECT_SCIENCE="Science"
+
+class Topic:
+    TOPIC_ADDITION="Addition"
+    TOPIC_SUBSTRACTION="Substraction"
+    
+class Class:
+    CLASS_V=5
+    CLASS_VI=6
+
+class Sectiion:
+    SECTION_A="A"
+    
     
     
 
