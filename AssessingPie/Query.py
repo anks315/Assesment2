@@ -434,7 +434,10 @@ def assign_questions_to_state(state_key,questions_in_state_keys):
         
          question_state=question_state_key.get()
          question_state.questions_in_state_keys.extend(questions_in_state_keys)
-         question_state.put()     
+         question_state.put()
+    for question_key in questions_in_state_keys:
+         question=question_key.get()
+         question.no_states_contained_in=question.no_states_contained_in+1
     return Constant.UPDATION_SUCCESSFULL
 
 """
