@@ -1,4 +1,3 @@
-
 from google.appengine.ext.ndb import Key
 from google.appengine.ext import ndb
 import logging
@@ -588,3 +587,4 @@ def get_states_by_topic_name(topic_name):
         return Constant.ERROR_INCONSISTENT_STATE
 
     return states
+

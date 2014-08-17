@@ -23,8 +23,17 @@ class  UserBuffer:
         self.questions = {0:Question(3,0.75,'Add 3 and 5',8), 1:Question(2,0.50,'Add 29 + 35',64), 2:Question(1,0.25,'Divide and find quotient 58 by 9',6),}
         self.minquestion = 1
         self.maxprobstate = 0
+
+    def initializequestions:
+
     def initializebuffer(self):
-        Query.get_states_of_topic()
+        state_db =Query.get_states_of_topic("Number  System")
+        initialprob = 1/state_db.__len__()
+        self.states.append(State((-1),initialprob))
+        for tempstate in state_db:
+            questiontuple = tuple(Query.get_questions_of_state(tempstate.key))
+            self.states.append(State(questiontuple,initialprob))
+
 
 
 usersdict ={}
