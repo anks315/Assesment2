@@ -31,7 +31,7 @@ Structured Property: Uses QuestionInstance class as a property for basic questio
 """    
 class Question(ndb.Model):
     
-    no_states_contained_in = ndb.IntegerProperty()
+    no_states_contained_in = ndb.IntegerProperty(default=0)
     instance = ndb.StructuredProperty(QuestionInstance, required=True)
     
 """
