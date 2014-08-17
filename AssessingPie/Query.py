@@ -286,27 +286,24 @@ Assigns  existing assessments to an existing school:
 """
 def assign_assessment_to_school(school_key,assessments_in_school_keys):
     school=None
+    school_assessment=None
     try:
         school=school_key.get() 
         for assessment_key in assessments_in_school_keys:
                    assessment=assessment_key.get()
+        school_assessment_key=school.assessments_in_school_key
     except Exception :
         logging.exception("")
         return Constant.ERROR_BAD_VALUE    
-    try: 
-        query=School_Assessments.query(School_Assessments.school_key == school_key)
-    except Exception :
-        logging.exception("")
-        return Constant.ERROR_FAILED_QUERY
-    if query.count()==0:   
+    if school_assessment_key==None:   
         
         school_assessment=School_Assessments(school_key=school_key,assessments_in_school_keys=assessments_in_school_keys)
         school_assessment.put()    
         school.assessments_in_school_key=school_assessment.key 
         school.put()
     else:
-         school_assessment_list=query.fetch()
-         school_assessment=school_assessment_list[0]
+        
+         school_assessment=school_assessment_key.get()
          school_assessment.assessments_in_school_key.extend(assessments_in_school_keys)
          school_assessment.put()     
     return Constant.UPDATION_SUCCESSFULL
@@ -319,27 +316,25 @@ Assigns  existing assessment to an existing topic:
 """
 def assign_assessment_to_topic(assessment_key,topics_in_assessment_keys):
     assessment=None
+    topic_assessment=None
     try:
         assessment=assessment_key.get() 
         for topic_key in topics_in_assessment_keys:
                    topic=topic_key.get()
+        topic_assessment_key=assessment.topics_in_assessment_key
     except Exception :
         logging.exception("")
         return Constant.ERROR_BAD_VALUE    
-    try: 
-        query=Assessment_Topics.query(Assessment_Topics.assessment_key ==assessment_key)
-    except Exception :
-        logging.exception("")
-        return Constant.ERROR_FAILED_QUERY
-    if query.count()==0:   
+   
+    if topic_assessment_key==None:   
         
         assessment_topic=Assessment_Topics(assessment_key=assessment_key,topics_in_assessment_keys=topics_in_assessment_keys)
         assessment_topic.put()    
         assessment.topics_in_assessment_key=assessment_topic.key
         assessment.put()
     else:
-         assessment_topic_list=query.fetch()
-         assessment_topic=assessment_topic_list[0]
+        
+         assessment_topic=topic_assessment_key.get()
          assessment_topic.topics_in_assessment_keys.extend(topics_in_assessment_keys)
          assessment_topic.put()     
     return Constant.UPDATION_SUCCESSFULL
@@ -353,27 +348,25 @@ Assigns  existing assessment to an existing state:
 """
 def assign_assessment_to_state(assessment_key,states_in_assessment_keys):
     assessment=None
+    state_asessment=None
     try:
         assessment=assessment_key.get() 
         for state_key in states_in_assessment_keys:
                    state=state_key.get()
+        state_asessment_key=assessment.states_in_assessment_key           
     except Exception :
         logging.exception("")
         return Constant.ERROR_BAD_VALUE    
-    try: 
-        query=Assessment_States.query(Assessment_States.assessment_key ==assessment_key)
-    except Exception :
-        logging.exception("")
-        return Constant.ERROR_FAILED_QUERY
-    if query.count()==0:   
+   
+    if state_asessment_key==None:   
         
         assessment_state=Assessment_States(assessment_key=assessment_key,states_in_assessment_keys=states_in_assessment_keys)
         assessment_state.put()    
         assessment.states_in_assessment_key=assessment_state.key
         assessment.put()
     else:
-         assessment_state_list=query.fetch()
-         assessment_state=assessment_state_list[0]
+         
+         assessment_state=state_asessment_key.get()
          assessment_state.states_in_assessment_keys.extend(states_in_assessment_keys)
          assessment_state.put()     
     return Constant.UPDATION_SUCCESSFULL
@@ -387,27 +380,25 @@ Assigns  existing questions  to an existing topic:
 """
 def assign_questions_to_topic(topic_key,questions_in_topic_keys):
     topic=None
+    topic_question=None
     try:
         topic=topic_key.get() 
         for question_key in questions_in_topic_keys:
                    question=question_key.get()
+        topic_question_key=topic.questions_in_topic_key
     except Exception :
         logging.exception("")
         return Constant.ERROR_BAD_VALUE    
-    try: 
-        query=Topic_Questions.query(Topic_Questions.topic_key ==topic_key)
-    except Exception :
-        logging.exception("")
-        return Constant.ERROR_FAILED_QUERY
-    if query.count()==0:   
+    
+    if topic_question_key==None:   
         
         topic_question=Topic_Questions(topic_key=topic_key,questions_in_topic_keys=questions_in_topic_keys)
         topic_question.put()    
         topic.questions_in_topic_key=topic_question.key
         topic.put()
     else:
-         topic_question_list=query.fetch()
-         topic_question=topic_question_list[0]
+         
+         topic_question=topic_question_key.get()
          topic_question.questions_in_topic_keys.extend(questions_in_topic_keys)
          topic_question.put()     
     return Constant.UPDATION_SUCCESSFULL
@@ -421,27 +412,24 @@ Assigns  existing questions  to an existing state:
 """
 def assign_questions_to_state(state_key,questions_in_state_keys):
     state=None
+    question_state=None
     try:
         state=state_key.get() 
         for question_key in questions_in_state_keys:
                    question=question_key.get()
+        question_state_key=state.question_in_state_key
     except Exception :
         logging.exception("")
-        return Constant.ERROR_BAD_VALUE    
-    try: 
-        query=State_Questions.query(State_Questions.state_key ==state_key)
-    except Exception :
-        logging.exception("")
-        return Constant.ERROR_FAILED_QUERY
-    if query.count()==0:   
+
+    if question_state_key==None:   
         
         question_state=State_Questions(state_key=state_key,questions_in_state_keys=questions_in_state_keys)
         question_state.put()    
         state.question_in_state_key=question_state.key
         state.put()
     else:
-         question_state_list=query.fetch()
-         question_state=question_state_list[0]
+        
+         question_state=question_state_key.get()
          question_state.questions_in_state_keys.extend(questions_in_state_keys)
          question_state.put()     
     return Constant.UPDATION_SUCCESSFULL
@@ -453,29 +441,26 @@ Assigns  existing topics  to an existing state:
 """
 def assign_states_to_topic(topic_key,states_in_topic_keys):
     topic=None
+    state_topic=None
     try:
         topic=topic_key.get() 
         for state_key in states_in_topic_keys:
                    state=state_key.get()
                    if not state.type==Constant.STATE_IN_TOPIC:
                        return Constant.ERROR_BAD_VALUE
+        state_topic_key=topic.states_in_topic_key
     except Exception :
         logging.exception("")
-        return Constant.ERROR_BAD_VALUE    
-    try: 
-        query=Topic_States.query(Topic_States.topic_key ==topic_key)
-    except Exception :
-        logging.exception("")
-        return Constant.ERROR_FAILED_QUERY
-    if query.count()==0:   
+  
+    if state_topic_key==None:   
         
         state_topic=Topic_States(topic_key=topic_key,states_in_topic_keys=states_in_topic_keys)
         state_topic.put()    
         topic.states_in_topic_key=state_topic.key
         topic.put()
     else:
-         state_topic_list=query.fetch()
-         state_topic=state_topic_list[0]
+         
+         state_topic=state_topic_key.get()
          state_topic.states_in_topic_keys.extend(states_in_topic_keys)
          state_topic.put()     
     return Constant.UPDATION_SUCCESSFULL
@@ -487,27 +472,24 @@ Assigns  existing topics  to an existing subject:
 """
 def assign_topics_to_subject(subject_key,topics_in_subject_key):
     subject=None
+    topic_subject=None
     try:
         subject=subject_key.get() 
         for topic_key in topics_in_subject_key:
                    topic=topic_key.get()
+        topic_subject_key=subject.topics_in_subject_key
     except Exception :
         logging.exception("")
-        return Constant.ERROR_BAD_VALUE    
-    try: 
-        query=Subject_Topics.query(Subject_Topics.subject_key ==subject_key)
-    except Exception :
-        logging.exception("")
-        return Constant.ERROR_FAILED_QUERY
-    if query.count()==0:   
+   
+    if topic_subject_key==None:   
         
         topic_subject=Subject_Topics(subject_key=subject_key,topics_in_subject_key=topics_in_subject_key)
         topic_subject.put()    
-        subject.topics_in_subject_key=[topic_subject.key]
+        subject.topics_in_subject_key=topic_subject.key
         subject.put()
     else:
-         topic_subject_list=query.fetch()
-         topic_subject=topic_subject_list[0]
+         
+         topic_subject=topic_subject_key.get()
          topic_subject.topics_in_subject_key.extend(topics_in_subject_key)
          topic_subject.put()     
     return Constant.UPDATION_SUCCESSFULL  
@@ -518,6 +500,7 @@ lists states (STATE_IN_TOPIC) associated to a topic
 """
 def get_states_of_topic(topic_key):
     states=[]
+    
     try:
         topic=topic_key.get()
     except Exception :
@@ -545,7 +528,9 @@ def get_questions_of_topic(topic_key):
         logging.exception("")
         return Constant.ERROR_BAD_VALUE    
     try:
-        question_in_topic_reln_key=topic.questions_in_topic_key 
+        question_in_topic_reln_key=topic.questions_in_topic_key
+        if question_in_topic_reln_key==None:
+            return Constant.ERROR_NO_DATA_FOUND 
         questions_in_topic=question_in_topic_reln_key.get()
         question_key_list=questions_in_topic.questions_in_topic_keys
         questions=ndb.get_multi(question_key_list)
