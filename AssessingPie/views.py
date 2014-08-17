@@ -5,6 +5,9 @@ from gaesessions import get_current_session
 from engine import nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer
 from django.template import RequestContext
 from google.appengine.api import  users
+from dummydata import fill
+from Query import login
+import logging
 
 
 counters=0
@@ -18,7 +21,7 @@ def asknextquestion(request):
 
     c=session.get('index',-1)
     if c== -1:
-        session['index']=counters
+        session['index']=users.get_current_user()
         usersdict[session['index']]= UserBuffer()
 
 
@@ -28,7 +31,7 @@ def asknextquestion(request):
         setcount(session['index'])
         answer =request.POST['answer']
 
-        if int(answer) == usersdict[session['index']].questions[nextquestion(session['index'])].answer :
+        if answer == usersdict[session['index']].questions[nextquestion(session['index'])].answer[0] :
              update(session['index'], True)
         else:
             update(session['index'], False)

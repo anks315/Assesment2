@@ -18,20 +18,42 @@ class State :
 class  UserBuffer:
     def __init__(self):
         self.count=0
-        self.initializebuffer()
-        self.states = [State((-1,),0.25),State((0,),0.25),State((0,1),0.25),State((0,1,2),0.25)]
-        self.questions = {0:Question(3,0.75,'Add 3 and 5',8), 1:Question(2,0.50,'Add 29 + 35',64), 2:Question(1,0.25,'Divide and find quotient 58 by 9',6),}
-        self.minquestion = 1
-        self.maxprobstate = 0
 
-    def initializequestions:
+        self.states = []
+        self.questions = dict()
+        self.minquestion = -1
+        self.maxprobstate = 0
+        self.initializebuffer()
 
     def initializebuffer(self):
-        state_db =Query.get_states_of_topic("Number  System")
-        initialprob = 1/state_db.__len__()
-        self.states.append(State((-1),initialprob))
+        question_db = Query.get_questions_by_topic_name("Number  System")
+        state_db =Query.get_states_by_topic_name("Number  System")
+        type(state_db)
+        initialprob = 1/float(len(state_db) + 1)
+        previous_minquestion=-1
+        for tempques in question_db:
+            num_states = tempques.no_states_contained_in
+            questionstring=tempques.instance.problem_statement
+            answer = tempques.instance.answer
+            if previous_minquestion==-1:
+                previous_minquestion = abs(int((len(state_db)/2)-num_states))
+                self.minquestion=tempques.key
+            else:
+                 if(abs(int(len(state_db)/2)-num_states) < previous_minquestion):
+                     self.minquestion = tempques.key
+
+            self.questions[tempques.key]=Question(num_states,initialprob*num_states,questionstring,answer)
+
+
+
+        self.states.append(State((-1,),initialprob))
         for tempstate in state_db:
-            questiontuple = tuple(Query.get_questions_of_state(tempstate.key))
+
+            questions = Query.get_questions_of_state(tempstate.key)
+            queskeylist =[]
+            for question in questions:
+                queskeylist.append(question.key)
+            questiontuple = tuple(queskeylist)
             self.states.append(State(questiontuple,initialprob))
 
 

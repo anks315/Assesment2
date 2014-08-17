@@ -1,4 +1,3 @@
-
 from google.appengine.ext.ndb import Key
 from google.appengine.ext import ndb
 import logging
@@ -438,6 +437,7 @@ def assign_questions_to_state(state_key,questions_in_state_keys):
     for question_key in questions_in_state_keys:
          question=question_key.get()
          question.no_states_contained_in=question.no_states_contained_in+1
+         question.put()
     return Constant.UPDATION_SUCCESSFULL
 
 """
