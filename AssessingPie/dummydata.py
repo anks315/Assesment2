@@ -24,7 +24,8 @@ def fill():
             assessment1=Query.addAssessment()
             address=Query.addAddress(Constant.ADDRESS_TYPE_HOME,"gg","rgge")
             userinfo=Query.addUserInfo("jhjjj",datetime.date(int(2012),int(6),int(6)),Constant.SEX_MALE, address, "yyy", 67757)
-            school=Query.addSchool("jhhj", address)
+            school=Query.addSchool("jhh"
+                                   "j", address)
             #basic_info,school,class_deatils,section_details
             student=Query.addStudent("anks.315",userinfo, school,"Class1","Section1")
             Query.assign_questions_to_state(state1.key, [question1.key])

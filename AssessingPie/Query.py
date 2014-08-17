@@ -29,7 +29,10 @@ def login(username):
          student=student_list[0]
         
       return student
-    
+
+
+
+
       
 
 """
@@ -562,4 +565,26 @@ def get_questions_of_state(state_key):
     return questions 
 
 
-                                                                   
+"""
+lists states (STATE_IN_TOPIC) associated to a topic name
+"""
+def get_states_by_topic_name(topic_name):
+    states=[]
+
+    try:
+
+        topic=Topic.query(Topic.name==topic_name).get()
+        logging.error(topic)
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE
+    try:
+        state_in_topic_reln_key=topic.states_in_topic_key
+        states_in_topic=state_in_topic_reln_key.get()
+        state_key_list=states_in_topic.states_in_topic_keys
+        states=ndb.get_multi(state_key_list)
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_INCONSISTENT_STATE
+
+    return states
