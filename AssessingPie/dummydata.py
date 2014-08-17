@@ -35,6 +35,8 @@ def fill():
             Query.assign_assessment_to_student(student.key, assessment1.key)
             Query.get_questions_of_state(state1.key)
             Query.get_questions_of_topic(topic.key)
+            #Query.assign_assessment_state_to_student(student.key, assessment1.key,state1.key)
+            #Query.assign_assessment_score_next_question_to_student(student.key, assessment1.key, state1.key,34,question1.key)
       except Exception :
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL

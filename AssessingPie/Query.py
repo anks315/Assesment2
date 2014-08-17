@@ -3,9 +3,9 @@ from google.appengine.ext.ndb import Key
 from google.appengine.ext import ndb
 import logging
 import datetime
-from model import QuestionInstance,State_Questions,Topic_States,Question,State,Topic,Address
-from model import School,Student,UserInfo,Subject,Assessment,Student_Assessments,School_Assessments
-from  model import Assessment_Topics,Assessment_States,Topic_Questions,State_Questions,Topic_States,Subject_Topics
+from models import QuestionInstance,State_Questions,Topic_States,Question,State,Topic,Address
+from models import School,Student,UserInfo,Subject,Assessment,Student_Assessments,School_Assessments
+from  models import Assessment_Topics,Assessment_States,Topic_Questions,State_Questions,Topic_States,Subject_Topics
 from Constant import Constant
 
 
@@ -188,28 +188,26 @@ Assigns an exsisting assessment to an existing student:
                             assessment_key: key of assessment entity
 """
 def assign_assessment_to_student(student_key,assessment_key):
-    student=None
+    student_assessment=None
     try:
-        student=student_key.get()        
+        student=student_key.get()  
+        
+        student_assessment_key=student.student_assessment_key       
+        #logging.error(assess)
         assessment=assessment_key.get()
         logging.error(student)
     except Exception :
         logging.exception("")
         return Constant.ERROR_BAD_VALUE    
-    try: 
-        query=Student_Assessments.query(Student_Assessments.student_key == student.key)
-    except Exception :
-        logging.exception("")
-        return Constant.ERROR_FAILED_QUERY
-    if query.count()==0:   
+    if student_assessment_key==None:   
         student_assessment=Student_Assessments(student_key=student.key,attended_assessment_key=[assessment.key])
         student_assessment.put()    
         student.student_assessment_key=student_assessment.key
         student.put()     
     else:
-         student_assessment=query.fetch()
-         student_assessment[0].attended_assessment_key.append(assessment.key)
-         
+         student_assessment=student_assessment_key.get()
+         student_assessment.attended_assessment_key.append(assessment.key)
+         student_assessment.put()
    
     return Constant.UPDATION_SUCCESSFULL
         
@@ -221,34 +219,23 @@ Assigns an exsisting assessment to an existing student:
                             states_of_or_in_assessments: key of state corresponding to assessment with key assessment_key
 """
 def assign_assessment_state_to_student(student_key,assessment_key,states_of_or_in_assessment):
-    
+    student_assessment=None
     try:
-        student=student_key.get()        
+        student=student_key.get()
+        student_assessment=student.student_assessment_key.get()       
         assessment=assessment_key.get()
         state=states_of_or_in_assessment.get()
-        logging.error(student)
+        #logging.error(assess)
     except Exception :
         logging.exception("")
-        return Constant.ERROR_BAD_VALUE    
-    try: 
-        query=Student_Assessments.query(Student_Assessments.student_key == student.key)
-    except Exception :
-        logging.exception("")
-        return Constant.ERROR_FAILED_QUERY
-    if query.count()==0:   
+    if  len(student_assessment.attended_assessment_key)==0:   
         return Constant.ERROR_INCONSISTENT_STATE
-        '''student_assessment=Student_Assessments(student_key=student.key,attended_assessment_key=[assessment.key])
-        student_assessment.put()    
-        student.student_assessment_key=student_assessment.key'''     
-    else:
-         student_assessment=query.fetch()
-         
-         if student_assessment[0].attended_assessment_key ==None  or assessment_key not in student_assessment[0].attended_assessment_key :
-             return Constant.ERROR_INCONSISTENT_STATE
-         #student_assessment[0].attended_assessment_key.
-         pos=student_assessment[0].attended_assessment_key.index(assessment_key)
-         student_assessment[0].states_of_or_in_assessments.insert(pos,states_of_or_in_assessment)
-         student_assessment[0].put()     
+          
+    pos=student_assessment.attended_assessment_key.index(assessment_key)
+    student_assessment.states_of_or_in_assessments.insert(pos,states_of_or_in_assessment)
+    #logging.error( "vffff"+str(student_assessment[0].states_of_or_in_assessments))
+    student_assessment.put()
+    logging.error("****"+str(student_assessment))     
     return Constant.UPDATION_SUCCESSFULL
         
 """
@@ -260,40 +247,35 @@ Assigns an exsisting assessment to an existing student:
                             questions_ready_to_learn:key of question ready to learn corresponding to the assessment id 
 """
 def assign_assessment_score_next_question_to_student(student_key,assessment_key,states_of_or_in_assessment, scores_in_assessments,questions_ready_to_learn ):
-    
+    student_assessment=None
     try:
         student=student_key.get()        
         assessment=assessment_key.get()
+        student_assessment=student.student_assessment_key.get()
         state=states_of_or_in_assessment.get()
-        question=questions_ready_to_learn.get()
+        #question=questions_ready_to_learn.get()
         logging.error(student)
     except Exception :
         logging.exception("")
         return Constant.ERROR_BAD_VALUE    
-    try: 
-        query=Student_Assessments.query(Student_Assessments.student_key == student.key)
-    except Exception :
-        logging.exception("")
-        return Constant.ERROR_FAILED_QUERY
-    if query.count()==0:   
+    
+    if  len(student_assessment.attended_assessment_key)==0: 
+        logging.error("found here")  
         return Constant.ERROR_INCONSISTENT_STATE
         '''student_assessment=Student_Assessments(student_key=student.key,attended_assessment_key=[assessment.key])
         student_assessment.put()    
         student.student_assessment_key=student_assessment.key'''     
     else:
-         student_assessment=query.fetch()
          
-         if student_assessment[0].attended_assessment_key ==None  or assessment_key not in student_assessment[0].attended_assessment_key :
-             return Constant.ERROR_INCONSISTENT_STATE
-         pos_assessment=student_assessment[0].attended_assessment_key.index(assessment_key)
-         pos_state=student_assessment[0].states_of_or_in_assessments.index(states_of_or_in_assessment)
+         pos_assessment=student_assessment.attended_assessment_key.index(assessment_key)
+         pos_state=student_assessment.states_of_or_in_assessments.index(states_of_or_in_assessment)
          if pos_assessment != pos_state:
+             logging.error("65555555555555found here") 
              return Constant.ERROR_INCONSISTENT_STATE
-         student_assessment[0].states_of_or_in_assessments.insert(pos_assessment,states_of_or_in_assessment)
-         student_assessment[0].questions_ready_to_learn.insert(pos_assessment,questions_ready_to_learn)
-         if not ( len(student_assessment[0].states_of_or_in_assessments)==len(student_assessment[0].questions_ready_to_learn) and len(student_assessment[0].questions_ready_to_learn)==len(student_assessment[0].attended_assessment_key)):
-            return Constant.ERROR_INCONSISTENT_STATE 
-         student_assessment[0].put()     
+         student_assessment.states_of_or_in_assessments.insert(pos_assessment,states_of_or_in_assessment)
+         student_assessment.questions_ready_to_learn.insert(pos_assessment,questions_ready_to_learn)
+         
+         student_assessment.put()     
     #student.put()
     return Constant.UPDATION_SUCCESSFULL
         

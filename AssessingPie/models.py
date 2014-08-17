@@ -302,7 +302,7 @@ key Property: school_key: contains key of  a School
 """
 
 class Student_Assessments(ndb.Model):   
-    student_key = ndb.KeyProperty(kind=Student)
+    student_key = ndb.KeyProperty(kind=Student,required=True)
     attended_assessment_key = ndb.KeyProperty(kind=Assessment, repeated=True)
     states_of_or_in_assessments = ndb.KeyProperty(kind=State, repeated=True)
     scores_in_assessments = ndb.IntegerProperty(repeated=True)
