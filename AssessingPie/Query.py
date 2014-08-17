@@ -270,7 +270,7 @@ def assign_assessment_score_next_question_to_student(student_key,assessment_key,
          pos_assessment=student_assessment.attended_assessment_key.index(assessment_key)
          pos_state=student_assessment.states_of_or_in_assessments.index(states_of_or_in_assessment)
          if pos_assessment != pos_state:
-             logging.error("65555555555555found here") 
+              
              return Constant.ERROR_INCONSISTENT_STATE
          student_assessment.states_of_or_in_assessments.insert(pos_assessment,states_of_or_in_assessment)
          student_assessment.questions_ready_to_learn.insert(pos_assessment,questions_ready_to_learn)
