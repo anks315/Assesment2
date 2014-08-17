@@ -1,6 +1,7 @@
 __author__ = 'ankur'
 import logging
 import models
+import Query
 
 class Question:
     def __init__(self,num_states,probsum,questionstring,answer):
@@ -17,11 +18,14 @@ class State :
 class  UserBuffer:
     def __init__(self):
         self.count=0
-
+        self.initializebuffer()
         self.states = [State((-1,),0.25),State((0,),0.25),State((0,1),0.25),State((0,1,2),0.25)]
         self.questions = {0:Question(3,0.75,'Add 3 and 5',8), 1:Question(2,0.50,'Add 29 + 35',64), 2:Question(1,0.25,'Divide and find quotient 58 by 9',6),}
         self.minquestion = 1
         self.maxprobstate = 0
+    def initializebuffer(self):
+        Query.get_states_of_topic()
+
 
 usersdict ={}
 previousmin=-1
