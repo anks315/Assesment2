@@ -588,3 +588,29 @@ def get_states_by_topic_name(topic_name):
         return Constant.ERROR_INCONSISTENT_STATE
 
     return states
+
+
+"""
+lists questions associated to a topic name
+"""
+def get_questions_by_topic_name(topic_name):
+    questions=[]
+    try:
+        topic=Topic.query(Topic.name==topic_name).get()
+        logging.error(topic)
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE
+    try:
+        question_in_topic_reln_key=topic.questions_in_topic_key
+        if question_in_topic_reln_key==None:
+            return Constant.ERROR_NO_DATA_FOUND
+        questions_in_topic=question_in_topic_reln_key.get()
+        question_key_list=questions_in_topic.questions_in_topic_keys
+        questions=ndb.get_multi(question_key_list)
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_INCONSISTENT_STATE
+
+    return questions
+
