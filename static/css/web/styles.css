@@ -2,6 +2,7 @@
 @import "/css/web/grid.css";
 @import "/css/web/forms.css";
 @import "/css/web/top.css";
+@import "/css/web/formdemo.css";
 @import url(http://fonts.googleapis.com/css?family=Exo+2:600);
 
 body{
@@ -202,8 +203,32 @@ nav {
     width: 100%;
 }
 
+.button_submit {
+    background: none repeat scroll 0 0 #1279d9;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 17px;
+    margin-left: 30px;
+    padding: 10px 20px 11px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+}
 
-
+.answer {
+    outline:none;
+	border:1px solid #e1e1e1;
+	color:#727272;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:18px;
+	margin:0;
+	height:16px;
+	line-height:17px;
+	background:none;
+	padding:7px 8px;
+	width:292px;
+	display:inline-block;
+}
 .button1 {
     background: none repeat scroll 0 0 #1279d9;
     color: #FFFFFF;

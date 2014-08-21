@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 
 <head>
@@ -20,12 +21,12 @@
 <h1><a class="logo" href="index.html">Critical Velos</a></h1>
 <nav>
 <ul class="my_menu">
-<li><a class="active" href="index.html">main</a></li>
+<li><a class="active" href="index.html">Home</a></li>
 <li><a href="#">about us</a></li>
-<li><a href="#">our partners</a></li>
 <li><a href="/assessment/" >Assess Yourself</a></li>
 <li><a href="{{ loginurl }}" class="current">Sign In</a></li>
-<li><a href="contact.html">contact Us</a></li>
+<li><a href="/assessment/" >SignUp</a></li>
+<li><a href="/contact_us/">contact Us</a></li>
 </ul>
 </nav>
 <div class="clear"></div>
