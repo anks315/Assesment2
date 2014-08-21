@@ -66,4 +66,8 @@ def home(request):
      if session.get('index',-1) != -1:
         del session['index']
 
-     return render_to_response('AssessingPie/home.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+     return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+
+
+def contactus(request):
+    return render_to_response('AssessingPie/contact.html', {}, context_instance = RequestContext(request))
