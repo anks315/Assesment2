@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     # url(r'^Assesment/', include('Assesment.foo.urls')),
     (r'^assessment/$', 'AssessingPie.views.asknextquestion'),
          (r'^contact_us/$','AssessingPie.views.contactus' ),
+          (r'^sign_up/$','AssessingPie.views.signup' ),
     url(r'^$', 'AssessingPie.views.home'),
 
 
