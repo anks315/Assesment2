@@ -73,4 +73,4 @@ def contactus(request):
     return render_to_response('AssessingPie/contact.html', {}, context_instance = RequestContext(request))
 
 def signup(request):
-    return render_to_response('AssessingPie/signup_form.html', {}, context_instance = RequestContext(request))
+    return render_to_response('AssessingPie/signup.html', {}, context_instance = RequestContext(request))
