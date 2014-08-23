@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<head>
+<title>Critical Velos</title>
+<meta charset="utf-8">
+<meta name="description" content="Your description">
+<meta name="keywords" content="Your keywords">
+<meta name="author" content="Bhandari" >
+
+<link rel="stylesheet" href="/css/web/styles.css">
+
+
+
+</head>
+<body>
+
+<header>
+<div class="main">
+<h1><a class="logo" href="index.html">Critical Velos</a></h1>
+<nav>
+<ul class="my_menu">
+<li><a href="abc.html">Home</a></li>
+<li><a href="#">about us</a></li>
+<li><a href="/assessment/" >Assess Yourself</a></li>
+<li><a href="{{ loginurl }}" class="current">Sign In</a></li>
+<li><a class="active" href="/sign_up/" >SignUp</a></li>
+<li><a href="/contact_us/">contact Us</a></li>
+</ul>
+</nav>
+<div class="clear"></div>
+</div>
+</header>
+
+<section id="content">
+<div class="container_12">
+<div class="wrapper">
+
+  <form class="register" id="signup_form" >
+    <div class="register-switch">
+      <input type="radio" name="account_type" value="School" id="type_school" class="register-switch-input" checked>
+      <label for="type_school" class="register-switch-label">School</label>
+      <input type="radio" name="account_type" value="Teacher" id="type_teacher" class="register-switch-input">
+      <label for="type_teacher" class="register-switch-label">Teacher</label>
+      <input type="radio" name="account_type" value="Student" id="type_student" class="register-switch-input">
+      <label for="type_student" class="register-switch-label">Student</label>
+    </div>
+    <input type="email" class="register-input" placeholder="Email address">
+    <input type="password" class="register-input" placeholder="Password">
+    <input type="submit" value="Create Account" class="register-button">
+  </form>
+<div class="clear"></div>
+
+    </div>
+</div>
+    <div class="clear"></div>
+</section>
+
+
+<footer>
+<div class="main">
+<ul class="soc-links">
+<li><a href="#">facebook</a></li>
+<li><a href="#">twitter</a></li>
+<li class="last3"><a href="#">google+</a></li>
+</ul>
+
+<div class="foot-page1">
+Critical Velos &copy; 2014<br />
+<div class="mwd"> Site Desgin: Critical Velos</div>
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+
+</div>
+</footer>
+<script src="/js/jquery-1.7.1.min.js"></script>
+<script src="/js/script.js"></script>
+</body>
+
+</html>
