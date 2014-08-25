@@ -2,6 +2,7 @@
 
 <html>
   <head>
+    <link rel="stylesheet" href="/css/question/table.css">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
     <script type="text/javascript">
@@ -56,7 +57,20 @@
   <body >
   <div>
     <div align="left" id="donutchart" style="width: 900px; height: 300px;"></div>
-    <div align="left" id="readytolearn" style="margin-left:400px;font-size: x-large; color:  red;"><p >You are ready to learn :{{ readytolearn }}<p></p></div>
+    <div align="left" id="readytolearn" style="margin-left:400px;">
+
+<table class="gridtable">
+    <col width="350">
+<tr>
+	<th>Readytolearn(Outer Fringe)</th>
+</tr>
+<tr>
+	<td>{{ readytolearn }}</td>
+</tr>
+
+</table>
+
+        <!--<p >You are ready to learn :{{ readytolearn }}</p>--></div>
 
    </div>
   <div id="chart_div" style="width:900px; height: 300px;"></div>

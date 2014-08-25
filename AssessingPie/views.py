@@ -73,5 +73,6 @@ def home(request):
 
 
 def contactus(request):
-
+        fill()
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
+
