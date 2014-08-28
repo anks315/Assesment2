@@ -7,87 +7,90 @@ class Question:
         self.questionstring = questionstring
 
 class TypeCache:
-    typelist ={}
-    @staticmethod
-    def addtype(key,typeid,questionstring):
-         TypeCache.typelist[typeid] =Question(key,typeid,questionstring)
-    @staticmethod
-    def gettype(typeid):
-        return TypeCache.typelist[typeid].questionstring
-    @staticmethod
-    def getlength():
-        return len(TypeCache.typelist)
+    def __init__(self):
+        self.typelist ={}
+
+    def addtype(self,key,typeid,questionstring):
+         self.typelist[typeid] =Question(key,typeid,questionstring)
+
+    def gettype(self,typeid):
+        return self.typelist[typeid].questionstring
+
+    def getlength(self):
+        return len(self.typelist)
 
 class SurmiseRelation:
-    surmisecache = {}
-    @staticmethod
-    def intialize():
-        loopvar = TypeCache.getlength()-1
+    def __init__(self,userbuffer):
+        self.surmisecache = {}
+        loopvar = userbuffer.typeCache.getlength()-1
         while loopvar >= 0:
-            SurmiseRelation.surmisecache[loopvar] = []
+            self.surmisecache[loopvar] = []
             loopvar-=1
-    @staticmethod
-    def addstate(typeid,state):
-        SurmiseRelation.surmisecache[typeid].append(state)
-    @staticmethod
-    def getstates(typeid):
-        return  SurmiseRelation.surmisecache.get(typeid)
-    @staticmethod
+
+
+
+    def addstate(self,typeid,state):
+        self.surmisecache[typeid].append(state)
+
+    def getstates(self,typeid):
+        return  self.surmisecache.get(typeid)
+
     def removestate(self,typeid,state):
-        SurmiseRelation.surmisecache[typeid].remove(state)
-    @staticmethod
-    def addstateifnotcontained(typeid,state):
+        self.surmisecache[typeid].remove(state)
+
+    def addstateifnotcontained(self,typeid,state):
         contained=0
-        for tempstate in SurmiseRelation.surmisecache[typeid]:
+        for tempstate in self.surmisecache[typeid]:
             if state.issubset(tempstate):
-                SurmiseRelation.removestate(typeid,tempstate)
+                self.removestate(typeid,tempstate)
             if tempstate.issubset(state):
                 contained=1
         if contained==0:
-            SurmiseRelation.addstate(typeid,state)
+            SurmiseRelation.addstate(self,typeid,state)
 
 
 class BlockCache:
-    blockcache={}
-    @staticmethod
-    def initializeblock(blocknumber):
-         BlockCache.blockcache[blocknumber]={}
-    @staticmethod
-    def setimplicationtrue(blocknumber,queryid):
-        BlockCache.blockcache[blocknumber][queryid]=1
-    @staticmethod
-    def setimplicationfalse(blocknumber,queryid):
-        BlockCache.blockcache[blocknumber][queryid]=2
-    @staticmethod
-    def getimplication(blocknumber,queryid):
-        return  BlockCache.blockcache[blocknumber].get(queryid,-1)
+    def __init__(self):
+        self.blockcache={}
+
+    def initializeblock(self,blocknumber):
+         self.blockcache[blocknumber]={}
+
+    def setimplicationtrue(self,blocknumber,queryid):
+        self.blockcache[blocknumber][queryid]=1
+
+    def setimplicationfalse(self,blocknumber,queryid):
+        self.blockcache[blocknumber][queryid]=2
+
+    def getimplication(self,blocknumber,queryid):
+        return  self.blockcache[blocknumber].get(queryid,-1)
 
 
-def createsurmise():
+def createsurmise(userbuffer):
 
-    numques=TypeCache.getlength()
+    numques=userbuffer.typeCache.getlength()
     for x in range(0,numques):
         tempset=set()
         for y in range(0,numques):
-            implication=BlockCache.getimplication(0,numques*x+y)
+            implication=userbuffer.blockCache.getimplication(0,numques*x+y)
             if implication is not None and implication == 2:
                 tempset.add(y)
 
         if len(tempset)>0:
-            insertintosurmise(tempset)
+            insertintosurmise(userbuffer,tempset)
 
-def insertintosurmise(tempset):
+def insertintosurmise(userbuffer,tempset):
     for x in tempset:
-        tempstatelist = SurmiseRelation.getstates(x)
+        tempstatelist = userbuffer.surmiseRelation.getstates(x)
         if tempstatelist is None:
-            SurmiseRelation.addstate(x,tempset)
+            userbuffer.surmiseRelation.addstate(x,tempset)
         else:
 
             tobeadded=1
             for state in tempstatelist:
                 if tempset.issubset(state):
-                    SurmiseRelation.removestate(x,state)
-                    SurmiseRelation.addstate(x,tempset)
+                    userbuffer.surmiseRelation.removestate(x,state)
+                    userbuffer.surmiseRelation.addstate(x,tempset)
                     tobeadded=0
                     break
                 else:
@@ -96,61 +99,68 @@ def insertintosurmise(tempset):
                         break
 
             if tobeadded==1:
-                SurmiseRelation.addstate(x,tempset)
+                userbuffer.surmiseRelation.addstate(x,tempset)
 
-def prepareblock(blocknumber):
-    BlockCache.initializeblock(blocknumber)
+def prepareblock(userbuffer,blocknumber):
+    userbuffer.blockCache.initializeblock(blocknumber)
 
-def passedhstest(block,antecedent,implication):
+def passedhstest(userbuffer,block,antecedent,implication):
     passed=True
-    numoftypes=TypeCache.getlength()
+    numoftypes=userbuffer.typeCache.getlength()
     for questiontype in range(0,numoftypes):
-        tempstatelist = SurmiseRelation.getstates(questiontype)
+        tempstatelist = userbuffer.surmiseRelation.getstates(questiontype)
         for state in tempstatelist:
             if implication in state and set(antecedent).intersection(state)==set([questiontype]):
                 passed=False
                 return passed
     return passed
 
-def collectsurmisestate(antecedent):
+def collectsurmisestate(userbuffer,antecedent):
     addlist=[]
     for questiontype in antecedent:
-        tempstatelist = SurmiseRelation.getstates(questiontype)
+        tempstatelist = userbuffer.surmiseRelation.getstates(questiontype)
         for state in tempstatelist:
             if set(antecedent).intersection(state)==set([questiontype]):
                 addlist.append(state)
     return addlist
 
-def updatesurmise(antecedent,implication):
-    addlist = collectsurmisestate(antecedent)
-    numtype = TypeCache.getlength()
+def updatesurmise(userbuffer,antecedent,implication):
+    addlist = collectsurmisestate(userbuffer,antecedent)
+    numtype = userbuffer.typeCache.getlength()
     for questiontype in range(0,numtype):
-        tempstatelist=SurmiseRelation.getstates(questiontype)
+        tempstatelist=userbuffer.surmiseRelation.getstates(questiontype)
         for state in tempstatelist:
             if implication in state and set(antecedent).intersection(state)==set():
                 for addstate in addlist:
                     addstate=addstate.union(state)
-                    SurmiseRelation.removestate(questiontype,state)
-                    SurmiseRelation.addstateifnotcontained(questiontype,addstate)
+                    userbuffer.surmiseRelation.removestate(questiontype,state)
+                    userbuffer.surmiseRelation.addstateifnotcontained(questiontype,addstate)
 
 
-def infertrue(block,antecedentid,antecedent):
-    numquestiontype=TypeCache.getlength()
+def infertrue(userbuffer,block,antecedentid,antecedent):
+    numquestiontype=userbuffer.typeCache.getlength()
     implication=antecedentid % numquestiontype
     for questiontype in range(0,numquestiontype):
-        implicationvalue=BlockCache.getimplication(0,numquestiontype*implication+questiontype)
+        implicationvalue=userbuffer.blockCache.getimplication(0,numquestiontype*implication+questiontype)
         if implicationvalue is not None and implicationvalue==1:
             if block != questiontype:
-                if block>0 and passedhstest(block,antecedent,questiontype):
-                    updatesurmise(antecedent,questiontype)
-                BlockCache.setimplicationtrue(block,antecedentid-implication+questiontype)
+                if block>0 and passedhstest(userbuffer,block,antecedent,questiontype):
+                    updatesurmise(userbuffer,antecedent,questiontype)
+                userbuffer.blockCache.setimplicationtrue(block,antecedentid-implication+questiontype)
         else:
             if implicationvalue is not None and implicationvalue==1:
                 if block != questiontype:
-                    BlockCache.setimplicationtrue(block,antecedentid-implication+questiontype)
+                    userbuffer.blockCache.setimplicationtrue(block,antecedentid-implication+questiontype)
 
 
-def initializetypecache():
-    TypeCache.addtype(0,0,"Simple addition")
-    TypeCache.addtype(1,1,"Carry Over addition")
-    TypeCache.addtype(2,2,"Division")
+
+
+
+class InferenceBuffer:
+    def __init__(self):
+        self.typeCache = TypeCache()
+        self.typeCache.addtype(0,0,"Simple addition")
+        self.typeCache.addtype(1,1,"Carry Over addition")
+        self.typeCache.addtype(2,2,"Division")
+        self.surmiseRelation = SurmiseRelation(self)
+        self.blockCache = BlockCache()

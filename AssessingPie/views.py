@@ -73,7 +73,7 @@ def home(request):
      return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
 
-blocknumber = inferenceengine.TypeCache.getlength()
+blocknumber = -1
 numofpossibleantecedent=-1
 currentblocknumber = -1
 currentantecedentnumber=0
@@ -91,35 +91,48 @@ def  inferquestion(request):
     global  numofpossibleantecedent
     global  blocknumber
 
+    session = get_current_session()
+
+    c=session.get('infer',-1)
+    if c==-1:
+        session['infer']=users.get_current_user()
+        usersdict[session['infer']]= inferenceengine.InferenceBuffer()
+        blocknumber = usersdict[session['infer']].typeCache.getlength()
+    else:
+        if request.method!='POST':
+            del session['infer']
+            session['infer'] = -1
+            return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+
     if request.method=='POST':
         if request.POST['answer']=='yes':
-             if currentblocknumber>0 and inferenceengine.passedhstest(currentblocknumber,antecedent,implication):
-                 inferenceengine.updatesurmise(antecedent,implication)
-             inferenceengine.BlockCache.setimplicationtrue(currentblocknumber,currentantecedentnumber-1)
-             inferenceengine.infertrue(currentblocknumber,currentantecedentnumber-1,antecedent)
+             if currentblocknumber>0 and inferenceengine.passedhstest(usersdict[session['infer']],currentblocknumber,antecedent,implication):
+                 inferenceengine.updatesurmise(usersdict[session['infer']],antecedent,implication)
+             usersdict[session['infer']].blockCache.setimplicationtrue(currentblocknumber,currentantecedentnumber-1)
+             inferenceengine.infertrue(usersdict[session['infer']],currentblocknumber,currentantecedentnumber-1,antecedent)
         else:
-             inferenceengine.BlockCache.setimplicationfalse(currentblocknumber,currentantecedentnumber-1)
+             usersdict[session['infer']].blockCache.setimplicationfalse(currentblocknumber,currentantecedentnumber-1)
 
     if currentblocknumber==-1:
-        inferenceengine.initializetypecache()
-        blocknumber = inferenceengine.TypeCache.getlength()
+
+        blocknumber = usersdict[session['infer']].typeCache.getlength()
         currentblocknumber=0
-        inferenceengine.BlockCache.initializeblock(currentblocknumber)
+        usersdict[session['infer']].blockCache.initializeblock(currentblocknumber)
 
 
     while True:
         if numofpossibleantecedent==-1:
             numofpossibleantecedent=blocknumber**(currentblocknumber+2)
         if currentantecedentnumber<numofpossibleantecedent:
-            if inferenceengine.BlockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
+            if usersdict[session['infer']].blockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
 
                 alreadyinffered=askquestion(currentblocknumber,currentantecedentnumber)
                 currentantecedentnumber+=1
                 if len(alreadyinffered)!=0:
                     question = "If student donot know: \n"
                     for x in antecedent:
-                        question +=inferenceengine.TypeCache.gettype(x)
-                    question = question+ "He will not be able to answer: " +   inferenceengine.TypeCache.gettype(implication)
+                        question +=usersdict[session['infer']].typeCache.gettype(x)
+                    question = question+ "He will not be able to answer: " +   usersdict[session['infer']].typeCache.gettype(implication)
                     return render_to_response('AssessingPie/inference.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : question},context_instance = RequestContext(request))
             else:
                 currentantecedentnumber+=1
@@ -127,36 +140,36 @@ def  inferquestion(request):
             logging.error("entered else")
             currentantecedentnumber=0
             if currentblocknumber==0:
-                inferenceengine.SurmiseRelation.intialize()
-                inferenceengine.createsurmise()
+
+                inferenceengine.createsurmise(usersdict[session['infer']])
 
             currentblocknumber+=1
             logging.error(currentblocknumber)
-            inferenceengine.prepareblock(currentblocknumber)
+            inferenceengine.prepareblock(usersdict[session['infer']],currentblocknumber)
             if currentblocknumber<blocknumber:
 
                 numofpossibleantecedent=blocknumber**(currentblocknumber+2)
             else:
-                logging.error(inferenceengine.SurmiseRelation.getstates(0))
-                logging.error(inferenceengine.SurmiseRelation.getstates(1))
-                logging.error(inferenceengine.SurmiseRelation.getstates(2))
+                logging.error(usersdict[session['infer']].surmiseRelation.getstates(0))
+                logging.error(usersdict[session['infer']].surmiseRelation.getstates(1))
+                logging.error(usersdict[session['infer']].surmiseRelation.getstates(2))
                 return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
-            if inferenceengine.BlockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
+            if usersdict[session['infer']].blockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
                 logging.error("asking question")
                 alreadyinffered=askquestion(currentblocknumber,currentantecedentnumber)
                 currentantecedentnumber+=1
                 if len(alreadyinffered)!=0:
                     question = "If student do not know: \n"
                     for x in antecedent:
-                        question+= inferenceengine.TypeCache.gettype(x)
-                    question += "He will not  be able to answer: " +   inferenceengine.TypeCache.gettype(implication)
+                        question+= usersdict[session['infer']].typeCache.gettype(x)
+                    question += "He will not  be able to answer: " +   usersdict[session['infer']].typeCache.gettype(implication)
                     return render_to_response('AssessingPie/inference.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : question,},context_instance = RequestContext(request))
             else:
                 currentantecedentnumber+=1
 
 def askquestion(block,antecedentid):
-
+    session = get_current_session()
     global  blocknumber
     global antecedent
     global  implication
@@ -176,24 +189,24 @@ def askquestion(block,antecedentid):
         if block>0:
             for questiontype in antecedent:
                 if questiontype == implication:
-                    inferenceengine.BlockCache.setimplicationtrue(block,antecedentid)
+                    usersdict[session['infer']].blockCache.setimplicationtrue(block,antecedentid)
                     inferred=1
-                    inferenceengine.infertrue(block,antecedentid,antecedent)
+                    inferenceengine.infertrue(usersdict[session['infer']],block,antecedentid,antecedent)
                     return list()
-                if inferenceengine.BlockCache.getimplication(0,(blocknumber*questiontype)+implication)==1:
-                    inferenceengine.BlockCache.setimplicationtrue(block,antecedentid)
+                if usersdict[session['infer']].blockCache.getimplication(0,(blocknumber*questiontype)+implication)==1:
+                    usersdict[session['infer']].blockCache.setimplicationtrue(block,antecedentid)
                     inferred=1
-                    inferenceengine.infertrue(block,antecedentid,antecedent)
+                    inferenceengine.infertrue(usersdict[session['infer']],block,antecedentid,antecedent)
                     return list()
-                if inferenceengine.BlockCache.getimplication(0,(blocknumber*questiontype)+implication)==2:
+                if usersdict[session['infer']].blockCache.getimplication(0,(blocknumber*questiontype)+implication)==2:
                     inferred=1
-                    inferenceengine.BlockCache.setimplicationfalse(block,antecedentid)
+                    usersdict[session['infer']].blockCache.setimplicationfalse(block,antecedentid)
                     return  list()
         else:
             if antecedent[0]==implication:
-                inferenceengine.BlockCache.setimplicationtrue(block,antecedentid)
+                usersdict[session['infer']].blockCache.setimplicationtrue(block,antecedentid)
                 inferred=1
-                inferenceengine.infertrue(block,antecedentid,antecedent)
+                inferenceengine.infertrue(usersdict[session['infer']],block,antecedentid,antecedent)
                 return list()
             return antecedent
 
