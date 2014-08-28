@@ -6,6 +6,11 @@ body {
 	margin-right:auto;
 	width:960px;
 }
+.container_ka {
+	margin-left:auto;
+	margin-right:auto;
+	width:600px;
+}
 .grid_1,.grid_2,.grid_3,.grid_4,.grid_5,.grid_6,.grid_7,.grid_8,.grid_9,.grid_10,.grid_11,.grid_12 {
 	display:inline;
 	float:left;
@@ -69,6 +74,9 @@ body {
 }
 .container_12 .grid_12 {
 	width:950px;
+}
+.container_ka.grid_c {
+    width: 550;
 }
 .container_12 .prefix_1 {
 	padding-left:80px;

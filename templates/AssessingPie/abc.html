@@ -3,6 +3,55 @@
 <html lang="en">
 
 <head>
+
+<script >
+    function check(){
+        alert("ABC");
+    }
+
+    function loadForm(abcd){
+
+        if(abcd=="School"){
+            document.getElementById("schoolName").style.display="block";
+            document.getElementById("schoolCity").style.display="block";
+            document.getElementById("schoolState").style.display="block";
+            document.getElementById("firstName").style.display="none";
+            document.getElementById("lastName").style.display="none";
+
+            //document.getElementById('schoolName')
+        }
+        if(abcd=="Student"){
+          //  alert("Kapil Student");
+            document.getElementById("schoolName").style.display="none";
+            document.getElementById("schoolCity").style.display="none";
+            document.getElementById("schoolState").style.display="none";
+            document.getElementById("firstName").style.display="block";
+            document.getElementById("lastName").style.display="block";
+
+        }
+        if(abcd=="Teacher"){
+           // alert("Teacher");
+            document.getElementById("schoolName").style.display="none";
+            document.getElementById("schoolCity").style.display="none";
+            document.getElementById("schoolState").style.display="none";
+            document.getElementById("firstName").style.display="block";
+            document.getElementById("lastName").style.display="block";
+        }
+        if(abcd=="Parent"){
+            document.getElementById("schoolName").style.display="none";
+            document.getElementById("schoolCity").style.display="none";
+            document.getElementById("schoolState").style.display="none";
+            document.getElementById("firstName").style.display="block";
+            document.getElementById("lastName").style.display="block";
+        }
+        //var account_type = document.getElementsByName('account_type');
+     //   alert(abcd);
+       // alert(account_type);
+
+        
+    }
+
+</script>
 <title>Critical Velos</title>
 <meta charset="utf-8">
 <meta name="description" content="Your description">
@@ -15,7 +64,12 @@
 
 </head>
 <body>
-
+<div class="topcorner">
+    <ul class="my_menu">
+<li><a class="active" href="{{ loginurl }}" class="current">Sign In</a> </li>
+<li><a class="active" href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">SignUp</a> </li>
+        </ul>
+</div>
 <header class="p30">
 <div class="main">
 <h1><a class="logo" href="index.html">Critical Velos</a></h1>
@@ -25,7 +79,7 @@
 <li><a href="#">about us</a></li>
 <li><a href="/assessment/" >Assess Yourself</a></li>
 <li><a href="{{ loginurl }}" class="current">Sign In</a></li>
-<li><a href="/sign_up/" >SignUp</a></li>
+<li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">SignUp</a></li>
 <li><a href="/contact_us/">contact Us</a></li>
 </ul>
 </nav>
@@ -33,6 +87,47 @@
 </div>
 
 
+ <div id="light" class="white_content" align="center"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
+
+
+  <form class="register" id="signup_form" >
+
+     <h1 class="register-title">Welcome to SignUp Form!!</h1>
+      <div class="clear"></div>
+
+      <div class="register-switch" id="account_types">
+
+
+      <input type="radio" name="account_type" value="School" id="type_school" class="register-switch-input" onclick="loadForm('School')" checked>
+      <label for="type_school" class="register-switch-label">School</label>
+      <input type="radio" name="account_type" value="Teacher" id="type_teacher" class="register-switch-input"  onclick="loadForm('Teacher')"  >
+      <label for="type_teacher" class="register-switch-label">Teacher</label>
+      <input type="radio" name="account_type" value="Parent" id="type_parent" class="register-switch-input" onclick="loadForm('Parent')" >
+      <label for="type_parent" class="register-switch-label">Parent</label>
+      <input type="radio" name="account_type" value="Student" id="type_student" class="register-switch-input" onclick="loadForm('Student')" >
+      <label for="type_student" class="register-switch-label">Student</label>
+    </div>
+
+    <input type="text" class="register-input" placeholder="School Name" id="schoolName">
+    <input type="text" class="register-input" placeholder="School State" id="schoolState">
+    <input type="text" class="register-input" placeholder="School City" id="schoolCity">
+    <input type="text" class="register-input-hide" placeholder="First Name" id="firstName">
+    <input type="text" class="register-input-hide" placeholder="Last Name" id="lastName">
+    <input type="email" class="register-input" placeholder="Email address" id="email">
+    <input type="password" class="register-input" placeholder="Password" id="password">
+
+    <input type="submit" value="Create Account" class="register-button" onclick="check()">
+  </form>
+
+
+
+     <div class="clear"></div>
+
+</div>
+
+
+
+ <div id="fade" class="black_overlay"> </div>
 <div id="slide">
 <div class="slider">
 <ul class="items">
