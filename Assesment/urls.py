@@ -16,8 +16,8 @@ urlpatterns = patterns('',
     (r'^dashboard/$', 'AssessingPie.views.dashboard'),
     url(r'^$', 'AssessingPie.views.home'),
     (r'^userdetails/$', 'AssessingPie.student_dashboard_data.userdetails'),
-    (r'^masterybysubject/$', 'AssessingPie.student_dashboard_data.getmasterybysubject')
-
+    (r'^masterybysubject/$', 'AssessingPie.student_dashboard_data.getmasterybysubject'),
+    (r'^pendingassessmentbysubject/$', 'AssessingPie.student_dashboard_data.getpendingassessment')
 
 
 
