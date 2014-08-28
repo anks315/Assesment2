@@ -23,6 +23,11 @@ handlers:
   login: required
   script: main.app
 
+- url: /inference/(.*)
+  login: required
+  script: main.app
+
+
 - url: /.*
   script: main.app
 

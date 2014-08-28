@@ -8,6 +8,7 @@ from google.appengine.api import  users
 from dummydata import fill
 from Query import login
 import logging
+import inferenceengine
 
 
 counters=0
@@ -72,7 +73,129 @@ def home(request):
      return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
 
+blocknumber = inferenceengine.TypeCache.getlength()
+numofpossibleantecedent=-1
+currentblocknumber = -1
+currentantecedentnumber=0
+implication=-1
+antecedent=[]
 def contactus(request):
         fill()
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
+
+
+def  inferquestion(request):
+
+    global currentantecedentnumber
+    global currentblocknumber
+    global  numofpossibleantecedent
+    global  blocknumber
+
+    if request.method=='POST':
+        if request.POST['answer']=='yes':
+             if currentblocknumber>0 and inferenceengine.passedhstest(currentblocknumber,antecedent,implication):
+                 inferenceengine.updatesurmise(antecedent,implication)
+             inferenceengine.BlockCache.setimplicationtrue(currentblocknumber,currentantecedentnumber-1)
+             inferenceengine.infertrue(currentblocknumber,currentantecedentnumber-1,antecedent)
+        else:
+             inferenceengine.BlockCache.setimplicationfalse(currentblocknumber,currentantecedentnumber-1)
+
+    if currentblocknumber==-1:
+        inferenceengine.initializetypecache()
+        blocknumber = inferenceengine.TypeCache.getlength()
+        currentblocknumber=0
+        inferenceengine.BlockCache.initializeblock(currentblocknumber)
+
+
+    while True:
+        if numofpossibleantecedent==-1:
+            numofpossibleantecedent=blocknumber**(currentblocknumber+2)
+        if currentantecedentnumber<numofpossibleantecedent:
+            if inferenceengine.BlockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
+
+                alreadyinffered=askquestion(currentblocknumber,currentantecedentnumber)
+                currentantecedentnumber+=1
+                if len(alreadyinffered)!=0:
+                    question = "If student donot know: \n"
+                    for x in antecedent:
+                        question +=inferenceengine.TypeCache.gettype(x)
+                    question = question+ "He will not be able to answer: " +   inferenceengine.TypeCache.gettype(implication)
+                    return render_to_response('AssessingPie/inference.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : question},context_instance = RequestContext(request))
+            else:
+                currentantecedentnumber+=1
+        else:
+            logging.error("entered else")
+            currentantecedentnumber=0
+            if currentblocknumber==0:
+                inferenceengine.SurmiseRelation.intialize()
+                inferenceengine.createsurmise()
+
+            currentblocknumber+=1
+            logging.error(currentblocknumber)
+            inferenceengine.prepareblock(currentblocknumber)
+            if currentblocknumber<blocknumber:
+
+                numofpossibleantecedent=blocknumber**(currentblocknumber+2)
+            else:
+                logging.error(inferenceengine.SurmiseRelation.getstates(0))
+                logging.error(inferenceengine.SurmiseRelation.getstates(1))
+                logging.error(inferenceengine.SurmiseRelation.getstates(2))
+                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+
+            if inferenceengine.BlockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
+                logging.error("asking question")
+                alreadyinffered=askquestion(currentblocknumber,currentantecedentnumber)
+                currentantecedentnumber+=1
+                if len(alreadyinffered)!=0:
+                    question = "If student do not know: \n"
+                    for x in antecedent:
+                        question+= inferenceengine.TypeCache.gettype(x)
+                    question += "He will not  be able to answer: " +   inferenceengine.TypeCache.gettype(implication)
+                    return render_to_response('AssessingPie/inference.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : question,},context_instance = RequestContext(request))
+            else:
+                currentantecedentnumber+=1
+
+def askquestion(block,antecedentid):
+
+    global  blocknumber
+    global antecedent
+    global  implication
+    antecedentqueryid = antecedentid
+    antecedent =[]
+    isvalid =1
+    implication = antecedentqueryid % blocknumber
+    for k in range(0,block+1):
+        divisor = blocknumber**(block-k+1)
+        if antecedentqueryid/divisor in antecedent:
+            isvalid=0
+
+        antecedent.append(antecedentqueryid/divisor)
+        antecedentqueryid=antecedentqueryid%divisor
+    if isvalid==1:
+        inferred =0
+        if block>0:
+            for questiontype in antecedent:
+                if questiontype == implication:
+                    inferenceengine.BlockCache.setimplicationtrue(block,antecedentid)
+                    inferred=1
+                    inferenceengine.infertrue(block,antecedentid,antecedent)
+                    return list()
+                if inferenceengine.BlockCache.getimplication(0,(blocknumber*questiontype)+implication)==1:
+                    inferenceengine.BlockCache.setimplicationtrue(block,antecedentid)
+                    inferred=1
+                    inferenceengine.infertrue(block,antecedentid,antecedent)
+                    return list()
+                if inferenceengine.BlockCache.getimplication(0,(blocknumber*questiontype)+implication)==2:
+                    inferred=1
+                    inferenceengine.BlockCache.setimplicationfalse(block,antecedentid)
+                    return  list()
+        else:
+            if antecedent[0]==implication:
+                inferenceengine.BlockCache.setimplicationtrue(block,antecedentid)
+                inferred=1
+                inferenceengine.infertrue(block,antecedentid,antecedent)
+                return list()
+            return antecedent
+
+    return list()
 

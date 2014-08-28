@@ -22,16 +22,16 @@ class SurmiseRelation:
     surmisecache = {}
     @staticmethod
     def intialize():
-        loopvar = TypeCache.getlength()
-        while loopvar > 0:
+        loopvar = TypeCache.getlength()-1
+        while loopvar >= 0:
             SurmiseRelation.surmisecache[loopvar] = []
-            loopvar=-1
+            loopvar-=1
     @staticmethod
     def addstate(typeid,state):
         SurmiseRelation.surmisecache[typeid].append(state)
     @staticmethod
     def getstates(typeid):
-        return  SurmiseRelation.surmisecache[typeid]
+        return  SurmiseRelation.surmisecache.get(typeid)
     @staticmethod
     def removestate(self,typeid,state):
         SurmiseRelation.surmisecache[typeid].remove(state)
@@ -60,7 +60,7 @@ class BlockCache:
         BlockCache.blockcache[blocknumber][queryid]=2
     @staticmethod
     def getimplication(blocknumber,queryid):
-        return  BlockCache.blockcache[blocknumber][queryid]
+        return  BlockCache.blockcache[blocknumber].get(queryid,-1)
 
 
 def createsurmise():
@@ -79,7 +79,7 @@ def createsurmise():
 def insertintosurmise(tempset):
     for x in tempset:
         tempstatelist = SurmiseRelation.getstates(x)
-        if len(tempstatelist)==0:
+        if tempstatelist is None:
             SurmiseRelation.addstate(x,tempset)
         else:
 
@@ -150,3 +150,7 @@ def infertrue(block,antecedentid,antecedent):
                     BlockCache.setimplicationtrue(block,antecedentid-implication+questiontype)
 
 
+def initializetypecache():
+    TypeCache.addtype(0,0,"Simple addition")
+    TypeCache.addtype(1,1,"Carry Over addition")
+    TypeCache.addtype(2,2,"Division")
