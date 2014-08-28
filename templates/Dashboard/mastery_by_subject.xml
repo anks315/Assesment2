@@ -1,0 +1,13 @@
+<root>
+{% for key, value in masterdict.items %}
+   <subject>
+   <name>
+   {{ key }}
+   </name>
+   <score>
+       {{ value }}
+   </score>
+   </subject>
+{% endfor %}
+
+</root>
