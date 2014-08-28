@@ -901,6 +901,47 @@ def assign_states_to_topic(topic_key,states_in_topic_keys):
     logging.info("CV Logs : success to assign states to topic :"+topic.name)     
     return Constant.UPDATION_SUCCESSFULL
 
+
+"""
+Assigns  existing topics  to an existing state:
+                            topic_key: key to state entity
+                            states_in_topic_keys : list of keys of states covered in topic
+"""
+@ndb.transactional(xg=True)
+def assign_states_to_topic_by_name(topic_name,states_in_topic_keys):
+    topic=None
+    state_topic=None
+    logging.info("CV Logs : inside assign_states_to_topic_by_name ")
+    try:
+
+        topic=Topic.query(Topic.name==topic_name).get()
+  
+        for state_key in states_in_topic_keys:
+                   state=state_key.get()
+                   if not state.type==Constant.STATE_IN_TOPIC:
+                       return Constant.ERROR_BAD_VALUE
+        state_topic_key=topic.states_in_topic_key
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE
+  
+    if state_topic_key==None:   
+        
+        state_topic=Topic_States(topic_key=topic.key,states_in_topic_keys=states_in_topic_keys)
+        state_topic.put()    
+        topic.states_in_topic_key=state_topic.key
+        topic.put()
+        #logging.info("CV Logs "+str(state_topic.key))
+    else:
+         
+         state_topic=state_topic_key.get()
+         state_topic.states_in_topic_keys.extend(states_in_topic_keys)
+         state_topic.put()     
+    logging.info("CV Logs : success to assign states to topic :"+topic.name)     
+    return Constant.UPDATION_SUCCESSFULL
+
+
+
 """
 Assigns  existing topics  to an existing subject:
                             topic_key: key to state entity
