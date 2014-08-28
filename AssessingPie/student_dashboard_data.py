@@ -30,3 +30,15 @@ def getmasterybysubject(request):
     session['student']= student
     mastery = Query.get_mastery_for_all_subjects(session['student'].key)
     return render_to_response('Dashboard/mastery_by_subject.xml',{'masterdict':mastery,},context_instance = RequestContext(request),content_type="text/xml")
+
+def getpendingassessment(request):
+    user_information= Query.login("Ankit_Bhatia","ankit")
+    session = get_current_session()
+    student = user_information[1]
+    session['student']= student
+    subjectlist = Query.get_subjects_by_student(session['student'].key)
+    pendingassessmentbysubject = {}
+    for subject in subjectlist:
+        pendingassessments = Query.get_pending_assessment_subject(subject.key,session['student'].key)
+        pendingassessmentbysubject[subject.name]= pendingassessments
+        return render_to_response('Dashboard/pending_assessmentbysubject.xml',{'assessmentdict':pendingassessmentbysubject,},context_instance = RequestContext(request),content_type="text/xml")
