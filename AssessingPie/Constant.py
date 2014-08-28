@@ -43,12 +43,23 @@ class Topic:
     TOPIC_ADDITION="Addition"
     TOPIC_SUBSTRACTION="Substraction"
     
+    
+class States:
+    state_city = {'UP' : ["Meerut","Ghaziabad"],'Karnataka' : ["Bengaluru","Hydrabad"]}
+    
 class Class:
     CLASS_V=5
     CLASS_VI=6
 
-class Sectiion:
+class Section:
     SECTION_A="A"
+
+class UserType:
+    STUDENT="Student"
+    TEACHER="Teacher"
+    SCHOOL="School"
+
+    
     
     
     
