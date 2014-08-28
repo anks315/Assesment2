@@ -27,7 +27,19 @@ handlers:
   login: required
   script: main.app
 
-- url: /topicname/(.*)
+- url: /topicnames/(.*)
+  login: required
+  script: main.app
+
+- url: /userdetails/(.*)
+  login: required
+  script: main.app
+
+- url: /masterybysubject/(.*)
+  login: required
+  script: main.app
+
+- url: /pendingassessmentbysubject/(.*)
   login: required
   script: main.app
 
