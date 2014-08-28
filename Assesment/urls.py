@@ -11,10 +11,14 @@ urlpatterns = patterns('',
     (r'^assessment/$', 'AssessingPie.views.asknextquestion'),
     (r'^inference/$', 'AssessingPie.views.inferquestion'),
     (r'^contact_us/$', 'AssessingPie.views.contactus'),
-    (r'^topicname/$', 'AssessingPie.views.topicname'),
+    (r'^topicnames/$', 'AssessingPie.views.topicnames'),
     (r'^assesstopicname/$', 'AssessingPie.views.assesstopicname'),
-        (r'^dashboard/$', 'AssessingPie.views.dashboard'),
+    (r'^dashboard/$', 'AssessingPie.views.dashboard'),
     url(r'^$', 'AssessingPie.views.home'),
+    (r'^userdetails/$', 'AssessingPie.student_dashboard_data.userdetails'),
+    (r'^masterybysubject/$', 'AssessingPie.student_dashboard_data.getmasterybysubject')
+
+
 
 
     # Uncomment the admin/doc line below to enable admin documentation:
