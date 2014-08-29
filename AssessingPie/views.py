@@ -104,11 +104,11 @@ def contactus(request):
         fill()
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
 
-def topicname(request):
-    return render_to_response('AssessingPie/topicname.html',{},context_instance = RequestContext(request))
+def topicnames(request):
+        return render_to_response('AssessingPie/topicname.html',{},context_instance = RequestContext(request))
 
 def assesstopicname(request):
-    return render_to_response('AssessingPie/assesstopicname.html',{},context_instance = RequestContext(request))
+        return render_to_response('AssessingPie/assesstopicname.html',{},context_instance = RequestContext(request))
 
 
 topicname = ''
