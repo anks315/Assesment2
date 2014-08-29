@@ -42,3 +42,23 @@ def getpendingassessment(request):
         pendingassessments = Query.get_pending_assessment_subject(subject.key,session['student'].key)
         pendingassessmentbysubject[subject.name]= pendingassessments
         return render_to_response('Dashboard/pending_assessmentbysubject.xml',{'assessmentdict':pendingassessmentbysubject,},context_instance = RequestContext(request),content_type="text/xml")
+
+def getgrowthforallsubject(request):
+    user_information= Query.login("Ankit_Bhatia","ankit")
+    session = get_current_session()
+    student = user_information[1]
+    session['student']= student
+    growthdict = Query.get_growth_for_all_subject(session['student'].key)
+    return render_to_response('Dashboard/growth_by_subject.xml',{'growthdict':growthdict,},context_instance = RequestContext(request),content_type="text/xml")
+
+
+def getreadytolearnbysubject(request):
+    user_information= Query.login("Ankit_Bhatia","ankit")
+    session = get_current_session()
+    student = user_information[1]
+    session['student']= student
+    readytolearndict =  Query.get_ready_to_learn_of_all_topic_dummy(session['student'].key)
+
+    return render_to_response('Dashboard/readytolearn_by_subject',{'readytolearndict':readytolearndict,},context_instance = RequestContext(request),content_type="text/xml")
+
+
