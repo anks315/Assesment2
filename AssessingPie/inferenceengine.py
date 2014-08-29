@@ -1,6 +1,7 @@
 __author__ = 'ankur'
 import logging
 import Query
+import models
 class Question:
     def __init__(self,key,typeid,questionstring):
         self.key=key
@@ -16,6 +17,9 @@ class TypeCache:
 
     def gettype(self,typeid):
         return self.typelist[typeid].questionstring
+
+    def gettypekey(self,typeid):
+        return self.typelist[typeid].key
 
     def getlength(self):
         return len(self.typelist)
@@ -185,5 +189,8 @@ def generatestates(userbuffer,topicname):
                 if stateadd not in statesgen:
                  statesgen.append(stateadd)
             tobeaddedlist=[]
-    
+
+    school=models.School.query(models.School.name=="CVSchool").get()
+    state1=Query.addState(type=Constant.STATE_IN_TOPIC,school_key=school.key)
+
     logging.error(statesgen)
