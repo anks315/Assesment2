@@ -1423,7 +1423,8 @@ def get_subjects_by_student(student_key):
             return Constant.ERROR_NO_DATA_FOUND
         subjects=ndb.get_multi(subject_keys)
     except Exception:
-            logging.info("CV Logs : failed to get subjects for student :"+student.basic_info.firstname)
+            logging.exception("")
+            logging.info("CV Logs : failed to get subjects for student :")
             return Constant.ERROR_OPERATION_FAIL
             
     logging.info("CV Logs : success to get subjects for student :"+student.basic_info.firstname)
@@ -2059,7 +2060,7 @@ def get_ready_to_learn_topic(topic_key,student_key):
         
        
         logging.info("CV Logs : success to get mastry for  student  :")
-        return question_key.get()
+        return question_key.get().instance.problem_statement
     except Exception:
         logging.info("CV Logs : failed to get mastry for  student :")
         logging.exception("")
@@ -2152,6 +2153,7 @@ def get_ready_to_learn_of_all_topic_dummy(student_key):
     total=0
     question_key=None
     try:
+        logging.error(str(student_key))
         subjects=get_subjects_by_student(student_key)
         for subject_dummy in subjects:
             if subject_dummy.name=="Mathematics":
