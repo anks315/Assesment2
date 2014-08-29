@@ -73,14 +73,14 @@ This class models  a Subject entity
                                                  section_details= ndb.StringProperty()# section name from Section in Constant.py
                                                  
                                                  
-                              
+                        topics_in_subject_key : key of relationship table Subject_Topics entity for topics contained in the subject
+                            
 """    
         
 class Subject(ndb.Expando):
     name = ndb.StringProperty(required=True)# from SUBJECT Constants in Constant.py
-    topics= ndb.KeyProperty(kind='Topic', repeated=True)
     type=ndb.IntegerProperty(required=True,choices=[Subject.TYPE_CLASS,Subject.TYPE_GLOBAL])
-    topics_in_subject_key=ndb.KeyProperty(kind='Subject_Topics',repeated=True)
+    topics_in_subject_key=ndb.KeyProperty(kind='Subject_Topics')
     
 
 
@@ -88,11 +88,10 @@ class Subject(ndb.Expando):
 
 
 """
-This class models  a Topic entity 
-key Property: states_in_topic_key: contains key of relationship entity Topic_States which contains
-                                        state keys associated to a topic
-              questions_in_topic_key: contains key of relationship entity Topic_Questions which contains
-                                        question keys associated to a topic        
+This class models  a one to many Subject to Topics relationship 
+key Property: topics_in_subject_key: contains key of r entity Topic  which are contained
+                                        in a Subject
+               
 """    
         
 class Subject_Topics(ndb.Model):
@@ -109,7 +108,8 @@ This class models  a Topic entity
 key Property: states_in_topic_key: contains key of relationship entity Topic_States which contains
                                         state keys associated to a topic
               questions_in_topic_key: contains key of relationship entity Topic_Questions which contains
-                                        question keys associated to a topic        
+                                        question keys associated to a topic  
+                   
 """    
         
 class Topic(ndb.Model):
@@ -205,8 +205,15 @@ key Property: topics_in_assessment_key: contains keys of  a topics in an assessm
 """
 
 class Assessment(ndb.Model):
-    topics_in_assessment_key = ndb.KeyProperty(kind='Assessment_Topics', repeated=True)
-    states_in_assessment_key = ndb.KeyProperty(kind='Assessment_States', repeated=True)
+    name=ndb.StringProperty(required=True)
+    
+    current_state=ndb.KeyProperty(kind=State)
+    next_state=ndb.KeyProperty(kind=State)
+    score=ndb.FloatProperty()
+    question_ready_to_learn=ndb.KeyProperty(kind=Question)
+    topics_in_assessment_key = ndb.KeyProperty(kind='Topic', repeated=True)
+    states_in_assessment_key = ndb.KeyProperty(kind='State', repeated=True)
+    
     
 """
 This class models  a one to many  Assessment to Topics relationship
@@ -216,12 +223,12 @@ key Property: assessment_key: contains key of  a Assessment
 """
    
     
-    
+"""   
     
 class Assessment_Topics(ndb.Model):   
     assessment_key = ndb.KeyProperty(kind=Assessment, required=True)
     topics_in_assessment_keys = ndb.KeyProperty(kind=Topic, repeated=True)
-  
+"""  
 """
 This class models  a one to many  Assessment to States relationship
 key Property: assessment_key: contains key of  a Assessment
@@ -241,7 +248,13 @@ class Address(ndb.Model):
   type = ndb.IntegerProperty(choices=set([Constant.ADDRESS_TYPE_HOME,Constant.ADDRESS_TYPE_WORK,Constant.ADDRESS_TYPE_OTHER]))  # E.g., 'home', 'work'
   street = ndb.StringProperty()
   city = ndb.StringProperty()
+  state=ndb.StringProperty()
 
+
+
+
+
+    
     
 """
 This class models  a school entity
@@ -252,8 +265,39 @@ key Property:
 
 class School(ndb.Model):
   name = ndb.StringProperty(required=True) 
+   
+  code=ndb.StringProperty(required=True) 
   address = ndb.StructuredProperty(Address, required=True)
-  assessments_in_school_key = ndb.KeyProperty(kind='School_Assessments', repeated=True)
+  assessments_in_school_key = ndb.KeyProperty(kind='School_Assessments')
+  classes_in_school_keys= ndb.KeyProperty(kind='Class', repeated=True)
+  teachers_in_school_keys= ndb.KeyProperty(kind='Teacher', repeated=True)
+  
+ 
+ 
+ 
+"""class Class_Assessments(ndb.Model):
+    class_key= ndb.KeyProperty(kind='Class', repeated=True)
+    assessments_in_class_keys=ndb.KeyProperty(kind='Assessments', repeated=True)
+""" 
+"""
+This class models  a school entity
+key Property: 
+              assessments_in_school_key: contains key of school to assessment one to many relationship entity of kind School_Assessments
+                                                                                            
+"""
+
+class Class(ndb.Model):
+  name = ndb.StringProperty(required=True)#from Constant.py  
+  school_key=ndb.KeyProperty(kind='School')
+  subjects_in_class_key=ndb.KeyProperty(kind='Subject',repeated=True)
+  section_details= ndb.StringProperty()
+  year_session=ndb.StringProperty()
+  students_in_class_key=ndb.KeyProperty(kind='Student',repeated=True)
+  #assessments_in_class_key=ndb.KeyProperty(kind='Class_Assessments')
+  
+  
+  
+  
 """
 This class models  a basic user information subentity
                                                                                             
@@ -283,15 +327,54 @@ class School_Assessments(ndb.Model):
 
 
 """
-This class models  a student entity 
+*******************************Gaurdian details 
+This class models  a student entity
+
 """
 class Student(ndb.Model):   
     username=ndb.StringProperty()
-    basic_info = ndb.StructuredProperty(UserInfo, required=True)
-    school = ndb.KeyProperty(kind=School, required=True) 
-    class_deatils= ndb.StringProperty()# class name from Class in Constant.py
-    section_details= ndb.StringProperty()# section name from Section in Constant.py
+    basic_info = ndb.StructuredProperty(UserInfo,required=True)
+    school = ndb.KeyProperty(kind=School, required=True)
+    parent_detail= ndb.KeyProperty(kind='Parent')
+    class_details= ndb.KeyProperty(kind=Class)
+    class_history=ndb.KeyProperty(kind=Class,repeated=True)# class name from Class in Constant.py
     student_assessment_key=ndb.KeyProperty(kind='Student_Assessments')
+    
+
+"""
+*******************************Gaurdian details 
+This class models  a student entity
+
+"""
+class Parent(ndb.Model):   
+    username=ndb.StringProperty()
+    basic_info = ndb.StructuredProperty(UserInfo,required=True)
+    
+    
+    
+
+
+"""
+This class models  a class to students one to many  entity 
+
+class Class_Students(ndb.Model):   
+    class_key= ndb.KeyProperty(kind=Class,repeated=True)# class name from Class in Constant.py
+    students_in_class=ndb.KeyProperty(kind='Student',repeated=True)
+ """   
+    
+    
+
+"""
+This class models  a Teacher entity 
+"""
+class Teacher(ndb.Model):   
+    username=ndb.StringProperty()
+    basic_info = ndb.StructuredProperty(UserInfo,required=True)
+    school = ndb.KeyProperty(kind=School, required=True) 
+    classes_under_teacher= ndb.KeyProperty(kind=Class,repeated=True)
+    class_history=ndb.KeyProperty(kind=Class,repeated=True)# class name from Class in Constant.py
+    
+    
         
 """
 This class models  a one to many  student to Assessment relationship
@@ -304,8 +387,8 @@ key Property: school_key: contains key of  a School
 class Student_Assessments(ndb.Model):   
     student_key = ndb.KeyProperty(kind=Student,required=True)
     attended_assessment_key = ndb.KeyProperty(kind=Assessment, repeated=True)
-    states_of_or_in_assessments = ndb.KeyProperty(kind=State, repeated=True)
+    '''states_of_or_in_assessments = ndb.KeyProperty(kind=State, repeated=True)
     scores_in_assessments = ndb.IntegerProperty(repeated=True)
-    questions_ready_to_learn = ndb.KeyProperty(kind=Question, repeated=True)
+    questions_ready_to_learn = ndb.KeyProperty(kind=Question, repeated=True)'''
     
     
