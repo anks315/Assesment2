@@ -21,7 +21,8 @@ urlpatterns = patterns('',
     (r'^growthbysubject/$', 'AssessingPie.student_dashboard_data.getgrowthforallsubject'),
      (r'^readytolearnbysubject/$', 'AssessingPie.student_dashboard_data.getreadytolearnbysubject'),
      (r'^learningprogress_by_date/$', 'AssessingPie.student_dashboard_data.getlearningprogressdatewise'),
-     (r'^notrecentlyloggedin_by_class/$', 'AssessingPie.teacher_dashboard_data.get_not_recently_loggedin')
+     (r'^notrecentlyloggedin_by_class/$', 'AssessingPie.teacher_dashboard_data.get_not_recently_loggedin'),
+     (r'^mastery_by_student_by_class/$', 'AssessingPie.teacher_dashboard_data.mastery_by_student_by_class')
 
 
 

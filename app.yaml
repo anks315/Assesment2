@@ -60,6 +60,10 @@ handlers:
   login: required
   script: main.app
 
+- url: /mastery_by_student_by_class/(.*)
+  login: required
+  script: main.app
+
 
 - url: /.*
   script: main.app

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
 {% for key, value in learningprogressdict.items %}
+    <progress>
    <date>
    {{ key }}
    </date>
@@ -10,8 +11,8 @@
 
    <attempted>
        {{ value.1 }}
-   </attempted>>
-
+   </attempted>
+     </progress>
    {% endfor %}
 
 

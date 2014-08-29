@@ -2,13 +2,15 @@
 {% for key, value in readytolearn.items %}
 
      <topic>
+     <name>
        {{ key }}
-     </topic>
+     </name>
     <percentage>
 
        {{ value }}
 
    </percentage>
+    </topic>
 
 {% endfor %}
 

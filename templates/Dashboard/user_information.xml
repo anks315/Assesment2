@@ -1,4 +1,5 @@
 <root>
+<user>
 <user_name>
     {{ user_name }}
 </user_name>
@@ -6,5 +7,5 @@
 <last_login>
 {{ last_login }}
 </last_login>
-
+</user>
  </root>
