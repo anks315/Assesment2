@@ -154,7 +154,25 @@ def UpdateQuestion(question_key,question_instance=None):
        
        return Constant.ERROR_BAD_VALUE 
    
-    
+"""
+deletes a question :
+                    
+"""    
+def DeleteQuestion(question_key):
+   logging.info("CV Logs : Inside UpdateQuestion") 
+   try:
+       question=question_key.get()
+       instance=question.instance
+       question.key.delete()
+       instance.key.delete()
+       logging.info("CV Logs : success to update question  :"+question.instance.problem_statement)    
+       return Constant.UPDATION_SUCCESSFULL;  
+   except Exception:
+       logging.exception("")
+       logging.error("CV Logs : failed to update question  :"+question.instance.problem_statement)
+       
+       return Constant.ERROR_BAD_VALUE 
+       
 
 
    
@@ -175,6 +193,27 @@ def addState(type,school_key):
        return Constant.ERROR_BAD_VALUE
    logging.info("CV Logs : success to add state  :")    
    return state;
+
+
+
+
+
+"""
+deletes a  State:
+                
+            
+"""
+def deleteState(state_key):
+   logging.info("CV Logs : Inside addState") 
+   try:
+       state=state_key.get()
+       state_key.delete() 
+   except Exception :
+       logging.exception("")
+       logging.error("CV Logs : failed to add state  :")
+       return Constant.ERROR_BAD_VALUE
+   logging.info("CV Logs : success to add state  :")    
+   return Constant.UPDATION_SUCCESSFULL;
 
 
 """
@@ -219,6 +258,34 @@ def updateSubject(subject_key,type=None,name=None):
    
 
 
+"""
+delete a  Subject:
+               
+    
+"""
+def deleteSubject(subject_key):
+   logging.info("CV Logs : Inside deleteSubject") 
+   try: 
+       subject = subject_key.get()
+       subject_key.delete()
+       '''topics_key=subject.topics_in_subject_key
+       topics_rel_key=topics_key.get()
+       topics=topics_rel_key.topics_in_subject_key
+       if not topics==None:
+           
+       
+       
+       
+       '''     
+       logging.info("CV Logs : success to delete subject  :")
+       return Constant.UPDATION_SUCCESSFULL;
+   except Exception :
+       logging.exception("")
+       logging.error("CV Logs : failed to delete subject  :")
+       return Constant.ERROR_BAD_VALUE
+   
+
+
 
 """
 Adds a new Topic:
@@ -239,6 +306,26 @@ def addTopic(school_key,name,prerequisite_topics,subject_key):
          return Constant.ERROR_BAD_VALUE   
    logging.info("CV Logs : success to add topic  :"+topic.name)
    return topic;                                                                      
+
+
+
+"""
+deletes a new Topic:
+                prerequisite_topics should have Type list of  Key of kind Topic
+                subject_key list of  Key of kind Subject
+"""
+def deleteTopic(topic_key):
+   try:
+       logging.info("CV Logs : Inside addTopic")
+       topic_key.delete()      
+   except Exception:
+         logging.exception("")
+         logging.error("CV Logs : failed to delete topic  :")
+         return Constant.ERROR_BAD_VALUE   
+   logging.info("CV Logs : success to delete topic  :")
+   return Constant.UPDATION_SUCCESSFULL;                                                                      
+
+
 
 
 """
@@ -331,6 +418,27 @@ def updateSchool(school_key,name=None,address=None):
          logging.error("CV Logs : failed to add school  :"+school.name)
          return Constant.ERROR_BAD_VALUE
 
+
+"""
+delete a  School:
+                
+ 
+"""
+def deleteSchool(school_key):
+     try:
+       logging.info("CV Logs : Inside deleteSchool")
+       
+       logging.info("CV Logs : success to delete school  :")
+       return Constant.UPDATION_SUCCESSFULL;
+     except Exception:
+         logging.exception("")
+         logging.error("CV Logs : failed to delete school  :")
+         return Constant.ERROR_BAD_VALUE
+     
+
+
+
+
 """
 
 
@@ -343,7 +451,7 @@ Adds a new Teacher:
 
 
 
-@ndb.transactional(xg=True)
+@ndb.transactional
 def addTeacher(username,basic_info,school_key):
     logging.info("CV Logs : Inside addTeacher")
     school=None
@@ -388,6 +496,22 @@ def updateTeacher(teacher_key,username=None,basic_info=None):
         logging.error("CV Logs : failed to update teacher  :"+teacher.basic_info.name)
         return Constant.ERROR_BAD_VALUE 
     
+
+
+def deleteTeacher(teacher_key):
+    logging.info("CV Logs : Inside deleteTeacher")
+       
+    try:
+         teacher_key.delete()   
+         
+    except Exception:
+        logging.exception("")
+        logging.error("CV Logs : failed to delete teacher  :")
+        #raise ndb.Rollback()
+        return Constant.ERROR_BAD_VALUE 
+    
+    logging.info("CV Logs : success to delete teacher  :")
+    return Constant.UPDATION_SUCCESSFULL;     
 
 
 
@@ -445,6 +569,22 @@ def updateClass(class_key,name=None,section_details=None,year_session=None):
         logging.error("CV Logs : failed to update class  :"+class_entity.name+":"+class_entity.section_details)
         return Constant.ERROR_BAD_VALUE
 
+
+
+
+def deleteClass(class_key):  
+    try:
+        logging.info("CV Logs : Inside deleteClass")
+        class_key.delete()
+    except Exception :
+        logging.exception("")
+        logging.error("CV Logs : failed to delete class  :")
+        return Constant.ERROR_BAD_VALUE
+    
+    logging.info("CV Logs : success to delete class  :")
+    return Constant.UPDATION_SUCCESSFULL;
+
+
 """
 Adds a new UserInfo:
                 address: should be an Address entity
@@ -489,6 +629,21 @@ def addAssessment(name,list_topic_key,school_key):
         logging.exception("")
         logging.error("CV Logs : failed to add assessment  :"+name)
         return Constant.ERROR_BAD_VALUE
+    
+def deleteAssessment(assessment_key):
+    try :     
+        logging.info("CV Logs : Inside deleteAssessment" )
+        assessment_key.delete()
+        logging.info("CV Logs : success to delete assessment  :")        
+        return Constant.UPDATION_SUCCESSFULL;
+    except Exception :
+        logging.exception("")
+        logging.error("CV Logs : failed to delete assessment  :")
+        return Constant.ERROR_BAD_VALUE
+       
+    
+    
+    
 
 """
 Adds a new Student:
@@ -543,6 +698,20 @@ def updateStudent(student_key,username=None,basic_info=None):
     return student;
 
 
+def deleteStudent(student_key):
+    logging.info("CV Logs : Inside deleteStudent" )
+     
+    try:
+         student_key.delete()
+         logging.info("CV Logs : success to add student  :")
+         return Constant.UPDATION_SUCCESSFULL;
+
+    except Exception:
+        logging.exception("")
+        logging.error("CV Logs : failed to add student  :")
+        return Constant.ERROR_BAD_VALUE
+
+
 """
 Assigns an exsisting assessment to an existing student:
                             student_key: key to student entity
@@ -555,7 +724,8 @@ def assign_assessment_to_student(student_key,assessment_key):
     try:
         logging.info("CV Logs : Inside assign_assessment_to_student" )
         student=student_key.get()  
-        student_assessment_key=student.student_assessment_key       
+        student_assessment_key=student.student_assessment_key
+        school_key=student.school     
         #logging.error(assess)
         assessment=assessment_key.get()
         logging.error(student)
@@ -564,7 +734,7 @@ def assign_assessment_to_student(student_key,assessment_key):
         logging.error("CV Logs : failed to assign assessment to student " )
         return Constant.ERROR_BAD_VALUE    
     if student_assessment_key==None:   
-        student_assessment=Student_Assessments(student_key=student.key,attended_assessment_key=[assessment.key])
+        student_assessment=Student_Assessments(parent=school_key,student_key=student.key,attended_assessment_key=[assessment.key])
         student_assessment.put()    
         student.student_assessment_key=student_assessment.key
         student.put()     
@@ -799,8 +969,8 @@ Assigns  existing questions  to an existing topic:
                             topic_key: key to topic entity
                             questions_in_topic_keys : list of keys of questions covered in topic
 """
-@ndb.transactional(xg=True)
-def assign_questions_to_topic(topic_key,questions_in_topic_keys):
+@ndb.transactional
+def assign_questions_to_topic(topic_key,questions_in_topic_keys,school_key):
     topic=None
     topic_question=None
     try:
@@ -815,7 +985,7 @@ def assign_questions_to_topic(topic_key,questions_in_topic_keys):
     
     if topic_question_key==None:   
         
-        topic_question=Topic_Questions(topic_key=topic_key,questions_in_topic_keys=questions_in_topic_keys)
+        topic_question=Topic_Questions(parent=school_key,topic_key=topic_key,questions_in_topic_keys=questions_in_topic_keys)
         topic_question.put()    
         topic.questions_in_topic_key=topic_question.key
         topic.put()
@@ -835,7 +1005,7 @@ Assigns  existing questions  to an existing state:
                             questions_in_topic_keys : list of keys of questions covered in topic
 """
 @ndb.transactional(xg=True)
-def assign_questions_to_state(state_key,questions_in_state_keys):
+def assign_questions_to_state(state_key,questions_in_state_keys,school_key):
     state=None
     question_state=None
     try:
@@ -849,7 +1019,7 @@ def assign_questions_to_state(state_key,questions_in_state_keys):
 
     if question_state_key==None:   
         
-        question_state=State_Questions(state_key=state_key,questions_in_state_keys=questions_in_state_keys)
+        question_state=State_Questions(parent=school_key,state_key=state_key,questions_in_state_keys=questions_in_state_keys)
         question_state.put()    
         state.question_in_state_key=question_state.key
         state.put()
@@ -871,7 +1041,7 @@ Assigns  existing topics  to an existing state:
                             states_in_topic_keys : list of keys of states covered in topic
 """
 @ndb.transactional(xg=True)
-def assign_states_to_topic(topic_key,states_in_topic_keys):
+def assign_states_to_topic(topic_key,states_in_topic_keys,school_key):
     topic=None
     state_topic=None
     logging.info("CV Logs : inside assign_states_to_topic ")
@@ -888,7 +1058,7 @@ def assign_states_to_topic(topic_key,states_in_topic_keys):
   
     if state_topic_key==None:   
         
-        state_topic=Topic_States(topic_key=topic_key,states_in_topic_keys=states_in_topic_keys)
+        state_topic=Topic_States(parent=school_key,topic_key=topic_key,states_in_topic_keys=states_in_topic_keys)
         state_topic.put()    
         topic.states_in_topic_key=state_topic.key
         topic.put()
@@ -908,7 +1078,7 @@ Assigns  existing topics  to an existing state:
                             states_in_topic_keys : list of keys of states covered in topic
 """
 @ndb.transactional(xg=True)
-def assign_states_to_topic_by_name(topic_name,states_in_topic_keys):
+def assign_states_to_topic_by_name(topic_name,states_in_topic_keys,school_key):
     topic=None
     state_topic=None
     logging.info("CV Logs : inside assign_states_to_topic_by_name ")
@@ -927,7 +1097,7 @@ def assign_states_to_topic_by_name(topic_name,states_in_topic_keys):
   
     if state_topic_key==None:   
         
-        state_topic=Topic_States(topic_key=topic.key,states_in_topic_keys=states_in_topic_keys)
+        state_topic=Topic_States(parent=school_key,topic_key=topic.key,states_in_topic_keys=states_in_topic_keys)
         state_topic.put()    
         topic.states_in_topic_key=state_topic.key
         topic.put()
@@ -948,7 +1118,7 @@ Assigns  existing topics  to an existing subject:
                             states_in_topic_keys : list of keys of states covered in topic
 """
 @ndb.transactional(xg=True)
-def assign_topics_to_subject(subject_key,topics_in_subject_key):
+def assign_topics_to_subject(subject_key,topics_in_subject_key,school_key):
     subject=None
     topic_subject=None
     try:
@@ -963,7 +1133,7 @@ def assign_topics_to_subject(subject_key,topics_in_subject_key):
    
     if topic_subject_key==None:   
         
-        topic_subject=Subject_Topics(subject_key=subject_key,topics_in_subject_key=topics_in_subject_key)
+        topic_subject=Subject_Topics(parent=school_key,subject_key=subject_key,topics_in_subject_key=topics_in_subject_key)
         topic_subject.put()    
         subject.topics_in_subject_key=topic_subject.key
         subject.put()
@@ -1204,6 +1374,7 @@ def get_questions_by_topic_name(topic_name):
         return Constant.ERROR_BAD_VALUE
     try:
         question_in_topic_reln_key=topic.questions_in_topic_key
+        logging.info("############"+str(topic))
         if question_in_topic_reln_key==None:
             return Constant.ERROR_NO_DATA_FOUND
         questions_in_topic=question_in_topic_reln_key.get()
