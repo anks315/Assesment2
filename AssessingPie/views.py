@@ -12,18 +12,17 @@ import inferenceengine
 from google.appengine.ext import ndb
 import  Query
 import datetime
+import Constant
 
-counters=0
-counter =0
 val=0
 readytolearn=""
 
 def asknextquestion(request):
 
-    global counters
-    counters+=1
+
     session = get_current_session()
     global assessmentkey
+
     c=session.get('index',-1)
     if c== -1:
         session['index']=users.get_current_user()
@@ -79,10 +78,8 @@ def asknextquestion(request):
                     logging.error(next(iter(quetionkey)))
                     logging.error(currentstate.key)
                     score =(val/(float)(getnumquestions(session['index'])))*100
-                    user_information= Query.login("Ankit_Bhatia","ankit")
-                    student = user_information[1]
-                    studentkey= student.key
-                    schoolkey= student.school
+                    studentkey= session.get('studentkey',-1)
+                    schoolkey= session.get('schoolkey',-1)
 
                     a=Query.update_assessment_detail_of_student(student_key=studentkey, assessment_key=ndb.Key(urlsafe=assessmentkey),current_state_key= currentstate.key, next_state_key=currentstate.key,next_question_key=next(iter(quetionkey)),score=int(score),school_key=schoolkey,start_date=datetime.date(int(2012),int(6),int(8)))
                     logging.error(a)
@@ -296,4 +293,31 @@ def askquestion(block,antecedentid):
 
 def dashboard(request):
     subjectsenrolled=['Maths','Science','English']
+    user_information= Query.login("Ankit_Bhatia","ankit")
+    session = get_current_session()
+
+    session['type'] = user_information[0]
+
+    if session['type'] == Constant.Constant.STUDENT:
+        student = user_information[1]
+        session['studentkey']= student.key
+        session['schoolkey']=student.school
+        session['studentname']=student.basic_info.firstname + student.basic_info.lastname
+        session['email'] = student.basic_info.email
+        session['studentaddress']= student.basic_info.address
+        session['contactnumber'] = student.basic_info.contact_no
+        session['dateofbirth '] =student.basic_info.date_of_birth
+        session['sex']=student.basic_info.sex
+        session['lastlogin']=user_information[2]
+    if session['type'] == Constant.Constant.TEACHER:
+        teacher = user_information[1]
+        session['teacherkey']=teacher.key
+        session['schoolkey']=teacher.school
+        session['teachername']=teacher.basic_info.firstname + student.basic_info.lastname
+        session['email'] = teacher.basic_info.email
+        session['teacheraddress']= teacher.basic_info.address
+        session['contactnumber'] = teacher.basic_info.contact_no
+        session['dateofbirth '] = teacher.basic_info.date_of_birth
+        session['sex']=teacher.basic_info.sex
+        session['lastlogin']=user_information[2]
     return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
