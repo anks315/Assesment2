@@ -6,7 +6,7 @@ import Constant
 import dummydata
 from gaesessions import get_current_session
 import logging
-
+from google.appengine.ext import ndb
 def get_not_recently_loggedin(request):
     session = get_current_session()
     teacherkey = session.get('teacherkey',-1)
@@ -57,7 +57,8 @@ def get_classes_of_teacher(request):
 def get_students_not_logged_in_by_class(request):
     session = get_current_session()
     teacherkey = session.get('teacherkey',-1)
-    classkey = request.GET['id']
+    key = request.GET['id']
+    classkey = ndb.Key(urlsafe=key)
     notrecentlyloggedin = Query.get_students_not_logged_in_by_class(teacherkey,classkey)
 
     t = loader.get_template('Dashboard/notrecenltyloggedin_byclass')
@@ -67,7 +68,8 @@ def get_students_not_logged_in_by_class(request):
 def getaveragemasterybysubjectallsubject(request):
     session = get_current_session()
     teacherkey = session.get('teacherkey',-1)
-    classkey = request.GET['id']
+    key = request.GET['id']
+    classkey = ndb.Key(urlsafe=key)
     averagemasterybysubject = Query.get_average_mastery_all_subject_detailed(teacherkey,classkey)
     logging.error(averagemasterybysubject)
     t = loader.get_template('Dashboard/averagemasterybysubject_allsubject')
@@ -77,7 +79,8 @@ def getaveragemasterybysubjectallsubject(request):
 def get_assessment_coverage_of_class(request):
     session = get_current_session()
     teacherkey = session.get('teacherkey',-1)
-    classkey = request.GET['id']
+    key = request.GET['id']
+    classkey = ndb.Key(urlsafe=key)
     assessmentcoveragedict = Query.get_assessment_coverage_of_class(teacherkey,classkey)
     logging.error(assessmentcoveragedict)
     t = loader.get_template('Dashboard/assessmentcoverageofclass')
@@ -87,7 +90,8 @@ def get_assessment_coverage_of_class(request):
 def get_subject_of_class(request):
     session = get_current_session()
     teacherkey = session.get('teacherkey',-1)
-    classkey = request.GET['id']
+    key = request.GET['id']
+    classkey = ndb.Key(urlsafe=key)
     subjectdict = Query.get_subject_details_of_teacher_in_class(teacherkey,classkey)
     t = loader.get_template('Dashboard/getsubjectofclass')
     c = Context({'getsubjectofclass': subjectdict,})
