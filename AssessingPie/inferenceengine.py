@@ -2,6 +2,7 @@ __author__ = 'ankur'
 import logging
 import Query
 import models
+import Constant
 class Question:
     def __init__(self,key,typeid,questionstring):
         self.key=key

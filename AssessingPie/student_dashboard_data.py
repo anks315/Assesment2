@@ -15,8 +15,8 @@ def userdetails(request):
     session = get_current_session()
 
     user_information= Query.login("Ankit_Bhatia","ankit")
-
-    if user_information[0] == Constant.Constant.STUDENT :
+    teacher_information = Query.login('Vijay_Mehta','jkjk')
+    if user_information[0] == Constant.Constant.TEACHER :
         student = user_information[1]
         session['student']= student
         user_name =  student.basic_info.firstname + ' ' + student.basic_info.lastname
@@ -25,6 +25,16 @@ def userdetails(request):
         c = Context({'user_name':user_name,'last_login':last_login})
         return HttpResponse(t.render(c),
         content_type="text/xml")
+    if teacher_information[0] == Constant.Constant.TEACHER :
+        teacher = teacher_information[1]
+        session['teacher']= teacher
+        user_name =  teacher.basic_info.firstname + ' ' + teacher.basic_info.lastname
+        last_login = teacher_information[2]
+        t = loader.get_template('Dashboard/user_information.xml')
+        c = Context({'user_name':user_name,'last_login':last_login})
+        return HttpResponse(t.render(c),
+        content_type="text/xml")
+
         #return render_to_response('Dashboard/user_information.xml',{'user_name':user_name,'last_login':last_login},context_instance = RequestContext(request),content_type="text/xml;")
 
 def getmasterybysubject(request):

@@ -17,7 +17,11 @@ urlpatterns = patterns('',
     url(r'^$', 'AssessingPie.views.home'),
     (r'^userdetails/$', 'AssessingPie.student_dashboard_data.userdetails'),
     (r'^masterybysubject/$', 'AssessingPie.student_dashboard_data.getmasterybysubject'),
-    (r'^pendingassessmentbysubject/$', 'AssessingPie.student_dashboard_data.getpendingassessment')
+    (r'^pendingassessmentbysubject/$', 'AssessingPie.student_dashboard_data.getpendingassessment'),
+    (r'^growthbysubject/$', 'AssessingPie.student_dashboard_data.getgrowthforallsubject'),
+     (r'^readytolearnbysubject/$', 'AssessingPie.student_dashboard_data.getreadytolearnbysubject'),
+     (r'^learningprogress_by_date/$', 'AssessingPie.student_dashboard_data.getlearningprogressdatewise'),
+     (r'^notrecentlyloggedin_by_class/$', 'AssessingPie.teacher_dashboard_data.get_not_recently_loggedin')
 
 
 

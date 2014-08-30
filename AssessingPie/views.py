@@ -5,7 +5,7 @@ from gaesessions import get_current_session
 from engine import nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer,maxstatesize,getnumquestions
 from django.template import RequestContext
 from google.appengine.api import  users
-from dummydata import fill
+from dummydata import fill,flush
 from Query import login
 import logging
 import inferenceengine
@@ -101,6 +101,7 @@ antecedent=[]
 numalreadyinferred=0
 
 def contactus(request):
+        flush()
         fill()
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
 
