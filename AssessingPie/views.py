@@ -24,6 +24,11 @@ def asknextquestion(request):
     if c== -1:
         session['index']=users.get_current_user()
         usersdict[session['index']]= UserBuffer()
+    else:
+        if request.method == 'POST':
+            del usersdict[session['index']]
+            session['index']=-1
+
 
 
 
@@ -79,6 +84,8 @@ currentblocknumber = -1
 currentantecedentnumber=0
 implication=-1
 antecedent=[]
+numalreadyinferred=0
+
 def contactus(request):
         fill()
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
@@ -90,6 +97,9 @@ def  inferquestion(request):
     global currentblocknumber
     global  numofpossibleantecedent
     global  blocknumber
+    global  numalreadyinferred
+    global antecedent
+    global implication
 
     session = get_current_session()
 
@@ -102,6 +112,13 @@ def  inferquestion(request):
         if request.method!='POST':
             del session['infer']
             session['infer'] = -1
+            blocknumber = -1
+            numofpossibleantecedent=-1
+            currentblocknumber = -1
+            currentantecedentnumber=0
+            implication=-1
+            antecedent=[]
+            numalreadyinferred=0
             return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
     if request.method=='POST':
@@ -129,12 +146,16 @@ def  inferquestion(request):
                 alreadyinffered=askquestion(currentblocknumber,currentantecedentnumber)
                 currentantecedentnumber+=1
                 if len(alreadyinffered)!=0:
+
                     question = "If student donot know: \n"
                     for x in antecedent:
                         question +=usersdict[session['infer']].typeCache.gettype(x)
                     question = question+ "He will not be able to answer: " +   usersdict[session['infer']].typeCache.gettype(implication)
                     return render_to_response('AssessingPie/inference.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : question},context_instance = RequestContext(request))
+                else:
+                     numalreadyinferred+=1
             else:
+                numalreadyinferred+=1
                 currentantecedentnumber+=1
         else:
             logging.error("entered else")
@@ -142,8 +163,20 @@ def  inferquestion(request):
             if currentblocknumber==0:
 
                 inferenceengine.createsurmise(usersdict[session['infer']])
-
+            logging.error(numalreadyinferred)
+            logging.error(numofpossibleantecedent)
+            if(numalreadyinferred==numofpossibleantecedent):
+                blocknumber = -1
+                numofpossibleantecedent=-1
+                currentblocknumber = -1
+                currentantecedentnumber=0
+                implication=-1
+                antecedent=[]
+                numalreadyinferred=0
+                logging.error(inferenceengine.generatestates(usersdict[session['infer']]))
+                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
             currentblocknumber+=1
+            numalreadyinferred=0
             logging.error(currentblocknumber)
             inferenceengine.prepareblock(usersdict[session['infer']],currentblocknumber)
             if currentblocknumber<blocknumber:
@@ -153,6 +186,13 @@ def  inferquestion(request):
                 logging.error(usersdict[session['infer']].surmiseRelation.getstates(0))
                 logging.error(usersdict[session['infer']].surmiseRelation.getstates(1))
                 logging.error(usersdict[session['infer']].surmiseRelation.getstates(2))
+                blocknumber = -1
+                numofpossibleantecedent=-1
+                currentblocknumber = -1
+                currentantecedentnumber=0
+                implication=-1
+                antecedent=[]
+                numalreadyinferred=0
                 return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
             if usersdict[session['infer']].blockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
@@ -165,7 +205,10 @@ def  inferquestion(request):
                         question+= usersdict[session['infer']].typeCache.gettype(x)
                     question += "He will not  be able to answer: " +   usersdict[session['infer']].typeCache.gettype(implication)
                     return render_to_response('AssessingPie/inference.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : question,},context_instance = RequestContext(request))
+                else:
+                     numalreadyinferred+=1
             else:
+                numalreadyinferred+=1
                 currentantecedentnumber+=1
 
 def askquestion(block,antecedentid):

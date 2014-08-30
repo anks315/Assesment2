@@ -1,5 +1,5 @@
 __author__ = 'ankur'
-
+import logging
 class Question:
     def __init__(self,key,typeid,questionstring):
         self.key=key
@@ -164,3 +164,19 @@ class InferenceBuffer:
         self.typeCache.addtype(2,2,"Division")
         self.surmiseRelation = SurmiseRelation(self)
         self.blockCache = BlockCache()
+
+def generatestates(userbuffer):
+    statesgen =[]
+    numoftype = userbuffer.typeCache.getlength()
+    for questiontype in range(0,numoftype):
+        surmiselist = userbuffer.surmiseRelation.getstates(questiontype)
+        for surmisestate in surmiselist:
+            tobeaddedlist =[]
+            tobeaddedlist.append(surmisestate)
+            for state in statesgen:
+                tobeaddedlist.append(surmisestate.union(state))
+            for stateadd in tobeaddedlist:
+                if stateadd not in statesgen:
+                 statesgen.append(stateadd)
+            tobeaddedlist=[]
+    logging.error(statesgen)

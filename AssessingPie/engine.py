@@ -27,8 +27,8 @@ class  UserBuffer:
         self.initializebuffer()
 
     def initializebuffer(self):
-        question_db = Query.get_questions_by_topic_name("Number  System")
-        state_db =Query.get_states_by_topic_name("Number  System")
+        question_db = Query.get_questions_by_topic_name("Number System")
+        state_db =Query.get_states_by_topic_name("Number System")
         type(state_db)
         initialprob = 1/float(len(state_db) + 1)
         previous_minquestion=-1
