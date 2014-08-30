@@ -288,7 +288,7 @@ def askquestion(block,antecedentid):
 
 def dashboard(request):
     subjectsenrolled=['Maths','Science','English']
-    user_information= Query.login("Ankit_Bhatia","ankit")
+    user_information= Query.login("Vijay_Mehta","ankit")
     session = get_current_session()
 
     session['type'] = user_information[0]
@@ -308,7 +308,7 @@ def dashboard(request):
         teacher = user_information[1]
         session['teacherkey']=teacher.key
         session['schoolkey']=teacher.school
-        session['teachername']=teacher.basic_info.firstname + student.basic_info.lastname
+        session['teachername']=teacher.basic_info.firstname + teacher.basic_info.lastname
         session['email'] = teacher.basic_info.email
         session['teacheraddress']= teacher.basic_info.address
         session['contactnumber'] = teacher.basic_info.contact_no

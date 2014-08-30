@@ -31,14 +31,16 @@ def get_not_recently_loggedin_all(request):
     session = get_current_session()
     teacherkey = session.get('teacherkey',-1)
     notrecentlyloggedin = Query.get_students_not_logged_in_of_all_class(teacherkey)
+    logging.error(notrecentlyloggedin)
     t = loader.get_template('Dashboard/not_recently_logged_in_byclass')
     c = Context({'notrecentlyloginall': notrecentlyloggedin,})
     return HttpResponse(t.render(c),content_type="text/xml")
 
-def getaveragemasterybysujectallclass(request):
+def getaveragemasterybysubjectallclass(request):
     session = get_current_session()
     teacherkey = session.get('teacherkey',-1)
     averagemasterybysubject = Query.get_average_mastery_by_subject_of_all_class(teacherkey)
+    logging.error(averagemasterybysubject)
     t = loader.get_template('Dashboard/not_recently_logged_in_byclass')
     c = Context({'averagemasterydict': averagemasterybysubject,})
     return HttpResponse(t.render(c),content_type="text/xml")
