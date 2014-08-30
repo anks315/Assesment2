@@ -25,7 +25,7 @@ def asknextquestion(request):
         session['index']=users.get_current_user()
         usersdict[session['index']]= UserBuffer()
     else:
-        if request.method == 'POST':
+        if request.method != 'POST':
             del usersdict[session['index']]
             session['index']=-1
 
