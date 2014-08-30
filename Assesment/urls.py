@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'Assesment.views.home', name='home'),
     # url(r'^Assesment/', include('Assesment.foo.urls')),
-    (r'^assessment/$', 'AssessingPie.views.asknextquestion'),
+    (r'^assessment$', 'AssessingPie.views.asknextquestion'),
     (r'^inference/$', 'AssessingPie.views.inferquestion'),
     (r'^contact_us/$', 'AssessingPie.views.contactus'),
     (r'^topicnames/$', 'AssessingPie.views.topicnames'),
