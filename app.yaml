@@ -1,4 +1,4 @@
-application: assesmentatcv
+application: assesmentaleks
 version: 1
 runtime: python27
 api_version: 1
@@ -53,6 +53,14 @@ handlers:
   script: main.app
 
 - url: /notrecentlyloggedin_by_class/(.*)
+  login: required
+  script: main.app
+
+- url: /notrecentlyloggedinall_by_teacher/(.*)
+  login: required
+  script: main.app
+
+- url: /averagemasterybysubjectallclass/(.*)
   login: required
   script: main.app
 

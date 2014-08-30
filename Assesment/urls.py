@@ -22,7 +22,9 @@ urlpatterns = patterns('',
      (r'^readytolearnbysubject/$', 'AssessingPie.student_dashboard_data.getreadytolearnbysubject'),
      (r'^learningprogress_by_date/$', 'AssessingPie.student_dashboard_data.getlearningprogressdatewise'),
      (r'^notrecentlyloggedin_by_class/$', 'AssessingPie.teacher_dashboard_data.get_not_recently_loggedin'),
-     (r'^mastery_by_student_by_class/$', 'AssessingPie.teacher_dashboard_data.mastery_by_student_by_class')
+     (r'^mastery_by_student_by_class/$', 'AssessingPie.teacher_dashboard_data.mastery_by_student_by_class'),
+     (r'^notrecentlyloggedinall_by_teacher/$', 'AssessingPie.teacher_dashboard_data.get_not_recently_loggedin_all'),
+     (r'^averagemasterybysubjectallclass/$', 'AssessingPie.teacher_dashboard_data.getaveragemasterybysujectallclass'),
 
 
 

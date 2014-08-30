@@ -27,3 +27,18 @@ def mastery_by_student_by_class(request):
     c = Context({'mastery_by_student':mastery_by_student ,})
     return HttpResponse(t.render(c),content_type="text/xml")
 
+def get_not_recently_loggedin_all(request):
+    session = get_current_session()
+    teacherkey = session.get('teacherkey',-1)
+    notrecentlyloggedin = Query.get_students_not_logged_in_of_all_class(teacherkey)
+    t = loader.get_template('Dashboard/not_recently_logged_in_byclass')
+    c = Context({'notrecentlyloginall': notrecentlyloggedin,})
+    return HttpResponse(t.render(c),content_type="text/xml")
+
+def getaveragemasterybysujectallclass(request):
+    session = get_current_session()
+    teacherkey = session.get('teacherkey',-1)
+    averagemasterybysubject = Query.get_average_mastery_by_subject_of_all_class(teacherkey)
+    t = loader.get_template('Dashboard/not_recently_logged_in_byclass')
+    c = Context({'averagemasterydict': averagemasterybysubject,})
+    return HttpResponse(t.render(c),content_type="text/xml")
