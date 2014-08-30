@@ -1,0 +1,15 @@
+<root>
+{% for key, value in notrecentlylogin.items %}
+
+
+   <student>
+   <name>
+       {{ key }}
+   </name>
+   <logindate>
+       {{ value }}
+   </logindate>
+   </student>
+{% endfor %}
+
+</root>

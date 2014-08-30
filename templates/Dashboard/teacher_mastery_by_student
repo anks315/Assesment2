@@ -1,0 +1,16 @@
+<root>
+{% for key, value in mastery_by_student.items %}
+   <student>
+   <name>
+   {{ key }}
+   </name>
+
+   <mastery>
+       {{ value }}
+   </mastery>
+     </student>
+   {% endfor %}
+
+
+
+</root>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+{% for key, value in learningprogressdict.items %}
+   <date>
+   {{ key }}
+   </date>
+   <mastered>
+   {{ value.0 }}
+   </mastered>
+
+   <attempted>
+       {{ value.1 }}
+   </attempted>>
+
+   {% endfor %}
+
+
+
+</root>

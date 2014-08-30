@@ -1,0 +1,15 @@
+<root>
+{% for key, value in growthdict.items %}
+   <subject>
+   <name>
+   {{ key }}
+   </name>
+   {% for key, values in value.items %}
+   <score>
+       {{ values }}
+   </score>
+   {% endfor %}
+   </subject>
+{% endfor %}
+
+</root>

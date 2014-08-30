@@ -1,0 +1,16 @@
+<root>
+{% for key, value in readytolearndict.items %}
+   <topic>
+   <name>
+   {{ key }}
+   </name>
+
+   <question>
+       {{ value }}
+   </question>
+     </topic>
+   {% endfor %}
+
+
+
+</root>

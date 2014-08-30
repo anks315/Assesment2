@@ -1,0 +1,15 @@
+<root>
+{% for key, value in readytolearn.items %}
+
+     <topic>
+       {{ key }}
+     </topic>
+    <percentage>
+
+       {{ value }}
+
+   </percentage>
+
+{% endfor %}
+
+</root>

@@ -1,0 +1,15 @@
+<root>
+{% for key, value in assessmentdict.items %}
+   {% for assessment in value %}
+     <subject>
+       {{ key }}
+     </subject>
+    <id>
+
+       {{ assessment }}
+
+   </id>
+  {% endfor %}
+{% endfor %}
+
+</root>
