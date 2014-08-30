@@ -72,6 +72,10 @@ handlers:
   login: required
   script: main.app
 
+- url: /subjectsofclass/(.*)
+  login: required
+  script: main.app
+
 - url: /assessmentcoveragebyclass/(.*)
   login: required
   script: main.app
