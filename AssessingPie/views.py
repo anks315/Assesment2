@@ -16,60 +16,60 @@ import Constant
 
 val=0
 readytolearn=""
-
+assessmentkey = ''
 def asknextquestion(request):
 
 
     session = get_current_session()
     global assessmentkey
 
-    c=session.get('index',-1)
-    if c== -1:
-        session['index']=users.get_current_user()
-        assessmentkey = request.GET['id']
-        key = ndb.Key(urlsafe=assessmentkey)
-        logging.error(assessmentkey)
-        assessment = key.get()
-        listoftopics=assessment.topics_in_assessment_key
-        usersdict[session['index']]= UserBuffer(listoftopics[0])
-    else:
+    c=session.get('studentname',-1)
+    if c != -1:
         if request.method != 'POST':
-            del usersdict[session['index']]
-            session['index']=-1
+            usersdict.pop(c, None)
+            assessmentkey = request.GET['id']
+            key = ndb.Key(urlsafe=assessmentkey)
+            logging.error(assessmentkey)
+            assessment = key.get()
+            listoftopics=assessment.topics_in_assessment_key
+            usersdict[c]= UserBuffer(listoftopics[0])
+    else:
+        return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+
 
     if request.method == 'POST':
 
-        setcount(session['index'])
+        setcount(session['studentname'])
         answer =request.POST['answer']
 
-        if answer == usersdict[session['index']].questions[nextquestion(session['index'])].answer[0] :
-             update(session['index'], True)
+        if answer == usersdict[session['studentname']].questions[nextquestion(session['studentname'])].answer[0] :
+             update(session['studentname'], True)
         else:
-            update(session['index'], False)
-    logging.error(maxstatesize(session['index']))
-    logging.error(maxstate(session['index']))
-    logging.error(usersdict[session['index']].states[maxstatesize(session['index'])][maxstate(session['index'])].questionstuple)
+            update(session['studentname'], False)
+    logging.error(maxstatesize(session['studentname']))
+    logging.error(maxstate(session['studentname']))
+    logging.error(usersdict[session['studentname']].states[maxstatesize(session['studentname'])][maxstate(session['studentname'])].questionstuple)
     val=0
-    if  session.get('index',-1)!=-1 and (usersdict[session['index']].states[maxstatesize(session['index'])][maxstate(session['index'])].prob > 0.40 or getcount(session['index'])==getnumquestions(session['index']) ):
+    if  session.get('studentname',-1)!=-1 and (usersdict[session['studentname']].states[maxstatesize(session['studentname'])][maxstate(session['studentname'])].prob > 0.40 or getcount(session['studentname'])==getnumquestions(session['studentname']) ):
         global val
         global readytolearn
         strknow = "You know :"
-        for quest in usersdict[session['index']].states[maxstatesize(session['index'])][maxstate(session['index'])].questionstuple:
+        for quest in usersdict[session['studentname']].states[maxstatesize(session['studentname'])][maxstate(session['studentname'])].questionstuple:
             if quest==-1:
                 val=0
             else:
-                strknow+=usersdict[session['index']].questions[quest].questionstring
+                strknow+=usersdict[session['studentname']].questions[quest].questionstring
                 strknow+=",,"
                 val+=1
-        maxsta =maxstate(session['index'])
-        if val==getnumquestions(session['index']):
+        maxsta =maxstate(session['studentname'])
+        if val==getnumquestions(session['studentname']):
 
             readytolearn="Congratulations!!you have completed maths donut"
         else:
-            logging.error(maxstate(session['index']))
+            logging.error(maxstate(session['studentname']))
 
-            states = usersdict[session['index']].states[maxstatesize(session['index']) + 1]
-            currentstate= usersdict[session['index']].states[maxstatesize(session['index'])][maxstate(session['index'])]
+            states = usersdict[session['studentname']].states[maxstatesize(session['studentname']) + 1]
+            currentstate= usersdict[session['studentname']].states[maxstatesize(session['studentname'])][maxstate(session['studentname'])]
             for state in states:
                 stateset = set(state.questionstuple)
                 currentstateset = set(currentstate.questionstuple)
@@ -77,28 +77,23 @@ def asknextquestion(request):
                     quetionkey = stateset.difference(currentstateset)
                     logging.error(next(iter(quetionkey)))
                     logging.error(currentstate.key)
-                    score =(val/(float)(getnumquestions(session['index'])))*100
+                    score =(val/(float)(getnumquestions(session['studentname'])))*100
                     studentkey= session.get('studentkey',-1)
                     schoolkey= session.get('schoolkey',-1)
 
                     a=Query.update_assessment_detail_of_student(student_key=studentkey, assessment_key=ndb.Key(urlsafe=assessmentkey),current_state_key= currentstate.key, next_state_key=currentstate.key,next_question_key=next(iter(quetionkey)),score=int(score),school_key=schoolkey,start_date=datetime.date(int(2012),int(6),int(8)))
                     logging.error(a)
-                    readytolearn+=usersdict[session['index']].questions[next(iter(quetionkey))].questionstring
+                    readytolearn+=usersdict[session['studentname']].questions[next(iter(quetionkey))].questionstring
 
 
-        del usersdict[session['index']]
-        del session['index']
+        del usersdict[session['studentname']]
         return render_to_response('AssessingPie_toBeremoved/pie.html',{'readytolearn':readytolearn,'num_known': val ,'num_dontknow':3-val,'st': maxsta,'state' : 'completed','know':strknow,},context_instance = RequestContext(request))
 
     else:
-        return render_to_response('AssessingPie/question.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : usersdict[session['index']].questions[nextquestion(session['index'])].questionstring,},context_instance = RequestContext(request))
+        return render_to_response('AssessingPie/question.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : usersdict[session['studentname']].questions[nextquestion(session['studentname'])].questionstring,},context_instance = RequestContext(request))
 
 
 def home(request):
-
-     session = get_current_session()
-     if session.get('index',-1) != -1:
-        del session['index']
 
      return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
