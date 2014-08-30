@@ -83,3 +83,13 @@ def get_assessment_coverage_of_class(request):
     t = loader.get_template('Dashboard/assessmentcoverageofclass')
     c = Context({'assessmentcoveragedict': assessmentcoveragedict,})
     return HttpResponse(t.render(c),content_type="text/xml")
+
+def get_subject_of_class(request):
+    session = get_current_session()
+    teacherkey = session.get('teacherkey',-1)
+    classkey = request.GET['id']
+    subjectdict = Query.get_subject_details_of_teacher_in_class(teacherkey,classkey)
+    t = loader.get_template('Dashboard/getsubjectofclass')
+    c = Context({'getsubjectofclass': subjectdict,})
+    return HttpResponse(t.render(c),content_type="text/xml")
+

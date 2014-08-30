@@ -1,0 +1,13 @@
+<root>
+{% for key, value in getsubjectofclass.items %}
+   <subject>
+   <key>
+   {{ key }}
+   </key>
+   <name>
+      {{ value }}
+   </name>
+   </subject>
+{% endfor %}
+
+</root>
