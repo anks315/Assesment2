@@ -11,7 +11,7 @@ body {
 	margin-right:auto;
 	width:600px;
 }
-.grid_1,.grid_2,.grid_3,.grid_4,.grid_5,.grid_6,.grid_7,.grid_8,.grid_9,.grid_10,.grid_11,.grid_12 {
+.grid_1,.grid_2,.grid_3,.grid_4,.grid_5,.grid_6,.grid_7,.grid_8,.grid_9,.grid_10,.grid_11,.grid_12,.grid_80 {
 	display:inline;
 	float:left;
 	position:relative;
@@ -47,6 +47,8 @@ body {
 }
 .container_12 .grid_4 {
 	width:310px;
+    height: 100%;
+
 }
 .container_12 .grid_5 {
 	width:390px;
@@ -62,6 +64,11 @@ body {
 }
 .container_12 .grid_8 {
 	width:630px;
+}
+.container_12 .grid_80 {
+	width:630px;
+    border:2px;
+    border-color: #8358d9;;
 }
 .container_12 .grid_9 {
 	width:710px;

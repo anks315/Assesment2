@@ -54,7 +54,7 @@ body {
 }
 
 .register-title1 {
-  width: 450px;
+  width: 100%;
   margin: auto;
   color: white;
   color: rgba(255, 255, 255, 0.95);
@@ -71,7 +71,7 @@ body {
 }
 
 .register-title {
-  width: 450px;
+  width: 100%;
   line-height: 43px;
   margin: 50px auto 20px;
   font-size: 30px;
