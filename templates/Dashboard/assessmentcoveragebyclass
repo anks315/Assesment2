@@ -1,0 +1,18 @@
+<root>
+{% for key, value in assessmentcoveragedict.items %}
+    {% for keydata, valuedata in value.items %}
+   <subjectname>
+
+   {{ key }}
+   </subjectname>
+   <assessmentid>
+         {{ keydata }}
+   </assessmentid>
+   <percentage>
+       {{ valuedata }}
+   </percentage>
+
+   {% endfor %}
+{% endfor %}
+
+</root>

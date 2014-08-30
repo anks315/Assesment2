@@ -25,6 +25,11 @@ urlpatterns = patterns('',
      (r'^mastery_by_student_by_class/$', 'AssessingPie.teacher_dashboard_data.mastery_by_student_by_class'),
      (r'^notrecentlyloggedinall_by_teacher/$', 'AssessingPie.teacher_dashboard_data.get_not_recently_loggedin_all'),
      (r'^averagemasterybysubjectallclass/$', 'AssessingPie.teacher_dashboard_data.getaveragemasterybysubjectallclass'),
+      (r'^getclassdetailsbyteacher/$', 'AssessingPie.teacher_dashboard_data.get_classes_of_teacher'),
+        (r'^notloggedinbyclass/$', 'AssessingPie.teacher_dashboard_data.get_students_not_logged_in_by_class'),
+          (r'^averagemasterybysubjectbyclass/$', 'AssessingPie.teacher_dashboard_data.getaveragemasterybysubjectallsubject'),
+           (r'^assessmentcoveragebyclass/$', 'AssessingPie.teacher_dashboard_data.get_assessment_coverage_of_class')
+
 
 
 
