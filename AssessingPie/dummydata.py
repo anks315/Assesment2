@@ -6,7 +6,7 @@ import logging
 import datetime
 
 from Constant import Subject,Constant,UserType
-from Query import addSubject, addTopic
+from Query import addSubject, addTopic     
 def fill():
       try: 
                  
@@ -19,7 +19,7 @@ def fill():
             class1=Query.addClass(name="Class_V",school_key= school.key,section_details="A",year_session="2013-2014")  #to be changed
            # class1=Query.addClass("Class1",  school.key, "A,B", "2012-2013")
             student1=Query.addStudent("anks.315",userinfo2, school.key)
-            student2=Query.addStudent("rahulshri",userinfo1, school.key)
+            student2=Query.addStudent("rahul",userinfo1, school.key)
             subject1=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_MATHS,school.key)
             subject2=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_ENGLISH,school.key)
             subject3=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_SCIENCE,school.key)
