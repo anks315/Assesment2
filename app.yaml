@@ -84,6 +84,14 @@ handlers:
   login: required
   script: main.app
 
+- url: /readytolearnofsubject/(.*)
+  login: required
+  script: main.app
+
+  - url: /assessmentcoverageofsubject/(.*)
+  login: required
+  script: main.app
+
 - url: /averagemasterybysubjectallclass/(.*)
   login: required
   script: main.app
