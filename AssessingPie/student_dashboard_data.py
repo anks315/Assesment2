@@ -4,6 +4,7 @@ from django.template import RequestContext,loader,Context
 import Query
 import Constant
 from gaesessions import get_current_session
+import logging
 
 def demoresponse(request):
     data = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<note>Ankur</note>"
@@ -59,6 +60,7 @@ def getpendingassessment(request):
     pendingassessmentbysubject = {}
     for subject in subjectlist:
         pendingassessments = Query.get_pending_assessment_subject(subject.key,session['student'].key)
+        logging.error(pendingassessments)
         pendingassessmentbysubject[subject.name]= pendingassessments
     t = loader.get_template('Dashboard/pending_assessmentbysubject.xml')
     c = Context({'assessmentdict':pendingassessmentbysubject,})
