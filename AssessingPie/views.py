@@ -75,7 +75,7 @@ def home(request):
      if session.get('index',-1) != -1:
         del session['index']
 
-     return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+     return render_to_response('AssessingPie/abc_backup.html',{'loginurl': users.create_login_url('/dashboard/'),},context_instance = RequestContext(request))
 
 
 blocknumber = -1
@@ -119,7 +119,7 @@ def  inferquestion(request):
             implication=-1
             antecedent=[]
             numalreadyinferred=0
-            return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+            return render_to_response('AssessingPie/abc_backup.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
     if request.method=='POST':
         if request.POST['answer']=='yes':
@@ -174,7 +174,7 @@ def  inferquestion(request):
                 antecedent=[]
                 numalreadyinferred=0
                 logging.error(inferenceengine.generatestates(usersdict[session['infer']]))
-                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+                return render_to_response('AssessingPie/abc_backup.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
             currentblocknumber+=1
             numalreadyinferred=0
             logging.error(currentblocknumber)
@@ -193,7 +193,7 @@ def  inferquestion(request):
                 implication=-1
                 antecedent=[]
                 numalreadyinferred=0
-                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+                return render_to_response('AssessingPie/abc_backup.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
             if usersdict[session['infer']].blockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
                 logging.error("asking question")
@@ -255,3 +255,5 @@ def askquestion(block,antecedentid):
 
     return list()
 
+def dashboard(request):
+    return render_to_response('AssessingPie/dashboard2.html',{},context_instance = RequestContext(request))

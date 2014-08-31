@@ -7,9 +7,8 @@
 <script >
     function check(){
         alert("ABC");
-    }
-
-    function loadForm(abcd){
+}
+  function loadForm(abcd){
 
         if(abcd=="School"){
             document.getElementById("schoolName").style.display="block";
@@ -64,27 +63,51 @@
 
 </head>
 <body>
+<!--
 <div class="topcorner">
     <ul class="my_menu">
-<li><a class="active" href="{{ loginurl }}" class="current">Sign In</a> </li>
-<li><a class="active" href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">SignUp</a> </li>
+<li><a href="{{ loginurl }}" class="current">Sign In</a> </li>
+<li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">SignUp</a> </li>
         </ul>
 </div>
+-->
 <header class="p30">
-<div class="main">
-<h1><a class="logo" href="index.html">Critical Velos</a></h1>
+
+
+
+
+    <div class="main">
+
 <nav>
-<ul class="my_menu">
-<li><a class="active" href="index.html">Home</a></li>
-<li><a href="#">about us</a></li>
-<li><a href="/assessment/" >Assess Yourself</a></li>
-<li><a href="/inference/" >Inference</a></li>
-<li><a href="{{ loginurl }}" class="current">Sign In</a></li>
-<li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">SignUp</a></li>
-<li><a href="/contact_us/">contact Us</a></li>
-</ul>
+    <ul class="my_menu1">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">about us</a></li>
+        <li><a href="{{ loginurl }}" >Sign In</a></li>
+        <li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">SignUp</a></li>
+        <li><a href="/contact_us/">contact Us</a></li>
+        <li><a href="#">Our Partners</a></li>
+    </ul>
+
 </nav>
+
 <div class="clear"></div>
+
+
+
+    <h1><a class="logo" href="index.html">Critical Velos</a></h1>
+<nav>
+    <ul class="my_menu">
+        <li><a href="index.html">Who are We?</a></li>
+        <li><a href="#">What we do?</a></li>
+        <li><a href="/assessment/" > FAQs</a></li>
+        <li><a href="{{ loginurl }}" class="current">about us</a></li>
+        <li><a href="#">Upcoming Projects</a></li>
+    </ul>
+</nav>
+
+<hr>
+        <hr/>
+
 </div>
 
 
@@ -93,7 +116,7 @@
 
   <form class="register" id="signup_form" >
 
-     <h1 class="register-title">Welcome to SignUp Form!!</h1>
+     <h1 class="register-title">SignUp Form!!</h1>
       <div class="clear"></div>
 
       <div class="register-switch" id="account_types">
@@ -129,40 +152,76 @@
 
 
  <div id="fade" class="black_overlay"> </div>
-<div id="slide">
-<div class="slider">
-<ul class="items">
-<li><img src="/images/classroomhighquality.jpg" alt=""/>
-<div class="banner">
-<strong>ASSESSMENT</strong>
-<span>Assess yourself or your Child or your Students</span>
-<p>Assesment is very much needed in order to tell u where u stand bla bla content to be filled baadmein</p>
-<a class="button1" href="#">read more</a></div>
-</li>
-<li><img src="/images/slide-3.jpg" alt=""/>
-<div class="banner">
-<strong>Android App - Attendance App</strong>
-<span>Mark Attendance and Reporting</span>
-<p>Now manage data and everything in cloud.. parents can check their students falanaa dhimakaana etc etc..</p>
-<a class="button1" href="#">read more</a></div>
-</li>
-<li><img src="/images/classroomhighquality.jpg" alt=""/>
-<div class="banner">
-<strong>Any other Projects etc</strong>
-<span>critical Velos Product </span>
-<p>innovative product of future etc etc etc..</p>
-<a class="button1" href="#">read more</a></div>
-</li>
-<li><img src="/images/slide-3.jpg" alt=""/>
-<div class="banner">
-<strong>Like this Add more and more products</strong>
-<span>critical Velos Product </span>
-<p>Coming soon.</p>
-<a class="button1" href="#">read more</a></div>
-</li>
-</ul>
+
+    <div class="clear"></div>
+<div class="container_12">
+<div class="wrapper">
+    <div class="grid_4">
+       <div class="page1-box2 last1">
+<span>Login to your account</span>
+
+										<form action="dashboard.html" method="post" class="nice" id="l_form">
+											<div class="sepH_c">
+												<div class="elVal">
+
+													<input type="text" placeholder = "Enter Login id " id="username" name="username" class="oversize expand input-text" />
+												</div>
+												<div class="elVal">
+
+													<input type="password" placeholder = "Enter Password" id="password" name="password" class="oversize expand input-text" />
+												</div>
+											</div>
+
+											<div class="cf">
+												<label for="remember" class="left"><input type="checkbox" id="remember"> Remember me</label>
+												<input type="submit" class="button small radius right black" value="Login" />
+											</div>
+
+										</form>
+
+<div class="clear"></div>
 </div>
+    </div>
+
+    <div class = "grid_8">
+        <div class="page1-box2">
+            <div id="slide">
+            <div class="slider">
+            <ul class="items">
+            <li><img src="/images/classroomhighquality.jpg" alt=""/>
+            <div class="banner">
+            <strong>ASSESSMENT</strong>
+            <span>Assess yourself</span>
+            <p>childrens parents schools and so much more</p>
+            <a class="button2k" href="#">read more</a></div>
+            </li>
+            <li><img src="/images/slide-3.jpg" alt=""/>
+            <div class="banner">
+            <strong>Android App</strong>
+            <span>Mark Attendance and Reporting</span>
+            <p>Now manage data and everything in cloud..</p>
+            <a class="button2k" href="#">read more</a></div>
+            </li>
+            <li><img src="/images/classroomhighquality.jpg" alt=""/>
+            <div class="banner">
+            <strong>UpComing Projects</strong>
+            <span>critical Velos Product </span>
+            <p>Coming soon ...</p>
+            <a class="button2k" href="#">read more</a></div>
+            </li>
+            </ul>
+            </div>
+            </div>
+            </div>
+    </div>
+
+
+
+
 </div>
+    </div>
+
+    <div class="clear"></div>
 
 <div class="container_12">
 <div class="wrapper">
