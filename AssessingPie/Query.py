@@ -1084,7 +1084,7 @@ def assign_states_to_topic_by_name(topic_name,states_in_topic_keys,school_key):
     logging.info("CV Logs : inside assign_states_to_topic_by_name ")
     try:
 
-        topic=Topic.query(Topic.name==topic_name).get()
+        topic=Topic.query(Topic.name==topic_name,ancestor=school_key).get()
   
         for state_key in states_in_topic_keys:
                    state=state_key.get()
