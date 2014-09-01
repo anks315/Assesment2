@@ -3,9 +3,10 @@ from google.appengine.ext import ndb
 import logging
 import datetime
 import Constant
-from models import QuestionInstance,State_Questions,Topic_States,Question,State,Topic,Address,Teacher,Class
+from models import QuestionInstance,State_Questions,Topic_States,Question,State,Address,Teacher,Class
 from models import School,Student,UserInfo,Subject,Assessment,Student_Assessments,School_Assessments
 from  models import Assessment_States,Topic_Questions,State_Questions,Topic_States,Subject_Topics
+from models import Topic
 from Constant import Constant,UserType
 
 
@@ -1084,6 +1085,7 @@ def assign_states_to_topic_by_name(topic_name,states_in_topic_keys,school_key):
     logging.info("CV Logs : inside assign_states_to_topic_by_name ")
     try:
 
+        
         topic=Topic.query(Topic.name==topic_name,ancestor=school_key).get()
   
         for state_key in states_in_topic_keys:
@@ -1653,8 +1655,76 @@ def get_students_by_class(class_key):
         logging.info("CV Logs : failed to get students for class :"+class_entity.name+":"+class_entity.section_details)
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
-            
     
+            
+"""
+lists students  associated to a class 
+"""
+def add_topic_dummy(topic_name):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    students=[]
+    topic=None
+    
+    logging.info("CV Logs : inside assign_states_to_topic_by_name ")
+    try:  
+        school=School.query(School.name=="CVSchool").get()
+        #topic=Topic.query(Topic.name==topic_name).get()
+        Topic =None
+        classes=school.classes_in_school_keys
+        class_entity=None
+        for class_key in classes:
+            if class_key.get().name=="Class_V":
+                class_entity=class_key.get()
+        subjects=(class_entity.subjects_in_class_key)
+        subject=subjects[0].get()        
+        topic=addTopic(school_key=school.key,name=topic_name, prerequisite_topics=[],subject_key=subject.key)
+       
+        assign_topics_to_subject(subject.key, [topic.key], school.key)
+        
+        
+        
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE
+    
+def add_states_to_topic_dummy(topic_name,states_in_topic_keys):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    
+    #topic=None
+    
+    state_topic=None
+    logging.info("CV Logs : inside assign_states_to_topic_by_name ")
+    try:
+        topic=Topic.query(Topic.name==topic_name).get()
+        school=School.query(School.name=="CVSchool").get()
+        #topic=Topic.query(Topic.name==topic_name,ancestor=school.key).get()
+        #topic=Topic.query(Topic.name==topic_name).get()
+        
+        for state_key in states_in_topic_keys:
+                   state=state_key.get()
+                   if not state.type==Constant.STATE_IN_TOPIC:
+                       return Constant.ERROR_BAD_VALUE
+        state_topic_key=topic.states_in_topic_key
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE
   
+    if state_topic_key==None:   
+        
+        state_topic=Topic_States(parent=school.key,topic_key=topic.key,states_in_topic_keys=states_in_topic_keys)
+        state_topic.put()    
+        topic.states_in_topic_key=state_topic.key
+        topic.put()
+        #logging.info("CV Logs "+str(state_topic.key))
+    else:
+         
+         state_topic=state_topic_key.get()
+         state_topic.states_in_topic_keys.extend(states_in_topic_keys)
+         state_topic.put()     
+    logging.info("CV Logs : success to assign states to topic :"+topic.name)     
+    return Constant.UPDATION_SUCCESSFULL
+
+
+
 
 

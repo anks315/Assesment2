@@ -13,7 +13,7 @@ def fill():
             address1=Query.addAddress(type=Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
             userinfo1=Query.addUserInfo("user1",datetime.date(int(2012),int(6),int(6)),Constant.SEX_MALE, address1, "yyy", 67757)
             userinfo2=Query.addUserInfo("user2",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
-            school=Query.addSchool("school1", address1)
+            school=Query.addSchool("CVSchool", address1)
             teacher1=Query.addTeacher("teacher1", userinfo1, school.key)
             teacher2=Query.addTeacher("teacher2", userinfo2, school.key)
             class1=Query.addClass(name="Class_V",school_key= school.key,section_details="A",year_session="2013-2014")  #to be changed
@@ -21,8 +21,8 @@ def fill():
             student1=Query.addStudent("anks.315",userinfo2, school.key)
             student2=Query.addStudent("rahul",userinfo1, school.key)
             subject1=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_MATHS,school.key)
-            subject2=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_ENGLISH,school.key)
-            subject3=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_SCIENCE,school.key)
+            #subject2=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_ENGLISH,school.key)
+            #subject3=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_SCIENCE,school.key)
 
          
             
@@ -44,7 +44,7 @@ def fill():
             userinfo=Query.addUserInfo("jhjjj",datetime.date(int(2012),int(6),int(6)),Constant.SEX_MALE, address1, "yyy", 67757)
               
             Query.assign_students_to_class(class1.key, [student1.key,student2.key])
-            Query.assign_subjects_to_class(class1.key, [subject1.key,subject2.key,subject3.key])
+            Query.assign_subjects_to_class(class1.key, [subject1])
             
             Query.assign_questions_to_state(state1.key, [question1.key],school.key)
             Query.assign_questions_to_state(state2.key, [question1.key,question2.key],school.key)
@@ -66,7 +66,7 @@ def fill():
             #Sndb.Rollback( Query.signup_student("kapilaaaaa", userinfo1, school.key))
             Query.signup_teacher("kapil", userinfo1, school.key)
             Query.assign_classes_to_teacher(teacher1.key, [class1.key])
-            Query.assign_subjects_to_class(class1.key,[subject1.key,subject2.key,subject3.key])
+            #Query.assign_subjects_to_class(class1.key,[subject1.key,subject2.key,subject3.key])
             Query.login("kapil",UserType.STUDENT)
             Query.get_subjects_by_student(student1.key)
             Query.get_topics_by_subject(subject1.key)
