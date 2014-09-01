@@ -9,9 +9,11 @@ urlpatterns = patterns('',
     # url(r'^$', 'Assesment.views.home', name='home'),
     # url(r'^Assesment/', include('Assesment.foo.urls')),
     (r'^assessment/$', 'AssessingPie.views.asknextquestion'),
-         (r'^contact_us/$','AssessingPie.views.contactus' ),
-          (r'^sign_up/$','AssessingPie.views.signup' ),
+    (r'^inference/$', 'AssessingPie.views.inferquestion'),
+    (r'^contact_us/$', 'AssessingPie.views.contactus'),
+    (r'^dashboard/$', 'AssessingPie.views.dashboard'),
     url(r'^$', 'AssessingPie.views.home'),
+
 
 
     # Uncomment the admin/doc line below to enable admin documentation:

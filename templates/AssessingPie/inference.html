@@ -9,6 +9,7 @@
 		<!-- main styles -->
 			<link rel="stylesheet" href="/css/dashboard/style.css">
 			<link rel="stylesheet" href="/css/dashboard/foundation.css" />
+            <link rel="stylesheet" href="/css/web/styles.css">
 
 		<!-- Google fonts -->
 			<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' />
@@ -67,8 +68,65 @@
 
 	</head>	
 	
-	<body class="ptrn_a grdnt_c mhover_c">
+	<body class="ptrn_e grdnt_c mhover_c">
+<header class="p30">
 
+					<div class="row sepH_b">
+
+					<div class="six columns">
+                    <h1><a class="logo" href="index.html">Critical Velos</a></h1>
+                    </div>
+					<div class="six columns">
+						<div class="user_box cf">
+							<div class="user_avatar">
+								<img src="/images/user_male.png" alt="" />
+							</div>
+							<div class="user_info user_sep">
+								<p class="sepH_a">
+									<strong>Hello {{ logger }}</strong>
+								</p>
+								<span>
+									<a href="#" class="sep">Settings</a>
+									<a href="{{ logouturl }}">Log out</a>
+								</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+<div class="main">
+
+
+    <div id="menu">
+    <nav>
+            <ul class="my_menu">
+
+								<li><a href="/assessment/" >Assess Yourself</a></li>
+								<li><a href="#" >My Chart</a></li>
+								<li><a href="/inference/" class ="active1">Inference</a></li>
+                                <li><a href="#" >Topics</a></li>
+								<li><a href="#" >Calendar</a></li>
+								<li><a href="#" >Results</a></li>
+
+            </ul>
+    </nav>
+        <div class="clear"></div>
+    </div>
+
+</div>
+
+
+
+</header>
+
+
+
+
+
+
+<!--
 		<header>
 			<div class="container head_s_a">
 				<div class="row sepH_b">
@@ -89,11 +147,11 @@
 							</div>
 							<div class="user_info user_sep">
 								<p class="sepH_a">
-									<strong>Hello {{ logger }}</strong>
+									<strong>User Name</strong>
 								</p>
 								<span>
 									<a href="#" class="sep">Settings</a>
-								<a href="{{ logouturl }}">Log out</a>
+									<a href="login.html">Log out</a>
 								</span>
 							</div>
 
@@ -109,7 +167,7 @@
 								<li><a href="#" class="mb_parent">Assess Yourself</a></li>
 								<li><a href="#" class="mb_parent">My Chart</a></li>
 								<li><a href="#" class="mb_parent">My Progress</a></li>
-                        <li><a href="#" class="mb_parent">Topics</a></li>
+                                <li><a href="#" class="mb_parent">Topics</a></li>
 								<li><a href="#" class="mb_parent">Documentation</a></li>
 								<li><a href="#" class="mb_parent">Calendar</a></li>
 								<li><a href="#" class="mb_parent">Results</a></li>
@@ -129,62 +187,48 @@
 			
 		</header>
 
+
+<div class="clear"></div>
 		<div class="container">
 			
-			<div class="row">
-
-				<div class="twelve columns">
-					<div class="box_c">
-						<div class="box_c_heading cf">
-							<div class="box_c_ico"><img src="/images/16-Graph.png" alt="" /></div>
-							<p>DoughNut Chart</p>
-						</div>
-						<div class="box_c_content">
-							<div class="inner_block" id="donutchart">
 
 
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="row">
-
-				<div class="twelve columns">
-					<div class="box_c">
-						<div class="box_c_heading cf">
-							<div class="box_c_ico"><img src="/images/16-Graph.png" alt="" /></div>
-							<p>History With Critical Velos</p>
-						</div>
-						<div class="box_c_content">
-							<div class="inner_block" >
-
-                                <div id="chart_div">
-
-                                </div>
-
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>			
 		
-		
+		<div class="clear"></div>
 		<div class="row">
 
 				<div class="twelve columns">
 					<div class="box_c">
 						<div class="box_c_heading cf">
 							<div class="box_c_ico"><img src="/images/16-Graph.png" alt="" /></div>
-							<p>Other Charts Can be added Here</p>
+							<p>Maths Subject Question Base</p>
 						</div>
 						<div class="box_c_content">
 							<div class="inner_block">
 
-							<p>Kapil</p>
+<!--
+<h3 class="p12"><a href="/code-samples/" class="current">Hello {{ logger }}</a></h3>
+-->
+
+<div class="page1q-box1">
+    <!--
+<span>Maths Subject</span>  -->
+
+<span> Question : {{ nextquestion }}  ?</span>
+    <p> "Click on Yes or No and then Submit"</p>
+            <form name="input" action="/inference/" method="post">
+
+                 {% csrf_token %}
+                   Agree: <input type="radio" name="answer" value="yes">Yes<br>
+                          <input type="radio" name="answer" value="no">No
+                           <input type="submit" value="Submit">
+             </form>
+<div class="clear"></div>
+</div>
+
+
+
+
 
 							</div>
 						</div>
@@ -192,103 +236,10 @@
 				</div>
 			</div>		
 			
-			<div class="row">
-				<div class="twelve columns">
-					<div class="box_c">
-						<div class="box_c_heading cf box_actions">
-							<div class="box_c_ico"><img src="/images/16-Books.png" alt="" /></div>
-							<p>Content</p>
-						</div>
-						
-						<div class="box_c_content" id="nestedAcc">
-							<ul id="acc" class="accordion">
-								<li>
-									<h4>Critical Velos</h4>
-									<div class="inner">
-										<ul>
-											<li>
-												<h5>Heading a</h5>
-												<div class="outer">
-													<div class="inner shown">
-														<p>
-														1a. Critical Velos Technologies is a research company founded by passionate Indian Engineers.
-Our company was founded on a coffee table discussing our school days. A full hearted discussion on our education system,
-we were born!! Sleepless nights of a year and research for blending technology for creative learning in Indian education
-was transformed into our first product SCAN [Student Capability Analysis] @ Re 1 per student per day.
-														</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<h5>Heading b</h5>
-												<div class="outer">
-													<div class="inner">
-														<p>
-														1b. Critical Velos Technologies is a research company founded by passionate Indian Engineers.
-Our company was founded on a coffee table discussing our school days. A full hearted discussion on our education system,
-we were born!! Sleepless nights of a year and research for blending technology for creative learning in Indian education
-was transformed into our first product SCAN [Student Capability Analysis] @ Re 1 per student per day.
-														</p>
-													</div>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</li>
-								<li>
-									<h4>Critical Velos</h4>
-									<div class="inner">
-										<ul>
-											<li>
-												<h5>Heading a</h5>
-												<div class="outer">
-													<div class="inner">
-													<p>
-														2a. Critical Velos Technologies is a research company founded by passionate Indian Engineers.
-Our company was founded on a coffee table discussing our school days. A full hearted discussion on our education system,
-we were born!! Sleepless nights of a year and research for blending technology for creative learning in Indian education
-was transformed into our first product SCAN [Student Capability Analysis] @ Re 1 per student per day.
-													</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<h5>Heading b</h5>
-												<div class="outer">
-													<div class="inner">
-														<p>
-												2b. Critical Velos Technologies is a research company founded by passionate Indian Engineers.
-Our company was founded on a coffee table discussing our school days. A full hearted discussion on our education system,
-we were born!! Sleepless nights of a year and research for blending technology for creative learning in Indian education
-was transformed into our first product SCAN [Student Capability Analysis] @ Re 1 per student per day.
-														</p>
-													</div>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				
 
-			</div>
-			
-			<div class="row">
-				<div class="twelve columns">
-					<div class="box_c">
-						<div class="box_c_heading cf box_actions">
-							<div class="box_c_ico"><img src="/images/16-Day-Calendar.png" alt="" /></div>
-							<p>Calendar</p>
-						</div>
-						<div class="box_c_content">
-							<div id='calendar'></div>
-						</div>
-					</div>
-				</div>
-			</div>
+
+            <div class="clear"></div>
+
 			
 			
 

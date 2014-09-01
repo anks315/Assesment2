@@ -7,6 +7,7 @@ class Question:
     def __init__(self,num_states,probsum,questionstring,answer):
         self.num_states = num_states
         self.probsum = probsum
+
         self.questionstring = questionstring
         self.answer = answer
 
@@ -36,10 +37,10 @@ class  UserBuffer:
             questionstring=tempques.instance.problem_statement
             answer = tempques.instance.answer
             if previous_minquestion==-1:
-                previous_minquestion = abs(int((len(state_db)/2)-num_states))
+                previous_minquestion = abs(int(((len(state_db)+1)/2)-num_states))
                 self.minquestion=tempques.key
             else:
-                 if(abs(int(len(state_db)/2)-num_states) < previous_minquestion):
+                 if(abs(int((len(state_db)+1)/2)-num_states) < previous_minquestion):
                      self.minquestion = tempques.key
 
             self.questions[tempques.key]=Question(num_states,initialprob*num_states,questionstring,answer)
@@ -78,7 +79,7 @@ def update(userid,correct):
     global previousmin
 
     previousmin = usersdict[userid].minquestion
-    usersdict[userid].questions[usersdict[userid].minquestion].probsum=3.00
+
     count =-1
     if correct==True:
         numstate = usersdict[userid].questions[usersdict[userid].minquestion].num_states
@@ -90,24 +91,27 @@ def update(userid,correct):
             count+=1
 
             if previousmin in state.questionstuple:
-                state.prob+=0.1
+                increament = (1/(usersdict[userid].questions[previousmin].probsum))-1
+                g = (0.5*state.prob)*increament
+                state.prob+=g
                 if usersdict[userid]. states[usersdict[userid].maxprobstate].prob < state.prob:
                     usersdict[userid].maxprobstate=count
                 for ques in state.questionstuple:
                     if ques!=-1:
-                        usersdict[userid].questions[ques].probsum+=0.1
+                        usersdict[userid].questions[ques].probsum+=g
                         if usersdict[userid].minquestion==-1:
                             usersdict[userid].minquestion =ques
-                        if abs(usersdict[userid].questions[usersdict[userid].minquestion].probsum - 0.5) > abs(usersdict[userid].questions[ques].probsum - 0.5):
+                        if (ques!=previousmin and abs(usersdict[userid].questions[usersdict[userid].minquestion].probsum - 0.5) > abs(usersdict[userid].questions[ques].probsum - 0.5)):
                             usersdict[userid].minquestion=ques
             else:
-                state.prob-=subtractamount
+                g=0.5*state.prob
+                state.prob-=0.5*state.prob
                 for quest in state.questionstuple:
                     if quest!=-1:
                         if usersdict[userid].minquestion==-1:
                             usersdict[userid].minquestion =quest
-                        usersdict[userid].questions[quest].probsum-=subtractamount
-                        if abs(usersdict[userid].questions[usersdict[userid].minquestion].probsum - 0.5) > abs(usersdict[userid].questions[quest].probsum - 0.5):
+                        usersdict[userid].questions[quest].probsum-=g
+                        if (quest!=previousmin and abs(usersdict[userid].questions[usersdict[userid].minquestion].probsum - 0.5) > abs(usersdict[userid].questions[quest].probsum - 0.5)):
                             usersdict[userid].minquestion=quest
     else:
         numstate = usersdict[userid].questions[usersdict[userid].minquestion].num_states
@@ -117,23 +121,34 @@ def update(userid,correct):
         for state in usersdict[userid].states:
             count+=1
             if previousmin in state.questionstuple:
-                state.prob-=0.1
+                g=0.5*state.prob
+                state.prob-=0.5*state.prob
+                logging.error("decrement value")
+                logging.error(g)
                 for ques in state.questionstuple:
                     if ques!=-1:
-                        usersdict[userid].questions[ques].probsum-=0.1
+                        usersdict[userid].questions[ques].probsum-=g
                         if usersdict[userid].minquestion==-1:
                             usersdict[userid].minquestion =ques
-                        if abs(usersdict[userid].questions[usersdict[userid].minquestion].probsum - 0.5) > abs(usersdict[userid].questions[ques].probsum - 0.5):
+                        if (ques!=previousmin and abs(usersdict[userid].questions[usersdict[userid].minquestion].probsum - 0.5) > abs(usersdict[userid].questions[ques].probsum - 0.5)):
                             usersdict[userid].minquestion=ques
             else:
-                state.prob+=addamount
+                increament = (1/(1-(usersdict[userid].questions[previousmin].probsum)))-1
+                logging.error("hii imcreament value")
+
+                g = (0.5*state.prob)*increament
+                logging.error(g)
+                state.prob+=g
                 if(usersdict[userid].states[usersdict[userid].maxprobstate].prob < state.prob):
                     usersdict[userid].maxprobstate=count
 
                 for quest in state.questionstuple:
                     if quest!=-1:
-                        usersdict[userid].questions[quest].probsum+=addamount
+                        usersdict[userid].questions[quest].probsum+=g
                         if usersdict[userid].minquestion==-1:
                             usersdict[userid].minquestion =quest
-                        if abs(usersdict[userid].questions[usersdict[userid].minquestion].probsum - 0.5) > abs(usersdict[userid].questions[quest].probsum - 0.5):
+                            logging.error("entered min")
+                        if (quest!=previousmin and abs(usersdict[userid].questions[usersdict[userid].minquestion].probsum - 0.5) > abs(usersdict[userid].questions[quest].probsum - 0.5)):
                             usersdict[userid].minquestion=quest
+                            logging.error("entered min")
+    usersdict[userid].questions[previousmin].probsum=50.00

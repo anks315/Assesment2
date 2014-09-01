@@ -7,9 +7,8 @@
 <script >
     function check(){
         alert("ABC");
-    }
-
-    function loadForm(abcd){
+}
+  function loadForm(abcd){
 
         if(abcd=="School"){
             document.getElementById("schoolName").style.display="block";
@@ -74,16 +73,19 @@
 -->
 <header class="p30">
 
+
+
+
     <div class="main">
 
 <nav>
     <ul class="my_menu1">
         <li><a href="index.html">Home</a></li>
         <li><a href="#">about us</a></li>
-        <li><a href="/assessment/" >Assess Yourself</a></li>
+        <li><a href="{{ loginurl }}" >Sign In</a></li>
         <li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">SignUp</a></li>
         <li><a href="/contact_us/">contact Us</a></li>
-        <li><a href="/contact_us/">Our Partners</a></li>
+        <li><a href="#">Our Partners</a></li>
     </ul>
 
 </nav>
@@ -155,35 +157,30 @@
 <div class="container_12">
 <div class="wrapper">
     <div class="grid_4">
-
-<div class="page1-box2">
-<span>"Technology is just a tool. In terms of getting the kids working together and motivating them, the teacher is the most important."</span>
-
-</div>
-
-    <div class="page1-box2 last1">
+       <div class="page1-box2 last1">
 <span>Login to your account</span>
 
 										<form action="dashboard.html" method="post" class="nice" id="l_form">
 											<div class="sepH_c">
 												<div class="elVal">
-													<label for="username">Username</label>
-													<input type="text" id="username" name="username" class="oversize expand input-text" />
+
+													<input type="text" placeholder = "Enter Login id " id="username" name="username" class="oversize expand input-text" />
 												</div>
 												<div class="elVal">
-													<label for="password">Password</label>
-													<input type="password" id="password" name="password" class="oversize expand input-text" />
+
+													<input type="password" placeholder = "Enter Password" id="password" name="password" class="oversize expand input-text" />
 												</div>
 											</div>
+
 											<div class="cf">
 												<label for="remember" class="left"><input type="checkbox" id="remember"> Remember me</label>
 												<input type="submit" class="button small radius right black" value="Login" />
 											</div>
+
 										</form>
 
 <div class="clear"></div>
 </div>
-
     </div>
 
     <div class = "grid_8">
