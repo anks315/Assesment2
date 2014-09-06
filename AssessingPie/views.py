@@ -89,7 +89,7 @@ def home(request):
      if session.get('index',-1) != -1:
         del session['index']
 
-     return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+     return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
 
 blocknumber = -1
@@ -278,3 +278,6 @@ def askquestion(block,antecedentid):
 
     return list()
 
+
+def dashboard(request):
+    return render_to_response('Dashboard/dashboard.html',{},context_instance = RequestContext(request))
