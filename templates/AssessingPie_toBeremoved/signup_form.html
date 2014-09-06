@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<head>
+<title>Critical Velos</title>
+<meta charset="utf-8">
+<meta name="description" content="Your description">
+<meta name="keywords" content="Your keywords">
+<meta name="author" content="Bhandari" >
+
+<link rel="stylesheet" href="/css/web/styles.css">
+
+
+
+</head>
+<body>
+ 
+<header>
+<div class="main">
+<h1><a class="logo" href="index.html">Critical Velos</a></h1>
+<nav>
+<ul class="my_menu">
+<li><a href="abc.html">Home</a></li>
+<li><a href="#">about us</a></li>
+<li><a href="/assessment/" >Assess Yourself</a></li>
+<li><a href="{{ loginurl }}" class="current">Sign In</a></li>
+<li><a class="active" href="/sign_up/" >SignUp</a></li>
+<li><a href="/contact_us/">contact Us</a></li>
+</ul>
+</nav>
+<div class="clear"></div>
+</div>
+</header>
+ 
+<section id="content">
+
+<div class="container_12">
+<div class="wrapper">
+
+<article class="grid_7 push_1">
+<h3 class="p12">SignUp</h3>
+
+
+
+<form id="regForm" action="submit.php" method="post" >
+
+<table>
+  <tbody>
+  <tr>
+    <td><label for="fname">First Name:</label></td>
+    <td><div class="input-container"><input name="fname" id="fname" type="text" /></div></td>
+  </tr>
+  <tr>
+    <td><label for="lname">Last Name:</label></td>
+    <td><div class="input-container"><input name="lname" id="lname" type="text" /></div></td>
+  </tr>
+  <tr>
+    <td><label for="email">Your Email:</label></td>
+    <td><div class="input-container"><input name="email" id="email" type="text" /></div></td>
+  </tr>
+  <tr>
+    <td><label for="pass">Password:</label></td>
+    <td><div class="input-container"><input name="pass" id="pass" type="password" /></div></td>
+  </tr>
+  <tr>
+    <td><label for="sex-select">I am:</label></td>
+    <td>
+    <div class="input-container">
+    <select name="sex-select" id="sex-select">
+    <option value="0">Select :</option>
+    <option value="1">Teacher</option>
+    <option value="2">Student</option>
+    <option value="3">Others</option>
+    </select>
+    </div>
+
+    </td>
+  </tr>
+
+    <tr>
+    <td><label for="account-type">If Teacher </label></td>
+    <td>
+    <div class="input-container">
+    <select name="sex-select" id="sex-select">
+    <option value="0">Select No Of Students</option>
+    <option value="1">1</option>
+    <option value="3">2</option>
+    <option value="4">5</option>
+    <option value="5">10</option>
+    <option value="6">20</option>
+    <option value="7">50</option>
+    </select>
+    </div>
+
+    </td>
+  </tr>
+
+
+  <tr>
+  <td>&nbsp;</td>
+  <td><input type="submit" class="greenButton" value="Sign Up" /><img id="loading" src="img/ajax-loader.gif" alt="working.." />
+</td>
+  </tr>
+
+
+  </tbody>
+</table>
+
+</form>
+
+</article>
+</div>
+</div>
+
+</section>
+ 
+<footer>
+<div class="main">
+<ul class="soc-links">
+<li><a href="#">facebook</a></li>
+<li><a href="#">twitter</a></li>
+<li class="last3"><a href="#">google+</a></li>
+</ul>
+
+<div class="foot-page1">
+Critical Velos &copy; 2014<br />
+<div class="mwd"> Site Desgin: Critical Velos</div>
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+
+</div>
+</footer>
+<script src="/js/jquery-1.7.1.min.js"></script>
+<script src="/js/script.js"></script>
+</body>
+
+</html>

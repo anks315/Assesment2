@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/question/table.css">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Knowledge', 'Fraction'],
+          ['Dont Know',    {{ num_dontknow }}]  ,
+          ['Already Know',    {{ num_known }}]
+
+        ]);
+
+        var options = {
+          title: 'Your Maths Donut',
+          pieHole: 0.4
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Assessment Number', 'Maths', 'Science'],
+          ['2004',  33,      56],
+          ['2005',  67,      67],
+          ['2006',  53,       89],
+          ['2007',  85,      96]
+        ]);
+
+
+        var options = {
+          title: 'Your History With Critical Velos',
+             animation:{
+        duration: 1000,
+        easing: 'out'
+      }
+
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+  </head>
+  <body >
+  <div>
+    <div align="left" id="donutchart" style="width: 900px; height: 300px;"></div>
+    <div align="left" id="readytolearn" style="margin-left:400px;">
+
+<table class="gridtable">
+    <col width="350">
+<tr>
+	<th>Readytolearn(Outer Fringe)</th>
+</tr>
+<tr>
+	<td>{{ readytolearn }}</td>
+</tr>
+
+</table>
+
+        <!--<p >You are ready to learn :{{ readytolearn }}</p>--></div>
+
+   </div>
+  <div id="chart_div" style="width:900px; height: 300px;"></div>
+
+
+
+  </body>
+</html>

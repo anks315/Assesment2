@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<head>
+
+<script >
+    function check(){
+        alert("ABC");
+}
+  function loadForm(abcd){
+
+        if(abcd=="School"){
+            document.getElementById("schoolName").style.display="block";
+            document.getElementById("schoolCity").style.display="block";
+            document.getElementById("schoolState").style.display="block";
+            document.getElementById("firstName").style.display="none";
+            document.getElementById("lastName").style.display="none";
+
+            //document.getElementById('schoolName')
+        }
+        if(abcd=="Student"){
+          //  alert("Kapil Student");
+            document.getElementById("schoolName").style.display="none";
+            document.getElementById("schoolCity").style.display="none";
+            document.getElementById("schoolState").style.display="none";
+            document.getElementById("firstName").style.display="block";
+            document.getElementById("lastName").style.display="block";
+
+        }
+        if(abcd=="Teacher"){
+           // alert("Teacher");
+            document.getElementById("schoolName").style.display="none";
+            document.getElementById("schoolCity").style.display="none";
+            document.getElementById("schoolState").style.display="none";
+            document.getElementById("firstName").style.display="block";
+            document.getElementById("lastName").style.display="block";
+        }
+        if(abcd=="Parent"){
+            document.getElementById("schoolName").style.display="none";
+            document.getElementById("schoolCity").style.display="none";
+            document.getElementById("schoolState").style.display="none";
+            document.getElementById("firstName").style.display="block";
+            document.getElementById("lastName").style.display="block";
+        }
+        //var account_type = document.getElementsByName('account_type');
+     //   alert(abcd);
+       // alert(account_type);
+
+        
+    }
+
+</script>
+<title>Critical Velos</title>
+<meta charset="utf-8">
+<meta name="description" content="Your description">
+<meta name="keywords" content="Your keywords">
+<meta name="author" content="Bhandari" >
+
+<link rel="stylesheet" href="/css/web/styles.css">
+
+
+
+</head>
+<body>
+<!--
+<div class="topcorner">
+    <ul class="my_menu">
+<li><a href="{{ loginurl }}" class="current">Sign In</a> </li>
+<li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">SignUp</a> </li>
+        </ul>
+</div>
+-->
+<header class="p30">
+
+
+
+
+    <div class="main">
+
+<nav>
+    <ul class="my_menu1">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">about us</a></li>
+        <li><a href="{{ loginurl }}" >Sign In</a></li>
+        <li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">SignUp</a></li>
+        <li><a href="/contact_us/">contact Us</a></li>
+        <li><a href="#">Our Partners</a></li>
+    </ul>
+
+</nav>
+
+<div class="clear"></div>
+
+
+
+    <h1><a class="logo" href="index.html">Critical Velos</a></h1>
+<nav>
+    <ul class="my_menu">
+        <li><a href="index.html">Who are We?</a></li>
+        <li><a href="#">What we do?</a></li>
+        <li><a href="/assessment/" > FAQs</a></li>
+        <li><a href="{{ loginurl }}" class="current">about us</a></li>
+        <li><a href="#">Upcoming Projects</a></li>
+    </ul>
+</nav>
+
+<hr>
+        <hr/>
+
+</div>
+
+
+ <div id="light" class="white_content" align="center"><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
+
+
+  <form class="register" id="signup_form" >
+
+     <h1 class="register-title">SignUp Form!!</h1>
+      <div class="clear"></div>
+
+      <div class="register-switch" id="account_types">
+
+
+      <input type="radio" name="account_type" value="School" id="type_school" class="register-switch-input" onclick="loadForm('School')" checked>
+      <label for="type_school" class="register-switch-label">School</label>
+      <input type="radio" name="account_type" value="Teacher" id="type_teacher" class="register-switch-input"  onclick="loadForm('Teacher')"  >
+      <label for="type_teacher" class="register-switch-label">Teacher</label>
+      <input type="radio" name="account_type" value="Parent" id="type_parent" class="register-switch-input" onclick="loadForm('Parent')" >
+      <label for="type_parent" class="register-switch-label">Parent</label>
+      <input type="radio" name="account_type" value="Student" id="type_student" class="register-switch-input" onclick="loadForm('Student')" >
+      <label for="type_student" class="register-switch-label">Student</label>
+    </div>
+
+    <input type="text" class="register-input" placeholder="School Name" id="schoolName">
+    <input type="text" class="register-input" placeholder="School State" id="schoolState">
+    <input type="text" class="register-input" placeholder="School City" id="schoolCity">
+    <input type="text" class="register-input-hide" placeholder="First Name" id="firstName">
+    <input type="text" class="register-input-hide" placeholder="Last Name" id="lastName">
+    <input type="email" class="register-input" placeholder="Email address" id="email">
+    <input type="password" class="register-input" placeholder="Password" id="password">
+
+    <input type="submit" value="Create Account" class="register-button" onclick="check()">
+  </form>
+
+
+
+     <div class="clear"></div>
+
+</div>
+
+
+
+ <div id="fade" class="black_overlay"> </div>
+
+    <div class="clear"></div>
+<div class="container_12">
+<div class="wrapper">
+    <div class="grid_4">
+       <div class="page1-box2 last1">
+<span>Login to your account</span>
+
+										<form action="dashboard.html" method="post" class="nice" id="l_form">
+											<div class="sepH_c">
+												<div class="elVal">
+
+													<input type="text" placeholder = "Enter Login id " id="username" name="username" class="oversize expand input-text" />
+												</div>
+												<div class="elVal">
+
+													<input type="password" placeholder = "Enter Password" id="password" name="password" class="oversize expand input-text" />
+												</div>
+											</div>
+
+											<div class="cf">
+												<label for="remember" class="left"><input type="checkbox" id="remember"> Remember me</label>
+												<input type="submit" class="button small radius right black" value="Login" />
+											</div>
+
+										</form>
+
+<div class="clear"></div>
+</div>
+    </div>
+
+    <div class = "grid_8">
+        <div class="page1-box2">
+            <div id="slide">
+            <div class="slider">
+            <ul class="items">
+            <li><img src="/images/classroomhighquality.jpg" alt=""/>
+            <div class="banner">
+            <strong>ASSESSMENT</strong>
+            <span>Assess yourself</span>
+            <p>childrens parents schools and so much more</p>
+            <a class="button2k" href="#">read more</a></div>
+            </li>
+            <li><img src="/images/slide-3.jpg" alt=""/>
+            <div class="banner">
+            <strong>Android App</strong>
+            <span>Mark Attendance and Reporting</span>
+            <p>Now manage data and everything in cloud..</p>
+            <a class="button2k" href="#">read more</a></div>
+            </li>
+            <li><img src="/images/classroomhighquality.jpg" alt=""/>
+            <div class="banner">
+            <strong>UpComing Projects</strong>
+            <span>critical Velos Product </span>
+            <p>Coming soon ...</p>
+            <a class="button2k" href="#">read more</a></div>
+            </li>
+            </ul>
+            </div>
+            </div>
+            </div>
+    </div>
+
+
+
+
+</div>
+    </div>
+
+    <div class="clear"></div>
+
+<div class="container_12">
+<div class="wrapper">
+<article class="grid_6">
+<div class="page1-box1">
+<span>Article 1 Education</span>
+<p>Critical Velos Technologies is a research company founded by passionate Indian Engineers.
+Our company was founded on a coffee table discussing our school days. A full hearted discussion on our education system,
+we were born!! Sleepless nights of a year and research for blending technology for creative learning in Indian education
+was transformed into our first product SCAN [Student Capability Analysis] @ Re 1 per student per day.</p>
+<a class="button2 fright" href="#">read more</a>
+<div class="clear"></div>
+</div>
+</article>
+<article class="grid_3">
+<div class="page1-box2">
+<span>Our Assessment</span>
+<p><a href="#">Our findings etc<br/> Line 1 <br/>Line 2 <br/>Line 3 <br/></a></p>
+</div>
+<div class="page1-box2 last2">
+<span>Abcdefg</span>
+<p><a href="#">>Content to be discussed.<br/> Line 1 <br/>Line 2 <br/></a> </p>
+</div>
+</article>
+<article class="grid_3">
+<div class="page1-box2">
+<span>Xyzefgd</span>
+<p><a href="#">Content to be Discussed.<br/> Line 1 <br/>Line 2 <br/>Line 3 <br/></a> </p>
+</div>
+<div class="page1-box2 last2">
+<span>Critical Velos</span>
+<p><a href="#">Content to be Discussed.<br/> Line 1 <br/>Line 2 <br/></a></p>
+</div>
+</article>
+</div>
+</div>
+</header>
+ 
+<section id="content" class="p31">
+<div class="container_12">
+<article class="grid_4">
+<h3 class="p6">Heading to be discussed</h3>
+<div class="page1-box3">
+<figure class="page1-img1"><img src="images/index_img1.jpg" alt=""></figure>
+
+<p>Line 1 <br/>Line 2 <br/>Line 3</p>
+<a href="#">CriticalVelos@gmail.com</a>
+</div>
+</article>
+<article class="grid_3">
+<h3 class="p6">Present Situation</h3>
+<div class="page1-box3">
+<figure class="page1-img1"><img src="images/index_img2.jpg" alt=""></figure>
+<p class="p8">Content to be Discussed....</p>
+<a class="link1" href="#">Read More</a></div>
+</article>
+<article class="grid_3 push_1">
+<h3 class="p6">Critical Velos</h3>
+<div class="page1-box3">
+<figure class="page1-img1"><img src="images/index_img3.jpg" alt=""></figure>
+<p class="p8">Content to be discussed</p>
+<a class="link1" href="#">Read More</a></div>
+</article>
+<div class="clear"></div>
+</div>
+</section>
+
+<footer>
+<div class="main">
+<ul class="soc-links">
+<li><a href="#">facebook</a></li>
+<li><a href="#">twitter</a></li>
+<li class="last3"><a href="#">google+</a></li>
+</ul>
+ 
+<div class="foot-page1">
+Critical Velos &copy; 2014<br />
+<div class="mwd"> Site Desgin: Critical Velos</div>
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+
+</div>
+</footer>
+<script src="/js/jquery-1.7.1.min.js"></script>
+<script src="/js/script.js"></script>
+</body>
+
+</html>
