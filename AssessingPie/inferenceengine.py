@@ -1,5 +1,7 @@
 __author__ = 'ankur'
 import logging
+import Query
+import models
 class Question:
     def __init__(self,key,typeid,questionstring):
         self.key=key
@@ -15,6 +17,9 @@ class TypeCache:
 
     def gettype(self,typeid):
         return self.typelist[typeid].questionstring
+
+    def gettypekey(self,typeid):
+        return self.typelist[typeid].key
 
     def getlength(self):
         return len(self.typelist)
@@ -159,13 +164,18 @@ def infertrue(userbuffer,block,antecedentid,antecedent):
 class InferenceBuffer:
     def __init__(self):
         self.typeCache = TypeCache()
-        self.typeCache.addtype(0,0,"Simple addition")
-        self.typeCache.addtype(1,1,"Carry Over addition")
-        self.typeCache.addtype(2,2,"Division")
+        question_db = Query.get_questions_by_topic_name("Number  System")
+        typeid=-1
+        for tempques in question_db:
+            typeid+=1
+            questionstring=tempques.instance.problem_statement
+            key = tempques.key
+            self.typeCache.addtype(key,typeid,questionstring)
+
         self.surmiseRelation = SurmiseRelation(self)
         self.blockCache = BlockCache()
 
-def generatestates(userbuffer):
+def generatestates(userbuffer,topicname):
     statesgen =[]
     numoftype = userbuffer.typeCache.getlength()
     for questiontype in range(0,numoftype):
@@ -179,4 +189,8 @@ def generatestates(userbuffer):
                 if stateadd not in statesgen:
                  statesgen.append(stateadd)
             tobeaddedlist=[]
+
+    school=models.School.query(models.School.name=="CVSchool").get()
+    state1=Query.addState(type=Constant.STATE_IN_TOPIC,school_key=school.key)
+
     logging.error(statesgen)

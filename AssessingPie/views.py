@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from gaesessions import get_current_session
-from engine import nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer
+from engine import nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer,maxstatesize,getnumquestions
 from django.template import RequestContext
 from google.appengine.api import  users
 from dummydata import fill
@@ -14,6 +14,7 @@ import inferenceengine
 counters=0
 counter =0
 val=0
+readytolearn=""
 def asknextquestion(request):
 
     global counters
@@ -41,13 +42,15 @@ def asknextquestion(request):
              update(session['index'], True)
         else:
             update(session['index'], False)
-
-    logging.error(usersdict[session['index']].states[maxstate(session['index'])].questionstuple)
+    logging.error(maxstatesize(session['index']))
+    logging.error(maxstate(session['index']))
+    logging.error(usersdict[session['index']].states[maxstatesize(session['index'])][maxstate(session['index'])].questionstuple)
     val=0
-    if  session.get('index',-1)!=-1 and (usersdict[session['index']].states[maxstate(session['index'])].prob > 0.40 or getcount(session['index'])==3 ):
+    if  session.get('index',-1)!=-1 and (usersdict[session['index']].states[maxstatesize(session['index'])][maxstate(session['index'])].prob > 0.40 or getcount(session['index'])==getnumquestions(session['index']) ):
         global val
+        global readytolearn
         strknow = "You know :"
-        for quest in usersdict[session['index']].states[maxstate(session['index'])].questionstuple:
+        for quest in usersdict[session['index']].states[maxstatesize(session['index'])][maxstate(session['index'])].questionstuple:
             if quest==-1:
                 val=0
             else:
@@ -55,12 +58,23 @@ def asknextquestion(request):
                 strknow+=",,"
                 val+=1
         maxsta =maxstate(session['index'])
-        if val==3:
+        if val==getnumquestions(session['index']):
 
             readytolearn="Congratulations!!you have completed maths donut"
         else:
             logging.error(maxstate(session['index']))
-            readytolearn=usersdict[session['index']].questions[usersdict[session['index']].states[maxstate(session['index'])+1].questionstuple[maxstate(session['index'])]].questionstring
+            states = usersdict[session['index']].states[maxstatesize(session['index']) + 1]
+            currentstate= usersdict[session['index']].states[maxstatesize(session['index'])][maxstate(session['index'])]
+            for state in states:
+                stateset = set(state.questionstuple)
+                currentstateset = set(currentstate.questionstuple)
+                if stateset.issuperset(currentstateset):
+                    quetionkey = stateset.difference(currentstateset)
+                    readytolearn+=usersdict[session['index']].questions[next(iter(quetionkey))].questionstring
+
+
+
+
         del usersdict[session['index']]
         del session['index']
         return render_to_response('AssessingPie/pie.html',{'readytolearn':readytolearn,'num_known': val ,'num_dontknow':3-val,'st': maxsta,'state' : 'completed','know':strknow,},context_instance = RequestContext(request))
@@ -75,7 +89,7 @@ def home(request):
      if session.get('index',-1) != -1:
         del session['index']
 
-     return render_to_response('AssessingPie/abc_backup.html',{'loginurl': users.create_login_url('/dashboard/'),},context_instance = RequestContext(request))
+     return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
 
 blocknumber = -1
@@ -90,7 +104,14 @@ def contactus(request):
         fill()
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
 
+def topicnames(request):
+        return render_to_response('AssessingPie/topicname.html',{},context_instance = RequestContext(request))
 
+def assesstopicname(request):
+        return render_to_response('AssessingPie/assesstopicname.html',{},context_instance = RequestContext(request))
+
+
+topicname = ''
 def  inferquestion(request):
 
     global currentantecedentnumber
@@ -100,9 +121,10 @@ def  inferquestion(request):
     global  numalreadyinferred
     global antecedent
     global implication
-
+    global topicname
     session = get_current_session()
-
+    if request.method == 'GET':
+         topicname = request.GET['topic']
     c=session.get('infer',-1)
     if c==-1:
         session['infer']=users.get_current_user()
@@ -119,7 +141,7 @@ def  inferquestion(request):
             implication=-1
             antecedent=[]
             numalreadyinferred=0
-            return render_to_response('AssessingPie/abc_backup.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+            return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
     if request.method=='POST':
         if request.POST['answer']=='yes':
@@ -173,8 +195,8 @@ def  inferquestion(request):
                 implication=-1
                 antecedent=[]
                 numalreadyinferred=0
-                logging.error(inferenceengine.generatestates(usersdict[session['infer']]))
-                return render_to_response('AssessingPie/abc_backup.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+                inferenceengine.generatestates(usersdict[session['infer']],topicname)
+                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
             currentblocknumber+=1
             numalreadyinferred=0
             logging.error(currentblocknumber)
@@ -193,7 +215,8 @@ def  inferquestion(request):
                 implication=-1
                 antecedent=[]
                 numalreadyinferred=0
-                return render_to_response('AssessingPie/abc_backup.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+                inferenceengine.generatestates(usersdict[session['infer']],topicname)
+                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
             if usersdict[session['infer']].blockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
                 logging.error("asking question")
@@ -255,5 +278,3 @@ def askquestion(block,antecedentid):
 
     return list()
 
-def dashboard(request):
-    return render_to_response('AssessingPie/dashboard2.html',{},context_instance = RequestContext(request))
