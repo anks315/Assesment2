@@ -280,4 +280,5 @@ def askquestion(block,antecedentid):
 
 
 def dashboard(request):
+    subjectsenrolled=['Maths','Science','English']
     return render_to_response('Dashboard/dashboard.html',{'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
