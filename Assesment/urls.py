@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     (r'^contact_us/$', 'AssessingPie.views.contactus'),
     (r'^topicname/$', 'AssessingPie.views.topicname'),
     (r'^assesstopicname/$', 'AssessingPie.views.assesstopicname'),
+        (r'^dashboard/$', 'AssessingPie.views.dashboard'),
     url(r'^$', 'AssessingPie.views.home'),
 
 
