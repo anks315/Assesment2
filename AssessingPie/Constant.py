@@ -1,10 +1,11 @@
 import sys
 class Constant:
-    STUDENT=1
-    SCHOOL=2
+    STUDENT=100
+    SCHOOL=200
+    TEACHER=300
     STATE=3
     QUESTION=4
-    TOPIC=5
+    #TOPIC=5
     ASSESSMENT=6
     NAME_ALIAS='N'
     QUESTION_TYPE_SINGLE=0
@@ -39,9 +40,9 @@ class Subject:
     SUBJECT_ENGLISH="English"
     SUBJECT_SCIENCE="Science"
 
-class Topic:
+'''class Topic:
     TOPIC_ADDITION="Addition"
-    TOPIC_SUBSTRACTION="Substraction"
+    TOPIC_SUBSTRACTION="Substraction"'''
     
     
 class States:

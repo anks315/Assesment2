@@ -12,7 +12,12 @@ This class contains the basic info of a user : id
 """ 
 class User(ndb.Model):   
     username=ndb.StringProperty(required=True)
+    type=ndb.IntegerProperty(choices=set([Constant.TEACHER,Constant.STUDENT,Constant.SCHOOL,Constant.TEACHER]))
+    key=ndb.KeyProperty(required=True)
+    pwd=ndb.StringProperty(required=True)
+    lastlogin=ndb.DateProperty()
     
+       
     
 
 """
@@ -206,10 +211,10 @@ key Property: topics_in_assessment_key: contains keys of  a topics in an assessm
 
 class Assessment(ndb.Model):
     name=ndb.StringProperty(required=True)
-    
+    date=ndb.DateProperty(required=True)
     current_state=ndb.KeyProperty(kind=State)
     next_state=ndb.KeyProperty(kind=State)
-    score=ndb.FloatProperty()
+    score=ndb.FloatProperty(default=-1)
     question_ready_to_learn=ndb.KeyProperty(kind=Question)
     topics_in_assessment_key = ndb.KeyProperty(kind='Topic', repeated=True)
     states_in_assessment_key = ndb.KeyProperty(kind='State', repeated=True)
@@ -305,7 +310,8 @@ This class models  a basic user information subentity
 
   
 class UserInfo(ndb.Model):
-  name = ndb.StringProperty(required=True)
+  firstname = ndb.StringProperty(required=True)
+  lastname=ndb.StringProperty(required=True)
   date_of_birth = ndb.DateProperty(required=True)
   # age=ndb.IntegerProperty(required=True) 
   sex = ndb.IntegerProperty(required=True, choices=set([Constant.SEX_MALE, Constant.SEX_FEMALE])) 
