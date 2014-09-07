@@ -2000,6 +2000,58 @@ def get_ready_to_learn_topic(topic_key,student_key):
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
 
+
+"""
+returns mastery in that subject in percentage
+"""
+def get_learning_progress_date_wise(topic_key,student_key):
+    logging.info("CV Logs : Inside get_learning_progress_date_wise ")
+    assessments=[]
+    assessments_temp=[]
+    learning_by_date={}
+    mastered=0
+    prev_pass=0
+    prev_failed=0
+    question_key=None
+    try:
+        subject=topic_key.get().subject_key.get()
+        student=student_key.get()
+        assessments=get_assessments_by_topic(student_key, topic_key)
+        logging.error("##########################################################"+str(assessments))
+        questions=get_questions_of_topic(topic_key)
+        logging.error("##########################################################"+str(questions))
+        if assessments==None:
+            return Constant.ERROR_NO_DATA_FOUND
+        for assessment_final in assessments:
+            if not assessment_final.date==None:
+                date_asessment=assessment_final.date
+                if date_asessment in learning_by_date:
+                     prev_pass,prev_failed=learning_by_date[date_asessment]
+                if assessment_final.score==100:
+                    prev_pass+=1
+                else :
+                    prev_failed+=1
+                learning_by_date[date_asessment]=[prev_pass,prev_failed]
+            else :
+                if assessment_final.score==100:
+                    prev_pass+=1
+                else :
+                    prev_failed+=1
+                learning_by_date.update({date_asessment:[prev_pass,prev_failed]}) 
+                          
+                    
+                
+                
+                
+        logging.info("CV Logs : success to get_learning_progress_date_wise  :")
+        return learning_by_date
+    except Exception:
+        logging.info("CV Logs : failed to get_learning_progress_date_wise :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+    
+
     
             
 """
