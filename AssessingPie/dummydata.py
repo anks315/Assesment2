@@ -110,7 +110,8 @@ def fill():
             Query.get_mastery_for_all_subjects(student1.key)
             Query.get_growth_for_all_topic_subject(student1.key,subject1.key)
             Query.get_growth_for_subject(student1.key,subject1.key)
-            a=Query.get_ready_to_learn_topic(topic.key,student1.key)'''
+            Query.get_ready_to_learn_topic(topic.key,student1.key)
+            a=get_learning_progress_date_wise(topic1.key,student1.key)'''
       except Exception :
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL

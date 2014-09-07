@@ -2002,7 +2002,8 @@ def get_ready_to_learn_topic(topic_key,student_key):
 
 
 """
-returns mastery in that subject in percentage
+returns {date:[passed,failed]}
+
 """
 def get_learning_progress_date_wise(topic_key,student_key):
     logging.info("CV Logs : Inside get_learning_progress_date_wise ")
