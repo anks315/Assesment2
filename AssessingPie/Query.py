@@ -6,7 +6,7 @@ import Constant
 from models import QuestionInstance,State_Questions,Topic_States,Question,State,Address,Teacher,Class
 from models import School,Student,UserInfo,Subject,Assessment,Student_Assessments,School_Assessments
 from  models import Assessment_States,Topic_Questions,State_Questions,Topic_States,Subject_Topics
-from models import Topic
+from models import Topic,User
 from Constant import Constant,UserType
 
 
@@ -17,27 +17,38 @@ from Constant import Constant,UserType
 login for users
             type: determines the user Type from Constant.py
 """
-def login(username,type):
+def login(username,pwd):
       logging.info("CV Logs :Inside login :")
       try: 
-        if type==UserType.SCHOOL:
+          user_name=User.query(User.username == username).get()
+          
+          logging.error("#############################  "+ str(user_name))
+          if user_name ==None:
+            logging.error("##########################")
+            return Constant.ERROR_NO_DATA_FOUND
+          type=user_name.type
+          if type==Constant.SCHOOL:
             user=School.query(School.code == username).get()
-        elif type==UserType.STUDENT:
+          elif type==Constant.STUDENT:
+            logging.error("#############################  ")  
             user=Student.query(Student.username == username).get()
-        elif type==UserType.TEACHER:
+          elif type==Constant.TEACHER:
             user=Teacher.query(Teacher.username == username).get()
-        else :
-            logging.info("CV Logs : failed to login for username :"+username+":type "+type)
+          else :
+            logging.info("CV Logs : failed to login for username :"+username+":type "+str(type))
             return Constant.ERROR_BAD_VALUE
       except Exception :
         logging.exception("")
-        logging.info("CV Logs : failed to login for username :"+username+":type "+type)
+        #logging.info("CV Logs : failed to login for username :"+username+":type "+str(type))
         return Constant.ERROR_BAD_VALUE
         
       if user==None:
         return Constant.ERROR_INVALID_USER
-      logging.info("CV Logs : success to login for username :"+username+":type "+type)
-      return user
+      lastlogin= user_name.lastlogin
+      user_name.lastlogin=datetime.date.today()
+      user_name.put()
+      logging.info("CV Logs : success to login for username :"+username+":type "+str(type))
+      return [type,user,lastlogin]
 
 """
 Sign up for a school
@@ -66,9 +77,9 @@ def signup_teacher(username,basic_info,school_key):
           if not  isinstance(teacher, Teacher):
                return Constant.ERROR_BAD_VALUE 
       except Exception:
-          logging.error("CV Logs : failed to sign up for teacher :"+teacher.basic_info.name)
+          logging.error("CV Logs : failed to sign up for teacher :"+teacher.basic_info.firstname)
           return Constant.ERROR_OPERATION_FAIL
-      logging.info("CV Logs : success to sign up for teacher :"+teacher.basic_info.name)  
+      logging.info("CV Logs : success to sign up for teacher :"+teacher.basic_info.firstname)  
       return teacher
 
 """
@@ -76,16 +87,16 @@ Sign up for a student
 
 """
 
-def signup_student(username,basic_info,school_key):
+def signup_student(basic_info,school_key,pwd):
       logging.info("CV Logs : inside signup_student ")
       try:
-          student=addStudent(username,basic_info,school_key)
+          student=addStudent(basic_info,school_key,pwd)
           if not  isinstance(student, Student):
                return Constant.ERROR_BAD_VALUE
       except Exception:
-          logging.error("CV Logs : failed to sign up for student :"+student.basic_info.name)
+          logging.error("CV Logs : failed to sign up for student :"+student.basic_info.firstname)
           return Constant.ERROR_BAD_VALUE 
-      logging.info("CV Logs : success to sign up for student :"+student.basic_info.name)
+      logging.info("CV Logs : success to sign up for student :"+student.basic_info.firstname)
       return student
 
 
@@ -463,14 +474,14 @@ def addTeacher(username,basic_info,school_key):
          
     except Exception:
         logging.exception("")
-        logging.error("CV Logs : failed to add teacher  :"+basic_info.name)
+        logging.error("CV Logs : failed to add teacher  :"+basic_info.firstname)
         #raise ndb.Rollback()
         return Constant.ERROR_BAD_VALUE 
     teacher = Teacher(parent=school_key,username=username,basic_info=basic_info,school=school_key) 
     teacher.put()  
     school.teachers_in_school_keys.append(teacher.key)
     school.put()
-    logging.info("CV Logs : success to add teacher  :"+teacher.basic_info.name)
+    logging.info("CV Logs : success to add teacher  :"+teacher.basic_info.firstname)
     return teacher;     
     
 """
@@ -490,11 +501,11 @@ def updateTeacher(teacher_key,username=None,basic_info=None):
                 return Constant.ERROR_BAD_VALUE      
             teacher.basic_info=basic_info
          teacher.put()  
-         logging.info("CV Logs : success to update teacher  :"+teacher.basic_info.name)
+         logging.info("CV Logs : success to update teacher  :"+teacher.basic_info.firstname)
          return teacher;     
     except Exception:
         logging.exception("")
-        logging.error("CV Logs : failed to update teacher  :"+teacher.basic_info.name)
+        logging.error("CV Logs : failed to update teacher  :"+teacher.basic_info.firstname)
         return Constant.ERROR_BAD_VALUE 
     
 
@@ -596,16 +607,16 @@ Adds a new UserInfo:
               contact_no =Integer
   
 """
-def addUserInfo(name,date_of_birth,sex,address,email,contact_no):
+def addUserInfo(firstname,lastname,date_of_birth,sex,address,email,contact_no):
     try :   
             logging.info("CV Logs : Inside addUserInfo" )  
-            user = UserInfo(name=name,date_of_birth=date_of_birth,sex=sex,address=address,email=email,contact_no=contact_no) 
+            user = UserInfo(firstname=firstname,lastname=lastname,date_of_birth=date_of_birth,sex=sex,address=address,email=email,contact_no=contact_no) 
             user.put()  
-            logging.info("CV Logs : success to add userinfo  :"+name)
+            logging.info("CV Logs : success to add userinfo  :"+lastname)
             return user;
     except Exception :
         logging.exception("")
-        logging.error("CV Logs : failed to add userinfo  :"+name)
+        logging.error("CV Logs : failed to add userinfo  :"+lastname)
         return Constant.ERROR_BAD_VALUE
 
 
@@ -614,10 +625,10 @@ def addUserInfo(name,date_of_birth,sex,address,email,contact_no):
 Adds a new Assessment:
                 list_topic_key: list of topics covered in the assessment
 """
-def addAssessment(name,list_topic_key,school_key):
+def addAssessment(name,list_topic_key,school_key,date):
     try :     
         logging.info("CV Logs : Inside addAssessment" )
-        assessment = Assessment(parent=school_key,name=name,topics_in_assessment_key=list_topic_key) 
+        assessment = Assessment(parent=school_key,name=name,topics_in_assessment_key=list_topic_key,date=date) 
         for topic in list_topic_key:
             topic_states=get_states_of_topic(topic)
             logging.info(str(topic_states))
@@ -654,20 +665,23 @@ Adds a new Student:
                 class_deatils=  class name from Class in Constant.py
                 section_details=section name from Section in Constant.py
 """
-def addStudent(username,basic_info,school_key):
+def addStudent(basic_info,school_key,pwd):
     logging.info("CV Logs : Inside addStudent" )
     if not (isinstance(basic_info, UserInfo)) :
             return Constant.ERROR_BAD_VALUE           
     try:
          school=school_key.get()
+         username=basic_info.firstname+"_"+basic_info.lastname
          student = Student(parent=school.key,username=username,basic_info=basic_info,school=school.key) 
          student.put()  
-         logging.info("CV Logs : success to add student  :"+basic_info.name)
+         vaultinfo=User(username=username,type=Constant.STUDENT,key=student.key,pwd=pwd)
+         vaultinfo.put()
+         logging.info("CV Logs : success to add student  :"+basic_info.firstname)
          return student;
 
     except Exception:
         logging.exception("")
-        logging.error("CV Logs : failed to add student  :"+basic_info.name)
+        logging.error("CV Logs : failed to add student  :"+basic_info.firstname)
         return Constant.ERROR_BAD_VALUE
      
     
@@ -746,7 +760,7 @@ def assign_assessment_to_student(student_key,assessment_key):
     '''result=assign_assessment_to_school(student.school, [assessment_key])
     if not result==Constant.UPDATION_SUCCESSFULL:
         return Constant.ERROR_OPERATION_FAIL'''
-    logging.info("CV Logs : success to assign assessment :"+assessment.name+" to student :"+ student.basic_info.name)
+    logging.info("CV Logs : success to assign assessment :"+assessment.name+" to student :"+ student.basic_info.firstname)
     return Constant.UPDATION_SUCCESSFULL
  
  
@@ -821,7 +835,7 @@ def update_assessment_detail_of_student(student_key,assessment_key,current_state
     assessment.question_ready_to_learn=next_question_key
     assessment.score=score
     assessment.put()
-    logging.info("CV Logs : success to update assessment :"+assessment.name+" for student :"+ student.basic_info.name)
+    logging.info("CV Logs : success to update assessment :"+assessment.name+" for student :"+ student.basic_info.firstname)
     return assessment
         
 """
@@ -1176,7 +1190,9 @@ Assigns  existing students  to an existing class:
 @ndb.transactional(xg=True)
 def assign_students_to_class(class_key,students_in_class_key):
     class_entity=None
+    logging.info("CV Logs : Inside assign_students_to_class ")
     try:
+        
         class_entity=class_key.get() 
         for student_key in students_in_class_key:
                    student=student_key.get()
@@ -1186,7 +1202,8 @@ def assign_students_to_class(class_key,students_in_class_key):
     try:
         for student_key in students_in_class_key:
                    student=student_key.get()
-                   student.class_details=class_entity.key
+                   logging.error("assigning students to class "+str(student)+"@@@@@@@@@"+str(class_entity))
+                   student.class_details=class_key
                    #memcache.add(name, person)
                    a=student.put()
                    logging.error(str(student.class_details)) 
@@ -1219,12 +1236,12 @@ def assign_classes_to_teacher(teacher_key,classes_under_teacher):
                    class_names+=class_entity.name+":"+class_entity.section_details+" "
     except Exception :
         logging.exception("")
-        logging.info("CV Logs :Failed in Assigning classes :"+class_names+"to teacher "+teacher_entity.basic_info.name)
+        logging.info("CV Logs :Failed in Assigning classes :"+class_names+"to teacher "+teacher_entity.basic_info.firstname)
         return Constant.ERROR_BAD_VALUE
 
     teacher_entity.classes_under_teacher.extend(classes_under_teacher)              
     teacher_entity.put()     
-    logging.info("CV Logs :Success Assigned classes :"+class_names+"to teacher "+teacher_entity.basic_info.name)
+    logging.info("CV Logs :Success Assigned classes :"+class_names+"to teacher "+teacher_entity.basic_info.firstname)
     return Constant.UPDATION_SUCCESSFULL  
 
 
@@ -1406,10 +1423,10 @@ def get_subjects_by_student(student_key):
             return Constant.ERROR_NO_DATA_FOUND
         subjects=ndb.get_multi(subject_keys)
     except Exception:
-            logging.info("CV Logs : failed to get subjects for student :"+student.basic_info.name)
+            logging.info("CV Logs : failed to get subjects for student :"+student.basic_info.firstname)
             return Constant.ERROR_OPERATION_FAIL
             
-    logging.info("CV Logs : success to get subjects for student :"+student.basic_info.name)
+    logging.info("CV Logs : success to get subjects for student :"+student.basic_info.firstname)
     return subjects
 
 """
@@ -1448,12 +1465,36 @@ def get_assessments_by_student(student_key):
             return Constant.ERROR_NO_DATA_FOUND
         assessments=ndb.get_multi(student_assessments_key.attended_assessment_key)
     except Exception:
-            logging.info("CV Logs : failed to get assessments for student :"+student.basic_info.name)
+            logging.info("CV Logs : failed to get assessments for student :"+student.basic_info.firstname)
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
             
-    logging.info("CV Logs : success to get assessments for student :"+student.basic_info.name)
+    logging.info("CV Logs : success to get assessments for student :"+student.basic_info.firstname)
     return assessments
+
+
+"""
+lists assessments associated to a topic for a student 
+"""
+def get_assessments_by_topic(student_key,topic_key):
+    logging.info("CV Logs : get_assessments_by_topic ")
+    assessments=[]
+    try:
+        topic=topic_key.get()
+        assesments_of_student= get_assessments_by_student(student_key)
+        for assessment in assesments_of_student:
+            if topic_key in assessment.topics_in_assessment_key:
+                assessments.append(assessment)
+        
+    except Exception:
+            logging.info("CV Logs : failed to get assessments of topic  for student :")
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL
+            
+    logging.info("CV Logs : success to get assessments for student :")
+    return assessments
+
+
 
 """
 get assessment score associated to a student 
@@ -1476,11 +1517,11 @@ def get_student_score_in_assessment(student_key,assessment_key):
         return assessment.score
        
     except Exception:
-            logging.info("CV Logs : failed to get score of assessment"+ assessment.name+" for student :"+student.basic_info.name)
+            logging.info("CV Logs : failed to get score of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
             
-    logging.info("CV Logs : success to get score of assessment"+ assessment.name+" for student :"+student.basic_info.name)
+    logging.info("CV Logs : success to get score of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
   
 """
 get assessment state associated to a student 
@@ -1504,11 +1545,11 @@ def get_student_current_state_in_assessment(student_key,assessment_key):
         return assessment.current_state.get()
        
     except Exception:
-            logging.info("CV Logs : failed to get state of assessment"+ assessment.name+" for student :"+student.basic_info.name)
+            logging.info("CV Logs : failed to get state of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
             
-    logging.info("CV Logs : success to get state of assessment"+ assessment.name+" for student :"+student.basic_info.name)
+    logging.info("CV Logs : success to get state of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
   
 
 
@@ -1531,11 +1572,11 @@ def get_student_next_state_in_assessment(student_key,assessment_key):
             return Constant.ERROR_NO_DATA_FOUND  
         if assessment.next_state==None:
             return Constant.ERROR_NO_DATA_FOUND
-        logging.info("CV Logs : success to get next state of assessment"+ assessment.name+" for student :"+student.basic_info.name)
+        logging.info("CV Logs : success to get next state of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
         return assessment.next_state.get()
        
     except Exception:
-            logging.info("CV Logs : failed to get next state of assessment"+ assessment.name+" for student :"+student.basic_info.name)
+            logging.info("CV Logs : failed to get next state of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
             
@@ -1561,17 +1602,77 @@ def get_student_next_question_in_assessment(student_key,assessment_key):
             return Constant.ERROR_NO_DATA_FOUND  
         if assessment.question_ready_to_learn==None:
             return Constant.ERROR_NO_DATA_FOUND
-        logging.info("CV Logs : success to get next question ready to learn of assessment"+ assessment.name+" for student :"+student.basic_info.name)
+        logging.info("CV Logs : success to get next question ready to learn of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
         return assessment.question_ready_to_learn.get()
        
     except Exception:
-            logging.info("CV Logs : failed to get next question ready to learn of assessment"+ assessment.name+" for student :"+student.basic_info.name)
+            logging.info("CV Logs : failed to get next question ready to learn of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
             
   
-  
 
+
+"""
+get assessment next state associated to a student 
+""" 
+def get_topper_mastery_in_subject(subject_key,student_key):
+    logging.info("CV Logs : get_topper_mastery_in_subject ")
+    
+    try:
+        g_mastry=0.0
+        student=student_key.get()
+        class_key=student.class_details.get()
+        students=get_students_by_class(class_key)
+        for students in students:
+            mastry=get_mastery_by_subject(subject_key, students.key)
+            if g_mastry<mastry:
+                g_mastry=mastry
+                topper=students
+        
+            logging.info("CV Logs : success to get topper ")
+        return {topper:g_mastry}
+       
+    except Exception:
+            logging.info("CV Logs : failed to get ")
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL
+            
+
+
+"""
+get get_pending_assessment_subject 
+""" 
+def get_pending_assessment_subject(subject_key,student_key):
+    logging.info("CV Logs : get_topper_mastery_in_subject ")
+    assessments=[]
+    assessment_topic=[]
+    pending_assessments=[]
+    try:
+        topics_sub=get_topics_by_subject(subject_key)
+        if topics_sub==None:
+            return Constant.ERROR_NO_DATA_FOUND
+        total=len(topics_sub)
+        for topic in topics_sub:
+            assessment=get_assessments_by_topic(student_key,topic.key)
+        
+            
+            if len(assessment) > 0:
+                    assessments.extend(assessment)
+        
+            for assesment_final in assessments:
+                if assesment_final.score== -1.0:
+                    pending_assessments.extend(assesment_final)
+                
+   
+   
+   
+    
+            return pending_assessments
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
   
 """
 get assessment state associated to a student 
@@ -1597,11 +1698,11 @@ def get_student_state_in_assessment(student_key,assessment_key):
         return state_key.get()
        
     except Exception:
-            logging.info("CV Logs : failed to get state of assessment"+ assessment.name+" for student :"+student.basic_info.name)
+            logging.info("CV Logs : failed to get state of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
             
-    logging.info("CV Logs : success to get state of assessment"+ assessment.name+" for student :"+student.basic_info.name)
+    logging.info("CV Logs : success to get state of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
   
 """
 """
@@ -1613,14 +1714,14 @@ def get_classes_of_teacher(teacher_key):
         teacher=teacher_key.get()
         classes_of_teacher_keys=teacher.classes_under_teacher
         classes_of_teacher=ndb.get_multi(classes_of_teacher_keys)        
-        logging.info("CV Logs : success to get classes of teacher"+teacher.basic_info.name)
+        logging.info("CV Logs : success to get classes of teacher"+teacher.basic_info.firstname)
         return classes_of_teacher
     except Exception:
-            logging.info("CV Logs : failed to get classes of teacher"+teacher.basic_info.name)
+            logging.info("CV Logs : failed to get classes of teacher"+teacher.basic_info.firstname)
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
             
-    logging.info("CV Logs : success to get classes of teacher"+teacher.basic_info.name)
+    logging.info("CV Logs : success to get classes of teacher"+teacher.basic_info.firstname)
   
 
 """
@@ -1655,11 +1756,309 @@ def get_students_by_class(class_key):
         logging.info("CV Logs : failed to get students for class :"+class_entity.name+":"+class_entity.section_details)
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
+
+
+
+"""
+get mastery by subjects  
+"""
+def get_mastery_by_subject(subject_key,student_key):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    assessments=[]
+    completed=0
+    total=0
+    try:
+        subject=subject_key.get()
+        student=student_key.get()
+        topics_sub=get_topics_by_subject(subject_key)
+        if topics_sub==None:
+            return Constant.ERROR_NO_DATA_FOUND
+        total=len(topics_sub)
+        for topic in topics_sub:
+            assessment=get_assessments_by_topic(student_key,topic.key)
+            
+            
+            if len(assessment) > 0:
+                assessments.extend(assessment)
+        
+        for assesment_final in assessments:
+            if not assesment_final.score== -1.0:
+                completed+=1
+                
+        mastry=completed/float(total)
+        logging.info("CV Logs : success to get mastry for  student  :"+str(mastry))
+        return mastry*100
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
+
+"""
+get mastery for all subjects  
+"""
+def get_mastery_for_all_subjects(student_key):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    assessments=[]
+    mastry_info={}
+    completed=0
+    total=0
+    try:
+        subjects=get_subjects_by_student(student_key)
+        student=student_key.get()
+        for subject in subjects:
+            subject_entity=subject
+            topics_sub=get_topics_by_subject(subject.key)
+            if topics_sub==None:
+                return Constant.ERROR_NO_DATA_FOUND
+            total=len(topics_sub)
+            for topic in topics_sub:
+                assessment=get_assessments_by_topic(student_key,topic.key)
+            
+            
+                if len(assessment) > 0:
+                    assessments.extend(assessment)
+        
+            for assesment_final in assessments:
+                if not assesment_final.score== -1.0:
+                    completed+=1
+            logging.error("completed"+str(completed)+"^^^^"+str(total))    
+            mastry=(completed/float(total)*100)
+            logging.info("CV Logs : success to get mastry for  student  :"+str(mastry))
+            mastry_info.update({subject_entity.name:mastry})
+        return mastry_info
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
+
+"""
+get growth by subjects  
+"""
+def get_growth_for_subject(student_key,subject_key):
+    logging.info("CV Logs : Inside get_growth_for_subject ")
+    
+    assessments=[]
+    dict_growth={}
+    completed=0
+    total=0
+    count=0
+    try:
+        topics_sub=get_topics_by_subject(subject_key)
+        subject=subject_key.get()
+        student=student_key.get()
+        for topic in topics_sub:
+            assessments=get_assessments_by_topic(student_key, topic.key)
+            logging.error("&&&&&&&&&&&&&&&&&&&"+str(assessments))
+            if assessments==None:
+                return Constant.ERROR_NO_DATA_FOUND
+            for assessment_final in assessments:
+                if not assessment_final.score== -1.0:
+                    completed=assessment_final.score
+                    count+=1
+            
+            total=100
+            if total==0:
+                growth=0
+            else:    
+                logging.error("set ############")
+                growth=(completed/float(total))*100
+                
+                dict_growth.update({count:growth})    
+        logging.info("CV Logs : success to get mastry for  student  :")
+        return dict_growth
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
+
+"""
+get growth for all topic by subject
+returns a dictionry   
+"""
+def get_growth_for_all_topic_subject(student_key,subject_key):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    logging.info("CV Logs : Inside get_students_by_class ")
+    assessments=[]
+    dict_growth={}
+    completed=0
+    total=0
+    try:
+        topics_sub=get_topics_by_subject(subject_key)
+        subject=subject_key.get()
+        student=student_key.get()
+        for topic in topics_sub:
+            assessments=get_assessments_by_topic(student_key, topic.key)
+            logging.error("&&&&&&&&&&&&&&&&&&&"+str(assessments))
+            if assessments==None:
+                return Constant.ERROR_NO_DATA_FOUND
+            for assessment_final in assessments:
+                if not assessment_final.score== -1.0:
+                    completed+=1
+            
+            total=len(assessments)
+            if total==0:
+                growth=0
+            else:    
+                logging.error("set ############")
+                growth=(completed/float(total))*100
+                
+                dict_growth.update({topic.name:growth})    
+        logging.info("CV Logs : success to get mastry for  student  :")
+        return dict_growth
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
+
+
+"""
+returns mastery in that subject in percentage
+"""
+def get_mastery_by_topic(topic_key,student_key):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    assessments=[]
+    completed=0
+    total=0
+    try:
+        subject=topic_key.get().subject_key.get()
+        student=student_key.get()
+        assessments=get_assessments_by_topic(student_key, topic_key)
+        if assessments==None:
+            return Constant.ERROR_NO_DATA_FOUND
+        for assessment_final in assessments:
+            if not assessment_final.score== -1.0:
+                completed+=1
+            
+        total=len(assessments)
+        
+        growth=completed/float(total)
+        logging.info("CV Logs : success to get mastry for  student  :")
+        return growth*100
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
+
+"""
+returns mastery in that subject in percentage
+"""
+def get_ready_to_learn_topic(topic_key,student_key):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    assessments=[]
+    assessments_temp=[]
+    questions=[]
+    completed=0
+    total=0
+    question_key=None
+    try:
+        subject=topic_key.get().subject_key.get()
+        student=student_key.get()
+        assessments=get_assessments_by_topic(student_key, topic_key)
+        logging.error("##########################################################"+str(assessments))
+        questions=get_questions_of_topic(topic_key)
+        logging.error("##########################################################"+str(questions))
+        if assessments==None:
+            return Constant.ERROR_NO_DATA_FOUND
+        for assessment_final in assessments:
+            if not assessment_final.score==100:
+                assessments_temp.append(assessment_final)
+                logging.error("##########################################################"+str(assessments_temp))
+        if len(assessments_temp)==0:
+            return Constant.UPDATION_SUCCESSFULL       
+        for assessment_temp2 in assessments_temp:
+            if not assessment_temp2.date==None:
+                logging.error("##########################################################")
+                question_temp=assessment_temp2.question_ready_to_learn
+                logging.error("$$$$$$$$$$$$"+str(question_temp))
+                if question_temp.get() in questions:
+                   logging.error("##########################################################")
+                   question_key= question_temp
+                    
+            
+        
+        
+       
+        logging.info("CV Logs : success to get mastry for  student  :")
+        return question_key.get()
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+"""
+returns {date:[passed,failed]}
+
+"""
+def get_learning_progress_date_wise(topic_key,student_key):
+    logging.info("CV Logs : Inside get_learning_progress_date_wise ")
+    assessments=[]
+    assessments_temp=[]
+    learning_by_date={}
+    mastered=0
+    prev_pass=0
+    prev_failed=0
+    question_key=None
+    try:
+        subject=topic_key.get().subject_key.get()
+        student=student_key.get()
+        assessments=get_assessments_by_topic(student_key, topic_key)
+        logging.error("##########################################################"+str(assessments))
+        questions=get_questions_of_topic(topic_key)
+        logging.error("##########################################################"+str(questions))
+        if assessments==None:
+            return Constant.ERROR_NO_DATA_FOUND
+        for assessment_final in assessments:
+            if not assessment_final.date==None:
+                date_asessment=assessment_final.date
+                if date_asessment in learning_by_date:
+                     prev_pass,prev_failed=learning_by_date[date_asessment]
+                if assessment_final.score==100:
+                    prev_pass+=1
+                else :
+                    prev_failed+=1
+                learning_by_date[date_asessment]=[prev_pass,prev_failed]
+            else :
+                if assessment_final.score==100:
+                    prev_pass+=1
+                else :
+                    prev_failed+=1
+                learning_by_date.update({date_asessment:[prev_pass,prev_failed]}) 
+                          
+                    
+                
+                
+                
+        logging.info("CV Logs : success to get_learning_progress_date_wise  :")
+        return learning_by_date
+    except Exception:
+        logging.info("CV Logs : failed to get_learning_progress_date_wise :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+    
+
     
             
 """
+
 lists students  associated to a class 
-"""
+
 def add_topic_dummy(topic_name):
     logging.info("CV Logs : Inside get_students_by_class ")
     students=[]
@@ -1722,8 +2121,8 @@ def add_states_to_topic_dummy(topic_name,states_in_topic_keys):
          state_topic.states_in_topic_keys.extend(states_in_topic_keys)
          state_topic.put()     
     logging.info("CV Logs : success to assign states to topic :"+topic.name)     
-    return Constant.UPDATION_SUCCESSFULL
-
+    return Constant.UPDATION_SUCCESSFULL'''
+"""
 
 
 
