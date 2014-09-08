@@ -21,7 +21,7 @@ def userdetails(request):
         session['student']= student
         user_name =  student.basic_info.firstname + ' ' + student.basic_info.lastname
         last_login = user_information[2]
-        return render_to_response('Dashboard/user_information.xml',{'user_name':user_name,'last_login':last_login},context_instance = RequestContext(request),content_type="text/xml")
+        return render_to_response('Dashboard/user_information.xml',{'user_name':user_name,'last_login':last_login},context_instance = RequestContext(request),content_type="text/xml;")
 
 def getmasterybysubject(request):
     user_information= Query.login("Ankit_Bhatia","ankit")
