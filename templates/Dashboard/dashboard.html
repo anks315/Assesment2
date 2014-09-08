@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Critical Velos</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
-   <!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script>   -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 
 <body>
@@ -103,6 +103,39 @@
 
          <!-- Script for search Box -->
 
+
+        <!--
+        Script for Ajax Div Login Details
+        -->
+
+        <script>
+            function loadloginDetails(){
+                var xmlhttp;
+                if (window.XMLHttpRequest)
+                  {// code for IE7+, Firefox, Chrome, Opera, Safari
+                  xmlhttp=new XMLHttpRequest();
+                  }
+                else
+                  {// code for IE6, IE5
+                  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                  }
+                xmlhttp.onreadystatechange=function()
+                  {
+                  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                    {
+                    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                    }
+                  }
+                xmlhttp.open("GET","ajax_info.txt",true);
+                xmlhttp.send();
+            }
+
+        </script>
+
+
+        <!--
+        Script for Ajax Div Login Details
+        -->
 
 		</div>
 
