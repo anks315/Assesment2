@@ -2118,6 +2118,34 @@ def get_learning_progress_date_wise(topic_key,student_key):
 
     
 
+"""
+TODO : Change as per dependent topics
+
+"""
+def get_ready_to_learn_of_all_topic(subject_key,student_key):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    ready_to_learn_topics={}
+    questions=[]
+    completed=0
+    total=0
+    question_key=None
+    try:
+        subject=subject_key.get()
+        student=student_key.get()
+        topics=get_topics_by_subject(subject_key)
+        for topic in topics:
+            question=get_ready_to_learn_topic(topic.key, student.key)
+            if not question==-4:
+                ready_to_learn_topics[topic.name]=question
+
+        return ready_to_learn_topics
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
     
             
 """
