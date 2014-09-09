@@ -2175,6 +2175,98 @@ def get_ready_to_learn_of_all_topic_dummy(student_key):
 
 
 
+"""
+get get_pending_assessment_subject  // List of names
+"""
+def get_pending_assessment_subject_dummy(student_key):
+    logging.info("CV Logs : get_topper_mastery_in_subject ")
+    assessments=[]
+    assessment_topic=[]
+    pending_assessments=[]
+    try:
+        subjects=get_subjects_by_student(student_key)
+        for subject_dummy in subjects:
+            if subject_dummy.name=="Mathematics":
+                subject=subject_dummy
+                break
+        topics_sub=get_topics_by_subject(subject.key)
+        if topics_sub==None:
+            return Constant.ERROR_NO_DATA_FOUND
+        total=len(topics_sub)
+        for topic in topics_sub:
+            assessment=get_assessments_by_topic(student_key,topic.key)
+
+            if len(assessment) > 0:
+                    assessments.extend(assessment)
+
+            for assesment_final in assessments:
+                if assesment_final.score== -1.0:
+                    pending_assessments.extend(assesment_final)
+
+            return pending_assessments
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
+"""
+returns mastery in that subject in percentage
+"""
+def get_learning_progress_date_wise_dummy(student_key):
+    logging.info("CV Logs : Inside get_learning_progress_date_wise ")
+    assessments=[]
+    assessments_temp=[]
+    learning_by_date={}
+    mastered=0
+    prev_pass=0
+    prev_failed=0
+    question_key=None
+    try:
+        subjects=get_subjects_by_student(student_key)
+        for subject_dummy in subjects:
+            if subject_dummy.name=="Mathematics":
+                subject=subject_dummy
+                break
+
+        topics=get_topics_by_subject(subject.key)
+        for topic in topics:
+            assessments=get_assessments_by_topic(student_key, topic.key)
+            logging.error("##########################################################"+str(assessments))
+            questions=get_questions_of_topic(topic.key)
+            logging.error("##########################################################"+str(questions))
+            if assessments==None:
+                return Constant.ERROR_NO_DATA_FOUND
+            for assessment_final in assessments:
+                if not assessment_final.date==None:
+                    date_asessment=assessment_final.date
+                    if date_asessment in learning_by_date:
+                        prev_pass,prev_failed=learning_by_date[date_asessment]
+                        if assessment_final.score==100:
+                            prev_pass+=1
+                        else :
+                            prev_failed+=1
+                        learning_by_date[str(date_asessment)]=[prev_pass,prev_pass+prev_failed]
+                    else :
+                        if assessment_final.score==100:
+                            prev_pass+=1
+                        else :
+                            prev_failed+=1
+                        learning_by_date.update({str(date_asessment):[prev_pass,prev_pass+prev_failed]})
+
+        logging.info("CV Logs : success to get_learning_progress_date_wise  :")
+        return learning_by_date
+
+    except Exception:
+        logging.info("CV Logs : failed to get_learning_progress_date_wise :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
+
+
 
 
 
