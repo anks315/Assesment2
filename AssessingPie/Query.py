@@ -2144,6 +2144,36 @@ def get_ready_to_learn_of_all_topic(subject_key,student_key):
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
 
+def get_ready_to_learn_of_all_topic_dummy(student_key):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    ready_to_learn_topics={}
+    questions=[]
+    completed=0
+    total=0
+    question_key=None
+    try:
+        subjects=get_subjects_by_student(student_key)
+        for subject_dummy in subjects:
+            if subject_dummy.name=="Mathematics":
+                subject=subject_dummy
+                break
+
+        student=student_key.get()
+        topics=get_topics_by_subject(subject.key)
+        for topic in topics:
+            question=get_ready_to_learn_topic(topic.key, student.key)
+            if not question==-4:
+                ready_to_learn_topics[topic.name]=question
+
+        return ready_to_learn_topics
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
+
 
 
     
