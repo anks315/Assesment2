@@ -1722,7 +1722,13 @@ def get_classes_of_teacher(teacher_key):
             return Constant.ERROR_OPERATION_FAIL
             
     logging.info("CV Logs : success to get classes of teacher"+teacher.basic_info.firstname)
-  
+
+
+
+
+
+
+
 
 """
 get subjects  associated to a class 
@@ -1876,6 +1882,65 @@ def get_growth_for_subject(student_key,subject_key):
         logging.info("CV Logs : failed to get mastry for  student :")
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
+
+
+"""
+get growth for all subjects
+"""
+def get_growth_for_all_subject(student_key):
+    logging.info("CV Logs : Inside get_growth_for_subject ")
+
+    assessments=[]
+    dict_growth={}
+    dict_subject_growth={}
+    subjects=[]
+    completed=0
+
+    total=0
+
+    try:
+
+        #subject=subject_key.get()
+        student=student_key.get()
+        subjects=get_subjects_by_student(student_key)
+
+        logging.error("(((((((((((((("+str(len(subjects)))
+        for subject in subjects:
+            count=0
+            growth=0
+            topics_sub=get_topics_by_subject(subject.key)
+            if len(topics_sub)==0:
+               dict_growth.update({subject.name:0})
+            logging.error("(((((((((((((("+str(len(topics_sub)))
+            for topic in topics_sub:
+                count+=1
+                assessments=get_assessments_by_topic(student_key, topic.key)
+                logging.error("&&&&&&&&&&&&&&&&&&&"+str(len(assessments)))
+                if assessments==None:
+                    return Constant.ERROR_NO_DATA_FOUND
+                for assessment_final in assessments:
+                    completed=0
+                    if not assessment_final.score== -1.0:
+                        completed=completed+assessment_final.score
+
+
+                    total=100
+                    if total==0:
+                        growth=0
+                    else:
+                        logging.error("set ############")
+                        growth=growth+(completed/float(total))*100
+                        logging.error("@@@@@@@@@@@@@@"+str(growth))
+                dict_growth.update({count:growth})
+            logging.error("#######"+str(dict_growth))
+            logging.info("CV Logs : success to get mastry for  student  :")
+            dict_subject_growth.update({subject.name:dict_growth})
+        return dict_subject_growth
+    except Exception:
+        logging.info("CV Logs : failed to get mastry for  student :")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
 
 
 
