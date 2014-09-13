@@ -124,6 +124,7 @@ class Topic(ndb.Model):
     student_level_count = ndb.IntegerProperty(repeated=True)  # NO_STUDENT_LEVEL_UPTO_25=0,NO_STUDENT_LEVEL_UPTO_50=1,NO_STUDENT_LEVEL_UPTO_75=2,NO_STUDENT_LEVEL_UPTO_100=3
     states_in_topic_key = ndb.KeyProperty(kind='Topic_States')
     questions_in_topic_key = ndb.KeyProperty(kind='Topic_Questions')
+    assessments_in_topic=ndb.KeyProperty(kind='Assessment')
     
     
     
@@ -212,38 +213,36 @@ key Property: topics_in_assessment_key: contains keys of  a topics in an assessm
 class Assessment(ndb.Model):
     name=ndb.StringProperty(required=True)
     date=ndb.DateProperty(required=True)
-    current_state=ndb.KeyProperty(kind=State)
-    next_state=ndb.KeyProperty(kind=State)
-    score=ndb.FloatProperty(default=-1)
-    question_ready_to_learn=ndb.KeyProperty(kind=Question)
+    due_date=ndb.DateProperty(required=True)
+    published=ndb.BooleanProperty(required=True,default=True)
+    teacher_key=ndb.KeyProperty(kind='Teacher',required=True)
     topics_in_assessment_key = ndb.KeyProperty(kind='Topic', repeated=True)
     states_in_assessment_key = ndb.KeyProperty(kind='State', repeated=True)
+    class_key=ndb.KeyProperty(kind='Class',required=True)
     
     
-"""
-This class models  a one to many  Assessment to Topics relationship
-key Property: assessment_key: contains key of  a Assessment
-              topics_in_assessment_keys: contains keys of Topics in  an assessment 
-                                              
-"""
+    
+class Assessment_Record(ndb.Model):  
+    start_date=ndb.DateProperty()
+    completion_date=ndb.DateProperty()
+    assessment_key=ndb.KeyProperty(kind=Assessment,required=True)
+    current_state=ndb.KeyProperty(kind=State)
+    next_state=ndb.KeyProperty(kind=State)
+    score=ndb.IntegerProperty(default=-1)
+    question_ready_to_learn=ndb.KeyProperty(kind=Question)
    
-    
-"""   
-    
-class Assessment_Topics(ndb.Model):   
-    assessment_key = ndb.KeyProperty(kind=Assessment, required=True)
-    topics_in_assessment_keys = ndb.KeyProperty(kind=Topic, repeated=True)
-"""  
+ 
 """
 This class models  a one to many  Assessment to States relationship
 key Property: assessment_key: contains key of  a Assessment
               states_in_assessment_keys: contains keys of states in  an assessment
                                               
-"""    
+    
 class Assessment_States(ndb.Model):   
     assessment_key = ndb.KeyProperty(kind=Assessment, required=True)
     states_in_assessment_keys = ndb.KeyProperty(kind=State, repeated=True)   
     
+"""
 """
 This class models  an Address entity
                                               
@@ -254,13 +253,7 @@ class Address(ndb.Model):
   street = ndb.StringProperty()
   city = ndb.StringProperty()
   state=ndb.StringProperty()
-
-
-
-
-
-    
-    
+     
 """
 This class models  a school entity
 key Property: 
@@ -273,17 +266,11 @@ class School(ndb.Model):
    
   code=ndb.StringProperty(required=True) 
   address = ndb.StructuredProperty(Address, required=True)
-  assessments_in_school_key = ndb.KeyProperty(kind='School_Assessments')
+  #assessments_in_school_key = ndb.KeyProperty(kind='School_Assessments')
   classes_in_school_keys= ndb.KeyProperty(kind='Class', repeated=True)
   teachers_in_school_keys= ndb.KeyProperty(kind='Teacher', repeated=True)
   
- 
- 
- 
-"""class Class_Assessments(ndb.Model):
-    class_key= ndb.KeyProperty(kind='Class', repeated=True)
-    assessments_in_class_keys=ndb.KeyProperty(kind='Assessments', repeated=True)
-""" 
+  
 """
 This class models  a school entity
 key Property: 
@@ -298,11 +285,7 @@ class Class(ndb.Model):
   section_details= ndb.StringProperty()
   year_session=ndb.StringProperty()
   students_in_class_key=ndb.KeyProperty(kind='Student',repeated=True)
-  #assessments_in_class_key=ndb.KeyProperty(kind='Class_Assessments')
-  
-  
-  
-  
+      
 """
 This class models  a basic user information subentity
                                                                                             
@@ -319,17 +302,6 @@ class UserInfo(ndb.Model):
   email = ndb.StringProperty()
   contact_no = ndb.IntegerProperty()
   
-  
-"""
-This class models  a one to many  School to Assessment relationship
-key Property: school_key: contains key of  a School
-              assessments_in_school_keys: contains keys of assessments in  a school
-"""
-    
-class School_Assessments(ndb.Model):   
-    school_key = ndb.KeyProperty(kind=School, required=True)
-    assessments_in_school_keys = ndb.KeyProperty(kind=Assessment, repeated=True)
-
 
 
 """
@@ -378,7 +350,8 @@ class Teacher(ndb.Model):
     basic_info = ndb.StructuredProperty(UserInfo,required=True)
     school = ndb.KeyProperty(kind=School, required=True) 
     classes_under_teacher= ndb.KeyProperty(kind=Class,repeated=True)
-    class_history=ndb.KeyProperty(kind=Class,repeated=True)# class name from Class in Constant.py
+    class_history=ndb.KeyProperty(kind=Class,repeated=True)
+    subjects=ndb.KeyProperty(kind=Subject,repeated=True)# class name from Class in Constant.py
     
     
         
@@ -393,8 +366,6 @@ key Property: school_key: contains key of  a School
 class Student_Assessments(ndb.Model):   
     student_key = ndb.KeyProperty(kind=Student,required=True)
     attended_assessment_key = ndb.KeyProperty(kind=Assessment, repeated=True)
-    '''states_of_or_in_assessments = ndb.KeyProperty(kind=State, repeated=True)
-    scores_in_assessments = ndb.IntegerProperty(repeated=True)
-    questions_ready_to_learn = ndb.KeyProperty(kind=Question, repeated=True)'''
-    
+    assessment_record= ndb.KeyProperty(kind=Assessment_Record,repeated=True)
+   
     

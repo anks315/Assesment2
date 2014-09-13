@@ -5,6 +5,9 @@ class Constant:
     TEACHER=300
     STATE=3
     QUESTION=4
+    USER_TYPE="type"
+    USER_ENTITY="entity"
+    LAST_LOGIN="lastlogin"
     #TOPIC=5
     ASSESSMENT=6
     NAME_ALIAS='N'
@@ -29,7 +32,7 @@ class Constant:
     ERROR_NO_DATA_FOUND=-4
     ERROR_INVALID_USER=-5
     UPDATION_SUCCESSFULL=0
-    
+    MAX_MARKS=100
     
     
 
