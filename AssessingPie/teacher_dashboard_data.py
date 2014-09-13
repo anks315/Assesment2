@@ -3,11 +3,15 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext,loader,Context
 import Query
 import Constant
+import dummydata
 from gaesessions import get_current_session
 
 
 def get_not_recently_loggedin(request):
     session = get_current_session()
+
+    dummydata.flush()
+    dummydata.fill()
     teacher_information = Query.login('Vijay_Mehta','jkjk')
     teacher = teacher_information[1]
     session['teacher']= teacher

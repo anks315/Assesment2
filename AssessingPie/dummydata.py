@@ -1,11 +1,11 @@
 
-from Constant import Constant
 from google.appengine.ext import ndb
 import Query
 import logging
 import datetime
 
-from Constant import Constant,UserType
+#from Constant import Constant,UserType,Subject
+import Constant
 from Query import addSubject, addTopic   
 from models import QuestionInstance,State_Questions,Topic_States,Question,State,Address,Teacher,Class,\
     Assessment_Record
@@ -14,18 +14,18 @@ from  models import Topic_Questions,State_Questions,Topic_States,Subject_Topics
 from models import Topic,User  
 def fill():
       try: 
-            address1=Query.addAddress(type=Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
+            address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
             school=Query.addSchool("CVSchool", address1)
             
-            userinfo1=Query.addUserInfo("Trish","Kumar",datetime.date(int(2012),int(6),int(6)),Constant.SEX_MALE, address1, "yyy", 67757)
+            userinfo1=Query.addUserInfo("Trish","Kumar",datetime.date(int(2012),int(6),int(6)),Constant.Constant.SEX_MALE, address1, "yyy", 67757)
             Query.signup_student( userinfo1, school.key,"123")
            
             
-            userinfo2=Query.addUserInfo("Ankit","Bhatia",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
+            userinfo2=Query.addUserInfo("Ankit","Bhatia",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
             
-            userinfo3=Query.addUserInfo("Suraj","Singh",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
-            userinfo4=Query.addUserInfo("Sarthak","Tiwari",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
-            userinfo5=Query.addUserInfo("Vijay","Mehta",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
+            userinfo3=Query.addUserInfo("Suraj","Singh",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            userinfo4=Query.addUserInfo("Sarthak","Tiwari",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            userinfo5=Query.addUserInfo("Vijay","Mehta",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
             
             #teacher1=Query.addTeacher("teacher1", userinfo1, school.key)
             
@@ -44,8 +44,8 @@ def fill():
             
             Query.login("Ankit_Bhatia", "pwd")
             Query.login("Suraj_Singh", "pwd")
-            subject1=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_MATHS,school.key)
-            subject2=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_SCIENCE,school.key)
+            subject1=Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.SUBJECT_MATHS,school.key)
+            subject2=Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.SUBJECT_SCIENCE,school.key)
             
             
             topic=Query.addTopic(school_key=school.key,name="Number  System", prerequisite_topics=[],subject_key=subject1.key)
@@ -55,19 +55,19 @@ def fill():
             topic4=Query.addTopic(school_key=school.key,name="Triangle", prerequisite_topics=[topic.key,topic1.key,topic2.key,topic3.key],subject_key=subject2.key)
             #topic5=Query.addTopic(school_key=school.key,name="Ellipse ", prerequisite_topics=[topic.key],subject_key=subject1.key)
             
-            questioninstance=Query.addQuestionInstance(problem_statement="sum of 2+3 ", type=Constant.QUESTION_TYPE_SINGLE, choices=["4,6,7,8"], answers=["5"],school_key=school.key)
+            questioninstance=Query.addQuestionInstance(problem_statement="sum of 2+3 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4,6,7,8"], answers=["5"],school_key=school.key)
             
-            questioninstance2=Query.addQuestionInstance(problem_statement="sum of 222+30 ", type=Constant.QUESTION_TYPE_SINGLE, choices=["252,600,227,8"], answers=["252"],school_key=school.key)
-            questioninstance3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9 ", type=Constant.QUESTION_TYPE_SINGLE, choices=["252,600,227,8"], answers=["6"],school_key=school.key)
+            questioninstance2=Query.addQuestionInstance(problem_statement="sum of 222+30 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252,600,227,8"], answers=["252"],school_key=school.key)
+            questioninstance3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252,600,227,8"], answers=["6"],school_key=school.key)
             
             question1=Query.addQuestion(questioninstance,school.key)
            
             question2=Query.addQuestion(questioninstance3,school.key)
             question3=Query.addQuestion(questioninstance2,school.key)
-            state1=Query.addState(type=Constant.STATE_IN_TOPIC,school_key=school.key)
+            state1=Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
             
-            state2=Query.addState(type=Constant.STATE_IN_TOPIC,school_key=school.key)
-            state3=Query.addState(type=Constant.STATE_IN_TOPIC,school_key=school.key)
+            state2=Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
+            state3=Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
             #class1=None
             Query.assign_subjects_to_class(class1.key, [subject1.key,subject2.key])
             Query.assign_students_to_class(class1.key, [student1.key,student2.key,student3.key,student4.key])
@@ -123,7 +123,7 @@ def fill():
             Query.get_learning_progress_date_wise_dummy(student1.key)
             Query.get_growth_for_subject(student1.key,subject2.key)
             Query.get_growth_for_all_subject(student1.key)
-            Query.login('Vijay_Mehta','jkjk')
+            a=Query.login('Vijay_Mehta','jkjk')
             Query.login("Ankit_Bhatia", "pwd")
             Query.get_pending_assessment_subject_dummy(student1.key)
             Query.get_subjects_of_class(class1.key)
@@ -134,15 +134,15 @@ def fill():
             Query.get_ready_to_learn_of_class(teacher1.key)
             Query.get_mastery_by_student_of_class(teacher1.key)
             Query.get_students_not_logged_in_by_class(teacher1.key)
-
+            return a
                         
             
             
       except Exception :
             logging.exception("")
-            return Constant.ERROR_OPERATION_FAIL
+            return Constant.Constant.ERROR_OPERATION_FAIL
         
-      return Constant.UPDATION_SUCCESSFULL  
+      return Constant.Constant.UPDATION_SUCCESSFULL  
 def flush():
     ndb.delete_multi(School.query().fetch(keys_only=True)) 
     ndb.delete_multi(QuestionInstance.query().fetch(keys_only=True))
@@ -168,4 +168,3 @@ def flush():
     ndb.delete_multi(User.query().fetch(keys_only=True))
        
     
-      
