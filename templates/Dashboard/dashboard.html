@@ -15,14 +15,26 @@
 
 <script>
 
-    $(document).ready(function(){
-        alert('asdasd');
+
+        function dashboard(){
+
         $("#dashboard_row1").show();
         $("#dashboard_row2").show();
         $("#subject_dashboard_row1").hide();
         $("#subject_dashboard_row2").hide();
+    }
+
+
+    $(document).ready(function(){
+
+      //  alert("ready");
+
+      dashboard();
+
 
     });
+
+
 
 
 </script>
@@ -59,7 +71,7 @@
 		 		<span >
 		 		  	<div class="home" style="margin-left:10%;margin-top:36px;box-shadow: 8px 8px 5px #888888;border-radius: 10px;"  id="homeimage" >
 		 		  	
-		 		  	<img alt="HOME" src="/images/home3.png">
+		 		  	<img alt="HOME" src="/images/home3.png" onclick="dashboard()">
 		 		  	</div>
 		 		  	<div class="searchclass" id="select_subject"  style="width:35%;padding: 38px 0 0 30px;">
 		 		  	  <table  style="background-color:rgb(117, 175, 106);  width:100%; box-shadow: 8px 8px 5px #888888; border: 2px solid #blue; border-radius: 10px;">
@@ -73,7 +85,7 @@
 		 		  	    </tr>
 		 		  	    <tr>
 		 		  	    	<td style="width: 100%;">
-		 		  	         <input style="width: 100%;" type="text|" name="classname" onclick="showsubjects()" onblur="hidesubjects()">
+		 		  	         <input style="width: 100%;" type="text|" name="classname" onclick="showsubjects()" >
 		 		  	         </td>
 		 		  	    </tr>
 
@@ -123,12 +135,17 @@
 
 
 
-        <!--
-        Script for Ajax Div Login Details , Mastery , Learning Curve etc
-        -->
 
 <script>
-    function loadloginDetails() {
+
+
+    // alert("1");
+    var list_subjects=[];
+    var ready_tolearn="";
+
+
+        function loadloginDetails(){
+    //alert('load');
         var xmlhttp;
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -137,7 +154,9 @@
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
+
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+              //  alert('asd');
                 xmlDoc = xmlhttp.responseXML;
                 x = xmlhttp.responseXML.documentElement.getElementsByTagName("user_name");
                 y = xmlhttp.responseXML.documentElement.getElementsByTagName("last_login");
@@ -152,9 +171,9 @@
         xmlhttp.overrideMimeType("text/xml");
         xmlhttp.send();
     }
-</script>
-    <script>
-    function loadMasteryDetails() {
+
+       function loadMasteryDetails() {
+     //   alert('loadmasterydeails');
         var xmlhttp;
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -184,6 +203,7 @@
                     list_of_subjects.push(subject_name);
 
                 }
+            //    alert(div_to_be_loaded);
                 document.getElementById("masteryDetails").innerHTML = div_to_be_loaded;
 
 
@@ -203,88 +223,103 @@
 
 
     }
-</script>
+
+          //var list_to_populate="";
+
+    function populate_list_of_subjects(list) {
+
+            var lists = "";
+            var a = "";
 
 
-<!-- Script to display list of subjects under a student-->
-    <script>
 
-        var kapil;
+            for (i = 0; i < list.length; i++) {
 
-        //var list_to_populate="";
-
-        function populate_list_of_subjects(list){
-
-           var lists="";
-            var a="";
-
-            kapil="bhandari ji";
-
-          for(i=0;i<list.length;i++){
-
-               a=a+list[i]+" , ";
+                a = a + list[i] + " , ";
 
 
-      //      lists= lists+ "<tr onclick=\"showreportbysubjects("+list[i]+");\" style=\"border: 2px none rgb(0, 0, 0); background-color: rgb(112, 179, 71); color: rgb(255, 255, 255);\"><td colspan=\"1\" width=\"100%\" ><h5><a>"+list[i]+"</a></h5></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+                //      lists= lists+ "<tr onclick=\"showreportbysubjects("+list[i]+");\" style=\"border: 2px none rgb(0, 0, 0); background-color: rgb(112, 179, 71); color: rgb(255, 255, 255);\"><td colspan=\"1\" width=\"100%\" ><h5><a>"+list[i]+"</a></h5></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
 
-              lists= lists+ "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+list[i]+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>"+list[i]+"</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+                lists = lists + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('" + list[i] + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + list[i] + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
 
 
-      //      alert(lists);
-                }
+                //      alert(lists);
+            }
 
-            document.getElementById("listsubjects_list").innerHTML=lists;
-            document.getElementById("subjects_enrolled").innerHTML=a;
+            document.getElementById("listsubjects_list").innerHTML = lists;
+            document.getElementById("subjects_enrolled").innerHTML = a;
 
 
 
         }
-
     function abc()
     {
-        alert("Kapil"+kapil);
+        alert("Kapil");
     }
 
 
-    function showreportbysubjects(abc){
 
-        alert("caled");
+    function showreportbysubjects(subject){
+
+       // alert("caled");
+
+        $("#dashboard_row1").hide();
+        $("#dashboard_row2").hide();
+        $("#subject_dashboard_row1").show();
+        $("#subject_dashboard_row2").show();
+        //Now cal AJAX to load divisions correspondingly
 
         document.getElementById('subjectList').style.display='none';
-        alert("show report for subject "+abc);
+        list_pending_assignments(subject);
+        learningprogress_bydate_sub(subject);
+        get_ready_tolearn(subject);
+        getdonutmastery_subject(subject);
     }
 
 
-    </script>
+        //return list of pending assignments
+    function list_pending_assignments(subject){
+        alert("pending");
+    }
 
-        <!--
-        Script for Ajax Div Login Details , Mastery , Learning Curve etc
-        -->
+    function learningprogress_bydate_sub(subject){
+    alert('learningprogress');
+    }
+
+    function get_ready_tolearn(subject){
+    alert('getting readytolearn');
+    }
+
+    function getdonutmastery_subject(subject){
+        alert('donutmastery');
+    }
+
+    function showsubjects() {
+
+        document.getElementById('subjectList').style.display = 'block';
 
 
-        <!-- Script for search Box -->
-        	<script>
+    }
 
-                function showsubjects() {
+    function hidesubjects() {
+        document.getElementById('subjectList').style.display = 'none';
+    }
 
-                    document.getElementById('subjectList').style.display='block';
+    function showreportlist() {
+        document.getElementById('select_report').style.opacity = 1;
+        document.getElementById('select_report').style.display = 'block';
+
+    }
+
+    function hidereportlist() {
+        document.getElementById('select_report').style.display = 'none';
+    }
 
 
-                };
-                function hidesubjects() {
-                document.getElementById('subjectList').style.display='none';
-                };
-                function showreportlist() {
-                document.getElementById('select_report').style.opacity=1;
-                document.getElementById('select_report').style.display='block';
 
-                };
-                function hidereportlist() {
-                document.getElementById('select_report').style.display='none';
-                };
-	        </script>
+</script>
 
-         <!-- Script for search Box -->
+
 
 
 
@@ -328,7 +363,7 @@
 
 <table width=100%>
 <tr>
-<h2 id="dashboardHeading" onclick="abc()" align="center" style="font-family: Arial,Sans-Serif; font-size: 20px; background-color: rgb(79, 136, 155); border-bottom: 3px ridge rgb(29, 140, 228); margin: 5px; padding-top: 15px; color: rgb(255, 255, 255); height: 40px;"><a href="#" style="color: rgb(255, 255, 255); width: 150px;margin: auto" >DashBoard</a></h2>
+<h2 id="dashboardHeading" onclick="dashboard()" align="center" style="font-family: Arial,Sans-Serif; font-size: 20px; background-color: rgb(79, 136, 155); border-bottom: 3px ridge rgb(29, 140, 228); margin: 5px; padding-top: 15px; color: rgb(255, 255, 255); height: 40px;"><a href="/dashboard/" style="color: rgb(255, 255, 255); width: 150px;margin: auto" >DashBoard</a></h2>
 </tr>
 			
 
@@ -449,7 +484,7 @@
 
                               <div style="position: relative;">
                                  <div id="masteryDetails" style="padding: 20px 20% 10px 15%; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
-                                    <script>loadMasteryDetails();</script>
+                                    <script>loadMasteryDetails()</script>
 
 
                                  </div>
@@ -625,9 +660,9 @@
 <!-- First Colum   -->
 
 <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
-   <script>
-       donutmasteryforsubject()
-   </script>
+<!--   <script>
+       getdonutmastery_subject(subject)
+   </script>   -->
     <div style="text-align: left; width: 100%; height: 300px;">
       <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
          <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
@@ -680,7 +715,7 @@
 
                               <div style="position: relative;">
                                  <div id="readytoLearn" style="padding: 20px 20% 10px 15%; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
-                                    <script>loadreadytolearnDetails('maths');</script>
+                               <!--     <script>get_ready_tolearn(subject)</script>     -->
 
 
                                      <table style="font-size: 1em; width: 100%;" cellpadding="0" cellspacing="0" >
@@ -779,6 +814,9 @@
                               <div style="position: relative;">
                                  <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
+                                    <div id="chart_div">
+
+                                    </div>
 
                                  </div>
                               </div>
@@ -839,7 +877,10 @@
 
 	</div>
 
+<script>
 
+
+</script>
 
 
 	      <script type="text/javascript">
