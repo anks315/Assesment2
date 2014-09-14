@@ -6,8 +6,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Critical Velos</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
-   <!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script>  -->
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 </head>
+
+
+<script>
+
+    $(document).ready(function(){
+        alert('asdasd');
+        $("#dashboard_row1").show();
+        $("#dashboard_row2").show();
+        $("#subject_dashboard_row1").hide();
+        $("#subject_dashboard_row2").hide();
+
+    });
+
+
+</script>
+
 
 <body>
 	<div class="template_background">
@@ -54,12 +73,32 @@
 		 		  	    </tr>
 		 		  	    <tr>
 		 		  	    	<td style="width: 100%;">
-		 		  	         <input style="width: 100%;" type="text" name="classname" onfocus="showsubjects()" onblur="hidesubjects()" on>
-
+		 		  	         <input style="width: 100%;" type="text|" name="classname" onclick="showsubjects()" onblur="hidesubjects()">
 		 		  	         </td>
 		 		  	    </tr>
+
+
+
+
 		 		  	  </table>
-		 		  	</div>
+
+
+                           <div id="subjectList" style="display: none; top: auto; left: auto; min-width: 417px; position: absolute; z-index: 5;">
+
+
+                               <table id="listsubjects_list" style="width: 98%; margin: 2px;" cellpadding="0" cellspacing="0">
+
+
+
+
+
+
+                                 </table>
+                              </div>
+
+
+            </div>
+
 		 		  	<div class="searchstudent" id="select_report"  style=" width:35%;padding: 38px 0 0 35px;">
 		 		  		  <table  style="background-color:rgb(117, 175, 106);  width:100%; box-shadow: 8px 8px 5px #888888; border: 2px solid #blue; border-radius: 10px;">
 		 		  	    <tr style="">
@@ -75,33 +114,13 @@
 		 		  	    </tr>
 		 		  	  </table>
 		 		  	</div>
-		 		</span>
+		 		            </span>
+
+
+
 
 			</div>
 
-
-        <!-- Script for search Box -->
-        	<script>
-
-                function showsubjects() {
-                document.getElementById('listsubject').style.opacity=1;
-                document.getElementById('listsubject').style.display='block';
-
-                };
-                function hidesubjects() {
-                document.getElementById('listsubject').style.display='none';
-                };
-                function showreportlist() {
-                document.getElementById('select_report').style.opacity=1;
-                document.getElementById('select_report').style.display='block';
-
-                };
-                function hidereportlist() {
-                document.getElementById('select_report').style.display='none';
-                };
-	        </script>
-
-         <!-- Script for search Box -->
 
 
         <!--
@@ -153,6 +172,7 @@
                 div_to_be_loaded = "";
                 no_of_subject = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
 
+                var list_of_subjects= [];
                 for (i = 0; i < no_of_subject; i++) {
 
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
@@ -161,9 +181,18 @@
                     var upperDiv="<div style=\"display: inline-block; width: 260px; height: 15px;\"><table style=\"font-size: 1em;\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td style=\"text-align: left; font: bold 10px Verdana; height: 15px; vertical-align: top; overflow: visible;\"><div style=\"width: 40px; height: 35px; border-radius: 4px; color: rgb(255, 255, 255); background-color: rgb(84, 180, 220); font: bold 10px/35px Verdana; text-align: center; margin: 0px 6px 0px 0px;\">"+score+"%</div></td><td style=\"text-align: left; font: bold 10px Verdana; height: 15px; vertical-align: top;\"><div style=\"width: 210px; height: 15px; border-radius: 4px; background-color: rgb(209, 221, 225);\"><div style=\"width:"+score+"%; height: 15px; border-radius: 4px; background-color: rgb(84, 180, 220);\"></div></div></td></tr></tbody></table></div>";
                     var lowerdiv = "<div style=\"color: rgb(24, 144, 186); font-size: 12px; padding: 0px 2px 10px 50px;\"><span style=\"display: inline-block; position: relative; vertical-align: middle; width: auto; height: auto; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px;\"><input tabindex=\"0\" style=\"position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;\" type=\"button\"><div style=\"float: left; clear: both; position: relative; width: auto; height: auto;\"><div style=\"float: left; clear: both; position: relative; width: auto; height: auto;\"><span style=\"text-decoration: none;\">" + subject_name + "</span></div></div></span></div>";
                     div_to_be_loaded += upperDiv + lowerdiv;
+                    list_of_subjects.push(subject_name);
 
                 }
                 document.getElementById("masteryDetails").innerHTML = div_to_be_loaded;
+
+
+                //Now Call the function which wuld populate subjects
+
+              //  alert(list_of_subjects);
+                populate_list_of_subjects(list_of_subjects);
+
+
             }
         }
 
@@ -177,9 +206,87 @@
 </script>
 
 
+<!-- Script to display list of subjects under a student-->
+    <script>
+
+        var kapil;
+
+        //var list_to_populate="";
+
+        function populate_list_of_subjects(list){
+
+           var lists="";
+            var a="";
+
+            kapil="bhandari ji";
+
+          for(i=0;i<list.length;i++){
+
+               a=a+list[i]+" , ";
+
+
+      //      lists= lists+ "<tr onclick=\"showreportbysubjects("+list[i]+");\" style=\"border: 2px none rgb(0, 0, 0); background-color: rgb(112, 179, 71); color: rgb(255, 255, 255);\"><td colspan=\"1\" width=\"100%\" ><h5><a>"+list[i]+"</a></h5></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+
+              lists= lists+ "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+list[i]+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>"+list[i]+"</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+
+
+      //      alert(lists);
+                }
+
+            document.getElementById("listsubjects_list").innerHTML=lists;
+            document.getElementById("subjects_enrolled").innerHTML=a;
+
+
+
+        }
+
+    function abc()
+    {
+        alert("Kapil"+kapil);
+    }
+
+
+    function showreportbysubjects(abc){
+
+        alert("caled");
+
+        document.getElementById('subjectList').style.display='none';
+        alert("show report for subject "+abc);
+    }
+
+
+    </script>
+
         <!--
         Script for Ajax Div Login Details , Mastery , Learning Curve etc
         -->
+
+
+        <!-- Script for search Box -->
+        	<script>
+
+                function showsubjects() {
+
+                    document.getElementById('subjectList').style.display='block';
+
+
+                };
+                function hidesubjects() {
+                document.getElementById('subjectList').style.display='none';
+                };
+                function showreportlist() {
+                document.getElementById('select_report').style.opacity=1;
+                document.getElementById('select_report').style.display='block';
+
+                };
+                function hidereportlist() {
+                document.getElementById('select_report').style.display='none';
+                };
+	        </script>
+
+         <!-- Script for search Box -->
+
+
 
 		</div>
 
@@ -221,13 +328,13 @@
 
 <table width=100%>
 <tr>
-<h2 id="dashboardHeading" style="font-family: Arial,Sans-Serif; font-size: 20px; background-color: rgb(79, 136, 155); border-bottom: 3px ridge rgb(29, 140, 228); margin: 5px; padding: 15px 20px 5px 40%; color: rgb(255, 255, 255);">DashBoard</h2>
+<h2 id="dashboardHeading" onclick="abc()" align="center" style="font-family: Arial,Sans-Serif; font-size: 20px; background-color: rgb(79, 136, 155); border-bottom: 3px ridge rgb(29, 140, 228); margin: 5px; padding-top: 15px; color: rgb(255, 255, 255); height: 40px;"><a href="#" style="color: rgb(255, 255, 255); width: 150px;margin: auto" >DashBoard</a></h2>
 </tr>
 			
 
     <!--  First Row.. -->
 
-<tr>
+<tr id="dashboard_row1">
 
 
 <!-- First Colum   -->
@@ -359,7 +466,7 @@
 </td>
 </tr>
 		
-<tr>
+<tr id="dashboard_row2">
     <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
     <div style="text-align: left; width: 100%; height: 300px;">
                <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
@@ -512,12 +619,187 @@
 			</tr>
 
 
-
-    <tr>
-
+<tr id="subject_dashboard_row1">
 
 
-    </tr>
+<!-- First Colum   -->
+
+<td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
+   <script>
+       donutmasteryforsubject()
+   </script>
+    <div style="text-align: left; width: 100%; height: 300px;">
+      <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+         <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+            <span style="position: relative; left: 0px; top: 0px; display: inline-block; vertical-align: middle; width: 100%; height: 100%; transform: translateZ(0px);">
+               <div style="width: 100%; height: 300px; border-radius: 8px; background-color: rgb(239, 245, 248);">
+                  <div style="font: bold 12px Verdana; color: rgb(255, 255, 255);">
+                     <span style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 31px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgb(163, 106, 63);">
+                        <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+                        <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                           <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                              <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Donut Mastery</div>
+                              <img src="/images/icons/user_info.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
+                           </div>
+                        </div>
+                     </span>
+                  </div>
+
+                    <div>
+
+                    </div>
+               </div>
+            </span>
+         </span>
+      </span>
+   </div>
+</td>
+
+
+<!-- Second Column   -->
+
+   <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 2% 5px 1%; width: 50%; height: 300px;">
+
+        <div style="text-align: left; width: 100%; height: 300px;">
+               <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+                  <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+                     <span style="position: relative; left: 0px; top: 0px; display: inline-block; vertical-align: middle; width: 100%; height: 100%; transform: translateZ(0px);">
+                        <div style="width: 100%; height: 300px; border-radius: 8px; background-color: rgb(239, 245, 248); position: relative;">
+                           <div style="font: bold 12px Verdana; color: rgb(255, 255, 255);">
+                              <span style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 31px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgb(244, 159, 151);">
+                                 <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+                                 <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                    <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                       <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Ready To Learn ?</div>
+                                       <img src="/images/icons/bar-chart.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
+                                    </div>
+                                 </div>
+                              </span>
+                           </div>
+                           <div style="position: relative; z-index: 0;">
+
+                              <div style="position: relative;">
+                                 <div id="readytoLearn" style="padding: 20px 20% 10px 15%; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+                                    <script>loadreadytolearnDetails('maths');</script>
+
+
+                                     <table style="font-size: 1em; width: 100%;" cellpadding="0" cellspacing="0" >
+                        <tbody>
+                           <tr>
+                              <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;">
+                                 <div style="font: 12px Verdana; color: rgb(174, 189, 180); padding: 4px 0px 0px 10px;">U r Ready To Learn </div>
+                                 <div id ="subjects_enrolled" style="font: 12px Verdana; color: rgb(96, 123, 138); padding: 0px 0px 4px 10px;"></div>
+                              </td>
+                              <td style="vertical-align: baseline; text-align: left; font-size: 20px; width: 50%;"></td>
+                           </tr>
+                        </tbody>
+                                         </table>
+
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </span>
+                  </span>
+               </span>
+            </div>
+
+
+
+</td>
+</tr>
+
+<tr id="subject_dashboard_row2">
+    <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
+    <div style="text-align: left; width: 100%; height: 300px;">
+               <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+                  <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+                     <span style="position: relative; left: 0px; top: 0px; display: inline-block; vertical-align: middle; width: 100%; height: 100%; transform: translateZ(0px);">
+                        <div style="width: 100%; height: 300px; border-radius: 8px; background-color: rgb(239, 245, 248); position: relative;">
+                           <div style="font: bold 12px Verdana; color: rgb(255, 255, 255);">
+                              <span style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 31px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgb(226, 219, 2);">
+                                 <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+                                 <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                    <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                       <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">List of Pending Assignments</div>
+                                       <img src="/images/icons/bar-chart.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
+                                    </div>
+                                 </div>
+                              </span>
+                           </div>
+
+                                                       <div style="position: relative; z-index: 0;">
+
+                              <div style="position: relative;">
+                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+
+                                 <div id="pending_assignment" style="height: 150px; width: 90%; margin: 5%;">
+
+
+                                 </div>
+
+
+                                 </div>
+                              </div>
+                           </div>
+
+
+                           </div>
+                        </div>
+                     </span>
+                  </span>
+               </span>
+            </div>
+
+
+
+</td>
+
+
+<td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 2% 5px 1%; width: 50%; height: 300px;">
+    <div style="text-align: left; width: 100%; height: 300px;">
+               <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+                  <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+                     <span style="position: relative; left: 0px; top: 0px; display: inline-block; vertical-align: middle; width: 100%; height: 100%; transform: translateZ(0px);">
+                        <div style="width: 100%; height: 300px; border-radius: 8px; background-color: rgb(239, 245, 248); position: relative;">
+                           <div style="font: bold 12px Verdana; color: rgb(255, 255, 255);">
+                              <span style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 31px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgb(55, 217, 185);">
+                                 <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+                                 <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                    <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                       <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Learning Progress DateWise</div>
+                                       <img src="/images/icons/bar-chart.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
+                                    </div>
+                                 </div>
+                              </span>
+                           </div>
+
+                                                       <div style="position: relative; z-index: 0;">
+
+                              <div style="position: relative;">
+                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+
+
+                                 </div>
+                              </div>
+                           </div>
+
+
+                           </div>
+                        </div>
+                     </span>
+                  </span>
+               </span>
+            </div>
+
+
+
+</td>
+
+
+			</tr>
+
+
 
 		</table>
 		</div>

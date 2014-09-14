@@ -18,7 +18,7 @@ margin-right:auto;
 margin-left:auto;
 width:90%;
 min-height:100%;
-background-color: #c6ffa4;
+background-color: #ffffff;
 padding-top:15px;
 }
 
@@ -411,9 +411,10 @@ margin-left:15px;
 }
 
 div.footer_div {
-border-top:2px solid #5b61e2;
+border-top:3px solid #5b61e2;
 padding-top:12px;
 margin:20px 0 0;
+background-color: #ffffff;
 }
 
 div.sub_head_details,span.sub_head_details {
