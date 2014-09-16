@@ -33,7 +33,7 @@ def fill():
             teacher1=Query.addTeacher( userinfo5, school.key,"")
             teacher3=Query.addTeacher( userinfo4, school.key,"")
             teacher4=Query.addTeacher( userinfo4, school.key,"")
-            teacher5=Query.addTeacher( userinfo2, school.key,"")
+           # teacher5=Query.addTeacher( userinfo2, school.key,"")
             class1=Query.addClass(name="Class_V",school_key= school.key,section_details="A",year_session="2013-2014")  #to be changed
             class2=Query.addClass(name="Class_VI",school_key= school.key,section_details="B",year_session="2013-2014")  #to be changed
             b=Query.assign_classes_to_teacher(teacher1.key,[class1.key,class2.key])
@@ -44,8 +44,8 @@ def fill():
             
             Query.login("Ankit_Bhatia", "pwd")
             Query.login("Suraj_Singh", "pwd")
-            subject1=Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.SUBJECT_MATHS,school.key)
-            subject2=Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.SUBJECT_SCIENCE,school.key)
+            subject1=Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.SUBJECT_MATHS,school.key,class1.key)
+            subject2=Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.SUBJECT_SCIENCE,school.key,class1.key)
             
             
             topic=Query.addTopic(school_key=school.key,name="Number  System", prerequisite_topics=[],subject_key=subject1.key)
@@ -62,8 +62,8 @@ def fill():
             
             question1=Query.addQuestion(questioninstance,school.key)
            
-            question2=Query.addQuestion(questioninstance3,school.key)
-            question3=Query.addQuestion(questioninstance2,school.key)
+            question2=Query.addQuestion(questioninstance2,school.key)
+            question3=Query.addQuestion(questioninstance3,school.key)
             state1=Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
             
             state2=Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
