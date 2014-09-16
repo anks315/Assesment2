@@ -9,29 +9,34 @@ from dummydata import fill,flush
 from Query import login
 import logging
 import inferenceengine
-
+from google.appengine.ext import ndb
+import  Query
+import datetime
 
 counters=0
 counter =0
 val=0
 readytolearn=""
+
 def asknextquestion(request):
 
     global counters
     counters+=1
     session = get_current_session()
-
+    global assessmentkey
     c=session.get('index',-1)
     if c== -1:
         session['index']=users.get_current_user()
-        usersdict[session['index']]= UserBuffer()
+        assessmentkey = request.GET['id']
+        key = ndb.Key(urlsafe=assessmentkey)
+        logging.error(assessmentkey)
+        assessment = key.get()
+        listoftopics=assessment.topics_in_assessment_key
+        usersdict[session['index']]= UserBuffer(listoftopics[0])
     else:
         if request.method != 'POST':
             del usersdict[session['index']]
             session['index']=-1
-
-
-
 
     if request.method == 'POST':
 
@@ -63,6 +68,7 @@ def asknextquestion(request):
             readytolearn="Congratulations!!you have completed maths donut"
         else:
             logging.error(maxstate(session['index']))
+
             states = usersdict[session['index']].states[maxstatesize(session['index']) + 1]
             currentstate= usersdict[session['index']].states[maxstatesize(session['index'])][maxstate(session['index'])]
             for state in states:
@@ -70,20 +76,28 @@ def asknextquestion(request):
                 currentstateset = set(currentstate.questionstuple)
                 if stateset.issuperset(currentstateset):
                     quetionkey = stateset.difference(currentstateset)
+                    logging.error(next(iter(quetionkey)))
+                    logging.error(currentstate.key)
+                    score =(val/(float)(getnumquestions(session['index'])))*100
+                    user_information= Query.login("Ankit_Bhatia","ankit")
+                    student = user_information[1]
+                    studentkey= student.key
+                    schoolkey= student.school
+
+                    a=Query.update_assessment_detail_of_student(student_key=studentkey, assessment_key=ndb.Key(urlsafe=assessmentkey),current_state_key= currentstate.key, next_state_key=currentstate.key,next_question_key=next(iter(quetionkey)),score=int(score),school_key=schoolkey,start_date=datetime.date(int(2012),int(6),int(8)))
+                    logging.error(a)
                     readytolearn+=usersdict[session['index']].questions[next(iter(quetionkey))].questionstring
-
-
 
 
         del usersdict[session['index']]
         del session['index']
-        return render_to_response('AssessingPie/pie.html',{'readytolearn':readytolearn,'num_known': val ,'num_dontknow':3-val,'st': maxsta,'state' : 'completed','know':strknow,},context_instance = RequestContext(request))
+        return render_to_response('AssessingPie_toBeremoved/pie.html',{'readytolearn':readytolearn,'num_known': val ,'num_dontknow':3-val,'st': maxsta,'state' : 'completed','know':strknow,},context_instance = RequestContext(request))
 
     else:
         return render_to_response('AssessingPie/question.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : usersdict[session['index']].questions[nextquestion(session['index'])].questionstring,},context_instance = RequestContext(request))
 
-def home(request):
 
+def home(request):
 
      session = get_current_session()
      if session.get('index',-1) != -1:
