@@ -1831,7 +1831,7 @@ def get_pending_assessment_subject(subject_key,student_key):
                   logging.error("%%%%%%%%%%%%%"+str(assessment_score))
                   
                   pending_assessments.append(assesment_final) 
-                  pending_assesments_dict.update({assesment_final.key:[assesment_final.name,assesment_final.due_date]})
+                  pending_assesments_dict.update({assesment_final.key.urlsafe():[assesment_final.name,assesment_final.due_date]})
         return pending_assesments_dict
     except Exception:
         logging.info("CV Logs : failed to get mastry for  student :")
