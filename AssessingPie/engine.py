@@ -12,12 +12,12 @@ class Question:
         self.answer = answer
 
 class State :
-    def __init__(self,questionstuple,prob):
+    def __init__(self,questionstuple,prob,key):
         self.questionstuple = questionstuple
         self.prob = prob
-
+        self.key=key
 class  UserBuffer:
-    def __init__(self):
+    def __init__(self,topickey):
         self.count=0
 
         self.states = {}
@@ -25,12 +25,12 @@ class  UserBuffer:
         self.minquestion = -1
         self.maxprobstate = 0
         self.maxprobsize=0
-        self.initializebuffer()
+        self.initializebuffer(topickey)
         self.numstates=-1
 
-    def initializebuffer(self):
-        question_db = Query.get_questions_by_topic_name("Number  System")
-        state_db =Query.get_states_by_topic_name("Number  System")
+    def initializebuffer(self,topickey):
+        question_db = Query.get_questions_of_topic(topickey)
+        state_db =Query.get_states_of_topic(topickey)
         self.numstates=len(state_db)
         type(state_db)
         initialprob = 1/float(len(state_db) + 1)
@@ -50,7 +50,7 @@ class  UserBuffer:
 
 
 
-        self.states[0] =[State((-1,),initialprob)]
+        self.states[0] =[State((-1,),initialprob,0)]
         for tempstate in state_db:
 
             questions = Query.get_questions_of_state(tempstate.key)
@@ -58,11 +58,12 @@ class  UserBuffer:
             for question in questions:
                 queskeylist.append(question.key)
             questiontuple = tuple(queskeylist)
+            key=tempstate.key
             size = len(questiontuple)
             temp = self.states.get(size)
             if temp is None:
                 self.states[size]=[]
-            self.states[size].append(State(questiontuple,initialprob))
+            self.states[size].append(State(questiontuple,initialprob,key))
 
 
 
