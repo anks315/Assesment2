@@ -1,7 +1,6 @@
 from google.appengine.ext.ndb import Key
 from google.appengine.ext import ndb
 import logging
-import datetime
 import Constant
 from models import QuestionInstance,State_Questions,Topic_States,Question,State,Address,Teacher,Class,\
     Assessment_Record
@@ -9,6 +8,7 @@ from models import School,Student,UserInfo,Subject,Assessment,Student_Assessment
 from  models import Topic_Questions,State_Questions,Topic_States,Subject_Topics,Assessment_Record
 from models import Topic,User
 from Constant import Constant,UserType
+import datetime
 
 
 
@@ -236,10 +236,10 @@ Adds a new Subject:
                name =from SUBJECT Constants in Constant.py
     
 """
-def addSubject(type,name,school_key):
+def addSubject(type,name,school_key,class_key):
    logging.info("CV Logs : Inside addSubject") 
    try: 
-       subject = Subject(parent=school_key,type=type,name=name) 
+       subject = Subject(parent=school_key,type=type,name=name,class_key=class_key) 
        subject.put()
    except Exception :
        logging.exception("")
@@ -386,7 +386,7 @@ def addAddress(type,street,city,state):
    try:
        logging.info("CV Logs : Inside addAddress")
        address = Address(type=type,street=street,city=city,state=state) 
-       address.put()  
+       #address.put()  
        logging.info("CV Logs : success to add address  :")
        return address;
    except Exception:
@@ -636,7 +636,11 @@ def addAssessment(name,list_topic_key,school_key,date,due_date,published,teacher
     try :     
         logging.info("CV Logs : Inside addAssessment" )
         assessment = Assessment(parent=school_key,name=name,topics_in_assessment_key=list_topic_key,date=date,due_date=due_date,published=published,teacher_key=teacher_key,class_key=class_key) 
+        assessment.put() 
         for topic in list_topic_key:
+            topic_entity=topic.get()
+            topic_entity.assessments_in_topic=assessment.key
+            topic_entity.put()
             topic_states=get_states_of_topic(topic)
             logging.info(str(topic_states))
             for topic_state in topic_states:
@@ -828,14 +832,15 @@ Update an existing assessment
 def update_assessment_detail_of_student(score,student_key,assessment_key,current_state_key,next_state_key,next_question_key,school_key,start_date):
     student_assessment=None
     try:
-        logging.info("CV Logs: Inside update_assessment_detail_of_student ")
+        assessment=assessment_key.get()
+        logging.info("##############CV Logs1: Inside update_assessment_detail_of_student "+str(assessment.name))
         student=student_key.get()
         #logging.info("CV Logs: Inside update_assessment_detail_of_student "+student.name)
-        logging.error("@@@@@@@@@@@@@@@@@@@"+str(student))
+        logging.error("##############  1 @@@@@@@@@@@@@@@@@@@"+str(student))
         student_assessment=student.student_assessment_key 
-        logging.info("CV Logs:found student assessment "+str(student_assessment))
+        logging.info("###############CV Logs 1:found student assessment "+str(student_assessment))
         assessment_record=None      
-        assessment=assessment_key.get()
+        #assessment=assessment_key.get()
         current_state=current_state_key.get()
         next_state=next_state_key.get()
         next_question=next_question_key.get()
@@ -851,7 +856,10 @@ def update_assessment_detail_of_student(score,student_key,assessment_key,current
                     logging.info("0")
                     return Constant.ERROR_INCONSISTENT_STATE
                 logging.info("1")
+                
+                
                 student_assessmnet_entity=student_assessment.get()
+                logging.info("#############CV Logs 1: failed to update assessment :")
                 students_assessments=student_assessmnet_entity.attended_assessment_key
                 if not assessment_key in students_assessments:
                     return Constant.ERROR_INCONSISTENT_STATE
@@ -860,13 +868,15 @@ def update_assessment_detail_of_student(score,student_key,assessment_key,current
                 
                     
                 student_records=student_assessmnet_entity.assessment_record
-                logging.error("index is$$$$$$$$$$$"+str(index)+"  rgggg"+str(student_records))
-                if  len(student_records)==0 or len(student_records)==index-1:
+                
+                logging.error("index is$$$$$$$$$$$  1"+str(index)+"  rgggg"+str(student_records))
+                if  len(student_records)==0 or len(student_records)==index:
                     assessment_record=Assessment_Record(score=score,assessment_key=assessment_key,current_state=current_state_key,next_state =next_state_key,question_ready_to_learn=next_question_key,parent=school_key,start_date=start_date)
                     assessment_record.put()
-                    student_records.append(assessment_record.key)
+                    student_assessmnet_entity.assessment_record.append(assessment_record.key)
+                    student_assessmnet_entity.put()
                 else :
-                    assessment_record_key=student_records[index-1]
+                    assessment_record_key=student_records[index]
                     assessment_record=assessment_record_key.get()
                     assessment_record.current_state=current_state_key
                     assessment_record.next_state =next_state_key
@@ -1360,6 +1370,21 @@ def assign_subjects_to_class(class_key,subjects_in_class_key):
     class_entity.put()     
     return Constant.UPDATION_SUCCESSFULL  
 
+@ndb.transactional(xg=True)
+def assign_subjects_to_teacher(teacher_key,subjects_in_class_key):
+    class_entity=None
+    try:
+        teacher_entity=teacher_key.get() 
+        for subject_key in subjects_in_class_key:
+                   subject=subject_key.get()
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE
+    teacher_entity.subjects.extend(subjects_in_class_key)              
+    teacher_entity.put()     
+    return Constant.UPDATION_SUCCESSFULL  
+
+
 """
 lists states (STATE_IN_TOPIC) associated to a topic 
 """
@@ -1520,13 +1545,15 @@ def get_topics_by_subject(subject_key):
         if topic_keys==None:
             return Constant.ERROR_NO_DATA_FOUND
         topics=ndb.get_multi(topic_keys)
+        return topics
+        logging.error("!!!!!!!!!!!!!!@@@@@@@@@@@@@"+str(topics))
     except Exception:
             logging.info("CV Logs : failed to get topics for subject :"+subject.name)
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
             
     logging.info("CV Logs : success to get topics for subject :"+subject.name)
-    return topics
+    
     
 """
 lists assessments associated to a student 
@@ -1646,6 +1673,7 @@ def get_student_start_date_in_assessment(student_key,assessment_key):
     logging.info("CV Logs : success to get score of assessment"+ assessment.name+" for student :"+student.basic_info.firstname)
     
 """
+//TODO
 get assessment state associated to a student 
 """ 
 def get_student_current_state_in_assessment(student_key,assessment_key):
@@ -1677,6 +1705,7 @@ def get_student_current_state_in_assessment(student_key,assessment_key):
 
 
 """
+//TODO
 get assessment next state associated to a student 
 """ 
 def get_student_next_state_in_assessment(student_key,assessment_key):
@@ -1774,31 +1803,36 @@ def get_topper_mastery_in_subject(subject_key,student_key):
 
 """
 //TODO Check pending assessment logic : suspicious behavior
-get get_pending_assessment_subject 
+get get_pending_assessment_subject  Add max marks logic
 """ 
 def get_pending_assessment_subject(subject_key,student_key):
-    logging.info("CV Logs : get_topper_mastery_in_subject ")
+    logging.info("CV Logs : get_pending_assessment_subject ")
     assessments=[]
     assessment_topic=[]
     pending_assessments=[]
+    pending_assesments_dict={}
     try:
         topics_sub=get_topics_by_subject(subject_key)
+        logging.error("##$%$%$%$%%%%%%%%%%%%"+str(topics_sub))
         if topics_sub==None:
             return Constant.ERROR_NO_DATA_FOUND
+        
         total=len(topics_sub)
+        logging.error("@2222222222length"+str((total)))
         for topic in topics_sub:
             assessment=get_assessments_by_topic(student_key,topic.key)
-            logging.error("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$length"+str(len(assessment)))
+            logging.error("@2222222222length"+str(len(assessment)))
             
             if len(assessment) > 0:
                     assessments.extend(assessment)
-        
+            logging.error("@2222222$$$$$$$"+str(len(assessments)))
             for assesment_final in assessments:
                   assessment_score=get_student_score_in_assessment(student_key, assesment_final.key)
                   logging.error("%%%%%%%%%%%%%"+str(assessment_score))
-                  if not assessment_score== Constant.MAX_MARKS:
-                      pending_assessments.append(assesment_final) 
-            return pending_assessments
+                  
+                  pending_assessments.append(assesment_final) 
+                  pending_assesments_dict.update({assesment_final.key:[assesment_final.name,assesment_final.due_date]})
+        return pending_assesments_dict
     except Exception:
         logging.info("CV Logs : failed to get mastry for  student :")
         logging.exception("")
@@ -1858,7 +1892,29 @@ def get_classes_of_teacher(teacher_key):
 
 
 
-
+"""
+get subjects  associated to a teacher 
+"""
+def get_subjects_of_teacher_in_class(teacher_key,class_key):
+    logging.info("CV Logs : get_subjects_of_teacher ")
+    try:
+        subjects=[]
+        teacher_entity=teacher_key.get()
+        class_entity=class_key.get()
+        subjects_of_teacher_keys=teacher_entity.subjects
+        subjects_of_teacher=ndb.get_multi(subjects_of_teacher_keys)
+        for subject in subjects_of_teacher:
+            if subject.class_key==class_key:
+                subjects.append(subject)       
+        logging.info("CV Logs : success to get subjects of class"+class_entity.name+":"+class_entity.section_details)
+        return subjects
+    except Exception:
+            logging.info("CV Logs : to get subjects of class"+class_entity.name+":"+class_entity.section_details)
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL
+        
+        
+            
 
 """
 get subjects  associated to a class 
@@ -1893,6 +1949,9 @@ def get_students_by_class(class_key):
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
 
+'''//TODO
+
+'''
 def get_average_score_by_subject(subject_key,teacher_key):
     logging.info("CV Logs : Inside get_students_by_class ")
     students=[]
@@ -1921,6 +1980,10 @@ def get_average_score_by_subject(subject_key,teacher_key):
         return Constant.ERROR_OPERATION_FAIL
 
 
+
+'''//TODO
+
+'''
 def get_average_mastery_by_subject_detailed(teacher_key):
     logging.info("CV Logs : Inside get_students_by_class ")
     students=[]
@@ -1965,7 +2028,7 @@ def get_average_mastery_by_subject_detailed(teacher_key):
 
 
 
-
+'''TODO'''
 def get_mastery_by_student_of_class(teacher_key):
     logging.info("CV Logs : Inside get_students_by_class ")
     students=[]
@@ -2037,6 +2100,8 @@ def get_students_not_logged_in_by_class(teacher_key):
         #logging.info("CV Logs : failed to get students for class :"+class_entity.name+":"+class_entity.section_details)
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
+    
+'''TODO'''    
 def get_average_mastery_all_subject_detailed(teacher_key):
     logging.info("CV Logs : Inside get_students_by_class ")
     students=[]
@@ -2054,7 +2119,7 @@ def get_average_mastery_all_subject_detailed(teacher_key):
             if class_dummy.get().name=="Class_V":
                 class_entity=class_dummy
                 
-        subjects=get_subjects_of_class(class_entity)
+        subjects=get_subjects_of_teacher_in_class(teacher_key, class_entity)
         for subject in subjects:
             mastery=get_average_mastery_by_subject_detailed(subject.key,teacher_key)
             dict_data[subject.name]=[mastery[0],mastery[1]]
@@ -2068,7 +2133,7 @@ def get_average_mastery_all_subject_detailed(teacher_key):
 
 
 """
-todo subject wise 
+todo 
 """
 def get_ready_to_learn_of_class(teacher_key):
     logging.info("CV Logs : Inside get_students_by_class ")
@@ -2088,7 +2153,8 @@ def get_ready_to_learn_of_class(teacher_key):
                 class_entity=class_dummy
                 
         students=get_students_by_class(class_entity)
-        subjects=get_subjects_of_class(class_entity)
+        subjects=get_subjects_of_teacher_in_class(teacher_key, class_entity)
+        #subjects=get_subjects_of_class(class_entity)
         for subject in subjects:
             if subject.name=="Mathematics":
                subject_entity=subject
@@ -2117,7 +2183,7 @@ def get_ready_to_learn_of_class(teacher_key):
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
 
-
+'''TODO'''
 def get_average_score_all_subject(subject_key,teacher_key):
     logging.info("CV Logs : Inside get_students_by_class ")
     dict_averagescore={}
@@ -2130,7 +2196,7 @@ def get_average_score_all_subject(subject_key,teacher_key):
             if class_dummy.get().name=="Class_V":
                 class_entity=class_dummy
                 
-        subjects=get_subjects_of_class(class_entity)
+        subjects=get_subjects_of_teacher_in_class(teacher_key, class_entity)
         logging.info("!!!!!!!!!!!!!!!!!!!!!!!FFF"+str(subjects))
         for subject in subjects:
             average_score=get_average_score_by_subject(subject.key, teacher_key)
