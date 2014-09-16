@@ -1,22 +1,23 @@
 <root>
 {% for key, value in assessmentdict.items %}
-   {% for assessment in value %}
+  {% for keydata, valuedata in value.items %}
   <assessment>
      <subject>
 
        {{ key }}
      </subject>
-    <id>
 
-       ankur
-
-   </id>
-      <key>
-          key
+       <key>
+         {{ keydata }}
       </key>
-  <due_date>
+    <id>
+          {{ valuedata.0 }}
+       </id>
 
+  <due_date>
+       {{ valuedata.1 }}
   </due_date>
+
        </assessment>
   {% endfor %}
 {% endfor %}
