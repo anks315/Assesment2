@@ -19,7 +19,7 @@ handlers:
   static_files: static/css/\1
   upload: static/css/.*
 
-- url: /assessment/(.*)
+- url: /assessment(.*)
   login: required
   script: main.app
 
