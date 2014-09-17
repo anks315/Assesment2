@@ -41,6 +41,45 @@ def getaveragemasterybysubjectallclass(request):
     teacherkey = session.get('teacherkey',-1)
     averagemasterybysubject = Query.get_average_mastery_by_subject_of_all_class(teacherkey)
     logging.error(averagemasterybysubject)
-    t = loader.get_template('Dashboard/not_recently_logged_in_byclass')
+    t = loader.get_template('Dashboard/averagemasterybysubject_allclass')
     c = Context({'averagemasterydict': averagemasterybysubject,})
+    return HttpResponse(t.render(c),content_type="text/xml")
+
+def get_classes_of_teacher(request):
+    session = get_current_session()
+    teacherkey = session.get('teacherkey',-1)
+    classdetails = Query.get_class_details_of_teacher(teacherkey)
+
+    t = loader.get_template('Dashboard/getclassdetails_byteacher')
+    c = Context({'getclassdetailsdict': classdetails,})
+    return HttpResponse(t.render(c),content_type="text/xml")
+
+def get_students_not_logged_in_by_class(request):
+    session = get_current_session()
+    teacherkey = session.get('teacherkey',-1)
+    classkey = request.GET['id']
+    notrecentlyloggedin = Query.get_students_not_logged_in_by_class(teacherkey,classkey)
+
+    t = loader.get_template('Dashboard/notrecenltyloggedin_byclass')
+    c = Context({'notrecentlyloggedinbyclass': notrecentlyloggedin,})
+    return HttpResponse(t.render(c),content_type="text/xml")
+
+def getaveragemasterybysubjectallsubject(request):
+    session = get_current_session()
+    teacherkey = session.get('teacherkey',-1)
+    classkey = request.GET['id']
+    averagemasterybysubject = Query.get_average_mastery_all_subject_detailed(teacherkey,classkey)
+    logging.error(averagemasterybysubject)
+    t = loader.get_template('Dashboard/averagemasterybysubject_allsubject')
+    c = Context({'averagemasterydict': averagemasterybysubject,})
+    return HttpResponse(t.render(c),content_type="text/xml")
+
+def get_assessment_coverage_of_class(request):
+    session = get_current_session()
+    teacherkey = session.get('teacherkey',-1)
+    classkey = request.GET['id']
+    assessmentcoveragedict = Query.get_assessment_coverage_of_class(teacherkey,classkey)
+    logging.error(assessmentcoveragedict)
+    t = loader.get_template('Dashboard/assessmentcoverageofclass')
+    c = Context({'assessmentcoveragedict': assessmentcoveragedict,})
     return HttpResponse(t.render(c),content_type="text/xml")

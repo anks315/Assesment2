@@ -60,6 +60,26 @@ handlers:
   login: required
   script: main.app
 
+-- url: /getclassdetailsbyteacher/(.*)
+  login: required
+  script: main.app
+
+- url: /notloggedinbyclass/(.*)
+  login: required
+  script: main.app
+
+- url: /averagemasterybysubjectbyclass/(.*)
+  login: required
+  script: main.app
+
+- url: /assessmentcoveragebyclass/(.*)
+  login: required
+  script: main.app
+
+- url: /getclassdetailsbyteacher/(.*)
+  login: required
+  script: main.app
+
 - url: /averagemasterybysubjectallclass/(.*)
   login: required
   script: main.app
