@@ -156,6 +156,34 @@ def fill():
             '''
             {Subject_key:subjectname'}
             '''
+
+            #teacher dashboard class and subject selected
+            Query.get_subject_details(subject1.key)
+            {u'MSubject_name': ['Number System', 'Float division']}
+
+
+            Query.get_average_mastery_all_subject_detailed(teacher1.key, class1.key)
+            '''
+            {subjectname: [mastery, {topicname:mastery}]}
+            '''
+
+
+            Query.get_ready_to_learn_of_class(teacher1.key, class1.key, subject1.key)
+            '''
+            {'Question ': percentage of students}
+            '''
+
+
+            Query.get_assessment_coverage_of_subject(teacher1.key, class1.key, subject1.key)
+
+            {'AssessmentId': percentage_of_student_attended}
+
+
+            Query.get_mastery_details_of_subject(teacher1.key, class1.key, subject1.key)
+
+
+
+            {'Lowest': {u'Sarthak Tiwari': 50, u'Trish Kumar': 50, u'Suraj Singh': 50, u'Ankit Bhatia': 70}, 'Highest': {u'Sarthak Tiwari': 50, u'Trish Kumar': 50, u'Suraj Singh': 50, u'Ankit Bhatia': 70}}
             return a
                         
             
