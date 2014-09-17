@@ -152,6 +152,10 @@ def fill():
             '''
             {subjectname: {assessmentId: percntage of people attended}}
             '''
+            Query.get_subject_details_of_teacher_in_class(teacher1.key, class1.key)
+            '''
+            {Subject_key:subjectname'}
+            '''
             return a
                         
             

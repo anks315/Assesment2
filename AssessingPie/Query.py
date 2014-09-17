@@ -1930,7 +1930,28 @@ def get_subjects_of_teacher_in_class(teacher_key,class_key):
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
         
-        
+ 
+"""
+get subjects  associated to a teacher 
+"""
+def get_subject_details_of_teacher_in_class(teacher_key,class_key):
+    logging.info("CV Logs : get_subject_details_of_teacher_in_class ")
+    try:
+        subjects=[]
+        dict_subjects={}
+        teacher_entity=teacher_key.get()
+        class_entity=class_key.get()
+        subjects_of_teacher_keys=teacher_entity.subjects
+        subjects_of_teacher=ndb.get_multi(subjects_of_teacher_keys)
+        for subject in subjects_of_teacher:
+            if subject.class_key==class_key:
+                dict_subjects.update({subject.key.urlsafe():subject.name})       
+        logging.info("CV Logs : success to get subject details  of class for teacher"+class_entity.name+":"+class_entity.section_details)
+        return dict_subjects
+    except Exception:
+            logging.info("CV Logs : to subject details  of class for teacher"+class_entity.name+":"+class_entity.section_details)
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL       
             
 
 """
@@ -1944,6 +1965,25 @@ def get_subjects_of_class(class_key):
         subjects_of_class=ndb.get_multi(subjects_of_class_keys)        
         logging.info("CV Logs : success to get subjects of class"+class_entity.name+":"+class_entity.section_details)
         return subjects_of_class
+    except Exception:
+            #logging.info("CV Logs : to get subjects of class"+class_entity.name+":"+class_entity.section_details)
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL
+
+
+
+def get_subject_details_of_class(class_key):
+    
+    logging.info("CV Logs : get_subject_details_of_class ")
+    try:
+        dict_subjects={}
+        class_entity=class_key.get()
+        subjects_of_class_keys=class_entity.subjects_in_class_key
+        subjects_of_class=ndb.get_multi(subjects_of_class_keys) 
+        for subject in subjects_of_class:
+            dict_subjects.update({subject.key:subject.name})       
+        logging.info("CV Logs : success to get subjects of class"+class_entity.name+":"+class_entity.section_details)
+        return dict_subjects
     except Exception:
             #logging.info("CV Logs : to get subjects of class"+class_entity.name+":"+class_entity.section_details)
             logging.exception("")
