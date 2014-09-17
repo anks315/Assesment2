@@ -86,6 +86,7 @@ class Subject(ndb.Expando):
     name = ndb.StringProperty(required=True)# from SUBJECT Constants in Constant.py
     type=ndb.IntegerProperty(required=True,choices=[Subject.TYPE_CLASS,Subject.TYPE_GLOBAL])
     topics_in_subject_key=ndb.KeyProperty(kind='Subject_Topics')
+    class_key=ndb.KeyProperty(kind='Class')
     
 
 
@@ -219,6 +220,7 @@ class Assessment(ndb.Model):
     topics_in_assessment_key = ndb.KeyProperty(kind='Topic', repeated=True)
     states_in_assessment_key = ndb.KeyProperty(kind='State', repeated=True)
     class_key=ndb.KeyProperty(kind='Class',required=True)
+    no_of_user_completed=ndb.IntegerProperty(default=0)
     
     
     
@@ -351,7 +353,7 @@ class Teacher(ndb.Model):
     school = ndb.KeyProperty(kind=School, required=True) 
     classes_under_teacher= ndb.KeyProperty(kind=Class,repeated=True)
     class_history=ndb.KeyProperty(kind=Class,repeated=True)
-    subjects=ndb.KeyProperty(kind=Subject,repeated=True)# class name from Class in Constant.py
+    subjects=ndb.KeyProperty(kind=Subject,repeated=True)
     
     
         

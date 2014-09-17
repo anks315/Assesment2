@@ -884,7 +884,7 @@ def update_assessment_detail_of_student(score,student_key,assessment_key,current
                     assessment_record.score=score
                     assessment_record.start_date=start_date
                     assessment_record.put()
-                
+                assessment.no_of_user_completed+=1
                 
     except Exception :
             logging.exception("")
@@ -1896,7 +1896,7 @@ def get_class_details_of_teacher(teacher_key):
         classes_of_teacher_keys=teacher.classes_under_teacher
         classes_of_teacher=ndb.get_multi(classes_of_teacher_keys)
         for class_entity in classes_of_teacher:
-            dict_class.update({class_entity.key.urlsafe():class_entity.name})
+            dict_class.update({class_entity.key.urlsafe():class_entity.name+" "+class_entity.section_details})
         logging.info("CV Logs : success to get classes of teacher"+teacher.basic_info.firstname)
         return dict_class
     except Exception:
@@ -2183,6 +2183,41 @@ def get_average_mastery_all_subject_detailed(teacher_key,class_key):
         #logging.info("CV Logs : failed to get average mastery for subject for class :"+class_entity.name+":"+class_entity.section_details)
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
+
+
+
+   
+'''TODO'''    
+def get_assessment_coverage_of_class(teacher_key,class_key):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    dict_assessment_data={}
+    dict_assessment_coverage={}
+    try:
+        teacher_entity=teacher_key.get()
+        subjects=get_subjects_of_teacher_in_class(teacher_key, class_key)
+        assessments=Assessment.query(Assessment.class_key==class_key).fetch()
+        if assessments==None:
+            return {}
+        for assessment in assessments:
+            topics=assessment.topics_in_assessment_key
+            topic=topics[0].get()
+            subject_key=topic.subject_key
+            subject_name=subject_key.get().name
+            percentage_covered=assessment.no_of_user_completed/float(len(get_students_by_class(class_key)))
+            dict_assessment_data.update({subject_name:{assessment.name:(percentage_covered)}})
+            
+                
+                
+         
+        #logging.info("CV Logs : success to get average mastery for subject for class :"+class_entity.name+":"+class_entity.section_details)
+        return dict_assessment_data
+    except Exception:
+        #logging.info("CV Logs : failed to get average mastery for subject for class :"+class_entity.name+":"+class_entity.section_details)
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
 
 
 """

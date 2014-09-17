@@ -132,9 +132,26 @@ def fill():
             Query.get_average_mastery_by_subject_detailed(teacher1.key)
             #Query.get_average_mastery_all_subject_detailed(teacher1.key)
             Query.get_class_details_of_teacher(teacher1.key)
+            #tecaher dashboard without any selection
             Query.get_students_not_logged_in_of_all_class(teacher1.key)
             a=Query.get_average_mastery_by_subject_of_all_class(teacher1.key)
-
+            #teacher dashboard when class selected
+            Query.get_class_details_of_teacher(teacher1.key)
+            '''
+            {classkey:classname}
+            '''
+            Query.get_students_not_logged_in_by_class(teacher1.key, class1.key)
+            '''
+            {Studentname: date}
+            '''
+            Query.get_average_mastery_all_subject_detailed(teacher1.key, class1.key)
+            '''
+            {subjectname: [mastery, {topicname:mastery}]}
+            '''
+            Query.get_assessment_coverage_of_class(teacher1.key, class1.key)
+            '''
+            {subjectname: {assessmentId: percntage of people attended}}
+            '''
             return a
                         
             
