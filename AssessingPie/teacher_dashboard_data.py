@@ -9,13 +9,8 @@ import logging
 
 def get_not_recently_loggedin(request):
     session = get_current_session()
-
-    dummydata.flush()
-    dummydata.fill()
-    teacher_information = Query.login('Vijay_Mehta','jkjk')
-    teacher = teacher_information[1]
-    session['teacher']= teacher
-    notrecentlydict =Query.get_students_not_logged_in_by_class(session['teacher'].key)
+    teacherkey = session.get('teacherkey',-1)
+    notrecentlydict =Query.get_students_not_logged_in_by_class(teacherkey)
     logging.error('sbxjks' )
     logging.error(notrecentlydict)
     t = loader.get_template('Dashboard/not_recently_logged_in_byclass')
@@ -25,10 +20,8 @@ def get_not_recently_loggedin(request):
 
 def mastery_by_student_by_class(request):
     session = get_current_session()
-    teacher_information = Query.login('Vijay_Mehta','jkjk')
-    teacher = teacher_information[1]
-    session['teacher']= teacher
-    mastery_by_student = Query.get_mastery_by_student_of_class(session['teacher'].key)
+    teacherkey = session.get('teacherkey',-1)
+    mastery_by_student = Query.get_mastery_by_student_of_class(teacherkey)
 
     t = loader.get_template('Dashboard/teacher_mastery_by_student')
     c = Context({'mastery_by_student':mastery_by_student ,})
