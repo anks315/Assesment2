@@ -2138,6 +2138,27 @@ def get_students_not_logged_in_by_class(teacher_key,class_key):
         #logging.info("CV Logs : failed to get students for class :"+class_entity.name+":"+class_entity.section_details)
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
+
+
+
+def get_students_not_logged_in_of_all_class(teacher_key):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    students=[]
+    dict_users_not_logged_in={}
+    try:
+        
+        teacher_entity=teacher_key.get()
+        classess=teacher_entity.classes_under_teacher
+        logging.error("dsssss"+str(classess))
+        for class_key in classess:
+               students=get_students_not_logged_in_by_class(teacher_key, class_key)
+               dict_users_not_logged_in.update(students)
+        return dict_users_not_logged_in
+    except Exception:
+        #logging.info("CV Logs : failed to get students for class :"+class_entity.name+":"+class_entity.section_details)
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+   
     
 '''TODO'''    
 def get_average_mastery_all_subject_detailed(teacher_key,class_key):

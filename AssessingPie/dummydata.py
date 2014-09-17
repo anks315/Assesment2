@@ -132,7 +132,7 @@ def fill():
             Query.get_average_mastery_by_subject_detailed(teacher1.key)
             #Query.get_average_mastery_all_subject_detailed(teacher1.key)
             Query.get_class_details_of_teacher(teacher1.key)
-            Query.get_students_not_logged_in_by_class(teacher1.key,class1.key)
+            Query.get_students_not_logged_in_of_all_class(teacher1.key)
             a=Query.get_average_mastery_by_subject_of_all_class(teacher1.key)
 
             return a
