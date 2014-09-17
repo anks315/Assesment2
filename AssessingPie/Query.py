@@ -1888,6 +1888,23 @@ def get_classes_of_teacher(teacher_key):
     logging.info("CV Logs : success to get classes of teacher"+teacher.basic_info.firstname)
 
 
+def get_class_details_of_teacher(teacher_key):
+    logging.info("CV Logs : get_classes_of_teacher ")
+    try:
+        dict_class={}
+        teacher=teacher_key.get()
+        classes_of_teacher_keys=teacher.classes_under_teacher
+        classes_of_teacher=ndb.get_multi(classes_of_teacher_keys)
+        for class_entity in classes_of_teacher:
+            dict_class.update({class_entity.key.urlsafe():class_entity.name})
+        logging.info("CV Logs : success to get classes of teacher"+teacher.basic_info.firstname)
+        return dict_class
+    except Exception:
+            logging.info("CV Logs : failed to get classes of teacher"+teacher.basic_info.firstname)
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL
+            
+    logging.info("CV Logs : success to get classes of teacher"+teacher.basic_info.firstname)
 
 
 
@@ -1928,7 +1945,7 @@ def get_subjects_of_class(class_key):
         logging.info("CV Logs : success to get subjects of class"+class_entity.name+":"+class_entity.section_details)
         return subjects_of_class
     except Exception:
-            logging.info("CV Logs : to get subjects of class"+class_entity.name+":"+class_entity.section_details)
+            #logging.info("CV Logs : to get subjects of class"+class_entity.name+":"+class_entity.section_details)
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
             
@@ -1984,7 +2001,7 @@ def get_average_score_by_subject(subject_key,teacher_key):
 '''//TODO
 
 '''
-def get_average_mastery_by_subject_detailed(teacher_key):
+def get_average_mastery_by_subject_detailed(teacher_key,class_key,subject_key):
     logging.info("CV Logs : Inside get_students_by_class ")
     students=[]
     mastery=0
@@ -1993,21 +2010,16 @@ def get_average_mastery_by_subject_detailed(teacher_key):
     count1=0
     try:
         teacher_entity=teacher_key.get()
-        
-        classess=teacher_entity.classes_under_teacher
-        logging.error("dsssss"+str(classess))
-        
-        for class_dummy in classess:
-            if class_dummy.get().name=="Class_V":
-                class_entity=class_dummy
-                
-        subjects=get_subjects_of_class(class_entity)
-        for subject_entity in subjects:
-            if subject_entity.name=="Mathematics":
-               subject=subject_entity
+       
+        subject=subject_key.get()
                
-        students_in_class=get_students_by_class(class_entity)
-        topics=get_topics_by_subject(subject.key)
+        students_in_class=get_students_by_class(class_key)
+        logging.error("@@@@@@@@@@@@@@@@@@@@@@@@@@"+str(subject))
+        topics=get_topics_by_subject(subject_key)
+        if isinstance(topics, int):
+             dict_average_topic_mastery={}
+             return [0,dict_average_topic_mastery]
+        #logging.error("@@@@@@@@@@@@@@@@@@@@@@@@@@"+str(len(topics)))
         for student in students_in_class:
             mastery=mastery+get_mastery_by_subject(subject.key, student.key)
             count+=1
@@ -2020,11 +2032,38 @@ def get_average_mastery_by_subject_detailed(teacher_key):
                 average_topic_mastery=  mastery_topic/count1
         dict_average_topic_mastery={topic.name:average_topic_mastery}    
         #logging.info("CV Logs : success to get average mastery for subject for class :"+class_entity.name+":"+class_entity.section_details)
-        return {subject.name:[average_mastery,dict_average_topic_mastery]}
+        return [average_mastery,dict_average_topic_mastery]
     except Exception:
         #logging.info("CV Logs : failed to get average mastery for subject for class :"+class_entity.name+":"+class_entity.section_details)
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
+
+
+
+'''//TODO
+
+'''
+def get_average_mastery_by_subject_of_all_class(teacher_key):
+    logging.info("CV Logs : get_average_mastery_by_subject_of_all_class ")
+    dict_mastery_class={}
+    dict_mastery={}
+    try:
+        teacher_entity=teacher_key.get()
+        classes=teacher_entity.classes_under_teacher
+        for class_key in classes:
+            subjects=get_subjects_of_teacher_in_class(teacher_key, class_key)
+            for subject in subjects:
+                 mastery=get_average_mastery_by_subject_detailed(teacher_key, class_key, subject.key)
+                 dict_mastery_class.update({subject.name:mastery[0]})
+            class_entity=class_key.get()
+            class_name=class_entity.name+class_entity.section_details
+            dict_mastery.update({class_name:dict_mastery_class})       
+        return dict_mastery
+    except Exception:
+        #logging.info("CV Logs : failed to get average mastery for subject for class :"+class_entity.name+":"+class_entity.section_details)
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
 
 
 
@@ -2065,8 +2104,10 @@ def get_mastery_by_student_of_class(teacher_key):
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
 
-
-def get_students_not_logged_in_by_class(teacher_key):
+'''
+//TODO
+'''
+def get_students_not_logged_in_by_class(teacher_key,class_key):
     logging.info("CV Logs : Inside get_students_by_class ")
     students=[]
     dict_users_not_logged_in={}
@@ -2074,11 +2115,8 @@ def get_students_not_logged_in_by_class(teacher_key):
         teacher_entity=teacher_key.get()
         classess=teacher_entity.classes_under_teacher
         logging.error("dsssss"+str(classess))
-        
-        for class_dummy in classess:
-            if class_dummy.get().name=="Class_V":
-                class_entity=class_dummy.get()
-                break
+        class_entity=class_key.get()
+               
                 
         
         students_in_class_keys=class_entity.students_in_class_key
@@ -2102,7 +2140,7 @@ def get_students_not_logged_in_by_class(teacher_key):
         return Constant.ERROR_OPERATION_FAIL
     
 '''TODO'''    
-def get_average_mastery_all_subject_detailed(teacher_key):
+def get_average_mastery_all_subject_detailed(teacher_key,class_key):
     logging.info("CV Logs : Inside get_students_by_class ")
     students=[]
     mastery=0
@@ -2112,17 +2150,11 @@ def get_average_mastery_all_subject_detailed(teacher_key):
     dict_data={}
     try:
         teacher_entity=teacher_key.get()
-        
-        classess=teacher_entity.classes_under_teacher
-        logging.error("dsssss"+str(classess))
-        for class_dummy in classess:
-            if class_dummy.get().name=="Class_V":
-                class_entity=class_dummy
-                
-        subjects=get_subjects_of_teacher_in_class(teacher_key, class_entity)
+        subjects=get_subjects_of_teacher_in_class(teacher_key, class_key)
         for subject in subjects:
-            mastery=get_average_mastery_by_subject_detailed(subject.key,teacher_key)
-            dict_data[subject.name]=[mastery[0],mastery[1]]
+            mastery=get_average_mastery_by_subject_detailed(teacher_key,class_key,subject.key)
+            logging.error("&&&&&&&&&&&&&&&&&&&&"+str(mastery))
+            dict_data.update({subject.name:mastery})
          
         #logging.info("CV Logs : success to get average mastery for subject for class :"+class_entity.name+":"+class_entity.section_details)
         return dict_data
@@ -2223,17 +2255,17 @@ def get_mastery_by_subject(subject_key,student_key):
         if topics_sub==None or not isinstance(topics_sub, list):
             return 0
         total=len(topics_sub)
-        #logging.error("dffffffffffffff"+str(total))
+        logging.error("dffffffffffffff"+str(total))
         for topic in topics_sub:
             assessment=get_assessments_by_topic(student_key,topic.key)
-            
+            logging.error("~~~~~~~~~~~~~~~~~"+str(len(assessment)))
             
             if len(assessment) > 0:
                 assessments.extend(assessment)
         
         for assesment_final in assessments:
             assessment_score=get_student_score_in_assessment(student_key, assesment_final.key)
-            if  assessment_score== Constant.MAX_MARKS:
+            if  assessment_score>=-1:
                 completed+=1
                 
         mastry=completed/float(total)
