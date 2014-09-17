@@ -104,8 +104,8 @@ def fill():
             Query.get_topics_by_subject(subject1.key)
             
             Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question2.key,score=100,school_key=school.key,start_date=datetime.date(int(2012),int(6),int(8)))
-            Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question3.key,score=40,school_key=school.key,start_date=datetime.date(int(2012),int(6),int(8)))
-            Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question3.key,score=100,school_key=school.key,start_date=datetime.date(int(2012),int(6),int(8)))
+            #Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question3.key,score=40,school_key=school.key,start_date=datetime.date(int(2012),int(6),int(8)))
+            #Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question3.key,score=100,school_key=school.key,start_date=datetime.date(int(2012),int(6),int(8)))
             Query.get_assessments_by_topic(student1.key, topic.key)
             Query.get_mastery_by_subject(subject1.key,student1.key)
             #a=Query.get_student_score_in_assessment(student1.key, assessment1.key)
@@ -131,9 +131,10 @@ def fill():
             Query.get_average_score_all_subject(subject1.key,teacher1.key)
             Query.get_average_mastery_by_subject_detailed(teacher1.key)
             #Query.get_average_mastery_all_subject_detailed(teacher1.key)
-            Query.get_ready_to_learn_of_class(teacher1.key)
-            Query.get_mastery_by_student_of_class(teacher1.key)
-            Query.get_students_not_logged_in_by_class(teacher1.key)
+            Query.get_class_details_of_teacher(teacher1.key)
+            Query.get_students_not_logged_in_of_all_class(teacher1.key)
+            a=Query.get_average_mastery_by_subject_of_all_class(teacher1.key)
+
             return a
                         
             
