@@ -68,6 +68,10 @@ handlers:
   login: required
   script: main.app
 
+- url: /averagemasteryofsubject_topicwise/(.*)
+  login: required
+  script: main.app
+
 - url: /averagemasterybysubjectbyclass/(.*)
   login: required
   script: main.app

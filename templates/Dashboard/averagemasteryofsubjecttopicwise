@@ -1,0 +1,17 @@
+<root>
+{% for key, value in averagemasterydict.items %}
+   {% for keydata, valuedata in value.1.items %}
+   <mastery>
+   <topicname>
+
+   {{ keydata }}
+   </topicname>
+
+   <score>
+       {{ valuedata }}
+   </score>
+</mastery>
+{% endfor %}
+{% endfor %}
+
+</root>

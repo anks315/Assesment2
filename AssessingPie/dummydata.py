@@ -184,6 +184,12 @@ def fill():
 
 
             {'Lowest': {u'Sarthak Tiwari': 50, u'Trish Kumar': 50, u'Suraj Singh': 50, u'Ankit Bhatia': 70}, 'Highest': {u'Sarthak Tiwari': 50, u'Trish Kumar': 50, u'Suraj Singh': 50, u'Ankit Bhatia': 70}}
+
+            Query.get_average_mastery_of_a_subject(teacher1.key, class1.key, subject1.key)
+            {u'Mathematics': [75, {u'Float division': 37}]}
+
+
+
             return a
                         
             

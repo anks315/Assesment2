@@ -31,7 +31,8 @@ urlpatterns = patterns('',
            (r'^assessmentcoveragebyclass/$', 'AssessingPie.teacher_dashboard_data.get_assessment_coverage_of_class'),
             (r'^subjectsofclass/$', 'AssessingPie.teacher_dashboard_data.get_subject_of_class'),
             (r'^readytolearnofsubject/$', 'AssessingPie.teacher_dashboard_data.get_readytolearn_of_subject'),
-            (r'^assessmentcoverageofsubject/$', 'AssessingPie.teacher_dashboard_data.get_assessment_coverage_of_subject')
+            (r'^assessmentcoverageofsubject/$', 'AssessingPie.teacher_dashboard_data.get_assessment_coverage_of_subject'),
+            (r'^averagemasteryofsubject_topicwise/$', 'AssessingPie.teacher_dashboard_data.get_averagemastery_of_subject_topicwise'),
 
 
 

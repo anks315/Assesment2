@@ -2257,6 +2257,30 @@ def get_average_mastery_all_subject_detailed(teacher_key,class_key):
 
 
 
+def get_average_mastery_of_a_subject(teacher_key,class_key,subject_key):
+    logging.info("CV Logs : Inside get_students_by_class ")
+    students=[]
+    mastery=0
+    mastery_topic=0
+    count=0
+    count1=0
+    dict_data={}
+    try:
+        teacher_entity=teacher_key.get()
+        subject=subject_key.get()
+        
+        mastery=get_average_mastery_by_subject_detailed(teacher_key,class_key,subject_key)
+        logging.error("&&&&&&&&&&&&&&&&&&&&"+str(mastery))
+        dict_data.update({subject.name:mastery})
+         
+        #logging.info("CV Logs : success to get average mastery for subject for class :"+class_entity.name+":"+class_entity.section_details)
+        return dict_data
+    except Exception:
+        #logging.info("CV Logs : failed to get average mastery for subject for class :"+class_entity.name+":"+class_entity.section_details)
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
    
 '''TODO'''    
 def get_assessment_coverage_of_class(teacher_key,class_key):
