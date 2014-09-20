@@ -60,7 +60,7 @@ handlers:
   login: required
   script: main.app
 
--- url: /getclassdetailsbyteacher/(.*)
+- url: /getclassdetailsbyteacher/(.*)
   login: required
   script: main.app
 
@@ -92,7 +92,7 @@ handlers:
   login: required
   script: main.app
 
-  - url: /assessmentcoverageofsubject/(.*)
+- url: /assessmentcoverageofsubject/(.*)
   login: required
   script: main.app
 
