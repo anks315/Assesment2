@@ -291,7 +291,7 @@ def dashboard(request):
     username = request.POST['username']
     password = request.POST['password']
 
-    user_information= Query.login("Vijay_Mehta","lk")
+    user_information= Query.login(username,password)
 
 
     session = get_current_session()
