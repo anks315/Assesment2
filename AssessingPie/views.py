@@ -288,7 +288,12 @@ def askquestion(block,antecedentid):
 
 def dashboard(request):
     subjectsenrolled=['Maths','Science','English']
-    user_information= Query.login("Vijay_Mehta","ankit")
+    username = request.POST['username']
+    password = request.POST['password']
+
+    user_information= Query.login("Vijay_Mehta","lk")
+
+
     session = get_current_session()
 
     session['type'] = user_information[0]
@@ -304,6 +309,7 @@ def dashboard(request):
         session['dateofbirth '] =student.basic_info.date_of_birth
         session['sex']=student.basic_info.sex
         session['lastlogin']=user_information[2]
+        return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
     if session['type'] == Constant.Constant.TEACHER:
         teacher = user_information[1]
         session['teacherkey']=teacher.key
@@ -315,4 +321,4 @@ def dashboard(request):
         session['dateofbirth '] = teacher.basic_info.date_of_birth
         session['sex']=teacher.basic_info.sex
         session['lastlogin']=user_information[2]
-    return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
+        return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
