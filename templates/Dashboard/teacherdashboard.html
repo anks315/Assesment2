@@ -20,8 +20,8 @@
 
         $("#dashboard_row1").show();
         $("#dashboard_row2").show();
-        $("#subject_dashboard_row1").hide();
-        $("#subject_dashboard_row2").hide();
+        $("#class_dashboard_row1").hide();
+        $("#class_dashboard_row2").hide();
     }
 
 
@@ -30,6 +30,12 @@
       //  alert("ready");
 
       dashboard();
+
+                    populate_list_of_classes();
+        loadloginDetails();
+        loadMasteryDetails();
+
+        students_not_recently_logged_in();
 
 
     });
@@ -94,19 +100,18 @@
 
 		 		  	  </table>
 
-
-                           <div id="classList" style="display: none; top: auto; left: auto; min-width: 417px; position: absolute; z-index: 5;">
-
-
-                               <table id="listclass_list" style="width: 98%; margin: 2px;" cellpadding="0" cellspacing="0">
+                                           <div id="classlist" style="display: none; top: auto; left: auto; min-width: 417px; position: absolute; z-index: 5;">
 
 
+                               <table id="listclasses_list" style="width: 98%; margin: 2px;" cellpadding="0" cellspacing="0">
 
 
 
 
                                  </table>
                               </div>
+
+
 
 
             </div>
@@ -137,9 +142,6 @@
 
 
                                <table id="listsubjects_list" style="width: 98%; margin: 2px;" cellpadding="0" cellspacing="0">
-
-
-
 
 
 
@@ -213,18 +215,22 @@
                 xmlDoc = xmlhttp.responseXML;
 
                 div_to_be_loaded = "";
-                no_of_subject = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
+                no_of_students = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery").length;
 
                 var list_of_subjects= [];
-                for (i = 0; i < no_of_subject; i++) {
+                for (i = 0; i < no_of_students; i++) {
 
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
-                    var subject_name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                    var score = parseInt(x.getElementsByTagName("score")[0].childNodes[0].nodeValue);
-                    var upperDiv="<div style=\"display: inline-block; width: 260px; height: 15px;\"><table style=\"font-size: 1em;\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td style=\"text-align: left; font: bold 10px Verdana; height: 15px; vertical-align: top; overflow: visible;\"><div style=\"width: 40px; height: 35px; border-radius: 4px; color: rgb(255, 255, 255); background-color: rgb(84, 180, 220); font: bold 10px/35px Verdana; text-align: center; margin: 0px 6px 0px 0px;\">"+score+"%</div></td><td style=\"text-align: left; font: bold 10px Verdana; height: 15px; vertical-align: top;\"><div style=\"width: 210px; height: 15px; border-radius: 4px; background-color: rgb(209, 221, 225);\"><div style=\"width:"+score+"%; height: 15px; border-radius: 4px; background-color: rgb(84, 180, 220);\"></div></div></td></tr></tbody></table></div>";
-                    var lowerdiv = "<div style=\"color: rgb(24, 144, 186); font-size: 12px; padding: 0px 2px 10px 50px;\"><span style=\"display: inline-block; position: relative; vertical-align: middle; width: auto; height: auto; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px;\"><input tabindex=\"0\" style=\"position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;\" type=\"button\"><div style=\"float: left; clear: both; position: relative; width: auto; height: auto;\"><div style=\"float: left; clear: both; position: relative; width: auto; height: auto;\"><span style=\"text-decoration: none;\">" + subject_name + "</span></div></div></span></div>";
-                    div_to_be_loaded += upperDiv + lowerdiv;
-                    list_of_subjects.push(subject_name);
+                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery")[i];
+                    var class_name = x.getElementsByTagName("classname")[0].childNodes[0].nodeValue.trim();
+                    var subject = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
+                    var score = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
+                    var key="abc";
+                   // var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                    //alert(key);
+                   var innerdiv="<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:32%; background-color: #cce0ef\"><a href=\"#\">"+class_name+"</a></td><td style=\"width:32%; color: #ac4637;background-color: #cce0ef\">"+subject+"</td><td style=\"width:30% ;color: #3DAC9E;background-color: #cce0ef\">"+score+"%</td></tr></tbody></table>";
+
+                //alert(innerdiv);
+                    div_to_be_loaded += innerdiv;
 
                 }
 
@@ -233,13 +239,13 @@
 
                 //Now Call the function which wuld populate subjects
 
-                populate_list_of_subjects(list_of_subjects);
+
 
 
             }
         }
 
-        xmlhttp.open("GET", "/masterybysubject/", true);
+        xmlhttp.open("GET", "/averagemasterybysubjectallclass/", true);
         xmlhttp.overrideMimeType("text/xml");
         xmlhttp.send();
 
@@ -277,7 +283,7 @@
                     //alert(key);
                     var innerdiv="<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\"><a href=\"/assessment?id="+key+"\">"+student_name+"</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">"+lastlogindate+"</td></tr></tbody></table>";
 
-alert(innerdiv);
+                    //alert(innerdiv);
                     div_to_be_loaded += innerdiv;
 
 
@@ -293,7 +299,7 @@ alert(innerdiv);
             }
         }
 
-        xmlhttp.open("GET", "/notrecentlyloggedin_by_class/", true);
+        xmlhttp.open("GET", "/notrecentlyloggedinall_by_teacher/", true);
         xmlhttp.overrideMimeType("text/xml");
         xmlhttp.send();
 
@@ -301,35 +307,148 @@ alert(innerdiv);
     }
           //var list_to_populate="";
 
-    function populate_list_of_subjects(list) {
+    function populate_list_of_classes(){
+            var xmlhttp;
+     //   alert('listofclasses');
 
-            var lists = "";
-            var a = "";
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.overrideMimeType("text/xml");
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                xmlDoc = xmlhttp.responseXML;
+
+                div_to_be_loaded = "";
+                lists="";
+                no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
+
+              //  alert(no_of_classes);
+                var list_of_subjects= [];
+                for (i = 0; i < no_of_classes; i++) {
+
+
+                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("class")[i];
+                    var classname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                    //var key="abc";
+                   var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                    //alert(key);
+                       // div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+                div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbyclass('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
 
 
 
-            for (i = 0; i < list.length; i++) {
 
-                a = a + list[i] + " , ";
+                }
 
-                //      lists= lists+ "<tr onclick=\"showreportbysubjects("+list[i]+");\" style=\"border: 2px none rgb(0, 0, 0); background-color: rgb(112, 179, 71); color: rgb(255, 255, 255);\"><td colspan=\"1\" width=\"100%\" ><h5><a>"+list[i]+"</a></h5></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
-
-                lists = lists + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('" + list[i] + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + list[i] + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+                document.getElementById("listclasses_list").innerHTML = div_to_be_loaded;
 
 
-                //      alert(lists);
+
+
             }
+        }
 
-            document.getElementById("listsubjects_list").innerHTML = lists;
-            document.getElementById("subjects_enrolled").innerHTML = a;
+        xmlhttp.open("GET", "/getclassdetailsbyteacher/", true);
+        xmlhttp.overrideMimeType("text/xml");
+        xmlhttp.send();
+    }
+
+      /*
+      inner xml fields to be updated
+       */
+
+    function populate_list_of_subjects(classname) {
+
+            var xmlhttp;
+     //   alert('listofclasses');
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.overrideMimeType("text/xml");
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                xmlDoc = xmlhttp.responseXML;
+
+                div_to_be_loaded = "";
+                lists="";
+                no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
+
+              //  alert(no_of_classes);
+                var list_of_subjects= [];
+                for (i = 0; i < no_of_classes; i++) {
+
+
+                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("class")[i];
+                    var classname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                    //var key="abc";
+                   var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                    //alert(key);
+                       // div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+                div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbyclass('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+
+
+
+
+                }
+
+                document.getElementById("listsubjects_list").innerHTML = div_to_be_loaded;
+
+
+
+
+            }
+        }
+
+        xmlhttp.open("GET", "/subjectsofclass/", true);
+        xmlhttp.overrideMimeType("text/xml");
+        xmlhttp.send();
+
+
+
+
 
         }
-    function abc()
+
+    function abc(va)
     {
-        alert("Kapil");
+
+        hidesclass();
+        $("#dashboard_row1").hide();
+        $("#dashboard_row2").hide();
+        $("#class_dashboard_row1").show();
+        $("#class_dashboard_row2").show();
+
+        alert(va);
+    }
+
+    function populatedivbyclass(classname){
+
+
+        $("#dashboard_row1").hide();
+        $("#dashboard_row2").hide();
+        $("#class_dashboard_row1").show();
+        $("#class_dashboard_row2").show();
+        //Now cal AJAX to load divisions correspondingly
+        document.getElementById('classlist').style.display = 'none';
+
     }
 
 
+    function donutmasterybyclass(classname){
+
+     }
 
     function showreportbysubjects(subject){
 
@@ -337,8 +456,8 @@ alert(innerdiv);
 
         $("#dashboard_row1").hide();
         $("#dashboard_row2").hide();
-        $("#subject_dashboard_row1").show();
-        $("#subject_dashboard_row2").show();
+        $("#class_dashboard_row1").show();
+        $("#class_dashboard_row2").show();
         //Now cal AJAX to load divisions correspondingly
 
         document.getElementById('subjectList').style.display='none';
@@ -388,7 +507,7 @@ alert(innerdiv);
 
                 //Now Call the function which wuld populate subjects
 
-                populate_list_of_subjects(list_of_subjects);
+               // populate_list_of_subjects(list_of_subjects);
 
 
             }
@@ -459,6 +578,18 @@ alert(innerdiv);
 
 
     }
+
+      function showsclass(){
+
+          document.getElementById('classlist').style.display = 'block';
+
+     //  alert('shoeclass');
+      }
+
+      function hidesclass(){
+          document.getElementById('classlist').style.display = 'none';
+
+      }
 
     function showsubjects() {
 
@@ -549,9 +680,7 @@ alert(innerdiv);
 <!-- First Colum   -->
 
 <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
-   <script>
-       loadloginDetails()
-   </script>
+
     <div style="text-align: left; width: 100%; height: 300px;">
       <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
          <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
@@ -658,7 +787,7 @@ alert(innerdiv);
 
                               <div style="position: relative;">
                                  <div id="masteryDetails" style="padding: 20px 20% 10px 15%; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
-                                    <script>loadMasteryDetails()</script>
+
 
 
                                  </div>
@@ -676,9 +805,6 @@ alert(innerdiv);
 </tr>
 		
 <tr id="dashboard_row2">
-    <script>
-        students_not_recently_logged_in()
-    </script>
     <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
     <div style="text-align: left; width: 100%; height: 300px;">
                <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
@@ -749,7 +875,7 @@ alert(innerdiv);
                               <div style="position: relative;">
                                  <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
-
+<!--
                                  <div style="display: inline-block; width: 260px; height: 15px;">
                                        <table style="font-size: 1em;" cellpadding="0" cellspacing="0">
                                           <tbody>
@@ -810,7 +936,7 @@ alert(innerdiv);
                                     </div>
 
 
-
+-->
 
                                  </div>
                               </div>
@@ -832,15 +958,12 @@ alert(innerdiv);
 			</tr>
 
 
-<tr id="subject_dashboard_row1">
+<tr id="class_dashboard_row1">
 
 
 <!-- First Colum   -->
 
 <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
-<!--   <script>
-       getdonutmastery_subject(subject)
-   </script>   -->
     <div style="text-align: left; width: 100%; height: 300px;">
       <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
          <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
@@ -851,7 +974,7 @@ alert(innerdiv);
                         <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
                         <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
                            <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                              <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Donut Mastery</div>
+                              <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Students Not Recently Logged in</div>
                               <img src="/images/icons/user_info.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
                            </div>
                         </div>
@@ -879,6 +1002,104 @@ alert(innerdiv);
          </span>
       </span>
    </div>
+</td>
+
+
+<td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 2% 5px 1%; width: 50%; height: 300px;">
+    <div style="text-align: left; width: 100%; height: 300px;">
+               <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+                  <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+                     <span style="position: relative; left: 0px; top: 0px; display: inline-block; vertical-align: middle; width: 100%; height: 100%; transform: translateZ(0px);">
+                        <div style="width: 100%; height: 300px; border-radius: 8px; background-color: rgb(239, 245, 248); position: relative;">
+                           <div style="font: bold 12px Verdana; color: rgb(255, 255, 255);">
+                              <span style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 31px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgb(55, 217, 185);">
+                                 <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+                                 <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                    <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                       <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Class Information</div>
+                                       <img src="/images/icons/bar-chart.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
+                                    </div>
+                                 </div>
+                              </span>
+                           </div>
+
+                                           <div style="position: relative; z-index: 0;">
+
+                              <div style="position: relative;">
+                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+
+                                 <div id="class_information" style="height: 200px; width: 96%; margin: 2%;">
+
+
+                                 </div>
+
+
+                                 </div>
+                              </div>
+                           </div>
+
+
+
+
+
+                           </div>
+                        </div>
+                     </span>
+                  </span>
+               </span>
+            </div>
+
+
+
+</td>
+
+
+</tr>
+
+<tr id="class_dashboard_row2">
+    <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
+    <div style="text-align: left; width: 100%; height: 300px;">
+               <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+                  <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
+                     <span style="position: relative; left: 0px; top: 0px; display: inline-block; vertical-align: middle; width: 100%; height: 100%; transform: translateZ(0px);">
+                        <div style="width: 100%; height: 300px; border-radius: 8px; background-color: rgb(239, 245, 248); position: relative;">
+                           <div style="font: bold 12px Verdana; color: rgb(255, 255, 255);">
+                              <span style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 31px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgb(226, 219, 2);">
+                                 <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+                                 <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                    <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                       <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Mastery over all</div>
+                                       <img src="/images/icons/bar-chart.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
+                                    </div>
+                                 </div>
+                              </span>
+                           </div>
+
+                                                       <div style="position: relative; z-index: 0;">
+
+                              <div style="position: relative;">
+                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+
+                                 <div id="mastery_over_all" style="height: 150px; width: 90%; margin: 5%;">
+
+
+                                 </div>
+
+
+                                 </div>
+                              </div>
+                           </div>
+
+
+                           </div>
+                        </div>
+                     </span>
+                  </span>
+               </span>
+            </div>
+
+
+
 </td>
 
 
@@ -923,102 +1144,6 @@ alert(innerdiv);
 
                                  </div>
                               </div>
-                           </div>
-                        </div>
-                     </span>
-                  </span>
-               </span>
-            </div>
-
-
-
-</td>
-</tr>
-
-<tr id="subject_dashboard_row2">
-    <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
-    <div style="text-align: left; width: 100%; height: 300px;">
-               <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
-                  <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
-                     <span style="position: relative; left: 0px; top: 0px; display: inline-block; vertical-align: middle; width: 100%; height: 100%; transform: translateZ(0px);">
-                        <div style="width: 100%; height: 300px; border-radius: 8px; background-color: rgb(239, 245, 248); position: relative;">
-                           <div style="font: bold 12px Verdana; color: rgb(255, 255, 255);">
-                              <span style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 31px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgb(226, 219, 2);">
-                                 <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
-                                 <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                                    <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                                       <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">List of Pending Assignments</div>
-                                       <img src="/images/icons/bar-chart.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
-                                    </div>
-                                 </div>
-                              </span>
-                           </div>
-
-                                                       <div style="position: relative; z-index: 0;">
-
-                              <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
-
-                                 <div id="pending_assignment" style="height: 150px; width: 90%; margin: 5%;">
-
-
-                                 </div>
-
-
-                                 </div>
-                              </div>
-                           </div>
-
-
-                           </div>
-                        </div>
-                     </span>
-                  </span>
-               </span>
-            </div>
-
-
-
-</td>
-
-
-<td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 2% 5px 1%; width: 50%; height: 300px;">
-    <div style="text-align: left; width: 100%; height: 300px;">
-               <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
-                  <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
-                     <span style="position: relative; left: 0px; top: 0px; display: inline-block; vertical-align: middle; width: 100%; height: 100%; transform: translateZ(0px);">
-                        <div style="width: 100%; height: 300px; border-radius: 8px; background-color: rgb(239, 245, 248); position: relative;">
-                           <div style="font: bold 12px Verdana; color: rgb(255, 255, 255);">
-                              <span style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 31px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgb(55, 217, 185);">
-                                 <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
-                                 <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                                    <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                                       <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Learning Progress DateWise</div>
-                                       <img src="/images/icons/bar-chart.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
-                                    </div>
-                                 </div>
-                              </span>
-                           </div>
-
-                                           <div style="position: relative; z-index: 0;">
-
-                              <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
-
-                                 <div id="subject_chart_div" style="height: 200px; width: 96%; margin: 2%;">
-
-
-                                 </div>
-
-
-                                 </div>
-                              </div>
-                           </div>
-
-
-
-
-
                            </div>
                         </div>
                      </span>
