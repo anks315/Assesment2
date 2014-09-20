@@ -41,7 +41,7 @@ def getaveragemasterybysubjectallclass(request):
     teacherkey = session.get('teacherkey',-1)
     averagemasterybysubject = Query.get_average_mastery_by_subject_of_all_class(teacherkey)
     logging.error(averagemasterybysubject)
-    t = loader.get_template('Dashboard/averagemasterybysubject_allclass')
+    t = loader.get_template('Dashboard/averagemasterybysubject_allclass.xml')
     c = Context({'averagemasterydict': averagemasterybysubject,})
     return HttpResponse(t.render(c),content_type="text/xml")
 

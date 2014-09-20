@@ -1,0 +1,50 @@
+<root>
+        <mastery>
+   <classname>
+
+   class 8
+   </classname>
+   <subject>
+         maths
+   </subject>
+   <score>
+       20%
+   </score>
+   </mastery>
+
+            <mastery>
+   <classname>
+
+   class 5
+   </classname>
+   <subject>
+         maths
+   </subject>
+   <score>
+       25%
+   </score>
+   </mastery>
+
+</root>
+
+<!--
+<root>
+{% for key, value in averagemasterydict.items %}
+    {% for keydata, valuedata in value.items %}
+    <mastery>
+   <classname>
+
+   {{ key }}
+   </classname>
+   <subject>
+         {{ keydata }}
+   </subject>
+   <score>
+       {{ valuedata }}
+   </score>
+   </mastery>
+   {% endfor %}
+{% endfor %}
+
+</root>
+-->

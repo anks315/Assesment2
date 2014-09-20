@@ -315,4 +315,4 @@ def dashboard(request):
         session['dateofbirth '] = teacher.basic_info.date_of_birth
         session['sex']=teacher.basic_info.sex
         session['lastlogin']=user_information[2]
-    return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
+    return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))

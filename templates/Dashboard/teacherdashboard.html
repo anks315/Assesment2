@@ -16,12 +16,18 @@
 <script>
 
 
+    /*
+    Show Dashboard Divisions
+    4 For the time being
+
+     */
         function dashboard(){
 
         $("#dashboard_row1").show();
         $("#dashboard_row2").show();
-        $("#class_dashboard_row1").hide();
-        $("#class_dashboard_row2").hide();
+        $("#class_subject_dashboard_row1").hide();
+        $("#class_subject_dashboard_row2").hide();
+        $("#accountsummary").hide();
     }
 
 
@@ -29,15 +35,23 @@
 
       //  alert("ready");
 
-      dashboard();
+        dashboard();
 
-                    populate_list_of_classes();
+
+        populate_list_of_classes();
+
+        //populate_list_of_subjects()
+
         loadloginDetails();
         loadMasteryDetails();
-
         students_not_recently_logged_in();
 
 
+
+        /*
+        * Static*/
+
+        populate_list_of_subjects("class6");
     });
 
 
@@ -50,7 +64,7 @@
 	<div class="template_background">
 		<div class="template_header" style="">
 			<div class="template_main_header" style="border-bottom: 2px solid rgba(28, 156, 88, 1);">
-				
+
 				<table  width="100%">
 				<tr >
 				<td  width="9%" >
@@ -69,14 +83,14 @@
 					</div>
 				</td>
 				<td  width="12%">
-				</td> 
+				</td>
 				</tr>
                 </table> </div>
 		 	<div  class="template_dashboard_header" style="padding-bottom:5px; background-color: #D3EBCB;height:100px;border-bottom: 2px solid rgba(28, 156, 88, 1);">
-		 	
+
 		 		<span >
 		 		  	<div class="home" style="margin-left:10%;margin-top:36px;box-shadow: 8px 8px 5px #888888;border-radius: 10px;"  id="homeimage" >
-		 		  	
+
 		 		  	<img alt="HOME" src="/images/home3.png" onclick="dashboard()">
 		 		  	</div>
 		 		  	<div class="searchclass" id="select_class"  style="width:35%;padding: 38px 0 0 30px;">
@@ -164,262 +178,281 @@
 <script>
 
 
+
+/*
+ * Global Variables
+ */
+
+            /*
+             * lOAD gOOGLE PACKAGES
+             */
+
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
 
-    // alert("1");
-    var list_subjects=[];
-    var ready_tolearn="";
 
 
-        function loadloginDetails(){
-         var xmlhttp;
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-              //  alert('asd');
-                xmlDoc = xmlhttp.responseXML;
-                x = xmlhttp.responseXML.documentElement.getElementsByTagName("user_name");
-                y = xmlhttp.responseXML.documentElement.getElementsByTagName("last_login");
-              //  z = xmlhttp.responseXML.documentElement.getElementsByTagName("email");
-                document.getElementById("loginname").innerHTML = x[0].childNodes[0].nodeValue;
-                document.getElementById("email_id").innerHTML = "abc@xyz.com";
-                document.getElementById("lastLogin").innerHTML = y[0].childNodes[0].nodeValue;
-              //  document.getElementById("email_id").innerHTML = z[0].childNodes[0].nodeValue;
-            }
-        }
-        xmlhttp.open("GET", "/userdetails/", true);
-        xmlhttp.overrideMimeType("text/xml");
-        xmlhttp.send();
-    }
-
-       function loadMasteryDetails() {
-        var xmlhttp;
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.overrideMimeType("text/xml");
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-                xmlDoc = xmlhttp.responseXML;
-
-                div_to_be_loaded = "";
-                no_of_students = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery").length;
-
-                var list_of_subjects= [];
-                for (i = 0; i < no_of_students; i++) {
-
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery")[i];
-                    var class_name = x.getElementsByTagName("classname")[0].childNodes[0].nodeValue.trim();
-                    var subject = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
-                    var score = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
-                    var key="abc";
-                   // var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
-                    //alert(key);
-                   var innerdiv="<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:32%; background-color: #cce0ef\"><a href=\"#\">"+class_name+"</a></td><td style=\"width:32%; color: #ac4637;background-color: #cce0ef\">"+subject+"</td><td style=\"width:30% ;color: #3DAC9E;background-color: #cce0ef\">"+score+"%</td></tr></tbody></table>";
-
-                //alert(innerdiv);
-                    div_to_be_loaded += innerdiv;
-
-                }
-
-                document.getElementById("masteryDetails").innerHTML = div_to_be_loaded;
-
-
-                //Now Call the function which wuld populate subjects
-
-
-
-
-            }
-        }
-
-        xmlhttp.open("GET", "/averagemasterybysubjectallclass/", true);
-        xmlhttp.overrideMimeType("text/xml");
-        xmlhttp.send();
-
-
-
-    }
-
-    function students_not_recently_logged_in(){
-       var xmlhttp;
-
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.overrideMimeType("text/xml");
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-                xmlDoc = xmlhttp.responseXML;
-
-                div_to_be_loaded = "";
-                no_of_students = xmlhttp.responseXML.documentElement.getElementsByTagName("student").length;
-
-                var list_of_subjects= [];
-                for (i = 0; i < no_of_students; i++) {
-
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("student")[i];
-                    var student_name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                    var lastlogindate = x.getElementsByTagName("logindate")[0].childNodes[0].nodeValue.trim();
-                    var key="abc";
-                   // var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
-                    //alert(key);
-                    var innerdiv="<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\"><a href=\"/assessment?id="+key+"\">"+student_name+"</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">"+lastlogindate+"</td></tr></tbody></table>";
-
-                    //alert(innerdiv);
-                    div_to_be_loaded += innerdiv;
-
-
-                }
-
-                document.getElementById("students_not_logged_in").innerHTML = div_to_be_loaded;
-
-
-                //Now Call the function which wuld populate subjects
-
-
-
-            }
-        }
-
-        xmlhttp.open("GET", "/notrecentlyloggedinall_by_teacher/", true);
-        xmlhttp.overrideMimeType("text/xml");
-        xmlhttp.send();
-
-
-    }
-          //var list_to_populate="";
-
-    function populate_list_of_classes(){
-            var xmlhttp;
-     //   alert('listofclasses');
-
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.overrideMimeType("text/xml");
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-                xmlDoc = xmlhttp.responseXML;
-
-                div_to_be_loaded = "";
-                lists="";
-                no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
-
-              //  alert(no_of_classes);
-                var list_of_subjects= [];
-                for (i = 0; i < no_of_classes; i++) {
-
-
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("class")[i];
-                    var classname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                    //var key="abc";
-                   var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
-                    //alert(key);
-                       // div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
-                div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbyclass('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
-
-
-
-
-                }
-
-                document.getElementById("listclasses_list").innerHTML = div_to_be_loaded;
-
-
-
-
-            }
-        }
-
-        xmlhttp.open("GET", "/getclassdetailsbyteacher/", true);
-        xmlhttp.overrideMimeType("text/xml");
-        xmlhttp.send();
-    }
-
-      /*
-      inner xml fields to be updated
+       /*
+       user details
        */
+
+        function loadloginDetails() {
+            var a;
+            if (window.XMLHttpRequest) a = new XMLHttpRequest();
+            else a = new ActiveXObject("Microsoft.XMLHTTP");
+            a.onreadystatechange = function() {
+                if (4 == a.readyState && 200 == a.status) {
+                    xmlDoc = a.responseXML;
+                    x = a.responseXML.documentElement.getElementsByTagName("user_name");
+                    y = a.responseXML.documentElement.getElementsByTagName("last_login");
+                    document.getElementById("loginname").innerHTML = x[0].childNodes[0].nodeValue;
+                    document.getElementById("email_id").innerHTML = "abc@xyz.com";
+                    document.getElementById("lastLogin").innerHTML = y[0].childNodes[0].nodeValue;
+                }
+            };
+            a.open("GET", "/userdetails/", true);
+            a.overrideMimeType("text/xml");
+            a.send();
+        }
+
+       /*
+       Mastery details
+       */
+
+        function loadMasteryDetails() {
+         var xmlhttp;
+         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                 xmlDoc = xmlhttp.responseXML;
+
+                 div_to_be_loaded = "";
+                 no_of_students = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery").length;
+
+                 var list_of_subjects = [];
+                 for (i = 0; i < no_of_students; i++) {
+
+                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery")[i];
+                     var class_name = x.getElementsByTagName("classname")[0].childNodes[0].nodeValue.trim();
+                     var subject = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
+                     var score = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
+                     var key = "abc";
+                     // var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                     //alert(key);
+                     var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:32%; background-color: #cce0ef\"><a href=\"#\">" + class_name + "</a></td><td style=\"width:32%; color: #ac4637;background-color: #cce0ef\">" + subject + "</td><td style=\"width:30% ;color: #3DAC9E;background-color: #cce0ef\">" + score + "%</td></tr></tbody></table>";
+
+                     //alert(innerdiv);
+                     div_to_be_loaded += innerdiv;
+
+                 }
+
+                 document.getElementById("masteryDetails").innerHTML = div_to_be_loaded;
+
+
+                 //Now Call the function which wuld populate subjects
+
+
+
+
+             }
+         }
+
+         xmlhttp.open("GET", "/averagemasterybysubjectallclass/", true);
+         xmlhttp.overrideMimeType("text/xml");
+         xmlhttp.send();
+
+
+
+     }
+
+       /*
+       students not logged in Dashboard all
+       */
+         function students_not_recently_logged_in() {
+             var xmlhttp;
+
+             if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                 xmlhttp = new XMLHttpRequest();
+                 xmlhttp.overrideMimeType("text/xml");
+             } else {
+                 // code for IE6, IE5
+                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+             }
+             xmlhttp.onreadystatechange = function() {
+
+                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                     xmlDoc = xmlhttp.responseXML;
+
+                     div_to_be_loaded = "";
+                     no_of_students = xmlhttp.responseXML.documentElement.getElementsByTagName("student").length;
+
+                     var list_of_subjects = [];
+                     for (i = 0; i < no_of_students; i++) {
+
+                         x = xmlhttp.responseXML.documentElement.getElementsByTagName("student")[i];
+                         var student_name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                         var lastlogindate = x.getElementsByTagName("logindate")[0].childNodes[0].nodeValue.trim();
+                         var key = "abc";
+                         // var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                         //alert(key);
+                         var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\"><a href=\"/assessment?id=" + key + "\">" + student_name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + lastlogindate + "</td></tr></tbody></table>";
+
+                         //alert(innerdiv);
+                         div_to_be_loaded += innerdiv;
+
+
+                     }
+
+                     document.getElementById("students_not_logged_in").innerHTML = div_to_be_loaded;
+
+
+                     //Now Call the function which wuld populate subjects
+
+
+
+                 }
+             }
+
+             xmlhttp.open("GET", "/notrecentlyloggedinall_by_teacher/", true);
+             xmlhttp.overrideMimeType("text/xml");
+             xmlhttp.send();
+
+
+         }
+
+            /*
+             * Populate the list of classes
+             */
+
+     function populate_list_of_classes() {
+         var xmlhttp;
+         //   alert('listofclasses');
+
+         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                 xmlDoc = xmlhttp.responseXML;
+
+                 div_to_be_loaded = "";
+                 lists = "";
+                 no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
+
+                 //  alert(no_of_classes);
+                 var list_of_subjects = [];
+                 for (i = 0; i < no_of_classes; i++) {
+
+
+                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("class")[i];
+                     var classname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     //var key="abc";
+                     var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                     //alert(key);
+                     // div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+                     div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbyclass('" + classname + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+
+
+
+
+                 }
+
+             document.getElementById("listclasses_list").innerHTML = div_to_be_loaded;
+
+
+
+
+         }
+     }
+
+     xmlhttp.open("GET", "/getclassdetailsbyteacher/", true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+ }
+
+ /*
+ inner xml fields to be updated
+  */
+
 
     function populate_list_of_subjects(classname) {
 
-            var xmlhttp;
+          /*
+             * Statuc data filling*/
+             subjectname="Maths";
+             div_to_be_loaded="<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbysubject('" + classname + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + subjectname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+             document.getElementById("listsubjects_list").innerHTML = div_to_be_loaded;
+
+
+
+     var xmlhttp;
      //   alert('listofclasses');
 
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.overrideMimeType("text/xml");
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
+     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+         xmlhttp = new XMLHttpRequest();
+         xmlhttp.overrideMimeType("text/xml");
+     } else {
+         // code for IE6, IE5
+         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+     }
+     xmlhttp.onreadystatechange = function() {
 
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-                xmlDoc = xmlhttp.responseXML;
+             xmlDoc = xmlhttp.responseXML;
 
-                div_to_be_loaded = "";
-                lists="";
-                no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
+             div_to_be_loaded = "";
+             lists = "";
+             no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
 
-              //  alert(no_of_classes);
-                var list_of_subjects= [];
-                for (i = 0; i < no_of_classes; i++) {
-
-
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("class")[i];
-                    var classname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                    //var key="abc";
-                   var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
-                    //alert(key);
-                       // div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
-                div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbyclass('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+             //  alert(no_of_classes);
+             var list_of_subjects = [];
+             for (i = 0; i < no_of_classes; i++) {
 
 
-
-
-                }
-
-                document.getElementById("listsubjects_list").innerHTML = div_to_be_loaded;
+                 x = xmlhttp.responseXML.documentElement.getElementsByTagName("class")[i];
+                 var classname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                 //var key="abc";
+                 var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                 //alert(key);
+                 // div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+                 div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbyclass('" + classname + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
 
 
 
 
-            }
-        }
-
-        xmlhttp.open("GET", "/subjectsofclass/", true);
-        xmlhttp.overrideMimeType("text/xml");
-        xmlhttp.send();
+             }
+            // uncomment this below line
+            // document.getElementById("listsubjects_list").innerHTML = div_to_be_loaded;
 
 
 
+         }
+     }
+
+     xmlhttp.open("GET", "/subjectsofclass/", true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
 
 
-        }
+
+
+ }
 
     function abc(va)
     {
@@ -427,29 +460,66 @@
         hidesclass();
         $("#dashboard_row1").hide();
         $("#dashboard_row2").hide();
-        $("#class_dashboard_row1").show();
-        $("#class_dashboard_row2").show();
+        $("#class_subject_dashboard_row1").hide();
+        $("#class_subject_dashboard_row2").hide();
+         $("#accountsummary").show();
 
-        alert(va);
+      //  alert(va);
     }
+
+      /*
+
+      This Function will load $ Divisions when a class is selected
+      1  studentnotloggedinbyclass
+      2  average mastery of subjects of class
+      3  class Information
+      4  assessmnet coverage of class
+
+       */
 
     function populatedivbyclass(classname){
 
 
         $("#dashboard_row1").hide();
         $("#dashboard_row2").hide();
-        $("#class_dashboard_row1").show();
-        $("#class_dashboard_row2").show();
+        $("#class_subject_dashboard_row1").show();
+        $("#class_subject_dashboard_row2").show();
+         $("#accountsummary").hide();
         //Now cal AJAX to load divisions correspondingly
+
+
+        document.getElementById('class_dashboard_row1_col1_header').innerHTML="Students Not Recently Logged in";
+        document.getElementById('class_dashboard_row1_col2_header').innerHTML="Class Information";
+        document.getElementById('class_dashboard_row2_col1_header').innerHTML="Average Mastery Of subject Of Class";
+        document.getElementById('class_dashboard_row2_col2_header').innerHTML="Assesment Coverag of this class";
+
         document.getElementById('classlist').style.display = 'none';
 
     }
 
+    function populatedivbysubject(subject){
 
-    function donutmasterybyclass(classname){
+        $("#dashboard_row1").hide();
+        $("#dashboard_row2").hide();
+        $("#class_subject_dashboard_row1").show();
+        $("#class_subject_dashboard_row2").show();
+         $("#accountsummary").hide();
 
-     }
 
+
+        document.getElementById('class_dashboard_row1_col1_header').innerHTML="Average mastery of Subject";
+        document.getElementById('class_dashboard_row1_col2_header').innerHTML="Assesment coverage of Subject";
+        document.getElementById('class_dashboard_row2_col1_header').innerHTML="Masterydetail of Subject";
+        document.getElementById('class_dashboard_row2_col2_header').innerHTML="Ready to learn by Subject";
+
+        document.getElementById('subjectList').style.display = 'none';
+
+
+
+    }
+
+
+/*
     function showreportbysubjects(subject){
 
        // alert("caled");
@@ -466,6 +536,7 @@
         get_ready_tolearn(subject);
         getdonutmastery_subject(subject);
     }
+
 
 
         //return list of pending assignments
@@ -579,6 +650,7 @@
 
     }
 
+*/
       function showsclass(){
 
           document.getElementById('classlist').style.display = 'block';
@@ -602,15 +674,7 @@
         document.getElementById('subjectList').style.display = 'none';
     }
 
-    function showreportlist() {
-        document.getElementById('select_report').style.opacity = 1;
-        document.getElementById('select_report').style.display = 'block';
 
-    }
-
-    function hidereportlist() {
-        document.getElementById('select_report').style.display = 'none';
-    }
 
 
 
@@ -637,8 +701,8 @@
 						  <li>Account Summary</li>
 						</ul>
 					  </li>
-					 
-					</ul>	
+
+					</ul>
 					</td>
 					<td width= "25%">
 					<ul>
@@ -647,14 +711,14 @@
 						  <li>Assesment </li>
 						</ul>
 					  </li>
-					 </ul>	
+					 </ul>
 					 </td>
-					 
-					
+
+
 					 <td width= "25%"></td>
 					</tr>
 				</table>
-			 
+
 			</div>
 
 		<div class="template_main_body">
@@ -666,11 +730,204 @@
 </tr>
 
 
-<tr style="display: none">
 
 
+<tr id="accountsummary" style="font-family: Arial,Sans-Serif; font-size: 20px; background-color: #ebe8f4; border-bottom: 3px ridge rgb(29, 140, 228); margin: 5px; padding-top: 15px; color: rgb(255, 119, 118); border-radius: 20px;"><td id="td0_" align="left" valign="top" width="640px">
+				<div class="sim_im_section sim_closed_box" id="" style="">
+					<div style="border-bottom: 2px solid #133A82; margin-bottom: 10px; padding-top:0px; padding-bottom:4px; position: relative; ">
+						<table cellpadding="0" cellspacing="0">
+						<tbody><tr>
+							<td style="color:#133A82; font: bold 14px Verdana" class="sim_closed_box_title" valign="middle">
+								Account Information
+							</td>
+							<td valign="middle">
+
+							</td>
+						</tr>
+						</tbody></table>
+						<div style="position: absolute; bottom:1px; right:1px; font: 11px Verdana;">
+			<a class="sim_edit_link" href="#">Edit</a>
+						</div>
+					</div>
+					<div class="sim_im_section_in">
+
+    
+    <div>
+    <div class="sub_section_title">
+
+      Basic Information
+
+    </div>
+    <div id="_ss_1_id_cache_58" class="sub_section_top">
+  Account Type: <strong>Instructor</strong><br>
+<br>
+Title: <strong></strong><br>
+<br>
+Salutation:&nbsp;<strong>Dr.</strong><br>
+<br>
+First Name:&nbsp;<strong>Joe</strong><br>
+<br>
+Middle Name: <strong></strong><br>
+<br>
+Last Name: <strong>Smith</strong><br><br>
+Login Name: <strong><code>XXXXXX</code></strong><br><br>
+<a href="#">Reset Password</a><br>
+<br>
+ID: <strong></strong><br>
+    </div>
+    <div id="_ss_2_id_cache_58" class="sub_section_bottom">
+
+    </div>
+    </div>
+
+    <div>
+    <div class="sub_section_title">
+
+      Contact Information
+
+    </div>
+    <div id="_ss_1_id_cache_86" class="sub_section_top">
+  <table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="nofont"><img src="/images/icons/list.png" alt="" border="0" height="10" width="1"></td></tr></tbody></table>
+  <div id="id_cache_90" style="position: relative; border: thin solid rgb(255, 202, 0); padding: 5px 10px; background-color: rgb(255, 255, 191); color: rgb(0, 0, 0); display: none;">
+      <a href="#" onclick="di('id_cache_90').style.display='none';"><img style="position: absolute; right: 10px; top:30%;" src="/images/icons/list.png" border="0"></a>
+      <table width="95%">
+        <tbody><tr>
+          <td style="width:35px;text-align: center;" align="center"><img src="/images/icons/list.png" style="vertical-align: middle" alt="Alert"></td>
+          <td id="id_cache_90_txt" style="text-align: left; ">
+ Please complete this section.
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+ <table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="nofont"><img src="/images/icons/list.png" alt="" border="0" height="10" width="1"></td></tr></tbody></table>Email: <strong></strong><br>
+<br>
+Phone Number: <strong></strong><br>
+<br>
+Address:<strong> </strong><strong></strong>
+    </div>
+    <div id="_ss_2_id_cache_86" class="sub_section_bottom">
+
+    </div>
+    </div>
+
+					</div>
+				</div>
+
+				<div class="sim_im_section sim_closed_box" id="" style="">
+					<div style="border-bottom: 2px solid #133A82; margin-bottom: 10px; padding-top:0px; padding-bottom:4px; position: relative; ">
+						<table cellpadding="0" cellspacing="0">
+						<tbody><tr>
+							<td style="color:#133A82; font: bold 14px Verdana" class="sim_closed_box_title" valign="middle">
+								Email Preferences
+							</td>
+							<td valign="middle">
+
+							</td>
+						</tr>
+						</tbody></table>
+						<div style="position: absolute; bottom:1px; right:1px; font: 11px Verdana;">
+			<a class="sim_edit_link" href="#">Edit</a>
+						</div>
+					</div>
+					<div class="sim_im_section_in">
+			<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="nofont"><img src="/aleks/gif/boxy/spacer.hcache:1.gif" alt="" border="0" height="10" width="1"></td></tr></tbody></table>
+  <div id="id_cache_128" style="position: relative; border: thin solid #FFCA00; padding: 5px 10px;background-color: #FFFFBF; color: #000000; ">
+
+      <table width="95%">
+        <tbody><tr>
+          <td style="width:35px;text-align: center;" align="center"><img src="/images/icons/list.png" style="vertical-align: middle" alt="Alert"></td>
+          <td id="id_cache_128_txt" style="text-align: left; ">
+ Your account set up needs to be completed. Please configure your email settings.<br>
+   <button id="button_1" type="button" class="sim_butt" name="_" onclick="javascript:g_NG('/alekscgi/x/Isl.exe/1o_u-IgNsIkHrQEF3-FxygIISSq9ubn2AYFz_ZaS3dM-0EVamJMX8SvC8gF9Qvgknh4MAtYNU0BmgH_z22mROOAifBGZ1_PM5UehRRgLFd4VU?1oiPvmAdTNWDDqezfZIM9pxXHB2t2jYc8rav2dxO6B2k6dq');" value="true">Set Email Preferences</button>
+
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+ <table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="nofont"><img src="/aleks/gif/boxy/spacer.hcache:1.gif" alt="" border="0" height="10" width="1"></td></tr></tbody></table>
+    <script> var _op_id_cache_136 = false; </script>
+    <div>
+    <div class="sub_section_title">
+
+      Email Settings
+
+    </div>
+    </div>
+
+					</div>
+				</div>
+
+	  </td><td id="td1_" width="10px">&nbsp;</td><td id="td2_" align="left" valign="top" width="300px">
+				<div class="sim_im_section sim_closed_box" id="" style="">
+					<div style="border-bottom: 2px solid #133A82; margin-bottom: 10px; padding-top:0px; padding-bottom:4px; position: relative; ">
+						<table cellpadding="0" cellspacing="0">
+						<tbody><tr>
+							<td style="color:#133A82; font: bold 14px Verdana" class="sim_closed_box_title" valign="middle">
+								Account Settings
+							</td>
+							<td valign="middle">
+
+							</td>
+						</tr>
+						</tbody></table>
+						<div style="position: absolute; bottom:1px; right:1px; font: 11px Verdana;">
+			<a class="sim_edit_link" href="javascript:g_NG('/alekscgi/x/Isl.exe/1o_u-IgNsIkHrQEF3-FxygIISSq9ubn2AYFz_ZaS3dM-0EVamJMX8SvC8gF9Qvgknh4MAtYNU0BmgH_z22mROOAifBGZ1_PM5UehRRgLFd4VU?1oiPvmAdTNWDDqezfZIM9pxXHB2dKVnCPFvbEFQh');">Edit</a>
+						</div>
+					</div>
+					<div class="sim_im_section_in">
+			<p>
+	Account Status: <strong>Enabled</strong></p>
+<p>
+	Language: <strong>English</strong></p>
+<p>
+	Automatic Logout: <strong>30 min</strong></p><strong>Permissions</strong><div class="setting_no_set">
+	Full student history</div>
+					</div>
+				</div>
+
+				<div class="sim_im_section sim_closed_box" id="" style="">
+					<div style="border-bottom: 2px solid #133A82; margin-bottom: 10px; padding-top:0px; padding-bottom:4px; position: relative; ">
+						<table cellpadding="0" cellspacing="0">
+						<tbody><tr>
+							<td style="color:#133A82; font: bold 14px Verdana" class="sim_closed_box_title" valign="middle">
+								Classes
+							</td>
+							<td valign="middle">
+
+							</td>
+						</tr>
+						</tbody></table>
+						<div style="position: absolute; bottom:1px; right:1px; font: 11px Verdana;">
+
+						</div>
+					</div>
+					<div class="sim_im_section_in">
+
+
+    <div>
+    <div class="sub_section_title">
+
+      Current Classes
+
+    </div>
+    <div id="_ss_1_id_cache_208" class="sub_section_top">
+  <ul class="small_roster small_roster_max">
+  		<li class="li_1"><a href="#">Math</a></li>
+  		<li class="li_1"><a href="#">Science</a></li>
+  			</ul>
+    </div>
+    <div id="_ss_2_id_cache_208" class="sub_section_bottom">
+
+    </div>
+    </div>
+
+					</div>
+				</div>
+
+  	  </td>
 </tr>
-			
+
+
 
     <!--  First Row.. -->
 
@@ -745,7 +1002,7 @@
                         </tbody>
                      </table>
                   </div>
-                  
+
                   <div style="width: 100%; height: 16px; font: 12px Verdana; color: rgb(150, 175, 189); padding: 5px; position: absolute; bottom: 0px;">
                      <span style="display: inline-block; position: relative; vertical-align: middle; width: auto; height: auto; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; padding: 0px 10px 0px 5px; float: right;">
                         <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
@@ -803,7 +1060,7 @@
 
 </td>
 </tr>
-		
+
 <tr id="dashboard_row2">
     <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
     <div style="text-align: left; width: 100%; height: 300px;">
@@ -875,6 +1132,9 @@
                               <div style="position: relative;">
                                  <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
+                                     <div id="messages">
+
+                                     </div>
 <!--
                                  <div style="display: inline-block; width: 260px; height: 15px;">
                                        <table style="font-size: 1em;" cellpadding="0" cellspacing="0">
@@ -958,12 +1218,12 @@
 			</tr>
 
 
-<tr id="class_dashboard_row1">
+<tr id="class_subject_dashboard_row1">
 
 
 <!-- First Colum   -->
 
-<td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
+<td id="class_dashboard_row1_col1" style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
     <div style="text-align: left; width: 100%; height: 300px;">
       <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
          <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
@@ -974,7 +1234,7 @@
                         <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
                         <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
                            <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                              <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Students Not Recently Logged in</div>
+                              <div id="class_dashboard_row1_col1_header" style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Students Not Recently Logged in</div>
                               <img src="/images/icons/user_info.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
                            </div>
                         </div>
@@ -1005,7 +1265,7 @@
 </td>
 
 
-<td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 2% 5px 1%; width: 50%; height: 300px;">
+<td id="class_dashboard_row1_col2" style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 2% 5px 1%; width: 50%; height: 300px;">
     <div style="text-align: left; width: 100%; height: 300px;">
                <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
                   <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
@@ -1016,7 +1276,7 @@
                                  <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
                                  <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
                                     <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                                       <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Class Information</div>
+                                       <div id="class_dashboard_row1_col2_header" style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Class Information</div>
                                        <img src="/images/icons/bar-chart.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
                                     </div>
                                  </div>
@@ -1056,8 +1316,8 @@
 
 </tr>
 
-<tr id="class_dashboard_row2">
-    <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
+<tr id="class_subject_dashboard_row2">
+    <td id="class_dashboard_row2_col1" style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 1% 5px 2%; width: 50%; height: 300px;">
     <div style="text-align: left; width: 100%; height: 300px;">
                <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
                   <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
@@ -1068,7 +1328,7 @@
                                  <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
                                  <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
                                     <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                                       <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Mastery over all</div>
+                                       <div id="class_dashboard_row2_col1_header" style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Average mastery of subjects of class</div>
                                        <img src="/images/icons/bar-chart.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
                                     </div>
                                  </div>
@@ -1105,7 +1365,7 @@
 
 <!-- Second Column   -->
 
-   <td style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 2% 5px 1%; width: 50%; height: 300px;">
+   <td id="class_dashboard_row2_col2" style="font-size: 1em; text-align: center; vertical-align: middle; padding: 25px 2% 5px 1%; width: 50%; height: 300px;">
 
         <div style="text-align: left; width: 100%; height: 300px;">
                <span style="position: relative; display: inline-block; vertical-align: middle; width: 100%; height: 100%;">
@@ -1117,7 +1377,7 @@
                                  <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
                                  <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
                                     <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                                       <div style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Ready To Learn ?</div>
+                                       <div id="class_dashboard_row2_col2_header" style="height: 21px; padding: 5px 40px 5px 10px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Assessmnet coverage of this class</div>
                                        <img src="/images/icons/bar-chart.png" style="position: absolute; top: 6px; right: 10px; width: 20px; height: 20px;">
                                     </div>
                                  </div>
