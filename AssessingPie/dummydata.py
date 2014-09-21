@@ -113,33 +113,34 @@ def fill():
             
             
             
-            questioninstance_number1=Query.addQuestionInstance(problem_statement="sum of 2+3 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4,6,7,8"], answers=["5"],school_key=school.key)
+            questioninstance_number1=Query.addQuestionInstance(problem_statement="sum of 2+3 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4","6","7","8"], answers=["5"],school_key=school.key)
             
-            questioninstance_number2=Query.addQuestionInstance(problem_statement="sum of 222+30 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252,600,227,8"], answers=["252"],school_key=school.key)
-            questioninstance_number3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252,600,227,8"], answers=["6"],school_key=school.key)
-            questioninstance_number4=Query.addQuestionInstance(problem_statement="Value of Sine 90 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["-1,2,0,1"], answers=["1"],school_key=school.key)
+            questioninstance_number2=Query.addQuestionInstance(problem_statement="sum of 222+30 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252","600","227","8"], answers=["252"],school_key=school.key)
+            questioninstance_number3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252","600","227","8"], answers=["6"],school_key=school.key)
+            questioninstance_number4=Query.addQuestionInstance(problem_statement="Value of Sine 90 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["-1","2","0","1"], answers=["1"],school_key=school.key)
+            questioninstance_number4=Query.addQuestionInstance(problem_statement="Value of Sine 90 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["-1","2","0","1"], answers=["1"],school_key=school.key)
+
         
         
-        
-            questioninstance_trig1=Query.addQuestionInstance(problem_statement="Sine(90+A) ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["SineA,CosA,-SinA,-CosA"], answers=["252"],school_key=school.key)
-            questioninstance_trig2=Query.addQuestionInstance(problem_statement="Area of square of arm length a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["pie*a*a,a*a,a*a*a,-a*a"], answers=["a*a"],school_key=school.key)
-            questioninstance_trig3=Query.addQuestionInstance(problem_statement="Area of circle of arm radius a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4,6,7,8"], answers=["pie*a*a"],school_key=school.key)
-            questioninstance_trig4=Query.addQuestionInstance(problem_statement="Area of circle of arm radius a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4,6,7,8"], answers=["pie*a*a"],school_key=school.key)
+            questioninstance_trig1=Query.addQuestionInstance(problem_statement="Sine(90+A) ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["SineA","CosA","-SinA","-CosA"], answers=["252"],school_key=school.key)
+            questioninstance_trig2=Query.addQuestionInstance(problem_statement="Area of square of arm length a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["pie*a*a","a*a","a*a*a","-a*a"], answers=["a*a"],school_key=school.key)
+            questioninstance_trig3=Query.addQuestionInstance(problem_statement="Area of circle of arm radius a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4","6","7","8"], answers=["pie*a*a"],school_key=school.key)
+            questioninstance_trig4=Query.addQuestionInstance(problem_statement="Area of circle of arm radius a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4","6","7","8"], answers=["pie*a*a"],school_key=school.key)
             
             
             
             
-            questioninstance_height1=Query.addQuestionInstance(problem_statement="tanA= CosA/SinA True ? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["T,F"], answers=["F"],school_key=school.key)
-            questioninstance_height2=Query.addQuestionInstance(problem_statement="An observer 1.6 m tall is 203 away from a tower. The angle of elevation from his eye to the top of the tower is 30º. The heights of the tower is: ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["21.6m,23.2m,24.72m,none"], answers=["12.6m"],school_key=school.key)
-            questioninstance_height3=Query.addQuestionInstance(problem_statement="The Top of a 15 metre high tower makes an angle of elevation of 60 degree with the bottom of an electric pole and angle of elevation of 30 degree with the top of pole. Find the height of the electric pole. ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["10,9,7,8"], answers=["10"],school_key=school.key)
-            questioninstance_height4=Query.addQuestionInstance(problem_statement="From a point P on a level ground, the angle of elevation of the top tower is 30º. If the tower is 100 m high, the distance of point P from the foot of the tower is: ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["149,156,173,200"], answers=["173"],school_key=school.key)
+            questioninstance_height1=Query.addQuestionInstance(problem_statement="tanA= CosA/SinA True ? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["T","F"], answers=["F"],school_key=school.key)
+            questioninstance_height2=Query.addQuestionInstance(problem_statement="An observer 1.6 m tall is 203 away from a tower. The angle of elevation from his eye to the top of the tower is 30º. The heights of the tower is: ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["21.6m","23.2m","24.72m","none"], answers=["12.6m"],school_key=school.key)
+            questioninstance_height3=Query.addQuestionInstance(problem_statement="The Top of a 15 metre high tower makes an angle of elevation of 60 degree with the bottom of an electric pole and angle of elevation of 30 degree with the top of pole. Find the height of the electric pole. ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["10","9","7","8"], answers=["10"],school_key=school.key)
+            questioninstance_height4=Query.addQuestionInstance(problem_statement="From a point P on a level ground, the angle of elevation of the top tower is 30º. If the tower is 100 m high, the distance of point P from the foot of the tower is: ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["149","156","173","200"], answers=["173"],school_key=school.key)
             
             
             
-            questioninstance_circle1=Query.addQuestionInstance(problem_statement="area of circle  ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["pie*r*r,r*r,r,2r"], answers=["pie*r*r"],school_key=school.key)
-            questioninstance_circle2=Query.addQuestionInstance(problem_statement="diameter of circle", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["r,2*r,r*r,pie*r*r"], answers=["2*r"],school_key=school.key)
-            questioninstance_circle3=Query.addQuestionInstance(problem_statement="circumference of circle", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["r,2**pie*r,r*r,pie*r*r"], answers=["2**pie*r"],school_key=school.key)
-            questioninstance_circle4=Query.addQuestionInstance(problem_statement="if r=4 diameter is ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4,6,7,8"], answers=["8"],school_key=school.key)
+            questioninstance_circle1=Query.addQuestionInstance(problem_statement="area of circle  ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["pie*r*r","r*r","r","2r"], answers=["pie*r*r"],school_key=school.key)
+            questioninstance_circle2=Query.addQuestionInstance(problem_statement="diameter of circle", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["r","2*r","r*r","pie*r*r"], answers=["2*r"],school_key=school.key)
+            questioninstance_circle3=Query.addQuestionInstance(problem_statement="circumference of circle", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["r","2**pie*r","r*r","pie*r*r"], answers=["2**pie*r"],school_key=school.key)
+            questioninstance_circle4=Query.addQuestionInstance(problem_statement="if r=4 diameter is ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4","6","7","8"], answers=["8"],school_key=school.key)
             
            
            
