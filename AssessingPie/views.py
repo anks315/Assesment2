@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from gaesessions import get_current_session
 from engine import nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer,maxstatesize,getnumquestions
 from django.template import RequestContext
-from google.appengine.api import  users
+from google.appengine.api import users
 from dummydata import fill,flush
 from Query import login
 import logging
@@ -13,7 +13,7 @@ from google.appengine.ext import ndb
 import  Query
 import datetime
 import Constant
-
+from django.core.context_processors import csrf
 val=0
 readytolearn=""
 assessmentkey = ''
@@ -287,6 +287,7 @@ def askquestion(block,antecedentid):
 
 
 def dashboard(request):
+
     subjectsenrolled=['Maths','Science','English']
     username = request.POST['username']
     password = request.POST['password']
@@ -322,3 +323,4 @@ def dashboard(request):
         session['sex']=teacher.basic_info.sex
         session['lastlogin']=user_information[2]
         return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
+    return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))

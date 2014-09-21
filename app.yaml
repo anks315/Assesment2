@@ -64,23 +64,23 @@ handlers:
   login: required
   script: main.app
 
-- url: /notloggedinbyclass/(.*)
+- url: /notloggedinbyclass(.*)
   login: required
   script: main.app
 
-- url: /averagemasteryofsubject_topicwise/(.*)
+- url: /averagemasteryofsubject_topicwise(.*)
   login: required
   script: main.app
 
-- url: /averagemasterybysubjectbyclass/(.*)
+- url: /averagemasterybysubjectbyclass(.*)
   login: required
   script: main.app
 
-- url: /subjectsofclass/(.*)
+- url: /subjectsofclass(.*)
   login: required
   script: main.app
 
-- url: /assessmentcoveragebyclass/(.*)
+- url: /assessmentcoveragebyclass(.*)
   login: required
   script: main.app
 
@@ -88,11 +88,11 @@ handlers:
   login: required
   script: main.app
 
-- url: /readytolearnofsubject/(.*)
+- url: /readytolearnofsubject(.*)
   login: required
   script: main.app
 
-- url: /assessmentcoverageofsubject/(.*)
+- url: /assessmentcoverageofsubject(.*)
   login: required
   script: main.app
 
