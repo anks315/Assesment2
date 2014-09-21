@@ -131,10 +131,10 @@ def fill():
             
             
             questioninstance_height1=Query.addQuestionInstance(problem_statement="tanA= CosA/SinA True ? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["T","F"], answers=["F"],school_key=school.key)
-            questioninstance_height2=Query.addQuestionInstance(problem_statement="An observer 1.6 m tall is 203 away from a tower. The angle of elevation from his eye to the top of the tower is 30º. The heights of the tower is: ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["21.6m","23.2m","24.72m","none"], answers=["12.6m"],school_key=school.key)
-            questioninstance_height3=Query.addQuestionInstance(problem_statement="The Top of a 15 metre high tower makes an angle of elevation of 60 degree with the bottom of an electric pole and angle of elevation of 30 degree with the top of pole. Find the height of the electric pole. ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["10","9","7","8"], answers=["10"],school_key=school.key)
-            questioninstance_height4=Query.addQuestionInstance(problem_statement="From a point P on a level ground, the angle of elevation of the top tower is 30º. If the tower is 100 m high, the distance of point P from the foot of the tower is: ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["149","156","173","200"], answers=["173"],school_key=school.key)
-            
+
+            questioninstance_height3=Query.addQuestionInstance(problem_statement="CotA= SinA-CosA True ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["T","F"], answers=["F"],school_key=school.key)
+            questioninstance_height4=Query.addQuestionInstance(problem_statement="Sin90 =", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1","0","2","200"], answers=["1"],school_key=school.key)
+            questioninstance_height2=Query.addQuestionInstance(problem_statement="Cos(90+A)", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["-SinA","CosA","SinB","CosecA"], answers=["-SinA"],school_key=school.key)
             
             
             questioninstance_circle1=Query.addQuestionInstance(problem_statement="area of circle  ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["pie*r*r","r*r","r","2r"], answers=["pie*r*r"],school_key=school.key)
