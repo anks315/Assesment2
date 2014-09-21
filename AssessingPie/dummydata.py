@@ -30,7 +30,7 @@ def fill():
    
             
             
-            vijay_user=Query.addUserInfo("Vivek","Mehta",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            vijay_user=Query.addUserInfo("Vijay","Mehta",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
             sulabh_user=Query.addUserInfo("Sulabj","Jain",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
             #userinfo7=Query.addUserInfo("Smriti","Arora",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
             #userinfo8=Query.addUserInfo("Samarath","Tiwari",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
