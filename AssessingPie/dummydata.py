@@ -117,7 +117,7 @@ def fill():
             
             questioninstance_number2=Query.addQuestionInstance(problem_statement="sum of 222+30 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252","600","227","8"], answers=["252"],school_key=school.key)
             questioninstance_number3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252","600","227","8"], answers=["6"],school_key=school.key)
-            questioninstance_number4=Query.addQuestionInstance(problem_statement="Value of Sine 90 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["-1","2","0","1"], answers=["1"],school_key=school.key)
+
             questioninstance_number4=Query.addQuestionInstance(problem_statement="Value of Sine 90 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["-1","2","0","1"], answers=["1"],school_key=school.key)
 
         
