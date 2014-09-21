@@ -57,7 +57,7 @@ def fill():
             
             
             Query.assign_students_to_class(class_VA.key, [student_vivek.key,student_kavya.key,student_prajjwal.key,student_shiv.key])
-            Query.assign_students_to_class(class_VIB.key, [student_sarthak.key,student_mishika.key,student_prasoon.key,student_pravesh.key])
+            Query.assign_students_to_class(class_VA.key, [student_sarthak.key,student_mishika.key,student_prasoon.key,student_pravesh.key])
 
             
             
@@ -72,21 +72,21 @@ def fill():
             
             
             a=Query.assign_classes_to_teacher(teacher_vijay.key,[class_VA.key])
-            Query.assign_classes_to_teacher(teacher_sulabh.key,[class_VIB.key])
+            Query.assign_classes_to_teacher(teacher_vijay.key,[class_VA.key])
             
             
             
-            subject_maths=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_MATHS,school.key,class_VA.key)
+            subject_maths=Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.SUBJECT_MATHS,school.key,class_VA.key)
             #subject2=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_SCIENCE,school.key,class1.key)
-            subject_english=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_ENGLISH,school.key,class_VIB.key)
+            subject_english=Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.SUBJECT_ENGLISH,school.key,class_VA.key)
             #subject4=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_GEOLOGY,school.key,class1.key)
             
             a=Query.assign_subjects_to_class(class_VA.key, [subject_maths.key])
-            a=Query.assign_subjects_to_class(class_VIB.key, [subject_english.key])
+            a=Query.assign_subjects_to_class(class_VA.key, [subject_english.key])
             
             
             Query.assign_subjects_to_teacher(teacher_vijay.key,[subject_maths.key])
-            a=Query.assign_subjects_to_teacher(teacher_sulabh.key,[subject_english.key])
+            a=Query.assign_subjects_to_teacher(teacher_vijay.key,[subject_english.key])
 
            
             ##Query.login("Suraj_Singh", "pwd")
@@ -118,11 +118,11 @@ def fill():
             questioninstance_number2=Query.addQuestionInstance(problem_statement="sum of 222+30 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252","600","227","8"], answers=["252"],school_key=school.key)
             questioninstance_number3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252","600","227","8"], answers=["6"],school_key=school.key)
 
-            questioninstance_number4=Query.addQuestionInstance(problem_statement="Value of Sine 90 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["-1","2","0","1"], answers=["1"],school_key=school.key)
+            questioninstance_number4=Query.addQuestionInstance(problem_statement="Value of sin 90 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["-1","2","0","1"], answers=["1"],school_key=school.key)
 
         
         
-            questioninstance_trig1=Query.addQuestionInstance(problem_statement="Sine(90+A) ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["SineA","CosA","-SinA","-CosA"], answers=["252"],school_key=school.key)
+            questioninstance_trig1=Query.addQuestionInstance(problem_statement="sin(90+A) ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["sinA","CosA","-SinA","-CosA"], answers=["252"],school_key=school.key)
             questioninstance_trig2=Query.addQuestionInstance(problem_statement="Area of square of arm length a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["pie*a*a","a*a","a*a*a","-a*a"], answers=["a*a"],school_key=school.key)
             questioninstance_trig3=Query.addQuestionInstance(problem_statement="Area of circle of arm radius a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4","6","7","8"], answers=["pie*a*a"],school_key=school.key)
             questioninstance_trig4=Query.addQuestionInstance(problem_statement="Area of circle of arm radius a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4","6","7","8"], answers=["pie*a*a"],school_key=school.key)
@@ -131,7 +131,7 @@ def fill():
             
             
             questioninstance_height1=Query.addQuestionInstance(problem_statement="tanA= CosA/SinA True ? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["T","F"], answers=["F"],school_key=school.key)
-
+     
             questioninstance_height3=Query.addQuestionInstance(problem_statement="CotA= SinA-CosA True ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["T","F"], answers=["F"],school_key=school.key)
             questioninstance_height4=Query.addQuestionInstance(problem_statement="Sin90 =", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1","0","2","200"], answers=["1"],school_key=school.key)
             questioninstance_height2=Query.addQuestionInstance(problem_statement="Cos(90+A)", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["-SinA","CosA","SinB","CosecA"], answers=["-SinA"],school_key=school.key)
@@ -172,6 +172,59 @@ def fill():
             question_circle3=Query.addQuestion(questioninstance_circle3,school.key)
             question_circle4=Query.addQuestion(questioninstance_circle4,school.key)
             
+            
+            
+            
+            
+            #'''*****************************************************''''
+            
+            
+            questioninstance_part1=Query.addQuestionInstance(problem_statement=" Which of the following words is an example of a preposition? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["into","if","many","you"], answers=["into"],school_key=school.key)
+            
+            questioninstance_part2=Query.addQuestionInstance(problem_statement="Which of the following words is an example of an interjection? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["soon","when","ouch","within"], answers=["ouch"],school_key=school.key)
+            questioninstance_part3=Query.addQuestionInstance(problem_statement="Which of the following words is an example of a conjunction? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["and","run","below","her"], answers=["and"],school_key=school.key)
+
+            questioninstance_part4=Query.addQuestionInstance(problem_statement="Which of the following words is an example of a verb? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["tastes","late","not","slowly"], answers=["tastes"],school_key=school.key)
+
+        
+            
+            questioninstance_tense1=Query.addQuestionInstance(problem_statement="Find the correct tense  : Did you play tennis yesterday?  ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["Simple Past","Present Perfect","Past Progressive"," Present Perfect Progressive"], answers=["Simple Past"],school_key=school.key)
+            questioninstance_tense2=Query.addQuestionInstance(problem_statement="Find the correct tense : Was John reading the book last night?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["Simple Past","Present Perfect","Past Progressive"," Present Perfect Progressive"], answers=["Past Progressive"],school_key=school.key)
+            questioninstance_tense3=Query.addQuestionInstance(problem_statement="Find the correct tense : Have you been waiting for me for long?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["Simple Past","Present Perfect","Past Progressive"," Present Perfect Progressive"], answers=["Present Perfect Progressive"],school_key=school.key)
+            questioninstance_tense4=Query.addQuestionInstance(problem_statement="Find the correct tense :Have you ever watched a film in English?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["Simple Past","Present Perfect","Past Progressive"," Present Perfect Progressive"], answers=["Present Perfect"],school_key=school.key)
+            
+            
+            
+            
+            questioninstance_sentence1=Query.addQuestionInstance(problem_statement="Fill Conjunctions in sentence : I like English ____ I like French very much.", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["and","but","so","or"], answers=["and"],school_key=school.key)
+            questioninstance_sentence2=Query.addQuestionInstance(problem_statement="Fill Conjunctions in sentence  :My brother likes Maths but he doesn't like History", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["and","but","so","or"], answers=["but"],school_key=school.key)
+            questioninstance_sentence3=Query.addQuestionInstance(problem_statement="Fill Conjunctions in sentence :Can you read and write English words?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["and","but","so","or"], answers=["and"],school_key=school.key)
+            questioninstance_sentence4=Query.addQuestionInstance(problem_statement="Fill Conjunctions in sentence :Do we have French or Music after the break?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["and","but","so","or"], answers=["or"],school_key=school.key)
+            
+         
+           
+            question_part1=Query.addQuestion(questioninstance_part1,school.key)
+            question_part2=Query.addQuestion(questioninstance_part2,school.key)
+            question_part3=Query.addQuestion(questioninstance_part3,school.key)
+            question_part4=Query.addQuestion(questioninstance_part4,school.key)
+           
+            
+            question_tense1=Query.addQuestion(questioninstance_tense1,school.key)
+            question_tense2=Query.addQuestion(questioninstance_tense2,school.key)
+            question_tense3=Query.addQuestion(questioninstance_tense3,school.key)
+            question_tense4=Query.addQuestion(questioninstance_tense4,school.key)
+          
+           
+           
+           
+            question_sentence1=Query.addQuestion(questioninstance_sentence1,school.key)
+            question_sentence2=Query.addQuestion(questioninstance_sentence1,school.key)
+            question_sentence3=Query.addQuestion(questioninstance_sentence1,school.key)
+            question_sentence4=Query.addQuestion(questioninstance_sentence1,school.key)
+            
+            #'''*******************************************'''
+            
+            
             state1=Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
             state2=Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
             
@@ -193,12 +246,21 @@ def fill():
            
             
              
-            Query.assign_questions_to_state(state1.key, [question_number1.key,question_number2.key,question_number3.key,question_number4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key,question_height1.key,question_height2.key,question_height3.key,question_height4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)            
+            Query.assign_questions_to_state(state1.key, [question_number1.key,question_number2.key,question_number3.key,question_number4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key,question_height1.key,question_height2.key,question_height3.key,question_height4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)         
+            Query.assign_questions_to_state(state2.key, [question_sentence1.key,question_sentence2.key,question_sentence3.key,question_sentence4.key,question_part1.key,question_part2.key,question_part3.key,question_part4.key,question_tense1.key,question_tense2.key,question_tense3.key,question_tense4.key],school.key)               
             
             Query.assign_questions_to_topic(topic_number.key,[question_number1.key,question_number2.key,question_number3.key,question_number4.key],school.key)
             Query.assign_questions_to_topic(topic_trig.key,[question_trig1.key,question_trig2.key,question_trig3.key,question_trig4.key],school.key)
             Query.assign_questions_to_topic(topic_circle.key,[question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)
             Query.assign_questions_to_topic(topic_height.key,[question_height1.key,question_height2.key,question_height3.key,question_height4.key],school.key)
+            
+            
+            
+            
+            Query.assign_questions_to_topic(topic_part.key,[question_part1.key,question_part2.key,question_part3.key,question_part4.key],school.key)
+            Query.assign_questions_to_topic(topic_sentences.key,[question_sentence2.key,question_sentence3.key,question_sentence4.key,question_sentence1.key],school.key)
+            Query.assign_questions_to_topic(topic_tenses.key,[question_tense1.key,question_tense2.key,question_tense3.key,question_tense4.key],school.key)
+           
             
             #a=Query.assign_states_to_topic_by_name("Number  System",[state1.key,state2.key,state3.key],school.key)            #Query.assign_assessment_state_to_student(student.key, assessment1.key,state1.key)
             
@@ -206,6 +268,10 @@ def fill():
             Query.assign_states_to_topic(topic_height.key, [state1.key,state2.key,state3.key],school.key)
             Query.assign_states_to_topic(topic_trig.key, [state1.key,state2.key,state3.key],school.key)
             Query.assign_states_to_topic(topic_circle.key, [state1.key,state2.key,state3.key],school.key)
+            
+            Query.assign_states_to_topic(topic_part.key, [state1.key,state2.key,state3.key],school.key)
+            Query.assign_states_to_topic(topic_sentences.key, [state1.key,state2.key,state3.key],school.key)
+            Query.assign_states_to_topic(topic_tenses.key, [state1.key,state2.key,state3.key],school.key)
             
             
             
@@ -221,28 +287,31 @@ def fill():
             
             assessment6=Query.addAssessment(name="Assessment6",list_topic_key=[topic_circle.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
             assessment7=Query.addAssessment(name="Assessment7",list_topic_key=[topic_circle.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            '''assessment8=Query.addAssessment(name="Assessment8",list_topic_key=[topic2.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            assessment9=Query.addAssessment(name="Assessment9",list_topic_key=[topic1.key,topic2.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            assessment10=Query.addAssessment(name="Assessment10",list_topic_key=[topic1.key,topic2.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            assessment11=Query.addAssessment(name="Assessment11",list_topic_key=[topic3.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            assessment12=Query.addAssessment(name="Assessment12",list_topic_key=[topic3.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            assessment13=Query.addAssessment(name="Assessment13",list_topic_key=[topic4.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            assessment14=Query.addAssessment(name="Assessment14",list_topic_key=[topic4.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            assessment15=Query.addAssessment(name="Assessment15",list_topic_key=[topic3.key,topic4.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            assessment16=Query.addAssessment(name="Assessment16",list_topic_key=[topic3.key,topic4.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            '''
+           
+            
+            assessment8=Query.addAssessment(name="Assessment8",list_topic_key=[topic_part.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment9=Query.addAssessment(name="Assessment9",list_topic_key=[topic_part.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment10=Query.addAssessment(name="Assessment10",list_topic_key=[topic_part.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment11=Query.addAssessment(name="Assessment11",list_topic_key=[topic_sentences.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment12=Query.addAssessment(name="Assessment12",list_topic_key=[topic_sentences.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment13=Query.addAssessment(name="Assessment13",list_topic_key=[topic_sentences.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment14=Query.addAssessment(name="Assessment14",list_topic_key=[topic_tenses.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment15=Query.addAssessment(name="Assessment15",list_topic_key=[topic_tenses.key,topic_sentences.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment16=Query.addAssessment(name="Assessment16",list_topic_key=[topic_tenses.key,topic_sentences.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            
             
            
-            a=Query.login('Vivek_Bhatia', '')
-            a=Query.login('Vijay_Mehta', '')
+            Query.login('Ankit_Bhatia', '')
+            Query.login('Vijay_Mehta', '')
             Query.get_states_of_topic(topic_number.key)
-            
+            Query.get_states_of_topic(topic_part.key)
+        
             
             Query.get_questions_of_state(state1.key)
             Query.get_questions_of_topic(topic_number.key)
             Query.signup_school("DPS INDIRAPURAM", address1)
             Query.get_subjects_by_student(student_vivek.key)
-            a=Query.get_topics_by_subject(subject_maths.key)
+            Query.get_topics_by_subject(subject_maths.key)
             
             a=Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=40,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
             
@@ -265,29 +334,52 @@ def fill():
             Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment6.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
             Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=34,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
             
-           
-           
-           
-           
-            a=Query.get_mastery_by_topic(topic_number.key, student_vivek.key)
-            a=Query.get_mastery_by_subject(subject_maths.key,student_vivek.key)
-            #a=Query.get_student_score_in_assessment(student1.key, assessment1.key)
-            a=Query.get_student_score_in_assessment(student_vivek.key, assessment1.key)
-            a=Query.get_pending_assessment_subject(subject_maths.key,student_vivek.key)
             
-            Query.get_mastery_by_topic(topic_number.key,student_vivek.key)
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=30,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number3.key,score=40,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+           
+            Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig2.key,score=30,school_key=school.key,completion_date=datetime.date(int(2012),int(2),int(2)))
+            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment4.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height2.key,score=80,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+            
+            Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle4.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+            
+            
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=20,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number4.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+           
+            Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig3.key,score=75,school_key=school.key,completion_date=datetime.date(int(2012),int(2),int(2)))
+            a=Query.update_assessment_detail_of_student(student_key=student_prajjwal.key, assessment_key=assessment4.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height1.key,score=30,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+            Query.update_assessment_detail_of_student(student_key=student_prajjwal.key,  assessment_key=assessment5.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=70,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+            Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment6.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+            Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+            
+           
+           
+           
+            
+            Query.get_mastery_by_topic(topic_part.key, student_vivek.key)
+            a=Query.get_mastery_by_subject(subject_english.key,student_vivek.key)
+            #a=Query.get_student_score_in_assessment(student1.key, assessment1.key)
+            a=Query.get_student_score_in_assessment(student_vivek.key, assessment7.key)
+            a=Query.get_pending_assessment_subject(subject_maths.key,student_prasoon.key)
+            
+            a=Query.get_mastery_by_topic(topic_number.key,student_vivek.key)
             #a1=Query.get_mastery_by_topic(topic2.key,student2.key)
             
             #a3=Query.get_mastery_by_topic(topic2.key,student4.key)
-            a=Query.get_mastery_by_subject(subject_maths.key, student_vivek.key)
+            a=Query.get_mastery_by_subject(subject_english.key, student_kavya.key)
             a=Query.get_growth_for_all_subject(student_vivek.key)
             a=Query.get_ready_to_learn_of_all_topic(subject_maths.key,student_vivek.key)
             a=Query.get_learning_progress_date_wise_dummy( student_vivek.key,subject_maths.key)
             #Query.get_mastery_for_all_subjects(student1.key)
-            a=Query.get_average_mastery_by_subject_detailed(teacher_vijay.key, class_VA.key, subject_maths.key)
+            a=Query.get_average_mastery_by_subject_detailed(teacher_vijay.key, class_VA.key, subject_english.key)
             a=Query.get_average_mastery_all_subject_detailed(teacher_vijay.key, class_VA.key)
             a=Query.get_growth_for_subject(student_vivek.key,subject_maths.key)
-            a=Query.get_growth_for_all_subject(student_vivek.key)
+            a=Query.get_growth_for_all_subject(student_kavya.key)
             a=Query.get_mastery_by_student_of_class(teacher_vijay.key)
             a=Query.get_students_not_logged_in_of_all_class(teacher_vijay.key)
             a=Query.get_average_mastery_by_subject_of_all_class(teacher_vijay.key)
@@ -298,17 +390,15 @@ def fill():
             
             a=Query.get_assessment_coverage_of_class(teacher_vijay.key,class_VA.key)#changed
             a=Query.get_subject_details_of_teacher_in_class(teacher_vijay.key,class_VA.key)
-            a=Query.get_ready_to_learn_of_class(teacher_vijay.key,class_VA.key,subject_english.key)
+            a=Query.get_ready_to_learn_of_class(teacher_vijay.key,class_VA.key,subject_maths.key)# when no attended then ?
             a=Query.get_assessment_coverage_of_subject(teacher_vijay.key,class_VA.key,subject_maths.key)
             a= Query.get_average_mastery_of_a_subject(teacher_vijay.key,class_VA.key,subject_maths.key)
             a=Query.get_subject_details_by_student(student_vivek.key)
-            ''''Query.get_growth_for_subject(student1.key,subject1.key)
-            a=Query.get_student_next_question_in_assessment(student1.key, assessment3.key)   
-            Query.get_ready_to_learn_topic(topic1.key,student1.key) 
-            a=Query.get_learning_progress_date_wise(topic1.key, student1.key)
-            a=Query.get_ready_to_learn_of_all_topic_dummy(student1.key)
-            a=Query.get_ready_to_learn_of_all_topic(subject1.key, student1.key)
-
+            a=Query.login('Ankit_Bhatia','')
+            b=Query.login('Vivek_Mehta', '')
+           
+            '''
+            old data
             address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
             school=Query.addSchool("CVSchool", address1)
             
@@ -442,7 +532,7 @@ def fill():
             Query.get_ready_to_learn_of_class(teacher1.key)
             Query.get_mastery_by_student_of_class(teacher1.key)
             Query.get_students_not_logged_in_by_class(teacher1.key)'''
-            return a
+            return a,b
                         
             
             

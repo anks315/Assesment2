@@ -654,7 +654,7 @@ def addUserInfo(firstname, lastname, date_of_birth, sex, address, email, contact
 Adds a new Assessment:
                 list_topic_key: list of topics covered in the assessment
 """
-@ndb.transactional(xg=True)
+#@ndb.transactional(xg=True)
 def addAssessment(name, list_topic_key, school_key, date, due_date, published, teacher_key, class_key):
     try :     
         logging.info("CV Logs : Inside addAssessment")
@@ -2260,8 +2260,8 @@ def get_average_mastery_by_subject_detailed(teacher_key, class_key, subject_key)
              return [0, dict_average_topic_mastery]
         # logging.error("@@@@@@@@@@@@@@@@@@@@@@@@@@"+str(len(topics)))
         for student in students_in_class:
-            
-            mastery = mastery + get_mastery_by_subject(subject.key, student.key)
+            a=get_mastery_by_subject(subject.key, student.key)
+            mastery = mastery + a
             count += 1
         average_mastery = int(mastery / float(count) ) 
         for topic in topics:
@@ -2594,10 +2594,14 @@ def get_mastery_by_subject(subject_key, student_key):
         topic_mastery=0
         logging.error("dffffffffffffff" + str(total))
         for topic in topics_sub:
-            topic_mastery+=get_mastery_by_topic(topic.key, student_key)
+            a=get_mastery_by_topic(topic.key, student_key)
+            if  a <0 :
+                continue
+            topic_mastery+=a
         mastry = topic_mastery / (float(total)*100)
         logging.info("CV Logs : success to get mastry for  student  :" + str(mastry))
-        return int(mastry * Constant.MAX_MARKS)
+        final_mastery=int(mastry * Constant.MAX_MARKS)
+        return final_mastery
     except Exception:
         logging.info("CV Logs : failed to get mastry for  student :")
         logging.exception("")
@@ -2853,7 +2857,7 @@ def get_mastery_by_topic(topic_key, student_key):
         assessment_records = get_assessment_records_by_topic(student_key, topic_key)
         logging.error("544554**********************"+str(assessment_records))
         if assessment_records == None or len(assessment_records) == 0:
-            return Constant.ERROR_NO_DATA_FOUND
+            return 0
         date_latest = assessment_records[0].completion_date
         
         assessment_latest = None
