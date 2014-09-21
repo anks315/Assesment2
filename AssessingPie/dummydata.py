@@ -16,7 +16,8 @@ def fill():
       try: 
             address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
             school=Query.addSchool("CVSchool", address1)
-            
+
+
             ankit_user=Query.addUserInfo("Ankit","Bhatia",datetime.date(int(2009),int(8),int(6)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
             kavya_user=Query.addUserInfo("Kavya","Singh",datetime.date(int(2008),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "kavya@gmail.com", 7667654766)
             prajjwal_user=Query.addUserInfo("Prajjwal","Ojha",datetime.date(int(2011),int(6),int(8)),Constant.Constant.SEX_MALE, address1, "prajjwal@gmail.com", 87654766)
