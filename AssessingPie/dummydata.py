@@ -30,7 +30,7 @@ def fill():
    
             
             
-            vijay_user=Query.addUserInfo("Vijay","Mehta",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            vijay_user=Query.addUserInfo("Vivek","Mehta",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
             sulabh_user=Query.addUserInfo("Sulabj","Jain",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
             #userinfo7=Query.addUserInfo("Smriti","Arora",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
             #userinfo8=Query.addUserInfo("Samarath","Tiwari",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
@@ -395,7 +395,12 @@ def fill():
             a= Query.get_average_mastery_of_a_subject(teacher_vijay.key,class_VA.key,subject_maths.key)
             a=Query.get_subject_details_by_student(student_vivek.key)
             a=Query.login('Ankit_Bhatia','')
-            b=Query.login('Vivek_Mehta', '')
+            b=None
+            
+            #a=Query.signup_teacher(sulabh_user, "CVSchool5678",'')
+            #b=Query.signup_student(pravesh_user, "CVSchool5678",'')
+            #c=Query.login(a,"")
+            #d=Query.login(b,"")
            
             '''
             old data
@@ -532,7 +537,7 @@ def fill():
             Query.get_ready_to_learn_of_class(teacher1.key)
             Query.get_mastery_by_student_of_class(teacher1.key)
             Query.get_students_not_logged_in_by_class(teacher1.key)'''
-            return a,b
+            return a
                         
             
             

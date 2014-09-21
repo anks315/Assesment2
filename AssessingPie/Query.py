@@ -70,36 +70,65 @@ def signup_school(name, address):
 """
 Sign up for a teacher
 
+basic_info object of UserInfo:
+First of all make an address instance : address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
+then make a basic_info object using   : user_basicinfo=Query.addUserInfo("Ankit","Bhatia",datetime.date(int(2009),int(8),int(6)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
+dummy schoolcode= CVSchool5678
+returns username
+
+usage example : Query.signup_teacher(user_basicinfo, "CVSchool5678",'')
 """
-def signup_teacher(basic_info, school_key, pwd):
+def signup_teacher(basic_info, school_code, pwd):
       logging.info("CV Logs : inside signup_teacher ")
       try:
+          school=School.query(School.code==school_code).get()
+          if school==None:
+              return Constant.ERROR_NO_DATA_FOUND
+          school_key=school.key
           teacher = addTeacher(basic_info, school_key, pwd)
-            
+        
           if not  isinstance(teacher, Teacher):
                return Constant.ERROR_BAD_VALUE 
+          username=teacher.basic_info.firstname+"_"+teacher.basic_info.lastname
       except Exception:
-          logging.error("CV Logs : failed to sign up for teacher :" + teacher.basic_info.firstname)
+          logging.exception("")
+          #logging.error("CV Logs : failed to sign up for teacher :" + teacher.basic_info.firstname)
           return Constant.ERROR_OPERATION_FAIL
       logging.info("CV Logs : success to sign up for teacher :" + teacher.basic_info.firstname)  
-      return teacher
+      return username
 
 """
 Sign up for a student
 
+
+basic_info object of UserInfo:
+First of all make an address instance : address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
+then make a basic_info object using   : user_basicinfo=Query.addUserInfo("Ankit","Bhatia",datetime.date(int(2009),int(8),int(6)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
+dummy schoolcode= CVSchool5678
+returns username
+
+usage example : Query.signup_student(user_basicinfo, "CVSchool5678",'')
 """
 
-def signup_student(basic_info, school_key, pwd):
+def signup_student(basic_info, school_code, pwd):
       logging.info("CV Logs : inside signup_student ")
       try:
+          
+          school=School.query(School.code==school_code).get()
+          if school==None:
+              return Constant.ERROR_NO_DATA_FOUND
+          school_key=school.key
           student = addStudent(basic_info, school_key, pwd)
           if not  isinstance(student, Student):
                return Constant.ERROR_BAD_VALUE
+          username=student.basic_info.firstname+"_"+student.basic_info.lastname
       except Exception:
-          logging.error("CV Logs : failed to sign up for student :" + student.basic_info.firstname)
+          logging.exception("")
+          
           return Constant.ERROR_BAD_VALUE 
       logging.info("CV Logs : success to sign up for student :" + student.basic_info.firstname)
-      return student
+      
+      return username
 
 
 """
@@ -427,7 +456,7 @@ def addSchool(name, address):
        logging.info("CV Logs : Inside addSchool")
        if not isinstance(address, Address):
             return Constant.ERROR_BAD_VALUE      
-       school = School(name=name, address=address, code=name + "34567") 
+       school = School(name=name, address=address, code=name + "5678") 
        school.put()  
        logging.info("CV Logs : success to add school  :" + school.name)
        return school;
