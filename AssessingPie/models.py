@@ -368,6 +368,8 @@ key Property: school_key: contains key of  a School
 class Student_Assessments(ndb.Model):   
     student_key = ndb.KeyProperty(kind=Student,required=True)
     attended_assessment_key = ndb.KeyProperty(kind=Assessment, repeated=True)
+    #assessment_record= ndb.KeyProperty(kind=Assessment_Record,repeated=True,default=None)
     assessment_record= ndb.KeyProperty(kind=Assessment_Record,repeated=True)
+   
    
     
