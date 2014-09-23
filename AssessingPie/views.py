@@ -323,3 +323,6 @@ def dashboard(request):
         session['lastlogin']=user_information[2]
         return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
     return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+
+def ques(request):
+    return render_to_response('Home/Questions.html',{},context_instance = RequestContext(request))
