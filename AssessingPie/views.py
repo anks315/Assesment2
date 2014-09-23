@@ -298,7 +298,6 @@ def dashboard(request):
     session = get_current_session()
 
     session['type'] = user_information[0]
-
     if session['type'] == Constant.Constant.STUDENT:
         student = user_information[1]
         session['studentkey']= student.key
@@ -310,7 +309,7 @@ def dashboard(request):
         session['dateofbirth '] =student.basic_info.date_of_birth
         session['sex']=student.basic_info.sex
         session['lastlogin']=user_information[2]
-        return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
+        return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
     if session['type'] == Constant.Constant.TEACHER:
         teacher = user_information[1]
         session['teacherkey']=teacher.key
@@ -322,5 +321,5 @@ def dashboard(request):
         session['dateofbirth '] = teacher.basic_info.date_of_birth
         session['sex']=teacher.basic_info.sex
         session['lastlogin']=user_information[2]
-        return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
+        return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
     return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
