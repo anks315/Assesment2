@@ -676,7 +676,25 @@ function readytolearnbysubject(classname,subjectname){
 
              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-                //Content to be Filled
+                             no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
+
+                     for (i = 0; i < no_of_topics; i++) {
+
+                       x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
+                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
+
+
+
+                var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + question + "</td></tr></tbody></table>";
+
+                         div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+                     }
+
+
+
+                 document.getElementById("readytoLearn").innerHTML = div_to_be_loaded;
          }
      }
 
@@ -687,6 +705,8 @@ function readytolearnbysubject(classname,subjectname){
 
 }
 
+//ankurjain
+//to be donee
 function masterydetailofsubject(classname,subjectname){
 
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -696,21 +716,41 @@ function masterydetailofsubject(classname,subjectname){
              // code for IE6, IE5
              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
          }
-         xmlhttp.onreadystatechange = function() {
+      xmlhttp.onreadystatechange = function() {
 
              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-            //Content to be Filled
+                             no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
+
+                     for (i = 0; i < no_of_topics; i++) {
+
+                       x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
+                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
+
+
+
+                var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + question + "</td></tr></tbody></table>";
+
+                         div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+                     }
+
+
+
+                 document.getElementById("readytoLearn").innerHTML = div_to_be_loaded;
          }
      }
 
-     xmlhttp.open("GET", "/averagemasterybysubjectbyclass?id=" + classkey, true);
+     xmlhttp.open("GET", "/readytolearn_by_subject?id=" + classkey+"&subject="+subjectname, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
 
 
 }
 
+//ankurJian
+//details of subject
 function detailsofsubject(classname,subjectname){
 
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
