@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Critical Velos</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<script>
+	var current = 1;
+	var clear = 0;
+	function validation()
+	{
+		//alert("validating");
+	
+	}
+	function clearText()
+	{
+		$('#answer').val('');
+			
+	}
+	function moveToNext(clearOrNext)
+	{
+		if(clearOrNext == 0)
+		{
+			$("#number").replaceWith( "<h2><pre>Question #"+(current + 1)+ "</pre></h2>");
+			if(current == 1){
+				
+				
+				$('#question').load('basic.html #basicTwo');
+				$('#answer').val('');
+			}
+			else if (current == 2) {
+				
+				
+				$('#question').load('basic.html #basicThree');
+				$('#answer').val('');
+			}
+			current=current+1;
+		} else {
+			clearText();
+		}
+	
+	}
+	
+</script>
+</head>
+<body>
+	<div class="template_background">
+		<div class="template_header" style="">
+			<div class="template_main_header" style="">
+				
+				<table  width="100%">
+				<tr >
+				<td  width="9%" >
+				</td>
+				<td  width="25%">
+					<a class="symbol" href="#" target="_top">
+						<img align="baseline" alt="SAMSUNG MDM" border="0" hspace="0" src="./images/logo.png" style="width: 224px; height: 45px">
+					</a>
+				</td>
+				<td width="25%">
+				</td>
+				<td  width="25%">
+					<div style=" float: right;; " aria-label="Quick links" role="navigation">
+					   <!-- <a style="padding-right: 10px;" class="wlnk" href="#">LOGIN</a>  -->
+					</div>
+				</td>
+				<td  width="12%">
+				</td> 
+				</tr>
+				
+				</table>
+			</div>
+		 	<div  class="template_dashboard_header" style="padding-bottom:5px; background-color: #D3EBCB;height:100px">
+		 	
+		 		<span >
+		 		  	<div class="home" style="margin-left:10%;margin-top:36px;box-shadow: 8px 8px 5px #888888;border-radius: 10px;"  id="homeimage" >
+		 		  	
+		 		  	 <img alt="HOME" src="./images/home3.png">
+		 		  	</div>
+
+		 		</span>
+				<!--  <table width ="100%" cellspacing="0" style="border-bottom:5px;border-bottom-style:solid;border-bottom-color:green;" >
+				<tr style="background-color:#C2D4DB " >
+				<td width="13%">
+				</td>
+				<td width=40%>
+					<p> Search Class</p>	
+					<input type="text" value="ankur">	
+					</td>
+				<td width=40%>
+					<p> Search Student</p>	
+					<input type="text" value="ankur">	
+				</td>
+				</tr>
+				</table>-->
+			</div>
+			
+		
+                
+		</div>
+		
+
+<div style="background-color:#FFF" width = 100%>
+<hr />
+<div id = "mainQuestions" width = 95%>
+
+
+
+
+<div id="number">
+<h2>
+<pre>
+Question #<script>document.write(current)</script>
+</pre>
+</h2>
+</div>
+
+
+
+<div id = "question">
+{{ nextquestion }}
+</div >
+<div id = "answerDiv">
+
+<input  id = "answer" width="20px"  type="text" placeholder = "Enter Your Answer">
+<table>
+
+<tr>
+<td width="60%"></td>
+<td><p class= "nextClear"><a  href="#" onclick = "moveToNext(1);">Clear</a></p></td>
+<td><p class= "nextClear"><a href="#" onclick = "validation();moveToNext(0);">Next</a></p></td>
+</tr>
+</table>
+</div>
+<hr />
+<div id="sim_footer_bottom_out" style="background-color:#EEE">
+   <div id="sim_footer_bottom" style="">   Copyright © 2014 UC Regents&nbsp;and Critical Velos -<sup>®</sup> is a registered trademark of Critical Corporation. <a href="http://www.CV.com/user_agreement" onclick="window.open('', 'user_agreement', 'width=717,height=500,menubar=no,toolbar=no,status=no,scrollbars=yes,resizable=yes,location=no,directories=no,left=300,top=100'); return false;">User Agreement</a> - <a href="#" onclick="window.open('#', 'privacy_statement', 'width=717,height=500,menubar=no,toolbar=no,status=no,scrollbars=yes,resizable=yes,location=no,directories=no,left=300,top=100'); return false;">Privacy Statement</a></div>
+</div>
+
+</div>
+</body>
