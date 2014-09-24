@@ -134,7 +134,7 @@ def get_averagemastery_of_subject_topicwise(request):
     subjectkey = ndb.Key(urlsafe=key)
     averagemasteryofsubject = Query.get_average_mastery_of_a_subject(teacherkey,classkey,subjectkey)
     logging.error(averagemasteryofsubject)
-    t = loader.get_template('Dashboard/assessmentcoverageofsubject')
+    t = loader.get_template('Dashboard/averagemasteryofsubjecttopicwise')
     c = Context({'averagemasterydict': averagemasteryofsubject,})
     return HttpResponse(t.render(c),content_type="text/xml")
 
