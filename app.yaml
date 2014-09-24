@@ -20,32 +20,25 @@ handlers:
   upload: static/css/.*
 
 - url: /assessment(.*)
-  login: required
   script: main.app
 
 - url: /inference/(.*)
-  login: required
   script: main.app
 
 - url: /topicnames/(.*)
-  login: required
   script: main.app
 
 - url: /userdetails/(.*)
-  login: required
   script: main.app
 
 - url: /masterybysubject/(.*)
-  login: required
   script: main.app
 
 - url: /pendingassessmentbysubject/(.*)
-  login: required
   script: main.app
 
 
 - url: /growthbysubject/(.*)
-  login: required
   script: main.app
 
 - url: /readytolearnbysubject/(.*)
@@ -53,59 +46,45 @@ handlers:
   script: main.app
 
 - url: /notrecentlyloggedin_by_class/(.*)
-  login: required
   script: main.app
 
 - url: /notrecentlyloggedinall_by_teacher/(.*)
-  login: required
   script: main.app
 
 - url: /getclassdetailsbyteacher/(.*)
-  login: required
   script: main.app
 
 - url: /notloggedinbyclass(.*)
-  login: required
   script: main.app
 
 - url: /averagemasteryofsubject_topicwise(.*)
-  login: required
   script: main.app
 
 - url: /averagemasterybysubjectbyclass(.*)
-  login: required
   script: main.app
 
 - url: /subjectsofclass(.*)
-  login: required
   script: main.app
 
 - url: /assessmentcoveragebyclass(.*)
-  login: required
   script: main.app
 
 - url: /getclassdetailsbyteacher/(.*)
-  login: required
   script: main.app
 
 - url: /readytolearnofsubject(.*)
-  login: required
   script: main.app
 
 - url: /assessmentcoverageofsubject(.*)
-  login: required
   script: main.app
 
 - url: /averagemasterybysubjectallclass/(.*)
-  login: required
   script: main.app
 
 - url: /learningprogress_by_date/(.*)
-  login: required
   script: main.app
 
 - url: /mastery_by_student_by_class/(.*)
-  login: required
   script: main.app
 
 
