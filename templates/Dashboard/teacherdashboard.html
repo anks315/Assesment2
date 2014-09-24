@@ -498,6 +498,8 @@
 
         populatedivrecentlyloggedinofclass(classkey);
         populatedivaveragemasterypersubjectofclass(classkey);
+        populateassessmentcoverageofclass(classkey);
+
         document.getElementById('class_dashboard_row1_col1_header').innerHTML="Students Not Recently Logged in";
         document.getElementById('class_dashboard_row1_col2_header').innerHTML="Class Information";
         document.getElementById('class_dashboard_row2_col1_header').innerHTML="Average Mastery Of subject Of Class";
@@ -508,6 +510,61 @@
 
     }
 
+    populatedivclassinfo(classkey){
+
+
+    }
+
+    function populateassessmentcoverageofclass(classname){
+
+
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                 xmlhttp = new XMLHttpRequest();
+                 xmlhttp.overrideMimeType("text/xml");
+             } else {
+                 // code for IE6, IE5
+                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+             }
+
+        div_to_be_loaded="";
+             xmlhttp.onreadystatechange = function() {
+
+                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                        no_of_assesments = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
+
+                         for (i = 0; i < no_of_assesments; i++) {
+
+                           x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
+                         var subject_name = x.getElementsByTagName("subjectname")[0].childNodes[0].nodeValue.trim();
+                         var assesment_id = x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
+                         var percentage = x.getElementsByTagName("percentage")[0].childNodes[0].nodeValue.trim();
+
+
+
+                    var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:30%; background-color: #cce0ef\">" + assesment_id + "</a></td><td style=\"width:33%; color: #ac4637;background-color: #cce0ef\">" + percentage + "</td><td style=\"width:30%; color: #ac4637;background-color: #cce0ef\">" + subject_name + "</td></tr></tr></tbody></table>";
+
+                             div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+                         }
+
+
+
+                     document.getElementById("readytoLearn").innerHTML = div_to_be_loaded;
+
+                    //Content to be Filled
+
+
+             }
+         }
+
+         xmlhttp.open("GET", "/assessmentcoveragebyclass?id=" + classname+",", true);
+         xmlhttp.overrideMimeType("text/xml");
+         xmlhttp.send();
+
+
+
+    }
 
     function populatedivrecentlyloggedinofclass(classkey) {
 

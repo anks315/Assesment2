@@ -84,7 +84,7 @@ def get_assessment_coverage_of_class(request):
     classkey = ndb.Key(urlsafe=key)
     assessmentcoveragedict = Query.get_assessment_coverage_of_class(teacherkey,classkey)
     logging.error(assessmentcoveragedict)
-    t = loader.get_template('Dashboard/assessmentcoverageofclass')
+    t = loader.get_template('Dashboard/assessmentcoveragebyclass')
     c = Context({'assessmentcoveragedict': assessmentcoveragedict,})
     return HttpResponse(t.render(c),content_type="text/xml")
 
