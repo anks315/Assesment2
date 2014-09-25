@@ -419,6 +419,7 @@ def fill():
             a=Query.get_mastery_by_topic(topic_sentences.key,student_prasoon.key)
             #a1=Query.get_mastery_by_topic(topic2.key,student2.key)
             a=Query.get_assessment_coverage_of_class(teacher_vijay.key,class_VA.key)
+            a=Query.login("Vijay_Mehta", '')
             #a3=Query.get_mastery_by_topic(topic2.key,student4.key)
             #a=Query.get_mastery_by_subject(subject_english.key, student_kavya.key)
             #a=Query.get_growth_for_all_subject(student_vivek.key)
