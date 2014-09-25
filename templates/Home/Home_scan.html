@@ -6,7 +6,47 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Critical Velos</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
+<script>
+
+    $(document).ready(function(){
+         $("#criticalvelosabout").show();
+         $("#whatisscan").hide();
+         $("#whyscan").hide();
+         $("#ourteam").hide();
+        // $("#header_tag").innerHTML="What is SCAN?";
+    }
+    function whatisscan(){
+    //    alert('as');
+         $("#criticalvelosabout").hide();
+         $("#whatisscan").show();
+         $("#whyscan").hide();
+         $("#ourteam").hide();
+         $("#header_tag").innerHTML="What is SCAN?";
+
+    }
+
+    function whyscan(){
+         $("#criticalvelosabout").hide();
+         $("#whatisscan").hide();
+         $("#whyscan").show();
+         $("#ourteam").hide();
+         $("#header_tag").innerHTML="Why SCAN?";
+    }
+
+    function ourteam(){
+
+         $("#criticalvelosabout").hide();
+         $("#whatisscan").hide();
+         $("#whyscan").hide();
+         $("#ourteam").show();
+         $("#header_tag").innerHTML="Our Team";
+    }
+
+
+</script>
 <body>
 
     <div class="template_body" style="">
@@ -34,7 +74,7 @@
             </a>
 
             <a href="#" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
+                <span class="ssb" style="width:20%;padding: 5px;margin: 1px;">
                 <span class="sub">COURSE&nbsp;PRODUCTS</span></span>
             </a>
 
@@ -45,67 +85,102 @@
             </a>
          </div>
 
+
+        <!-- abc -->
+
+        <table cellspacing="0" border="0" cellpadding="0" width="100%">
+ 	<tbody><tr>
+ 	<td background="/images/img_sub.png" height="80" width="232"></td>
+ 	<td width="10"></td>
+ 	<td class="header_about" height="80" width="660"><h1 id="header_tag">CRITICAL VELOS</h1></td></tr>
+ 	<tr>
+ 	<td height="30" width="232"></td>
+ 	<td width="10"></td>
+ 	<td height="30" width="660"></td></tr>
+ 	<tr>
+ 	<td align="left" valign="top" width="232">
+
+		<div class="about_us_menu menu_left " onclick="whatisscan();">
+
+		<a class="about_us_menu" href="#">
+			What is SCAN ?
+		</a>
+		<span class="about_us_menu menu_left" style="visibility: hidden;">What is SCAN ?</span>
+		</div>
+
+
+
+		<div class="about_us_menu menu_left " onclick="whyscan();">
+
+		<a class="about_us_menu" href="#">
+			Why SCAN
+		</a>
+		<span class="about_us_menu menu_left" style="visibility: hidden;">Why SCAN</span>
+		</div>
+
+
+		<div class="about_us_menu menu_left " onclick="ourteam();">
+
+		<a class="about_us_menu" href="#">
+			Our TEAM
+		</a>
+		<span class="about_us_menu menu_left" style="visibility: hidden;">OUR TEAM</span>
+		</div>
+
+
+
+		<div class="about_us_menu menu_left ">
+
+		<a class="about_us_menu" href="#">
+			Success Stories
+		</a>
+		<span class="about_us_menu menu_left" style="visibility: hidden;">Success Stories</span>
+		</div>
+
+
+
+
+	<table cellspacing="0" border="0" cellpadding="0"><tbody><tr><td class="nofont"><img src="/images/icons/spacer.gif" alt="" border="0" height="80" width="1"></td></tr></tbody></table></td>
+ 	<td width="10"><img src="/images/icons/spacer.gif" alt="" border="0" height="1" width="10"></td>
+ 	<td valign="top" width="660">
+
+<div id="criticalvelosabout" style="width: 660px; ">
+    <p>We are a research based organization working on solutions that will be helpful for betterment of the society. We at Critical Velos believe that use of technology can bring revolutionary changes in the society. Hence we are working on solutions that are the need of 21st century. Our team is dedicated to develop products that can be used in various sectors of the society and take society further. We to enhance the performance of every individual with the help of our innovative and easy to use products.</p>
+<p>In addition to technology development we take utmost care that there is balance between technology and human work and there must not be any adverse effect of any of our solution.</p>
+    <p>We understand that human values are invaluable hence use of technology should not affect the human values so one dimension of our research totally takes care of this concern. We make sure that human values should not be compromised wherever we use our technology.</p>
+</div>
+
+<div id="whatisscan" style="width: 660px; ">
+    <p><strong>SCAN </strong>is our first education based product which is a result of continuous research and innovation. The aim of this product is to provide a healthy environment to students, teachers and parents which will be helpful in overall development of child. Our vision is that every child in the country should get ample of opportunities for his development and his best qualities should be known at early stages so that they can be developed to professional level.  </p>
+<p>With this product we are targeting to change the concept of Information to knowledge and study to learning. We have also taken care that we give ample of respect to all the teachers involved with child and that teacher-child relationship becomes stronger with Indian education entering a new era.</p>
+<p><a href="#">Read an overview of SCAN</a></p></div>
+
+<div id="whyscan" style="width: 660px; ">
+<p><strong>SCAN</strong> is an Artificially Intelligent system that prepares itself uniquely for every child so that he can be assessed as per his qualities. It is not just an assessment prepared by a group of experts in which a set of questions are designed and result is analyzed. </p>
+    <p>But we at <strong>Critical Velos </strong> strongly believe that along with experts the role of teacher directly associated with a student cannot be neglected and their inputs are necessary to assess a child and make a plan for them.  Hence we have come up with a unique system that is embedded with inputs of experts and will also take inputs from teachers that are directly associated with students. </p>
+<p>Based on these inputs every child is assessed uniquely at regular intervals and it helps in knowing his mistake at early stages and work on them before they turn into his weakness. </p>
+<p>Thus SCAN gives special care every child and helps him building his own dream future.</p>
+</div>
+
+<div id="ourteam" style="width: 660px; ">
+<p>Our team consists of enthusiastic Young people passionate for working for society. Our team is has a rich experience in research field and have been involved in research work from last 5 years in various field. Our team is committed to embed latest technology in day to day solutions to solve real-time problems of the society.</p>
+</div>
+
+
+
+
+ </td></tr>
+ </tbody></table>
+
+        <!-- abc
+
+
 <div id="pic_table" style="width: 100%; height: 400px;/* background: url(http://1.bp.blogspot.com/-4QXn3QzBRAs/UG7WEMqZBPI/AAAAAAAADig/KmUm9EvLILM/s640/inidna-flag-black-and-white-with-color-photo.jpg);*/">
-		
-         <!--
-         <div style="width: 900px; height: 450px; background-color: green;">
-		                 <div id="id_text1_2" style="">
-		 -->
-
-
-                    <div class="login_outbox" style="" >
-
-                        <div class="login_innerbox" style="">
-
-                            <div style=" margin: 0px 10px;; ">
-
-                                <form name="login" id="login" style="padding: 0em; margin: 0em" method="POST" action="/dashboard/"  target="_top">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="_form_" value="login">
-                                    <label for="username" id="label_username" style="color:white; display: none">User Name</label>
-                                    <br>
-                                    <input type="text" name="username" id="username" value="" size="15" maxlength="40" style="border: 1px inset #B9B9B9; width: 
-178px; height: 23px; padding: 0px; margin: 0; font:vectipedebook,Arial,sans-serif;" placeholder=" User Name">
-
-                                    <div style="PADDING-TOP: 5px">
-                                        <label for="password" id="label_password" style="color:white; display: none">Password</label>
-                                        <br>
-
-                                        <input type="password" autocomplete="off" name="password" id="password" value="" size="15" maxlength="40" style="border: 1px
-inset #B9B9B9; width: 
-178px;height: 23px; padding: 0px; font:vectipedebook,Arial,sans-serif;margin: 0px" placeholder=" Password">
-                                    </div>
-
-                                    <div style="PADDING-TOP: 10px">
-                                        <font color="white" size="1"><div style="width:65pxpx;"><button class="login_search" name="login" style="padding-bottom: 2px; padding-left: 5px; padding-right: 5px; padding-top: 2px" type="submit" value="true">LOG IN</button> </div><input type="hidden" name="opt_home_page" value="#">
-<input type="hidden" name="opt_error_page" value="">
-<input type="hidden" name="return_url" value=""></font>
-                                    </div>
-									
-                                </form>
-
-
-
-
-                                <div id="id_text1_4_insert_shortcut_2_insert_shortcut_13" style=" margin: 5px 0px;; ">
-								<a class="white_link" href="#" style="font-style: italic" target="_blank">Forgot your login info?</a>
-								<br>
-								<a class="white_link" href="#" style="font-style: italic" target="_blank">SIGN UP NOW</a>
-                                </div>
-
-                            </div>
-
-
-
-                        </div>
-
-
-
-                    </div>
-
 
 
 		 </div>
+-->
+
         <!--   Footers of the page   -->
 
         <div class="footer_div" style="">
@@ -134,7 +209,6 @@ inset #B9B9B9; width:
 
 
         <div id="id_letterheads_9_insert_shortcut_33" style=" clear: both;; "></div>
-
 
 
     </div>
