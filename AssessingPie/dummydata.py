@@ -16,25 +16,24 @@ def fill():
       try: 
             address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
             school=Query.addSchool("CVSchool", address1)
-
-
-            ankit_user=Query.addUserInfo("Ankit","Bhatia",datetime.date(int(2009),int(8),int(6)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
-            kavya_user=Query.addUserInfo("Kavya","Singh",datetime.date(int(2008),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "kavya@gmail.com", 7667654766)
-            prajjwal_user=Query.addUserInfo("Prajjwal","Ojha",datetime.date(int(2011),int(6),int(8)),Constant.Constant.SEX_MALE, address1, "prajjwal@gmail.com", 87654766)
-            shiv_user=Query.addUserInfo("Shiv","Sahay",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            
+            ankit_user=Query.addUserInfo("Ankit","Bhatia",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
+            kavya_user=Query.addUserInfo("Kavya","Singh",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_FEMALE, address1, "kavya@gmail.com", 7667654766)
+            prajjwal_user=Query.addUserInfo("Prajjwal","Ojha",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_MALE, address1, "prajjwal@gmail.com", 87654766)
+            shiv_user=Query.addUserInfo("Shiv","Sahay",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
             
             
-            sarthaj_user=Query.addUserInfo("Sarthak","Tiwari",datetime.date(int(2009),int(8),int(6)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
-            mishika_user=Query.addUserInfo("Mishika","Singh",datetime.date(int(2008),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "kavya@gmail.com", 7667654766)
-            prasoon_user=Query.addUserInfo("Prasoon","Garg",datetime.date(int(2011),int(6),int(8)),Constant.Constant.SEX_MALE, address1, "prajjwal@gmail.com", 87654766)
-            pravesh_user=Query.addUserInfo("Pravesh Pal","Sahay",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            sarthaj_user=Query.addUserInfo("Sarthak","Tiwari",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
+            mishika_user=Query.addUserInfo("Mishika","Singh",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_FEMALE, address1, "kavya@gmail.com", 7667654766)
+            prasoon_user=Query.addUserInfo("Prasoon","Garg",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_MALE, address1, "prajjwal@gmail.com", 87654766)
+            pravesh_user=Query.addUserInfo("Pravesh Pal","Sahay",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
    
             
             
-            vijay_user=Query.addUserInfo("Vijay","Mehta",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
-            sulabh_user=Query.addUserInfo("Sulabj","Jain",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
-            #userinfo7=Query.addUserInfo("Smriti","Arora",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
-            #userinfo8=Query.addUserInfo("Samarath","Tiwari",datetime.date(int(2012),int(6),int(8)),Constant.SEX_FEMALE, address1, "8778", 654766)
+            vijay_user=Query.addUserInfo("Vivek","Mehta",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            sulabh_user=Query.addUserInfo("Sulabj","Jain",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            #userinfo7=Query.addUserInfo("Smriti","Arora",datetime.datetime.now(),Constant.SEX_FEMALE, address1, "8778", 654766)
+            #userinfo8=Query.addUserInfo("Samarath","Tiwari",datetime.datetime.now(),Constant.SEX_FEMALE, address1, "8778", 654766)
             
             
             student_vivek=Query.addStudent(ankit_user, school.key,'pwd')
@@ -279,26 +278,26 @@ def fill():
           
           
           
-            a=assessment1=Query.addAssessment(name="Assessment1",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment2=Query.addAssessment(name="Assessment2",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment3=Query.addAssessment(name="Assessment3",list_topic_key=[topic_trig.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment4=Query.addAssessment(name="Assessment4",list_topic_key=[topic_height.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment5=Query.addAssessment(name="Assessment5",list_topic_key=[topic_height.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            a=assessment1=Query.addAssessment(name="Assessment1",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment2=Query.addAssessment(name="Assessment2",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment3=Query.addAssessment(name="Assessment3",list_topic_key=[topic_trig.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment4=Query.addAssessment(name="Assessment4",list_topic_key=[topic_height.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment5=Query.addAssessment(name="Assessment5",list_topic_key=[topic_height.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
             
             
-            assessment6=Query.addAssessment(name="Assessment6",list_topic_key=[topic_circle.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment7=Query.addAssessment(name="Assessment7",list_topic_key=[topic_circle.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment6=Query.addAssessment(name="Assessment6",list_topic_key=[topic_circle.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment7=Query.addAssessment(name="Assessment7",list_topic_key=[topic_circle.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
            
             
-            assessment8=Query.addAssessment(name="Assessment8",list_topic_key=[topic_part.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment9=Query.addAssessment(name="Assessment9",list_topic_key=[topic_part.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment10=Query.addAssessment(name="Assessment10",list_topic_key=[topic_part.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment11=Query.addAssessment(name="Assessment11",list_topic_key=[topic_sentences.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment12=Query.addAssessment(name="Assessment12",list_topic_key=[topic_sentences.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment13=Query.addAssessment(name="Assessment13",list_topic_key=[topic_sentences.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment14=Query.addAssessment(name="Assessment14",list_topic_key=[topic_tenses.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment15=Query.addAssessment(name="Assessment15",list_topic_key=[topic_tenses.key,topic_sentences.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment16=Query.addAssessment(name="Assessment16",list_topic_key=[topic_tenses.key,topic_sentences.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment8=Query.addAssessment(name="Assessment8",list_topic_key=[topic_part.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment9=Query.addAssessment(name="Assessment9",list_topic_key=[topic_part.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment10=Query.addAssessment(name="Assessment10",list_topic_key=[topic_part.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment11=Query.addAssessment(name="Assessment11",list_topic_key=[topic_sentences.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment12=Query.addAssessment(name="Assessment12",list_topic_key=[topic_sentences.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment13=Query.addAssessment(name="Assessment13",list_topic_key=[topic_sentences.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment14=Query.addAssessment(name="Assessment14",list_topic_key=[topic_tenses.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment15=Query.addAssessment(name="Assessment15",list_topic_key=[topic_tenses.key,topic_sentences.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment16=Query.addAssessment(name="Assessment16",list_topic_key=[topic_tenses.key,topic_sentences.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
             
             
            
@@ -314,74 +313,123 @@ def fill():
             Query.get_subjects_by_student(student_vivek.key)
             Query.get_topics_by_subject(subject_maths.key)
             
-            a=Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=40,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+            a=Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=40,school_key=school.key,completion_date=datetime.datetime.now())
             
-            a=Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number3.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
+            a=Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=40,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.get_mastery_by_student_of_class(teacher_vijay.key, class_VA.key, subject_maths.key)
+            a=Query.get_students_not_logged_in_by_class(teacher_vijay.key,class_VA.key)
+            a=Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number3.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
            
-            Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig2.key,score=80,school_key=school.key,completion_date=datetime.date(int(2012),int(2),int(2)))
-            a=Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment4.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height2.key,score=50,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            
-            Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle4.key,score=10,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            
-            
-            
-            a=Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=70,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            
-            a=Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number4.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-           
-            Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig3.key,score=40,school_key=school.key,completion_date=datetime.date(int(2012),int(2),int(2)))
-            a=Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment4.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height1.key,score=80,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            Query.update_assessment_detail_of_student(student_key=student_kavya.key,  assessment_key=assessment5.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=90,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment6.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=34,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            
-            
-            
-            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=30,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            
-            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number3.key,score=40,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-           
-            Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig2.key,score=30,school_key=school.key,completion_date=datetime.date(int(2012),int(2),int(2)))
-            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment4.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height2.key,score=80,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            
-            Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle4.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            
-            
-            
-            a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=20,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            
-            a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number4.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-           
-            Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig3.key,score=75,school_key=school.key,completion_date=datetime.date(int(2012),int(2),int(2)))
-            a=Query.update_assessment_detail_of_student(student_key=student_prajjwal.key, assessment_key=assessment4.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height1.key,score=30,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            Query.update_assessment_detail_of_student(student_key=student_prajjwal.key,  assessment_key=assessment5.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=70,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment6.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=100,school_key=school.key,completion_date=datetime.date(int(2012),int(6),int(8)))
-            
-           
-           
+            Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig2.key,score=80,school_key=school.key,completion_date=datetime.datetime.now())
            
             
-            Query.get_mastery_by_topic(topic_part.key, student_vivek.key)
-            a=Query.get_mastery_by_subject(subject_english.key,student_vivek.key)
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=70,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number4.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+           
+            Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig3.key,score=40,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment4.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height1.key,score=80,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_kavya.key,  assessment_key=assessment5.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=90,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment6.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=34,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            
+           
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=30,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number3.key,score=40,school_key=school.key,completion_date=datetime.datetime.now())
+           
+            Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig2.key,score=30,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment4.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height2.key,score=80,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle4.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=20,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number4.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+           
+            Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig3.key,score=75,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.update_assessment_detail_of_student(student_key=student_prajjwal.key, assessment_key=assessment4.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height1.key,score=30,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_prajjwal.key,  assessment_key=assessment5.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=70,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment6.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+            
+           ###################################################
+            Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment8.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=40,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment9.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=40,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.get_mastery_by_student_of_class(teacher_vijay.key, class_VA.key, subject_maths.key)
+            a=Query.get_students_not_logged_in_by_class(teacher_vijay.key,class_VA.key)
+            a=Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment10.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number3.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+           
+            Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment11.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig2.key,score=80,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment12.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height2.key,score=50,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            Query.update_assessment_detail_of_student(student_key=student_vivek.key, assessment_key=assessment13.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle4.key,score=10,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment8.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=70,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment9.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number4.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+           
+            Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment10.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig3.key,score=40,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment11.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height1.key,score=80,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_kavya.key,  assessment_key=assessment12.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=90,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment13.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_kavya.key, assessment_key=assessment14.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=34,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            
+            
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment8.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=87,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment9.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number3.key,score=76,school_key=school.key,completion_date=datetime.datetime.now())
+           
+            Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment10.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig2.key,score=54,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.update_assessment_detail_of_student(student_key=student_mishika.key, assessment_key=assessment11.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height2.key,score=50,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment12.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle4.key,score=55,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment13.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=45,school_key=school.key,completion_date=datetime.datetime.now())
+            
+            a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment14.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number4.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+           
+            Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment8.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig3.key,score=23,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.update_assessment_detail_of_student(student_key=student_prajjwal.key, assessment_key=assessment9.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height1.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_prajjwal.key,  assessment_key=assessment10.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=80,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment11.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=70,school_key=school.key,completion_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment12.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=60,school_key=school.key,completion_date=datetime.datetime.now())
+            
+    
+            
+            a=Query.get_mastery_by_topic(topic_number.key, student_vivek.key)
+            a=Query.get_mastery_by_subject(subject_english.key,student_prasoon.key)
             #a=Query.get_student_score_in_assessment(student1.key, assessment1.key)
-            a=Query.get_student_score_in_assessment(student_vivek.key, assessment7.key)
-            a=Query.get_pending_assessment_subject(subject_maths.key,student_prasoon.key)
+            Query.get_student_score_in_assessment(student_vivek.key, assessment7.key)
             
-            a=Query.get_mastery_by_topic(topic_number.key,student_vivek.key)
+            a=Query.get_pending_assessment_subject(subject_maths.key,student_sarthak.key)
+            
+            a=Query.get_mastery_by_topic(topic_sentences.key,student_prasoon.key)
             #a1=Query.get_mastery_by_topic(topic2.key,student2.key)
-            
+            a=Query.get_assessment_coverage_of_class(teacher_vijay.key,class_VA.key)
             #a3=Query.get_mastery_by_topic(topic2.key,student4.key)
-            a=Query.get_mastery_by_subject(subject_english.key, student_kavya.key)
-            a=Query.get_growth_for_all_subject(student_vivek.key)
-            a=Query.get_ready_to_learn_of_all_topic(subject_maths.key,student_vivek.key)
+            #a=Query.get_mastery_by_subject(subject_english.key, student_kavya.key)
+            #a=Query.get_growth_for_all_subject(student_vivek.key)
+            ''''a=Query.get_ready_to_learn_of_all_topic(subject_maths.key,student_vivek.key)
             a=Query.get_learning_progress_date_wise_dummy( student_vivek.key,subject_maths.key)
             #Query.get_mastery_for_all_subjects(student1.key)
             a=Query.get_average_mastery_by_subject_detailed(teacher_vijay.key, class_VA.key, subject_english.key)
             a=Query.get_average_mastery_all_subject_detailed(teacher_vijay.key, class_VA.key)
             a=Query.get_growth_for_subject(student_vivek.key,subject_maths.key)
             a=Query.get_growth_for_all_subject(student_kavya.key)
-            a=Query.get_mastery_by_student_of_class(teacher_vijay.key)
+            a=Query.get_mastery_by_student_of_class(teacher_vijay.key,class_VA.key, subject_maths)
             a=Query.get_students_not_logged_in_of_all_class(teacher_vijay.key)
             a=Query.get_average_mastery_by_subject_of_all_class(teacher_vijay.key)
             a=Query.get_class_details_of_teacher(teacher_vijay.key)
@@ -402,7 +450,7 @@ def fill():
             #b=Query.signup_student(pravesh_user, "CVSchool5678",'')
             #c=Query.login(a,"")
             #d=Query.login(b,"")
-           
+            '''
             '''
             old data
             address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
@@ -412,11 +460,11 @@ def fill():
             Query.signup_student( userinfo1, school.key,"123")
            
             
-            userinfo2=Query.addUserInfo("Ankit","Bhatia",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            userinfo2=Query.addUserInfo("Ankit","Bhatia",datetime.datetime.now(),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
             
-            userinfo3=Query.addUserInfo("Suraj","Singh",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
-            userinfo4=Query.addUserInfo("Sarthak","Tiwari",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
-            userinfo5=Query.addUserInfo("Vijay","Mehta",datetime.date(int(2012),int(6),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            userinfo3=Query.addUserInfo("Suraj","Singh",datetime.datetime.now(),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            userinfo4=Query.addUserInfo("Sarthak","Tiwari",datetime.datetime.now(),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            userinfo5=Query.addUserInfo("Vijay","Mehta",datetime.datetime.now(),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
             
             #teacher1=Query.addTeacher("teacher1", userinfo1, school.key)
             
@@ -479,9 +527,9 @@ def fill():
             #Query.assign_states_to_topic(topic3.key, [state1.key,state2.key,state3.key],school.key)
             #Query.assign_states_to_topic(topic4.key, [state1.key,state2.key,state3.key],school.key)
           
-            assessment1=Query.addAssessment(name="Assessment1",list_topic_key=[topic.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            assessment2=Query.addAssessment(name="Assessment2",list_topic_key=[topic.key,topic1.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
-            #assessment3=Query.addAssessment(name="Assessment3",list_topic_key=[topic2.key,topic3.key],school_key=school.key,date=datetime.date.today(),due_date=datetime.date.today(),published=True,teacher_key=teacher1.key,class_key=class1.key)
+            assessment1=Query.addAssessment(name="Assessment1",list_topic_key=[topic.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher1.key,class_key=class1.key)
+            assessment2=Query.addAssessment(name="Assessment2",list_topic_key=[topic.key,topic1.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher1.key,class_key=class1.key)
+            #assessment3=Query.addAssessment(name="Assessment3",list_topic_key=[topic2.key,topic3.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher1.key,class_key=class1.key)
            
             
            
@@ -494,9 +542,9 @@ def fill():
             Query.get_subjects_by_student(student1.key)
             Query.get_topics_by_subject(subject1.key)
             
-            Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question2.key,score=100,school_key=school.key,start_date=datetime.date(int(2012),int(6),int(8)))
-            Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question3.key,score=40,school_key=school.key,start_date=datetime.date(int(2012),int(6),int(8)))
-           # Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question3.key,score=100,school_key=school.key,start_date=datetime.date(int(2012),int(6),int(8)))
+            Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question2.key,score=100,school_key=school.key,start_date=datetime.datetime.now())
+            Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment2.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question3.key,score=40,school_key=school.key,start_date=datetime.datetime.now())
+           # Query.update_assessment_detail_of_student(student_key=student1.key, assessment_key=assessment3.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question3.key,score=100,school_key=school.key,start_date=datetime.datetime.now())
             Query.get_assessments_by_topic(student1.key, topic.key)
             a=Query.get_mastery_by_subject(subject1.key,student1.key)
             #a=Query.get_student_score_in_assessment(student1.key, assessment1.key)
@@ -538,7 +586,8 @@ def fill():
             Query.get_ready_to_learn_of_class(teacher1.key)
             Query.get_mastery_by_student_of_class(teacher1.key)
             Query.get_students_not_logged_in_by_class(teacher1.key)'''
-            return a
+            #a=str(datetime.datetime.now())
+            return (a)
                         
             
             
