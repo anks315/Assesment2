@@ -1140,6 +1140,54 @@ def assign_questions_to_state(state_key, questions_in_state_keys, school_key):
     logging.info("CV Logs: success to  assign questions to state  ")     
     return Constant.UPDATION_SUCCESSFULL
 
+
+
+
+
+"""
+Assigns  existing questions  to an existing state:
+                            topic_key: key to state entity
+                            questions_in_topic_keys : list of keys of questions covered in topic
+"""
+@ndb.transactional(xg=True)
+def map_state_to_questions(topic_key, state_questions_map,school_key):
+    state = None
+    question_state = None
+    try:
+        logging.info("CV Logs: Inside assign_questions_to_topic ")
+        topic = topic_key.get() 
+        result=Constant.ERROR_OPERATION_FAIL
+        for key in state_questions_map.keys():
+            state=addState(type=Constant.STATE_IN_TOPIC,school_key=school_key)
+            result=assign_questions_to_state(state.key,state_questions_map[key], school_key)
+            if not result==Constant.UPDATION_SUCCESSFULL:
+                return Constant.ERROR_OPERATION_FAIL
+        return result 
+    except Exception :
+        logging.exception("")
+        logging.error("CV Logs: invalid values")
+    if question_state_key == None:   
+        
+        question_state = State_Questions(parent=school_key, state_key=state_key, questions_in_state_keys=questions_in_state_keys)
+        question_state.put()    
+        state.question_in_state_key = question_state.key
+        state.put()
+    else:
+        
+         question_state = question_state_key.get()
+         question_state.questions_in_state_keys.extend(questions_in_state_keys)
+         question_state.put()
+    for question_key in questions_in_state_keys:
+         question = question_key.get()
+         question.no_states_contained_in = question.no_states_contained_in + 1
+         question.put()
+    logging.info("CV Logs: success to  assign questions to state  ")     
+    return Constant.UPDATION_SUCCESSFULL
+
+
+
+
+
 """
 Assigns  existing topics  to an existing state:
                             topic_key: key to state entity
@@ -2470,6 +2518,7 @@ def get_assessment_coverage_of_subject(teacher_key, class_key, subject_key):
         for assessment in assessments:
             topics = assessment.topics_in_assessment_key
             topic = topics[0].get()
+            logging.error("WWWWWWWWWWWWWWW"+str(topic)+"##########"+str(topic.subject_key))
             if subject_key == topic.subject_key:
                 percentage_covered = (assessment.no_of_user_completed / float(len(get_students_by_class(class_key)))*Constant.MAX_MARKS)
                 dict_assessment_data.update({assessment.name:(percentage_covered)})
