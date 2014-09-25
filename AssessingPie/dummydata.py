@@ -407,7 +407,7 @@ def fill():
             Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment11.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=70,school_key=school.key,completion_date=datetime.datetime.now())
             Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment12.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=60,school_key=school.key,completion_date=datetime.datetime.now())
             
-    
+            '''
             
             a=Query.get_mastery_by_topic(topic_number.key, student_vivek.key)
             a=Query.get_mastery_by_subject(subject_english.key,student_prasoon.key)
@@ -418,11 +418,13 @@ def fill():
             
             a=Query.get_mastery_by_topic(topic_sentences.key,student_prasoon.key)
             #a1=Query.get_mastery_by_topic(topic2.key,student2.key)
-            a=Query.get_assessment_coverage_of_class(teacher_vijay.key,class_VA.key)
-            a=Query.login("Vijay_Mehta", '')
+            Query.get_assessment_coverage_of_class(teacher_vijay.key,class_VA.key)
+            a=Query.get_assessment_coverage_of_subject(teacher_vijay.key, class_VA.key, subject_maths.key)
+            # a=Query.login("Vijay_Mehta", '')
             #a3=Query.get_mastery_by_topic(topic2.key,student4.key)
             #a=Query.get_mastery_by_subject(subject_english.key, student_kavya.key)
             #a=Query.get_growth_for_all_subject(student_vivek.key)
+            '''
             ''''a=Query.get_ready_to_learn_of_all_topic(subject_maths.key,student_vivek.key)
             a=Query.get_learning_progress_date_wise_dummy( student_vivek.key,subject_maths.key)
             #Query.get_mastery_for_all_subjects(student1.key)
