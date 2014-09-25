@@ -326,3 +326,6 @@ def dashboard(request):
 
 def ques(request):
     return render_to_response('Home/Questions.html',{},context_instance = RequestContext(request))
+
+def whatisscan(request):
+    return render_to_response('Home/Home_scan.html',{},context_instance = RequestContext(request))

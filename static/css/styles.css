@@ -187,6 +187,15 @@ display:inline-block;
 padding:8px 0;
 }
 
+span.ssb:hover{
+font-family:vectipedebook, Arial bold, Sans-Serif;
+font-weight:700;
+text-transform:uppercase;
+font-size:13px;
+color: #f4312d;
+display:inline-block;
+padding:8px 0;
+}
 span.ssbs {
 font-family:vectipedebook, Arial bold, Sans-Serif;
 font-weight:700;
@@ -210,6 +219,8 @@ color:#32484C;
 font-weight:700;
 font-size:10pt;
 }
+
+
 
 .top_search {
 background-color:#de2516;
