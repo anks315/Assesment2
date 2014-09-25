@@ -17,14 +17,15 @@
          $("#whyscan").hide();
          $("#ourteam").hide();
         // $("#header_tag").innerHTML="What is SCAN?";
-    }
+     });
     function whatisscan(){
     //    alert('as');
          $("#criticalvelosabout").hide();
          $("#whatisscan").show();
          $("#whyscan").hide();
          $("#ourteam").hide();
-         $("#header_tag").innerHTML="What is SCAN?";
+        document.getElementById("header_tag").innerHTML="What is SCAN?";
+
 
     }
 
@@ -33,7 +34,7 @@
          $("#whatisscan").hide();
          $("#whyscan").show();
          $("#ourteam").hide();
-         $("#header_tag").innerHTML="Why SCAN?";
+         document.getElementById("header_tag").innerHTML="Why SCAN?";
     }
 
     function ourteam(){
@@ -42,7 +43,7 @@
          $("#whatisscan").hide();
          $("#whyscan").hide();
          $("#ourteam").show();
-         $("#header_tag").innerHTML="Our Team";
+        document.getElementById("header_tag").innerHTML="Our Team";
     }
 
 
@@ -92,7 +93,8 @@
  	<tbody><tr>
  	<td background="/images/img_sub.png" height="80" width="232"></td>
  	<td width="10"></td>
- 	<td class="header_about" height="80" width="660"><h1 id="header_tag">CRITICAL VELOS</h1></td></tr>
+ 	<td class="header_about" height="80" width="660"><h1 id="header_tag">CRITICAL VELOS</h1></td>
+    </tr>
  	<tr>
  	<td height="30" width="232"></td>
  	<td width="10"></td>
