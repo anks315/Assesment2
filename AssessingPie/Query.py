@@ -1168,7 +1168,27 @@ def map_state_to_questions(topic_key, state_questions_map,school_key):
         logging.exception("")
         logging.error("CV Logs: failed to map_state_to_questions")
     
-
+@ndb.transactional(xg=True)
+def map_state_to_questions_dummy( state_questions_map,school_key):
+    state = None
+    question_state = None
+    try:
+        topic=Topic.query(Topic.name=='Number_System',ancestor=school_key).get()
+        topic_key=topic.key
+        
+        logging.info("#######################CV Logs: Inside map_state_to_questions "+str(topic))
+        topic = topic_key.get() 
+        result=Constant.ERROR_OPERATION_FAIL
+        for key in state_questions_map.keys():
+            state=addState(type=Constant.STATE_IN_TOPIC,school_key=school_key)
+            result=assign_questions_to_state(state.key,state_questions_map[key], school_key)
+            if not result==Constant.UPDATION_SUCCESSFULL:
+                return Constant.ERROR_OPERATION_FAIL
+        logging.info("CV Logs: Success to map_state_to_questions")
+        return result 
+    except Exception :
+        logging.exception("")
+        logging.error("CV Logs: failed to map_state_to_questions")
 
 
 
