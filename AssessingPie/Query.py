@@ -2448,7 +2448,7 @@ def get_assessment_coverage_of_class(teacher_key, class_key):
             topic = topics[0].get()
             subject_key = topic.subject_key
             subject_name = subject_key.get().name
-            percentage_covered = assessment.no_of_user_completed / float(len(get_students_by_class(class_key)))
+            percentage_covered = (assessment.no_of_user_completed / float(len(get_students_by_class(class_key)))*Constant.MAX_MARKS)
             dict_assessment_data.update({assessment.name:{subject_name:(percentage_covered)}})
         logging.info("CV Logs : Success to get_assessment_coverage_of_class ")
         return dict_assessment_data
