@@ -2470,7 +2470,6 @@ def get_assessment_coverage_of_subject(teacher_key, class_key, subject_key):
         for assessment in assessments:
             topics = assessment.topics_in_assessment_key
             topic = topics[0].get()
-            logging.error("WWWWWWWWWWWWWWW"+str(topic)+"##########"+str(topic.subject_key))
             if subject_key == topic.subject_key:
                 percentage_covered = (assessment.no_of_user_completed / float(len(get_students_by_class(class_key)))*Constant.MAX_MARKS)
                 dict_assessment_data.update({assessment.name:(percentage_covered)})
