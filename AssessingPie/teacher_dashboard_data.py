@@ -106,6 +106,7 @@ def get_readytolearn_of_subject(request):
     classkey = ndb.Key(urlsafe=key)
     key = request.GET['subjectid']
     subjectkey = ndb.Key(urlsafe=key)
+    logging.error("99999999999999999999999999999999")
     readytolearn = Query.get_ready_to_learn_of_class(teacherkey,classkey,subjectkey)
     t = loader.get_template('Dashboard/readytolearn_ofsubject')
     c = Context({'readytolearndict': readytolearn,})
@@ -119,7 +120,7 @@ def get_assessment_coverage_of_subject(request):
     key = request.GET['subjectid']
     subjectkey = ndb.Key(urlsafe=key)
     assessmentcoveragedict = Query.get_assessment_coverage_of_subject(teacherkey,classkey,subjectkey)
-    logging.error(assessmentcoveragedict)
+    logging.error("101010")
     t = loader.get_template('Dashboard/assessmentcoverageofsubject')
     c = Context({'assessmentcoveragedict': assessmentcoveragedict,})
     return HttpResponse(t.render(c),content_type="text/xml")
