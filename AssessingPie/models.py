@@ -15,7 +15,7 @@ class User(ndb.Model):
     type=ndb.IntegerProperty(choices=set([Constant.TEACHER,Constant.STUDENT,Constant.SCHOOL,Constant.TEACHER]))
     key=ndb.KeyProperty(required=True)
     pwd=ndb.StringProperty(required=True)
-    lastlogin=ndb.DateProperty()
+    lastlogin=ndb.DateTimeProperty()
     
        
     
@@ -213,8 +213,8 @@ key Property: topics_in_assessment_key: contains keys of  a topics in an assessm
 
 class Assessment(ndb.Model):
     name=ndb.StringProperty(required=True)
-    date=ndb.DateProperty(required=True)
-    due_date=ndb.DateProperty(required=True)
+    date=ndb.DateTimeProperty(required=True)
+    due_date=ndb.DateTimeProperty(required=True)
     published=ndb.BooleanProperty(required=True,default=True)
     teacher_key=ndb.KeyProperty(kind='Teacher',required=True)
     topics_in_assessment_key = ndb.KeyProperty(kind='Topic', repeated=True)
@@ -225,8 +225,8 @@ class Assessment(ndb.Model):
     
     
 class Assessment_Record(ndb.Model):  
-    start_date=ndb.DateProperty()
-    completion_date=ndb.DateProperty()
+    start_date=ndb.DateTimeProperty()
+    completion_date=ndb.DateTimeProperty()
     assessment_key=ndb.KeyProperty(kind=Assessment,required=True)
     current_state=ndb.KeyProperty(kind=State)
     next_state=ndb.KeyProperty(kind=State)
@@ -297,7 +297,7 @@ This class models  a basic user information subentity
 class UserInfo(ndb.Model):
   firstname = ndb.StringProperty(required=True)
   lastname=ndb.StringProperty(required=True)
-  date_of_birth = ndb.DateProperty(required=True)
+  date_of_birth = ndb.DateTimeProperty(required=True)
   # age=ndb.IntegerProperty(required=True) 
   sex = ndb.IntegerProperty(required=True, choices=set([Constant.SEX_MALE, Constant.SEX_FEMALE])) 
   address = ndb.StructuredProperty(Address, required=True)
