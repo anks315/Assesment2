@@ -17,10 +17,10 @@
 
 
     /*
-    Show Dashboard Divisions
-    4 For the time being
+        Show Dashboard Divisions
+        4 For the time being
 
-     */
+    */
         function dashboard(){
 
         $("#dashboard_row1").show();
@@ -48,10 +48,12 @@
 
 
 
-        /*
-        * Static*/
 
-        populate_list_of_subjects("class6");
+        /*
+            Static
+         */
+
+
     });
 
 
@@ -78,8 +80,8 @@
 				</td>
 				<td  width="25%">
 					<div style=" float: right;; " aria-label="Quick links" role="navigation">
-					    <a style="padding: 20px;" class="wlnk" href="#">Help</a>
-					    <a style="padding: 20px;" class="wlnk" href="#">SignOut</a>
+					 <!--   <a style="padding: 20px;" class="wlnk" href="#">Help</a>-->
+					    <a style="padding: 20px;" class="wlnk" href="/signout/">SignOut</a>
 					</div>
 				</td>
 				<td  width="12%">
@@ -99,10 +101,12 @@
 		 		  	        <td align="center" style="width: 100%;">
 		 		  	        <span style="font-family: Verdana, Geneva, sans-serif;color:#fff">
 		 		  	          <b>  Search class</b>
-
+                              </span>
 		 		  	        </td>
-		 		  	        </span>
-		 		  	    </tr>
+                          </tr>
+
+
+
 		 		  	    <tr>
 		 		  	    	<td style="width: 100%;">
 		 		  	         <input style="width: 100%;" type="text|" name="classname" onclick="showsclass()" >
@@ -136,9 +140,9 @@
 		 		  	        <td align="center" style="width: 100%;">
 		 		  	        <span style="font-family: Verdana, Geneva, sans-serif;color:#fff">
 		 		  	          <b>  Search Subject</b>
-
+                                </span>
 		 		  	        </td>
-		 		  	        </span>
+
 		 		  	    </tr>
 		 		  	    <tr>
 		 		  	    	<td style="width: 100%;">
@@ -247,7 +251,7 @@
                      var key = "abc";
                      // var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
                      //alert(key);
-                     var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:32%; background-color: #cce0ef\"><a href=\"#\">" + class_name + "</a></td><td style=\"width:32%; color: #ac4637;background-color: #cce0ef\">" + subject + "</td><td style=\"width:30% ;color: #3DAC9E;background-color: #cce0ef\">" + score + "%</td></tr></tbody></table>";
+                     var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:32%; background-color: #cce0ef\"><a href=\"#\">" + class_name + "</a></td><td style=\"width:32%; color: #ac4637;background-color: #cce0ef\">" + subject + "</td><td style=\"width:30% ;color: #3DAC9E;background-color: #cce0ef\">" + score + "</td></tr></tbody></table>";
 
                      //alert(innerdiv);
                      div_to_be_loaded += innerdiv;
@@ -365,7 +369,7 @@
                      var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
                      //alert(key);
                      // div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
-                     div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbyclass('" + classname + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+                     div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbyclass('" + key + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
 
 
 
@@ -387,16 +391,17 @@
 
  /*
  inner xml fields to be updated
+
+ getassessmentcoverageofsubject
+ readytolearnbysubject
+ masterydetailsofsubject
+ subjectDetails
   */
 
 
-    function populate_list_of_subjects(classname) {
+    function populate_list_of_subjects(classkey) {
 
-          /*
-             * Statuc data filling*/
-             subjectname="Maths";
-             div_to_be_loaded="<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbysubject('" + classname + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + subjectname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
-             document.getElementById("listsubjects_list").innerHTML = div_to_be_loaded;
+//        alert(classkey);
 
 
 
@@ -418,21 +423,20 @@
 
              div_to_be_loaded = "";
              lists = "";
-             no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
+             no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
 
-             //  alert(no_of_classes);
+             // alert(no_of_classes);
              var list_of_subjects = [];
              for (i = 0; i < no_of_classes; i++) {
 
 
-                 x = xmlhttp.responseXML.documentElement.getElementsByTagName("class")[i];
-                 var classname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                 x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
+                 var subjectname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
                  //var key="abc";
                  var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
                  //alert(key);
                  // div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
-                 div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbyclass('" + classname + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
-
+                 div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbysubject('" + classkey +"," + key+ "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + subjectname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
 
 
 
@@ -440,12 +444,12 @@
             // uncomment this below line
             // document.getElementById("listsubjects_list").innerHTML = div_to_be_loaded;
 
-
+               document.getElementById("listsubjects_list").innerHTML = div_to_be_loaded;
 
          }
      }
 
-     xmlhttp.open("GET", "/subjectsofclass/", true);
+     xmlhttp.open("GET", "/subjectsofclass?id="+classkey, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
 
@@ -454,18 +458,7 @@
 
  }
 
-    function abc(va)
-    {
 
-        hidesclass();
-        $("#dashboard_row1").hide();
-        $("#dashboard_row2").hide();
-        $("#class_subject_dashboard_row1").hide();
-        $("#class_subject_dashboard_row2").hide();
-         $("#accountsummary").show();
-
-      //  alert(va);
-    }
 
       /*
 
@@ -477,27 +470,185 @@
 
        */
 
-    function populatedivbyclass(classname){
+    function populatedivbyclass(classkey){
 
 
-        $("#dashboard_row1").hide();
-        $("#dashboard_row2").hide();
+        $("#dashboard_row1").show();
+        $("#dashboard_row2").show();
         $("#class_subject_dashboard_row1").show();
         $("#class_subject_dashboard_row2").show();
          $("#accountsummary").hide();
         //Now cal AJAX to load divisions correspondingly
 
 
+       // alert(classkey);
+        populatedivrecentlyloggedinofclass(classkey);
+        populatedivaveragemasterypersubjectofclass(classkey);
+        populateassessmentcoverageofclass(classkey);
+        populatedivclassinfo(classkey);
         document.getElementById('class_dashboard_row1_col1_header').innerHTML="Students Not Recently Logged in";
         document.getElementById('class_dashboard_row1_col2_header').innerHTML="Class Information";
         document.getElementById('class_dashboard_row2_col1_header').innerHTML="Average Mastery Of subject Of Class";
-        document.getElementById('class_dashboard_row2_col2_header').innerHTML="Assesment Coverag of this class";
-
+        document.getElementById('class_dashboard_row2_col2_header').innerHTML="Assesment Coverage of this class";
         document.getElementById('classlist').style.display = 'none';
+
+        populate_list_of_subjects(classkey);
+
+
+        $("#dashboard_row1").hide();
+        $("#dashboard_row2").hide();
+        $("#class_subject_dashboard_row1").show();
+        $("#class_subject_dashboard_row2").show();
+         $("#accountsummary").hide();
 
     }
 
-    function populatedivbysubject(subject){
+    function populatedivclassinfo(classkey){
+
+
+    }
+
+    function populateassessmentcoverageofclass(classname){
+
+
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                 xmlhttp = new XMLHttpRequest();
+                 xmlhttp.overrideMimeType("text/xml");
+             } else {
+                 // code for IE6, IE5
+                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+             }
+
+        div_to_be_loaded="";
+             xmlhttp.onreadystatechange = function() {
+
+                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                        no_of_assesments = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
+
+                         for (i = 0; i < no_of_assesments; i++) {
+
+                           x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
+                         var subject_name = x.getElementsByTagName("subjectname")[0].childNodes[0].nodeValue.trim();
+                         var assesment_id = x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
+                         var percentage = x.getElementsByTagName("percentage")[0].childNodes[0].nodeValue.trim();
+
+
+
+                    var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:30%; background-color: #cce0ef\">" + assesment_id + "</a></td><td style=\"width:33%; color: #ac4637;background-color: #cce0ef\">" + percentage + "</td><td style=\"width:30%; color: #ac4637;background-color: #cce0ef\">" + subject_name + "</td></tr></tr></tbody></table>";
+
+                             div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+                         }
+
+
+
+                     document.getElementById("readytoLearn").innerHTML = div_to_be_loaded;
+
+                    //Content to be Filled
+
+
+             }
+         }
+
+         xmlhttp.open("GET", "/assessmentcoveragebyclass?id=" + classname+",", true);
+         xmlhttp.overrideMimeType("text/xml");
+         xmlhttp.send();
+
+
+
+    }
+
+//d
+    function populatedivrecentlyloggedinofclass(classkey) {
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+
+         xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                 xmlDoc = xmlhttp.responseXML;
+
+                 div_to_be_loaded = "";
+                 lists = "";
+                 no_of_students = xmlhttp.responseXML.documentElement.getElementsByTagName("student").length;
+
+
+                 alert(no_of_students);
+                 for (i = 0; i < no_of_students; i++) {
+
+                         x = xmlhttp.responseXML.documentElement.getElementsByTagName("student")[i];
+                         var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                         var logindate = x.getElementsByTagName("logindate")[0].childNodes[0].nodeValue.trim();
+
+                        var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + logindate + "</td></tr></tbody></table>";
+
+                        div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+
+                     }
+                 alert(div_to_be_loaded);
+                 document.getElementById("subjectdonutmastery").innerHTML = div_to_be_loaded;
+
+         }
+     }
+
+     xmlhttp.open("GET", "/notloggedinbyclass?id=" + classkey, true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+
+    }
+ function populatedivaveragemasterypersubjectofclass(classkey) {
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                 xmlDoc = xmlhttp.responseXML;
+
+                 div_to_be_loaded = "";
+                 lists = "";
+                 no_of_mastery = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery").length;
+                 alert(no_of_mastery);
+                 //  alert(no_of_classes);
+
+                 for (i = 0; i < no_of_mastery; i++) {
+
+
+                         x = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery")[i];
+                         var name = x.getElementsByTagName("subjectname")[0].childNodes[0].nodeValue.trim();
+                         var score = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
+
+                        var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + score + "</td></tr></tbody></table>";
+
+                        div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+                     }
+                 document.getElementById('mastery_over_all').innerHTML=div_to_be_loaded;
+
+         }
+     }
+
+     xmlhttp.open("GET", "/averagemasterybysubjectbyclass?id=" + classkey, true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+
+    }
+    function populatedivbysubject(classkey,subjectkey){
 
         $("#dashboard_row1").hide();
         $("#dashboard_row2").hide();
@@ -506,7 +657,7 @@
          $("#accountsummary").hide();
 
 
-
+        alert(subjectkey);
         document.getElementById('class_dashboard_row1_col1_header').innerHTML="Average mastery of Subject";
         document.getElementById('class_dashboard_row1_col2_header').innerHTML="Assesment coverage of Subject";
         document.getElementById('class_dashboard_row2_col1_header').innerHTML="Masterydetail of Subject";
@@ -515,9 +666,185 @@
         document.getElementById('subjectList').style.display = 'none';
 
 
+        getassessmentcoverageofsubject(classkey,subjectkey);
+        readytolearnbysubject(classkey,subjectkey);
+        masterydetailofsubject(classkey,subjectkey);
+        detailsofsubject(classkey,subjectkey);
+
+
+
 
     }
 
+
+    /*bhands code
+    *  getassessmentcoverageofsubject
+ readytolearnbysubject
+ masterydetailsofsubject
+ subjectDetails
+    * */
+
+function getassessmentcoverageofsubject(classname,subjectname){
+
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+
+    div_to_be_loaded="";
+         xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                    no_of_assesments = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
+
+                     for (i = 0; i < no_of_assesments; i++) {
+
+                       x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
+                     var assesment_id = x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
+                     var percentage = x.getElementsByTagName("percentage")[0].childNodes[0].nodeValue.trim();
+
+
+
+                var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + assesment_id + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + percentage + "</td></tr></tbody></table>";
+
+                         div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+                     }
+
+
+
+                 document.getElementById("class_information").innerHTML = div_to_be_loaded;
+
+                //Content to be Filled
+
+
+         }
+     }
+
+     xmlhttp.open("GET", "/assessmentcoverageofsubject?classid=" + classname+"&subjectid="+subjectname, true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+
+
+
+}
+
+function readytolearnbysubject(classname,subjectname){
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                             no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
+
+                     for (i = 0; i < no_of_topics; i++) {
+
+                       x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
+                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
+
+
+
+                var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + question + "</td></tr></tbody></table>";
+
+                         div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+                     }
+
+
+
+                 document.getElementById("readytoLearn").innerHTML = div_to_be_loaded;
+         }
+     }
+
+     xmlhttp.open("GET", "/readytolearn_by_subject?classid=" + classkey+"&subjectid="+subjectname, true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+
+
+}
+
+//ankurjain
+//to be donee
+function masterydetailofsubject(classname,subjectname){
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+      xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                             no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
+
+                     for (i = 0; i < no_of_topics; i++) {
+
+                       x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
+                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
+
+
+
+                var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + question + "</td></tr></tbody></table>";
+
+                         div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+                     }
+
+
+
+                 document.getElementById("mastery_over_all").innerHTML = div_to_be_loaded;
+         }
+     }
+
+     xmlhttp.open("GET", "/readytolearn_by_subject?classid=" + classkey+"&subjectid="+subjectname, true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+
+
+}
+
+//ankurJian
+//details of subject
+function detailsofsubject(classname,subjectname){
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                 //Content to be Filled
+         }
+     }
+
+     xmlhttp.open("GET", "/averagemasterybysubjectbyclass?id=" + classkey, true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+
+
+}
 
 /*
     function showreportbysubjects(subject){
@@ -706,9 +1033,9 @@
 					</td>
 					<td width= "25%">
 					<ul>
-					 <li>Assesments
+					 <li>Assessments
 					  	<ul>
-						  <li>Assesment </li>
+						  <li>Assessment </li>
 						</ul>
 					  </li>
 					 </ul>

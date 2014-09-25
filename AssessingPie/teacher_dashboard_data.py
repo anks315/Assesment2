@@ -13,7 +13,7 @@ def get_not_recently_loggedin(request):
     notrecentlydict =Query.get_students_not_logged_in_by_class(teacherkey)
     logging.error('sbxjks' )
     logging.error(notrecentlydict)
-    t = loader.get_template('Dashboard/not_recently_logged_in_byclass')
+    t = loader.get_template('Dashboard/not_recently_logged_in_all')
     c = Context({'notrecentlylogin': notrecentlydict,})
     return HttpResponse(t.render(c),content_type="text/xml")
 
@@ -32,7 +32,7 @@ def get_not_recently_loggedin_all(request):
     teacherkey = session.get('teacherkey',-1)
     notrecentlyloggedin = Query.get_students_not_logged_in_of_all_class(teacherkey)
     logging.error(notrecentlyloggedin)
-    t = loader.get_template('Dashboard/not_recently_logged_in_byclass')
+    t = loader.get_template('Dashboard/not_recently_logged_in_all')
     c = Context({'notrecentlyloginall': notrecentlyloggedin,})
     return HttpResponse(t.render(c),content_type="text/xml")
 
@@ -61,7 +61,7 @@ def get_students_not_logged_in_by_class(request):
     classkey = ndb.Key(urlsafe=key)
     notrecentlyloggedin = Query.get_students_not_logged_in_by_class(teacherkey,classkey)
 
-    t = loader.get_template('Dashboard/notrecenltyloggedin_byclass')
+    t = loader.get_template('Dashboard/notrecentlyloggedin_byclass')
     c = Context({'notrecentlyloggedinbyclass': notrecentlyloggedin,})
     return HttpResponse(t.render(c),content_type="text/xml")
 
@@ -84,7 +84,7 @@ def get_assessment_coverage_of_class(request):
     classkey = ndb.Key(urlsafe=key)
     assessmentcoveragedict = Query.get_assessment_coverage_of_class(teacherkey,classkey)
     logging.error(assessmentcoveragedict)
-    t = loader.get_template('Dashboard/assessmentcoverageofclass')
+    t = loader.get_template('Dashboard/assessmentcoveragebyclass')
     c = Context({'assessmentcoveragedict': assessmentcoveragedict,})
     return HttpResponse(t.render(c),content_type="text/xml")
 
@@ -93,6 +93,7 @@ def get_subject_of_class(request):
     teacherkey = session.get('teacherkey',-1)
     key = request.GET['id']
     classkey = ndb.Key(urlsafe=key)
+    logging.error(classkey)
     subjectdict = Query.get_subject_details_of_teacher_in_class(teacherkey,classkey)
     t = loader.get_template('Dashboard/getsubjectofclass')
     c = Context({'getsubjectofclass': subjectdict,})
@@ -133,7 +134,7 @@ def get_averagemastery_of_subject_topicwise(request):
     subjectkey = ndb.Key(urlsafe=key)
     averagemasteryofsubject = Query.get_average_mastery_of_a_subject(teacherkey,classkey,subjectkey)
     logging.error(averagemasteryofsubject)
-    t = loader.get_template('Dashboard/assessmentcoverageofsubject')
+    t = loader.get_template('Dashboard/averagemasteryofsubjecttopicwise')
     c = Context({'averagemasterydict': averagemasteryofsubject,})
     return HttpResponse(t.render(c),content_type="text/xml")
 

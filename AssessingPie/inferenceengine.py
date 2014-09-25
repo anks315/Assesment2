@@ -166,6 +166,7 @@ class InferenceBuffer:
     def __init__(self):
         self.typeCache = TypeCache()
         question_db = Query.get_questions_by_topic_name("Number  System")
+
         typeid=-1
         for tempques in question_db:
             typeid+=1

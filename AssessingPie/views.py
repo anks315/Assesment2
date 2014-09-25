@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from gaesessions import get_current_session
 from engine import nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer,maxstatesize,getnumquestions
 from django.template import RequestContext
-from google.appengine.api import  users
+from google.appengine.api import users
 from dummydata import fill,flush
 from Query import login
 import logging
@@ -13,7 +13,7 @@ from google.appengine.ext import ndb
 import  Query
 import datetime
 import Constant
-
+from django.core.context_processors import csrf
 val=0
 readytolearn=""
 assessmentkey = ''
@@ -287,38 +287,77 @@ def askquestion(block,antecedentid):
 
 
 def dashboard(request):
+
     subjectsenrolled=['Maths','Science','English']
-    username = request.POST['username']
-    password = request.POST['password']
+    username = None
+    session = get_current_session()
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
 
-    user_information= Query.login(username,password)
+        user_information= Query.login(username,password)
 
+
+
+
+        session['type'] = user_information[0]
+        if session['type'] == Constant.Constant.STUDENT:
+            student = user_information[1]
+            session['studentkey']= student.key
+            session['schoolkey']=student.school
+            session['studentname']=student.basic_info.firstname + student.basic_info.lastname
+            session['email'] = student.basic_info.email
+            session['studentaddress']= student.basic_info.address
+            session['contactnumber'] = student.basic_info.contact_no
+            session['dateofbirth '] =student.basic_info.date_of_birth
+            session['sex']=student.basic_info.sex
+            session['lastlogin']=user_information[2]
+            return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+        if session['type'] == Constant.Constant.TEACHER:
+            teacher = user_information[1]
+            session['teacherkey']=teacher.key
+            session['schoolkey']=teacher.school
+            session['teachername']=teacher.basic_info.firstname + teacher.basic_info.lastname
+            session['email'] = teacher.basic_info.email
+            session['teacheraddress']= teacher.basic_info.address
+            session['contactnumber'] = teacher.basic_info.contact_no
+            session['dateofbirth '] = teacher.basic_info.date_of_birth
+            session['sex']=teacher.basic_info.sex
+            session['lastlogin']=user_information[2]
+            return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+    if request.method != 'POST' and session.get('type')==None:
+        return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+    if request.method != 'POST' and session.get('type')!=None:
+        return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+def ques(request):
+    return render_to_response('Home/Questions.html',{},context_instance = RequestContext(request))
+
+
+def signout(request):
 
     session = get_current_session()
+    if session['type']!=None:
 
-    session['type'] = user_information[0]
+        if session['type'] == Constant.Constant.STUDENT:
+            del session['studentkey']
+            del session['schoolkey']
+            del session['studentname']
+            del session['email']
+            del session['studentaddress']
+            del session['contactnumber']
+            del session['dateofbirth ']
+            del session['sex']
+            del session['lastlogin']
 
-    if session['type'] == Constant.Constant.STUDENT:
-        student = user_information[1]
-        session['studentkey']= student.key
-        session['schoolkey']=student.school
-        session['studentname']=student.basic_info.firstname + student.basic_info.lastname
-        session['email'] = student.basic_info.email
-        session['studentaddress']= student.basic_info.address
-        session['contactnumber'] = student.basic_info.contact_no
-        session['dateofbirth '] =student.basic_info.date_of_birth
-        session['sex']=student.basic_info.sex
-        session['lastlogin']=user_information[2]
-        return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
-    if session['type'] == Constant.Constant.TEACHER:
-        teacher = user_information[1]
-        session['teacherkey']=teacher.key
-        session['schoolkey']=teacher.school
-        session['teachername']=teacher.basic_info.firstname + teacher.basic_info.lastname
-        session['email'] = teacher.basic_info.email
-        session['teacheraddress']= teacher.basic_info.address
-        session['contactnumber'] = teacher.basic_info.contact_no
-        session['dateofbirth '] = teacher.basic_info.date_of_birth
-        session['sex']=teacher.basic_info.sex
-        session['lastlogin']=user_information[2]
-        return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled ,'logger' : 'kapeelbhandari' },context_instance = RequestContext(request))
+        if session['type'] == Constant.Constant.TEACHER:
+
+                del session['teacherkey']
+                del session['schoolkey']
+                del session['teachername']
+                del session['email']
+                del session['teacheraddress']
+                del session['contactnumber']
+                del session['dateofbirth ']
+                del session['sex']
+                del session['lastlogin']
+        return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
