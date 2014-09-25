@@ -74,7 +74,7 @@
 					<div class="row sepH_b">
 
 					<div class="six columns">
-                    <h1><a class="logo" href="index.html">Critical Velos</a></h1>
+                    <h1><a class="logo" href="../AssessingPie_toBeremoved/index.html">Critical Velos</a></h1>
                     </div>
 					<div class="six columns">
 						<div class="user_box cf">
@@ -105,7 +105,7 @@
 
 								<li><a href="/assessment/" >Assess Yourself</a></li>
 								<li><a href="#" >My Chart</a></li>
-								<li><a href="/inference/" class ="active1">Inference</a></li>
+								<li><a href="/inference" class ="active1">Inference</a></li>
                                 <li><a href="#" >Topics</a></li>
 								<li><a href="#" >Calendar</a></li>
 								<li><a href="#" >Results</a></li>
@@ -216,7 +216,7 @@
 
 <span> Question : {{ nextquestion }}  ?</span>
     <p> "Click on Yes or No and then Submit"</p>
-            <form name="input" action="/inference/" method="post">
+            <form name="input" action="/inference" method="post">
 
                  {% csrf_token %}
                    Agree: <input type="radio" name="answer" value="yes">Yes<br>

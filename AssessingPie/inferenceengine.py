@@ -165,7 +165,7 @@ def infertrue(userbuffer,block,antecedentid,antecedent):
 class InferenceBuffer:
     def __init__(self):
         self.typeCache = TypeCache()
-        question_db = Query.get_questions_by_topic_name("Number  System")
+        question_db = Query.get_questions_by_topic_name("Number_System")
 
         typeid=-1
         for tempques in question_db:
@@ -176,8 +176,10 @@ class InferenceBuffer:
 
         self.surmiseRelation = SurmiseRelation(self)
         self.blockCache = BlockCache()
+        self.blockCache = BlockCache()
 
 def generatestates(userbuffer,topicname):
+    logging.error("entered g")
     statesgen =[]
     numoftype = userbuffer.typeCache.getlength()
     for questiontype in range(0,numoftype):
@@ -190,9 +192,28 @@ def generatestates(userbuffer,topicname):
             for stateadd in tobeaddedlist:
                 if stateadd not in statesgen:
                  statesgen.append(stateadd)
-            tobeaddedlist=[]
+    stateall = set()
+    num = numoftype-1
+    while num >= 0:
+        stateall.add(num)
+        logging.error(userbuffer.typeCache.gettype(num))
+        num-=1
+    logging.error(stateall)
+    if stateall not in statesgen:
+        statesgen.append(stateall)
+        tobeaddedlist=[]
+    queryreadydict = {}
+    statenum =0
+    for stateset in statesgen:
+        templist = []
+        for items in stateset:
+            templist.append(userbuffer.typeCache.gettypekey(items))
+        queryreadydict[statenum]=templist
+        statenum+=1
 
-    school=models.School.query(models.School.name=="CVSchool").get()
-    state1=Query.addState(type=Constant.STATE_IN_TOPIC,school_key=school.key)
 
-    logging.error(statesgen)
+
+
+
+
+    logging.error(queryreadydict)
