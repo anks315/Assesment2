@@ -225,6 +225,7 @@
 
         function loadMasteryDetails() {
          var xmlhttp;
+          var  div_to_be_loaded = "";
          if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
              xmlhttp.overrideMimeType("text/xml");
@@ -238,7 +239,7 @@
 
                  xmlDoc = xmlhttp.responseXML;
 
-                 div_to_be_loaded = "";
+
                  no_of_students = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery").length;
 
                  var list_of_subjects = [];
@@ -282,7 +283,7 @@
        */
          function students_not_recently_logged_in() {
              var xmlhttp;
-
+              var  div_to_be_loaded = "";
              if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
                  xmlhttp = new XMLHttpRequest();
                  xmlhttp.overrideMimeType("text/xml");
@@ -296,7 +297,7 @@
 
                      xmlDoc = xmlhttp.responseXML;
 
-                     div_to_be_loaded = "";
+
                      no_of_students = xmlhttp.responseXML.documentElement.getElementsByTagName("student").length;
 
                      var list_of_subjects = [];
@@ -340,7 +341,7 @@
      function populate_list_of_classes() {
          var xmlhttp;
          //   alert('listofclasses');
-
+           var div_to_be_loaded = "";
          if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
              xmlhttp.overrideMimeType("text/xml");
@@ -354,7 +355,7 @@
 
                  xmlDoc = xmlhttp.responseXML;
 
-                 div_to_be_loaded = "";
+
                  lists = "";
                  no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
 
@@ -407,7 +408,7 @@
 
      var xmlhttp;
      //   alert('listofclasses');
-
+            var div_to_be_loaded = "";
      if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
          xmlhttp = new XMLHttpRequest();
          xmlhttp.overrideMimeType("text/xml");
@@ -421,7 +422,7 @@
 
              xmlDoc = xmlhttp.responseXML;
 
-             div_to_be_loaded = "";
+
              lists = "";
              no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
 
@@ -516,7 +517,7 @@
                  xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
              }
      //  alert("hii");
-        div_to_be_loaded="";
+       var div_to_be_loaded="";
              xmlhttp.onreadystatechange = function() {
 
                  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -558,6 +559,7 @@
 
 //d
     function populatedivrecentlyloggedinofclass(classkey) {
+        var div_to_be_loaded = "";
 
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
@@ -573,7 +575,7 @@
 
                  xmlDoc = xmlhttp.responseXML;
 
-                 div_to_be_loaded = "";
+
                  lists = "";
                  no_of_students = xmlhttp.responseXML.documentElement.getElementsByTagName("student").length;
 
@@ -603,7 +605,7 @@
 
     }
  function populatedivaveragemasterypersubjectofclass(classkey) {
-
+var div_to_be_loaded = "";
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
              xmlhttp.overrideMimeType("text/xml");
@@ -617,7 +619,7 @@
                                            //  alert("ooo1");
                  xmlDoc = xmlhttp.responseXML;
 
-                 div_to_be_loaded = "";
+
                  lists = "";
                  no_of_mastery = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery").length;
                //  alert(no_of_mastery);
@@ -654,7 +656,7 @@
          $("#accountsummary").hide();
 
 
-        alert(subjectkey);
+
         document.getElementById('class_dashboard_row1_col1_header').innerHTML="Average mastery of Subject";
         document.getElementById('class_dashboard_row1_col2_header').innerHTML="Assesment coverage of Subject";
         document.getElementById('class_dashboard_row2_col1_header').innerHTML="Masterydetail of Subject";
@@ -692,13 +694,13 @@ function getassessmentcoverageofsubject(classname,subjectname){
              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
          }
 
-    div_to_be_loaded="";
+  var  div_to_be_loaded="";
          xmlhttp.onreadystatechange = function() {
 
              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
 
-                                  alert("hello");
+
                     no_of_assesments = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
 
                      for (i = 0; i < no_of_assesments; i++) {
@@ -734,7 +736,7 @@ function getassessmentcoverageofsubject(classname,subjectname){
 }
 
 function readytolearnbysubject(classname,subjectname){
-
+           var div_to_be_loaded = "";
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
              xmlhttp.overrideMimeType("text/xml");
@@ -745,14 +747,14 @@ function readytolearnbysubject(classname,subjectname){
          xmlhttp.onreadystatechange = function() {
 
              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                                 alert("hii");
-                             no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
+
+                             no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("question").length;
 
                      for (i = 0; i < no_of_topics; i++) {
 
-                       x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
+                       x = xmlhttp.responseXML.documentElement.getElementsByTagName("question")[i];
                      var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                     var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
+                     var question = x.getElementsByTagName("percentage")[0].childNodes[0].nodeValue.trim();
 
 
 
@@ -778,7 +780,7 @@ function readytolearnbysubject(classname,subjectname){
 //ankurjain
 //to be donee
 function masterydetailofsubject(classname,subjectname){
-
+var div_to_be_loaded = "";
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
              xmlhttp.overrideMimeType("text/xml");
@@ -789,14 +791,14 @@ function masterydetailofsubject(classname,subjectname){
       xmlhttp.onreadystatechange = function() {
 
              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                           alert("hiiiii");
-                             no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
 
+                             no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery").length;
+                                                   alert(no_of_topics);
                      for (i = 0; i < no_of_topics; i++) {
 
-                       x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
-                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                     var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
+                       x = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery")[i];
+                     var name = x.getElementsByTagName("topicname")[0].childNodes[0].nodeValue.trim();
+                     var question = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
 
 
 
