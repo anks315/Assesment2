@@ -406,7 +406,7 @@ def fill():
             Query.update_assessment_detail_of_student(student_key=student_prajjwal.key,  assessment_key=assessment10.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=80,school_key=school.key,completion_date=datetime.datetime.now())
             Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment11.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=70,school_key=school.key,completion_date=datetime.datetime.now())
             Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment12.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=60,school_key=school.key,completion_date=datetime.datetime.now())
-            
+            a=Query.map_state_to_questions(topic_part.key, {1:[question_number1.key,question_number2.key,question_number3.key]}, school.key)
             '''
             
             a=Query.get_mastery_by_topic(topic_number.key, student_vivek.key)
