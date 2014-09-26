@@ -25,7 +25,7 @@ handlers:
 - url: /signout/(.*)
   script: main.app
 
-- url: /inference/(.*)
+- url: /inference(.*)
   script: main.app
 
 - url: /topicnames/(.*)

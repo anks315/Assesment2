@@ -148,7 +148,7 @@ def  inferquestion(request):
             implication=-1
             antecedent=[]
             numalreadyinferred=0
-            return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+            return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
     if request.method=='POST':
         if request.POST['answer']=='yes':
@@ -203,7 +203,7 @@ def  inferquestion(request):
                 antecedent=[]
                 numalreadyinferred=0
                 inferenceengine.generatestates(usersdict[session['infer']],topicname)
-                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+                return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
             currentblocknumber+=1
             numalreadyinferred=0
             logging.error(currentblocknumber)
@@ -223,7 +223,7 @@ def  inferquestion(request):
                 antecedent=[]
                 numalreadyinferred=0
                 inferenceengine.generatestates(usersdict[session['infer']],topicname)
-                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+                return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
             if usersdict[session['infer']].blockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
                 logging.error("asking question")
