@@ -270,7 +270,7 @@
              }
          };
 
-         xmlhttp.open("GET", "/averagemasterybysubjectallclass/", false);
+         xmlhttp.open("GET", "/averagemasterybysubjectallclass/", true);
          xmlhttp.overrideMimeType("text/xml");
          xmlhttp.send();
 
@@ -327,7 +327,7 @@
                  }
              };
 
-             xmlhttp.open("GET", "/notrecentlyloggedinall_by_teacher/", false);
+             xmlhttp.open("GET", "/notrecentlyloggedinall_by_teacher/", true);
              xmlhttp.overrideMimeType("text/xml");
              xmlhttp.send();
 
@@ -385,7 +385,7 @@
          }
      };
 
-     xmlhttp.open("GET", "/getclassdetailsbyteacher/", false);
+     xmlhttp.open("GET", "/getclassdetailsbyteacher/", true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
  }
@@ -451,7 +451,7 @@
          }
      };
 
-     xmlhttp.open("GET", "/subjectsofclass?id="+classkey, false);
+     xmlhttp.open("GET", "/subjectsofclass?id="+classkey, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
 
@@ -508,6 +508,7 @@
 
     function populateassessmentcoverageofclass(classname){
 
+        var xmlhttp;
 
             if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
                  xmlhttp = new XMLHttpRequest();
@@ -549,7 +550,7 @@
              }
          }
 
-         xmlhttp.open("GET", "/assessmentcoveragebyclass?id=" + classname, false);
+         xmlhttp.open("GET", "/assessmentcoveragebyclass?id=" + classname, true);
          xmlhttp.overrideMimeType("text/xml");
          xmlhttp.send();
 
@@ -560,6 +561,7 @@
 //d
     function populatedivrecentlyloggedinofclass(classkey) {
         var div_to_be_loaded = "";
+        var xmlhttp;
 
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
@@ -599,13 +601,14 @@
          }
      }
 
-     xmlhttp.open("GET", "/notloggedinbyclass?id=" + classkey, false);
+     xmlhttp.open("GET", "/notloggedinbyclass?id=" + classkey, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
 
     }
  function populatedivaveragemasterypersubjectofclass(classkey) {
 var div_to_be_loaded = "";
+     var xmlhttp;
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
              xmlhttp.overrideMimeType("text/xml");
@@ -642,7 +645,7 @@ var div_to_be_loaded = "";
          }
      };
 
-     xmlhttp.open("GET", "/averagemasterybysubjectbyclass?id=" + classkey, false);
+     xmlhttp.open("GET", "/averagemasterybysubjectbyclass?id=" + classkey, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
 
@@ -685,6 +688,7 @@ var div_to_be_loaded = "";
 
 function getassessmentcoverageofsubject(classname,subjectname){
 
+    var xmlhttp;
 
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
@@ -727,7 +731,7 @@ function getassessmentcoverageofsubject(classname,subjectname){
          }
      };
 
-     xmlhttp.open("GET", "/assessmentcoverageofsubject?classid=" + classname+"&subjectid="+subjectname, false);
+     xmlhttp.open("GET", "/assessmentcoverageofsubject?classid=" + classname+"&subjectid="+subjectname, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
 
@@ -770,7 +774,7 @@ function readytolearnbysubject(classname,subjectname){
          }
      };
 
-     xmlhttp.open("GET", "/readytolearnofsubject?classid=" + classname+"&subjectid="+subjectname, false);
+     xmlhttp.open("GET", "/readytolearnofsubject?classid=" + classname+"&subjectid="+subjectname, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
 
@@ -781,6 +785,7 @@ function readytolearnbysubject(classname,subjectname){
 //to be donee
 function masterydetailofsubject(classname,subjectname){
 var div_to_be_loaded = "";
+    var xmlhttp;
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
              xmlhttp.overrideMimeType("text/xml");
@@ -814,7 +819,7 @@ var div_to_be_loaded = "";
          }
      }
 
-     xmlhttp.open("GET", "/averagemasteryofsubject_topicwise?classid=" + classname+"&subjectid="+subjectname, false);
+     xmlhttp.open("GET", "/averagemasteryofsubject_topicwise?classid=" + classname+"&subjectid="+subjectname, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
 
@@ -824,6 +829,7 @@ var div_to_be_loaded = "";
 //ankurJian
 //details of subject
 function detailsofsubject(classname,subjectname){
+    var xmlhttp;
 
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
@@ -840,7 +846,7 @@ function detailsofsubject(classname,subjectname){
          }
      }
 
-     xmlhttp.open("GET", "/averagemasterybysubjectbyclass?id=" + classname, false);
+     xmlhttp.open("GET", "/averagemasterybysubjectbyclass?id=" + classname, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
 
