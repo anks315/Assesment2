@@ -45,6 +45,7 @@
         loadloginDetails();
         loadMasteryDetails();
         students_not_recently_logged_in();
+        showmessages();
 
 
 
@@ -214,7 +215,7 @@
                     document.getElementById("lastLogin").innerHTML = y[0].childNodes[0].nodeValue;
                 }
             };
-            a.open("GET", "/userdetails/", false);
+            a.open("GET", "/userdetails/", true);
             a.overrideMimeType("text/xml");
             a.send();
         }
@@ -224,6 +225,11 @@
        */
 
         function loadMasteryDetails() {
+
+
+        document.getElementById('masteryDetails').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('masteryDetails').style.display='block';
+
          var xmlhttp;
           var  div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Class</th><th>Assesment Name</th><th>Students Achievers Mastery (%)</th></tr>";
          if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -285,6 +291,12 @@
        students not logged in Dashboard all
        */
          function students_not_recently_logged_in() {
+
+
+        document.getElementById('students_not_logged_in').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('students_not_logged_in').style.display='block';
+
+
              var xmlhttp;
               var  div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Student Name</th><th>Last Login</th></tr>";
              if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -343,6 +355,9 @@
              */
 
      function populate_list_of_classes() {
+
+
+
          var xmlhttp;
          //   alert('listofclasses');
            var div_to_be_loaded = "";
@@ -453,6 +468,7 @@
          }
      };
 
+
      xmlhttp.open("GET", "/subjectsofclass?id="+classkey, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
@@ -509,7 +525,13 @@
 
     }
 
+
     function populateassessmentcoverageofclass(classname){
+
+
+           document.getElementById('readytoLearn').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('readytoLearn').style.display='block';
+
 
         var xmlhttp;
 
@@ -565,6 +587,11 @@
 
 //d
     function populatedivrecentlyloggedinofclass(classkey) {
+
+           document.getElementById('subjectdonutmastery').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('subjectdonutmastery').style.display='block';
+
+
         var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Student Name</th><th>Recent Login Time</th></tr>";
         var xmlhttp;
 
@@ -613,6 +640,12 @@
 
     }
  function populatedivaveragemasterypersubjectofclass(classkey) {
+
+        document.getElementById('mastery_over_all').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('mastery_over_all').style.display='block';
+
+
+
 var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Subject Name</th><th>Mastery in (%)</th></tr>";
      var xmlhttp;
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -622,6 +655,7 @@ var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Subject Name</t
              // code for IE6, IE5
              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
          }
+
          xmlhttp.onreadystatechange = function() {
 
              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -695,6 +729,11 @@ var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Subject Name</t
 
 function getassessmentcoverageofsubject(classname,subjectname){
 
+
+       document.getElementById('class_information').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('class_information').style.display='block';
+
+
     var xmlhttp;
 
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -748,6 +787,12 @@ function getassessmentcoverageofsubject(classname,subjectname){
 }
 
 function readytolearnbysubject(classname,subjectname){
+
+       document.getElementById('readytoLearn').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('readytoLearn').style.display='block';
+
+    var xmlhttp;
+
            var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
@@ -793,6 +838,11 @@ function readytolearnbysubject(classname,subjectname){
 //ankurjain
 //to be donee
 function masterydetailofsubject(classname,subjectname){
+
+       document.getElementById('subjectdonutmastery').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('subjectdonutmastery').style.display='block';
+
+
 var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Score in (%)</th></tr>";
     var xmlhttp;
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -807,7 +857,7 @@ var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>
              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
                              no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery").length;
-                                                   alert(no_of_topics);
+                                             //      alert(no_of_topics);
                      for (i = 0; i < no_of_topics; i++) {
 
                        x = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery")[i];
@@ -839,7 +889,13 @@ var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>
 //ankurJian
 //details of subject
 function detailsofsubject(classname,subjectname){
+
+   //    document.getElementById('students_not_logged_in').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+   //     document.getElementById('students_not_logged_in').style.display='block';
+
     var xmlhttp;
+
+
 
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
@@ -854,7 +910,9 @@ function detailsofsubject(classname,subjectname){
 
                  //Content to be Filled
          }
+
      }
+
 
      xmlhttp.open("GET", "/averagemasterybysubjectbyclass?id=" + classname, true);
      xmlhttp.overrideMimeType("text/xml");
@@ -862,6 +920,42 @@ function detailsofsubject(classname,subjectname){
 
 
 }
+
+
+function showmessages(){
+    var xmlhttp;
+
+    document.getElementById('messages').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+    document.getElementById('messages').style.display='block';
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                 //Content to be Filled
+                 document.getElementById('messages').innerHTML="Messages to Display This is Static Data";
+
+         }
+
+     }
+
+
+     xmlhttp.open("GET", "/userdetails/", true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+
+
+}
+
+
+
 
 /*
     function showreportbysubjects(subject){
@@ -1493,11 +1587,9 @@ Address:<strong> </strong><strong></strong>
                                                        <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+                                 <div id="messages" style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
-                                     <div id="messages">
 
-                                     </div>
 <!--
                                  <div style="display: inline-block; width: 260px; height: 15px;">
                                        <table style="font-size: 1em;" cellpadding="0" cellspacing="0">
