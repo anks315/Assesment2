@@ -286,7 +286,7 @@
        */
          function students_not_recently_logged_in() {
              var xmlhttp;
-              var  div_to_be_loaded = "";
+              var  div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Student Name</th><th>Last Login</th></tr>";
              if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
                  xmlhttp = new XMLHttpRequest();
                  xmlhttp.overrideMimeType("text/xml");
@@ -312,7 +312,7 @@
                          var key = "abc";
                          // var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
                          //alert(key);
-                         var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\"><a href=\"/assessment?id=" + key + "\">" + student_name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + lastlogindate + "</td></tr></tbody></table>";
+                         var innerdiv = "<tr><td><a href=\"/assessment?id=" + key + "\">" + student_name + "</a></td><td>" + lastlogindate + "</td></tr>";
 
                          //alert(innerdiv);
                          div_to_be_loaded += innerdiv;
@@ -320,6 +320,7 @@
 
                      }
 
+                     div_to_be_loaded+="</tbody></table>";
                      document.getElementById("students_not_logged_in").innerHTML = div_to_be_loaded;
 
 
@@ -446,8 +447,6 @@
 
 
              }
-            // uncomment this below line
-            // document.getElementById("listsubjects_list").innerHTML = div_to_be_loaded;
 
                document.getElementById("listsubjects_list").innerHTML = div_to_be_loaded;
 
@@ -507,6 +506,7 @@
     function populatedivclassinfo(classkey){
 
 
+
     }
 
     function populateassessmentcoverageofclass(classname){
@@ -520,8 +520,8 @@
                  // code for IE6, IE5
                  xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
              }
-     //  alert("hii");
-       var div_to_be_loaded="";
+
+       var div_to_be_loaded="<table class=\"bordered\"><tbody><tr><th>Assesment</th><th>Percentage</th><th>Subject Name</th></tr>";
              xmlhttp.onreadystatechange = function() {
 
                  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -537,13 +537,15 @@
 
 
 
-                    var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:30%; background-color: #cce0ef\">" + assesment_id + "</a></td><td style=\"width:33%; color: #ac4637;background-color: #cce0ef\">" + percentage + "</td><td style=\"width:30%; color: #ac4637;background-color: #cce0ef\">" + subject_name + "</td></tr></tr></tbody></table>";
+                    var innerdiv = "<tr><td>" + assesment_id + "</td><td>" + percentage + "%</td><td>" + subject_name + "</td></tr>";
 
                              div_to_be_loaded=div_to_be_loaded+innerdiv;
 
                          }
 
 
+                     div_to_be_loaded+="</tbody></table>";
+                    // alert(div_to_be_loaded);
 
                      document.getElementById("readytoLearn").innerHTML = div_to_be_loaded;
 
@@ -563,7 +565,7 @@
 
 //d
     function populatedivrecentlyloggedinofclass(classkey) {
-        var div_to_be_loaded = "";
+        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Student Name</th><th>Recent Login Time</th></tr>";
         var xmlhttp;
 
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -592,12 +594,13 @@
                          var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
                          var logindate = x.getElementsByTagName("logindate")[0].childNodes[0].nodeValue.trim();
 
-                        var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + logindate + "</td></tr></tbody></table>";
+                        var innerdiv = "<tr><td><a href=\"#\">" + name + "</a></td><td>" + logindate + "</td></tr>";
 
                         div_to_be_loaded=div_to_be_loaded+innerdiv;
 
 
                      }
+                 div_to_be_loaded+="</tbody></table>";
               //   alert(div_to_be_loaded);
                  document.getElementById("subjectdonutmastery").innerHTML = div_to_be_loaded;
 
@@ -610,7 +613,7 @@
 
     }
  function populatedivaveragemasterypersubjectofclass(classkey) {
-var div_to_be_loaded = "";
+var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Subject Name</th><th>Mastery in (%)</th></tr>";
      var xmlhttp;
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
@@ -638,11 +641,12 @@ var div_to_be_loaded = "";
                          var name = x.getElementsByTagName("subjectname")[0].childNodes[0].nodeValue.trim();
                          var score = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
 
-                        var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + score + "</td></tr></tbody></table>";
+                        var innerdiv = "<tr><td><a href=\"#\">" + name + "</a></td><td>" + score + "</td></tr>";
 
                         div_to_be_loaded=div_to_be_loaded+innerdiv;
 
                      }
+                 div_to_be_loaded+="</tbody></table>";
                  document.getElementById('mastery_over_all').innerHTML=div_to_be_loaded;
 
          }
@@ -701,7 +705,7 @@ function getassessmentcoverageofsubject(classname,subjectname){
              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
          }
 
-  var  div_to_be_loaded="";
+  var  div_to_be_loaded="<table class=\"bordered\"><tbody><tr><th>Assesment </th><th>Coverage in (%)</th></tr>";
          xmlhttp.onreadystatechange = function() {
 
              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -718,12 +722,13 @@ function getassessmentcoverageofsubject(classname,subjectname){
 
 
 
-                var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + assesment_id + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + percentage + "</td></tr></tbody></table>";
+                var innerdiv = "<tr><td><a href=\"#\">" + assesment_id + "</a></td><td>" + percentage + "</td></tr>";
 
                          div_to_be_loaded=div_to_be_loaded+innerdiv;
 
                      }
 
+                 div_to_be_loaded+="</tbody></table>";
 
 
                  document.getElementById("class_information").innerHTML = div_to_be_loaded;
@@ -743,7 +748,7 @@ function getassessmentcoverageofsubject(classname,subjectname){
 }
 
 function readytolearnbysubject(classname,subjectname){
-           var div_to_be_loaded = "";
+           var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
              xmlhttp.overrideMimeType("text/xml");
@@ -765,7 +770,7 @@ function readytolearnbysubject(classname,subjectname){
 
 
 
-                var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + question + "</td></tr></tbody></table>";
+                var innerdiv = "<tr><td><a href=\"#\">" + name + "</a></td><td>" + question + "</td></tr>";
 
                          div_to_be_loaded=div_to_be_loaded+innerdiv;
 
@@ -773,6 +778,7 @@ function readytolearnbysubject(classname,subjectname){
 
 
 
+                 div_to_be_loaded+="</tbody></table>";
                  document.getElementById("readytoLearn").innerHTML = div_to_be_loaded;
          }
      };
@@ -787,7 +793,7 @@ function readytolearnbysubject(classname,subjectname){
 //ankurjain
 //to be donee
 function masterydetailofsubject(classname,subjectname){
-var div_to_be_loaded = "";
+var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Score in (%)</th></tr>";
     var xmlhttp;
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
              xmlhttp = new XMLHttpRequest();
@@ -805,18 +811,19 @@ var div_to_be_loaded = "";
                      for (i = 0; i < no_of_topics; i++) {
 
                        x = xmlhttp.responseXML.documentElement.getElementsByTagName("mastery")[i];
-                     var name = x.getElementsByTagName("topicname")[0].childNodes[0].nodeValue.trim();
-                     var question = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
+                     var topic = x.getElementsByTagName("topicname")[0].childNodes[0].nodeValue.trim();
+                     var score = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
 
 
 
-                var innerdiv = "<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:45%; background-color: #cce0ef\">" + name + "</a></td><td style=\"width:50%; color: #ac4637;background-color: #cce0ef\">" + question + "</td></tr></tbody></table>";
+                var innerdiv = "<tr><td><a href=\"#\">" + topic + "</a></td><td>" + score + "%</td></tr>";
 
                          div_to_be_loaded=div_to_be_loaded+innerdiv;
 
                      }
 
 
+                 div_to_be_loaded+="</tbody></table>"
 
                  document.getElementById("subjectdonutmastery").innerHTML = div_to_be_loaded;
          }
@@ -1443,13 +1450,9 @@ Address:<strong> </strong><strong></strong>
                                                        <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
-
-                                     <!-- kapil  -->
-                                 <div id="students_not_logged_in" style="height: 150px; width: 90%; margin: 5%;">
+                                 <div id="students_not_logged_in" style="padding: 20px 25px 10px 25px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
 
-                                 </div>
 
 
                                  </div>
@@ -1604,12 +1607,9 @@ Address:<strong> </strong><strong></strong>
                                                        <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
-
-                                 <div id="subjectdonutmastery" style="height: 150px; width: 90%; margin: 5%;">
+                                 <div id="subjectdonutmastery" style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
 
-                                 </div>
 
 
                                  </div>
@@ -1698,9 +1698,9 @@ Address:<strong> </strong><strong></strong>
                                                        <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+                                 <div id="mastery_over_all" style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
-                                 <div id="mastery_over_all" style="height: 150px; width: 90%; margin: 5%;">
+                                 <div  style="height: 150px; width: 90%; margin: 5%;">
 
 
                                  </div>
@@ -1746,21 +1746,10 @@ Address:<strong> </strong><strong></strong>
                            <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div id="readytoLearn" style="padding: 20px 20% 10px 15%; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
-                               <!--     <script>get_ready_tolearn(subject)</script>     -->
+                                 <div id="readytoLearn" style="padding: 20px 20px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
 
-                                     <table style="font-size: 1em; width: 100%;" cellpadding="0" cellspacing="0" >
-                        <tbody>
-                           <tr>
-                              <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;">
-                                 <div style="font: 12px Verdana; color: rgb(174, 189, 180); padding: 4px 0px 0px 10px;">U r Ready To Learn </div>
-                                 <div id ="readytolearntopic" style="font: 18px Verdana; color: rgb(101, 74, 138); padding: 0px 0px 4px 10px;">This is the Topic</div>
-                              </td>
-                              <td style="vertical-align: baseline; text-align: left; font-size: 20px; width: 50%;"></td>
-                           </tr>
-                        </tbody>
-                                         </table>
+
 
                                  </div>
                               </div>
