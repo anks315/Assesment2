@@ -924,6 +924,7 @@ def update_assessment_detail_of_student(score, student_key, assessment_key, curr
                     assessment_record.completion_date = completion_date
                     assessment_record.put()
                 assessment.no_of_user_completed += 1
+                assessment.put()
                 
     except Exception :
             logging.exception("")
