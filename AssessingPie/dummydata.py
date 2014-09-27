@@ -36,7 +36,7 @@ def fill():
             #userinfo8=Query.addUserInfo("Samarath","Tiwari",datetime.datetime.now(),Constant.SEX_FEMALE, address1, "8778", 654766)
             
             
-            student_vivek=Query.addStudent(ankit_user, school.key,'pwd')
+            student_vivek=Query.addStudent(ankit_user, school.key,'password')
             student_kavya=Query.addStudent(kavya_user, school.key,'pwd')
             student_prajjwal=Query.addStudent(prajjwal_user, school.key,'pwd')
             student_shiv=Query.addStudent(shiv_user, school.key,'pwd')
@@ -65,7 +65,7 @@ def fill():
             
             
             
-            teacher_vijay=Query.addTeacher( vijay_user, school.key,"")
+            teacher_vijay=Query.addTeacher( vijay_user, school.key,"password")
             teacher_sulabh=Query.addTeacher( sulabh_user, school.key,"")
             
             
@@ -249,7 +249,7 @@ def fill():
             Query.assign_questions_to_state(state1.key, [question_number1.key,question_number2.key,question_number3.key,question_number4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key,question_height1.key,question_height2.key,question_height3.key,question_height4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)         
             Query.assign_questions_to_state(state2.key, [question_sentence1.key,question_sentence2.key,question_sentence3.key,question_sentence4.key,question_part1.key,question_part2.key,question_part3.key,question_part4.key,question_tense1.key,question_tense2.key,question_tense3.key,question_tense4.key],school.key)               
             
-            Query.assign_questions_to_topic(topic_number.key,[question_number1.key,question_number2.key,question_number3.key],school.key)
+            Query.assign_questions_to_topic(topic_number.key,[question_number1.key,question_number2.key,question_number3.key,question_number4.key],school.key)
             Query.assign_questions_to_topic(topic_trig.key,[question_trig1.key,question_trig2.key,question_trig3.key,question_trig4.key],school.key)
             Query.assign_questions_to_topic(topic_circle.key,[question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)
             Query.assign_questions_to_topic(topic_height.key,[question_height1.key,question_height2.key,question_height3.key,question_height4.key],school.key)
@@ -301,8 +301,8 @@ def fill():
             
             
            
-            Query.login('Ankit_Bhatia', '')
-            Query.login('Vijay_Mehta', '')
+            #Query.login('Ankit_Bhatia', '')
+            #uery.login('Vijay_Mehta', '')
             Query.get_states_of_topic(topic_number.key)
             Query.get_states_of_topic(topic_part.key)
         
@@ -406,7 +406,9 @@ def fill():
             Query.update_assessment_detail_of_student(student_key=student_prajjwal.key,  assessment_key=assessment10.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=80,school_key=school.key,completion_date=datetime.datetime.now())
             Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment11.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=70,school_key=school.key,completion_date=datetime.datetime.now())
             Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment12.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=60,school_key=school.key,completion_date=datetime.datetime.now())
-            a=Query.map_state_to_questions(topic_part.key, {1:[question_number1.key,question_number2.key,question_number3.key]}, school.key)
+            a=Query.map_state_to_questions_dummy( {1:[question_number1.key,question_number2.key,question_number3.key]}, school.key)
+            a=Query.login("Vijay_Mehta","password")
+            a=Query.login("Ankit_Bhatia","password")
             '''
             
             a=Query.get_mastery_by_topic(topic_number.key, student_vivek.key)

@@ -21,23 +21,28 @@ login for users
 def login(username, pwd):
       logging.info("CV Logs :Inside login :")
       try: 
-          user_name = User.query(User.username == username).get()
+          user_name = User.query((User.username == username), ndb.AND (User.pwd==pwd )).get()
+           
+          logging.info("CV Logs :Inside login :"+str(user_name)+"@@@@@@@@@@@")
           if user_name == None:
             return Constant.ERROR_NO_DATA_FOUND
+          parent_key=user_name.key.parent() 
           type = user_name.type
           if type == Constant.SCHOOL:
             user = School.query(School.code == username).get()
           elif type == Constant.STUDENT:
-            user = Student.query(Student.username == username).get()
+            logging.info("CV Logs :Inside login : student")
+            user = Student.query(Student.username == username,ancestor=parent_key).get()
           elif type == Constant.TEACHER:
-            user = Teacher.query(Teacher.username == username).get()
+            logging.info("CV Logs :Inside login : teacher")
+            user = Teacher.query(Teacher.username == username,ancestor=parent_key).get()
           else :
             logging.info("CV Logs : failed to login for username :" + username + ":type " + str(type))
             return Constant.ERROR_BAD_VALUE
       except Exception :
         logging.exception("")
         logging.info("CV Logs : failed to login for username :"+username+":type "+str(type))
-        return Constant.ERROR_BAD_VALUE
+        return Constant.ERROR_BAD_VALUEa
         
       if user == None:
         return Constant.ERROR_INVALID_USER
