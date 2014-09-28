@@ -17,10 +17,12 @@ import datetime
 """
 login for users
             type: determines the user Type from Constant.py
+//TODO school_key ancestor key
 """
 def login(username, pwd):
       logging.info("CV Logs :Inside login :")
-      try: 
+      try:
+              
           user_name = User.query((User.username == username), ndb.AND (User.pwd==pwd )).get()
            
           logging.info("CV Logs :Inside login :"+str(user_name)+"@@@@@@@@@@@")
@@ -458,7 +460,7 @@ def addSchool(name, address):
        if not isinstance(address, Address):
             logging.error("Bad Instance of address")
             return Constant.ERROR_BAD_VALUE      
-       school = School(name=name, address=address, code=name + "5678") 
+       school = School(name=name, address=address, code="01")
        school.put()  
        logging.info("CV Logs : success to add school  :" + school.name)
        return school;
@@ -522,7 +524,7 @@ def addTeacher(basic_info, school_key, pwd):
     if not isinstance(basic_info, UserInfo):
             return Constant.ERROR_BAD_VALUE      
     try:
-         school = school_key.get()     
+
          school = school_key.get()
          username = basic_info.firstname + "_" + basic_info.lastname
          teacher = Teacher(parent=school_key, username=username, basic_info=basic_info, school=school_key) 
@@ -2180,6 +2182,27 @@ def get_subject_details_of_teacher_in_class(teacher_key, class_key):
             return Constant.ERROR_OPERATION_FAIL       
             
 
+
+def get_basic_details_of_teacher(teacher_key, class_key):
+    logging.info("CV Logs : get_subject_details_of_teacher_in_class ")
+    try:
+        subjects = []
+        dict_subjects = {}
+        teacher_entity = teacher_key.get()
+        class_entity = class_key.get()
+        subjects_of_teacher_keys = teacher_entity.subjects
+        subjects_of_teacher = ndb.get_multi(subjects_of_teacher_keys)
+        for subject in subjects_of_teacher:
+            if subject.class_key == class_key:
+                dict_subjects.update({subject.key.urlsafe():subject.name})       
+        logging.info("CV Logs : success to get subject details  of class for teacher" + class_entity.name + ":" + class_entity.section_details)
+        return dict_subjects
+    except Exception:
+            logging.error("CV Logs : Failed to subject details  of class for teacher" )
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL       
+            
+
 """
 get subjects  associated to a class 
 """
@@ -2281,7 +2304,7 @@ def get_average_score_by_subject(subject_key, teacher_key, class_key):
         average_mastery = mastery / float(count)  
     
         logging.info("CV Logs : Success to get_average_score_by_subject ")
-        return int(average_mastery)
+        return (average_mastery)
     except Exception:
         logging.error("CV Logs : Failed  to get_average_score_by_subject ")
         logging.exception("")
@@ -2639,7 +2662,7 @@ def get_mastery_by_subject(subject_key, student_key):
             topic_mastery += a
         mastry = topic_mastery / (float(total) * 100)
         logging.info("CV Logs : success to get_mastery_by_subject  :" + str(mastry))
-        final_mastery = int(mastry * Constant.MAX_MARKS)
+        final_mastery = (mastry * Constant.MAX_MARKS)
         return final_mastery
     except Exception:
         logging.error("CV Logs : failed to get get_mastery_by_subject :")
