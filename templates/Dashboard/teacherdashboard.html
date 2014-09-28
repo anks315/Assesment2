@@ -89,6 +89,10 @@
 				</td>
 				</tr>
                 </table> </div>
+
+
+            <!--
+
 		 	<div  class="template_dashboard_header" style="padding-bottom:5px; background-color: #D3EBCB;height:100px;border-bottom: 2px solid rgba(28, 156, 88, 1);">
 
 		 		<span >
@@ -177,6 +181,117 @@
 
 			</div>
 
+            -->
+
+
+
+            <div id="sel_nav_bar_container" style="">
+
+
+<div style="position: relative; width: 100%; min-width: 1000px; padding-top: 35px; background: linear-gradient(to bottom, rgb(194, 212, 219) 0%, rgb(163, 179, 184) 100%) repeat scroll 0% 0% transparent; text-align: center; font-size: 0px;" id="sim_dir_naviguator">
+	<span style="display: inline-block; position: relative; width: 1000px; text-align: left; font-size: 0px;">
+	<div style="position: absolute; left: 88px; bottom: 100%; padding-bottom: 5px; color: rgb(24, 144, 186); font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold;">
+	</div>
+	<div id="sim_dir_nav_container" style="position: relative; padding: 0px 27px;">
+		<span style="position: relative; vertical-align: bottom; display: inline-block; margin-right: 11px;">
+            <span style="display: inline-block; position: relative; vertical-align: bottom; width: 50px; height: 63px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; overflow: hidden; border-radius: 8px 8px 0px 0px; background-color: rgb(163, 106, 63);">
+                <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+		<div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+			<div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+				<img style="position: absolute; top: 50%; left: 50%; margin-top: -13px; margin-left: -13px;" src="/images/icons/home_dash.png" height="26" width="26">
+				<div style="position: absolute; left: 0px; bottom: -50px; width: 100%; height: 50px; box-shadow: 0px 0px 18px 9px rgba(0, 0, 0, 0.28);">
+				</div>
+			</div>
+		</div>
+		</span></span>
+
+        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px; margin-right: 11px;">
+		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
+		<tbody>
+		<tr>
+			<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+				<span id="sim_nav_sel_searchbar_1_button" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: auto; -moz-user-select: none; outline: medium none black; outline-offset: 0px; overflow: hidden; box-sizing: border-box; color: rgb(255, 255, 255); border-radius: 8px 8px 0px 0px; padding: 3px 12px; font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold; background-color: rgb(1, 80, 122);">
+                    <input disabled="" tabindex="-1" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+				<div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+					<div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+						<span style="text-decoration: none;">CLASS </span><span>&nbsp;»</span>
+					</div>
+				</div>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: baseline; text-align: left; font-size: 1em; padding: 11px 9px 8px; background-color: rgb(235, 235, 235);">
+				<div style="width: 419px;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
+					<div style="width: 417px; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
+						<input name="classname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
+                      <!--
+                        <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
+					-->
+							<div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showsclass();">
+							<div id="selected_class_name" style="font-style:italic;color:#AAA;">
+								Enter Your Search
+							</div>
+						</div>
+						<img style="top: 6px; right: 8px;" class="pulldownSB custom_pulldownSB" src="/images/icons/arrow_down_blue.png">
+					</div>
+					<div id="classlist" style="display: none; top: 21px; left: 0px; min-width: 417px;" class="scroll_divSB custom_scroll_divSB">
+					</div>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+		</table>
+		</span>
+
+        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px; opacity: 1.0;">
+		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
+		<tbody>
+		<tr>
+			<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+				<span id="sim_nav_sel_searchbar_2_button" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: auto; -moz-user-select: none; outline: medium none black; outline-offset: 0px; overflow: hidden; box-sizing: border-box; color: rgb(255, 255, 255); border-radius: 8px 8px 0px 0px; padding: 3px 12px; font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold; background-color: rgb(60, 199, 65);">
+               	<input name="subjectname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
+
+                    <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+					<div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+						<span style="text-decoration: none;">SUBJECT </span><span>&nbsp;»</span>
+					</div>
+				</div>
+				</span>
+			</td>
+		</tr>
+
+
+		<tr>
+			<td style="vertical-align: baseline; text-align: left; font-size: 1em; padding: 11px 9px 8px; background-color: rgb(235, 235, 235);">
+				<div style="width: 419px;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
+					<div style="width: 417px; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
+						<input name="subjectname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
+                      <!--
+                        <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
+					-->
+							<div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showsubjects();">
+							<div id="selected_subject_name" style="font-style:italic;color:#AAA;">
+								Enter Your Search
+							</div>
+						</div>
+						<img style="top: 6px; right: 8px;" class="pulldownSB custom_pulldownSB" src="/images/icons/arrow_down_red.png">
+					</div>
+					<div id="subjectList" style="display: none; top: 21px; left: 0px; min-width: 417px;" class="scroll_divSB custom_scroll_divSB">
+
+                    </div>
+				</div>
+			</td>
+		</tr>
+
+
+		</tbody>
+		</table>
+		</span>
+	</div>
+	</span>
+</div>
+                </div>
 
 
 
@@ -354,6 +469,64 @@
              * Populate the list of classes
              */
 
+function populate_list_of_classes() {
+
+
+
+         var xmlhttp;
+         //   alert('listofclasses');
+           var div_to_be_loaded = "<table style=\"width: 98%; margin: 2px;\" class=\"tableSB custom_tableSB\" cellspacing=\"0\" cellpadding=\"0\">";
+         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                 xmlDoc = xmlhttp.responseXML;
+
+
+                 lists = "";
+                 no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
+
+                 //  alert(no_of_classes);
+                 var list_of_subjects = [];
+                 for (i = 0; i < no_of_classes; i++) {
+
+
+                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("class")[i];
+                     var classname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     //var key="abc";
+                     var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                    // div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbyclass('" + key + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+
+
+                     div_to_be_loaded = div_to_be_loaded +"<tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\" onclick=\"populatedivbyclass('" + key + "','" + classname+ "')\">"+classname+"</div></td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+
+
+                 }
+
+                 div_to_be_loaded+="</table>";
+             document.getElementById("classlist").innerHTML = div_to_be_loaded;
+
+
+
+
+         }
+     };
+
+     xmlhttp.open("GET", "/getclassdetailsbyteacher/", true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+ }
+
+
+/*
+
      function populate_list_of_classes() {
 
 
@@ -408,6 +581,7 @@
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
  }
+*/
 
  /*
  inner xml fields to be updated
@@ -418,6 +592,74 @@
  subjectDetails
   */
 
+
+
+    function populate_list_of_subjects(classkey) {
+
+//        alert(classkey);
+
+
+
+     var xmlhttp;
+     //   alert('listofclasses');
+          var div_to_be_loaded = "<table style=\"width: 98%; margin: 2px;\" class=\"tableSB custom_tableSB\" cellspacing=\"0\" cellpadding=\"0\">";
+
+         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+         xmlhttp = new XMLHttpRequest();
+         xmlhttp.overrideMimeType("text/xml");
+     } else {
+         // code for IE6, IE5
+         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+     }
+     xmlhttp.onreadystatechange = function() {
+
+         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+             xmlDoc = xmlhttp.responseXML;
+
+
+             lists = "";
+             no_of_classes = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
+
+             //alert(no_of_classes);
+             var list_of_subjects = [];
+             for (i = 0; i < no_of_classes; i++) {
+
+
+                 x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
+                 var subjectname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                 //var key="abc";
+
+                 var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+               //  alert(key);
+                 // div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('"+classname+"')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + classname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+              //   div_to_be_loaded = div_to_be_loaded + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button  onclick=\"populatedivbysubject('" + classkey +"','" + key+ "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + subjectname + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+
+ div_to_be_loaded = div_to_be_loaded +"<tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\" onclick=\"populatedivbysubject('" + classkey + "','" + key + "','" + subjectname+ "')\">"+subjectname+"</div></td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+
+
+             }
+
+                   div_to_be_loaded+="</table>";
+
+               document.getElementById("subjectList").innerHTML = div_to_be_loaded;
+
+         }
+     };
+
+
+     xmlhttp.open("GET", "/subjectsofclass?id="+classkey, true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+
+
+
+
+ }
+
+
+
+/*
 
     function populate_list_of_subjects(classkey) {
 
@@ -479,6 +721,9 @@
  }
 
 
+ */
+
+
 
       /*
 
@@ -490,7 +735,7 @@
 
        */
 
-    function populatedivbyclass(classkey){
+    function populatedivbyclass(classkey,classname){
 
 
         $("#dashboard_row1").hide();
@@ -498,6 +743,9 @@
         $("#class_subject_dashboard_row1").show();
         $("#class_subject_dashboard_row2").show();
          $("#accountsummary").hide();
+
+        document.getElementById('selected_class_name').innerHTML=classname;
+
         //Now cal AJAX to load divisions correspondingly
 
 
@@ -691,7 +939,7 @@ var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Subject Name</t
      xmlhttp.send();
 
     }
-    function populatedivbysubject(classkey,subjectkey){
+    function populatedivbysubject(classkey,subjectkey,subjectname){
 
         $("#dashboard_row1").hide();
         $("#dashboard_row2").hide();
@@ -700,6 +948,7 @@ var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Subject Name</t
          $("#accountsummary").hide();
 
 
+        document.getElementById('selected_subject_name').innerHTML=subjectname;
 
         document.getElementById('class_dashboard_row1_col1_header').innerHTML="Average mastery of Subject";
         document.getElementById('class_dashboard_row1_col2_header').innerHTML="Assesment coverage of Subject";
@@ -1097,6 +1346,7 @@ function showmessages(){
       }
 
       function hidesclass(){
+          alert('oye');
           document.getElementById('classlist').style.display = 'none';
 
       }
@@ -1126,6 +1376,7 @@ function showmessages(){
 
 
 
+<!--
 	<div width=100%>
 				<table width ="100%" cellspacing="0" style="background-color:white;border-bottom: 5px;border-bottom-style: solid;border-bottom-color: rgb(29, 140, 228);" >
 					<tr>
@@ -1158,6 +1409,9 @@ function showmessages(){
 				</table>
 
 			</div>
+
+
+			-->
 
 		<div class="template_main_body">
 

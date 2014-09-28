@@ -1170,3 +1170,50 @@ table {
     -webkit-border-radius: 0 0 6px 6px
     border-radius: 0 0 6px 6px
 }
+
+
+/* Search Bar   */
+.DOM_objectSB {position: relative;overflow: visible;}
+.select_divSB {position: relative;border: 1px solid #000000;background-color: #FFFFFF;overflow: hidden;}
+.selectSB {position: absolute;width: 0px;height: 18px;opacity: 0;border: none;outline: none;padding-left: 5px;-webkit-appearance: none;}
+.selectedSB {position: absolute;padding-left: 5px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;cursor: text;}
+.pulldownSB {position: absolute;cursor: pointer;right: 2px;}
+.scroll_divSB {border: 1px solid #000000;background-color: #FFFFFF;position: absolute;z-index: 100;}
+.tableSB {position: relative;top: 0px;left: 0px;}
+.listed_elementSB {height: 20px;cursor: pointer;white-space: nowrap;}
+.up_downSB {position: absolute;}
+.scroll_cursorSB {position: absolute;background-color: #AAA;right: 0px;width: 5px;height: 20px;z-index: 500;border-radius: 2px;}
+.upSB {position: absolute;top: 0px;z-index: 1000;}
+.downSB {position: absolute;bottom: 0px;z-index: 1000;}
+.moreSB {font: 12px Verdana;}
+.tooltipClassSB {font: 10px Verdana;position: absolute;display: none;background-color: #F8FBC1;border: 1px solid #CCCCCC;padding: 5px;z-index: 10000;}
+
+
+.sim_sb_entry_tag_left{font: 12px Verdana;color: #007FFF;padding-left: 14px;}
+.sim_sb_entry_tag_right{font: 10px Verdana;padding-right: 10px;}
+.sim_sb_entry_tag_left_selected{float: left;font: 11px Verdana;color: #666;font-weight: bold;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.sim_sb_entry_tag_right_selected{float: right;font: 10px Verdana;text-align: right;}
+div.sim_nb_stu {font: 11px Verdana;color: #707985;text-align: right;}
+div.sim_teacher_adm {font: bold 10px Verdana;color: #FF9326;text-align: right;}
+div.sim_teacher_ta {font: bold 10px Verdana;color: #999999;text-align: right;}
+.custom_select_divSB {border-radius: 4px;border: 1px solid #EEEEEE;}
+.custom_select_divSB, .sim_sb_entry_tag_left, .sim_sb_entry_tag_right, .openclose {-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+.custom_select_div_openSB {-moz-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);-webkit-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);}
+.custom_selectSB {font: 12px Verdana;color: #000000;}
+.custom_selectedSB {font: 12px Verdana;color: #000000;}
+div.custom_select_divSB div.archive {background-color: #cccccc !important;}
+.custom_scroll_divSB {border-radius: 4px;border: 1px solid #EEEEEE;-moz-box-shadow: 5px 5px 10px rgba(0,0,0,0.25), -5px 5px 10px rgba(0,0,0,0.25);-webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.25), -5px 5px 10px rgba(0,0,0,0.25);box-shadow: 5px 5px 10px rgba(0,0,0,0.25), -5px 5px 10px rgba(0,0,0,0.25);}
+.custom_tableSB, tr.custom_listed_elementSB {border-collapse: collapse;background-color: #f3f3f3;}
+.custom_listed_elementSB {height: 25px;}
+.sim_sb_entry_tag_left {text-decoration: none;color: #666666;}
+.custom_tooltipClassSB {}
+.custom_tableSB {margin: 0px !important;width: 100% !important;}
+tr.archive * {background: none !important;color: #cccccc;}
+tr.archive {background-color: #666666 !important;color: #cccccc;}
+tr.searchSelectedDiv {}
+.sim_sb_entry_tag_left:hover, tr.archive td div.sim_sb_entry_tag_left:hover {color: #178fba;}
+.custom_listed_elementSB_first:hover, .custom_listed_elementSB_first_arrow, tr.searchMouseOverDiv * {color: #178fba;}
+tr.unselectable {background-color: #666666;color: #cccccc;border-bottom: 1px solid #7a7a7a;}
+tr.unselectable td, tr.unselectable td div {font-weight: bold;}
+.openclose {padding-left: 14px;}
+.openclose00 {font-weight: bold;font-size: 13pt;text-align:right;padding-right: 14px;}
