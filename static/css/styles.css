@@ -22,7 +22,6 @@ div.template_background {
 width:100%;
 height:100%;
 
-background-color: #eafac7;
 }
 div.template_background_question {
 width:100%;
@@ -46,13 +45,14 @@ padding-top:15px;
 }
 div.template_main_body {
 
-width:98%;
-margin-left:1%;
-margin-right:1%;
-margin-bottom: 5%;
-height:70%;
+width: 90%;
+margin: 3% 5% 5%;
+height: 70%;
 padding-bottom: 20px;
-background-color:#eafac7;
+background-color: rgba(229, 246, 229, 1);
+border-radius: 15px;
+border: 5px solid rgba(231, 233, 231, 1);
+
 
 }
 
@@ -1217,3 +1217,11 @@ tr.unselectable {background-color: #666666;color: #cccccc;border-bottom: 1px sol
 tr.unselectable td, tr.unselectable td div {font-weight: bold;}
 .openclose {padding-left: 14px;}
 .openclose00 {font-weight: bold;font-size: 13pt;text-align:right;padding-right: 14px;}
+
+
+#sim_main {width: 960px;margin-left: auto;margin-right: auto;padding-bottom: 15px;}
+#Xsim_main_in {min-height: 450px;padding: 20px;border-radius: 15px;border-left: 1px solid #EEEEEE;border-top: 1px solid #EEEEEE;border-right: 3px solid #D9E2E8;border-bottom: 3px solid #D9E2E8;background-color: #FFFFFF;}
+#sim_main_in {min-height: 450px;padding: 25px 5px 20px 5px;position: relative;}
+#sim_main_title {padding-bottom: 5px;margin-bottom: 20px;font: 16px Verdana;font-weight: bold;position: relative;overflow: hidden;text-overflow: elipsis;color: #666666;}
+#sim_main_title_back_link {font: 9px Verdana;}
+#sim_main_title_top_right {top: -2px;right: 1px;position: absolute;font: 9px Verdana;}

@@ -188,13 +188,13 @@
             <div id="sel_nav_bar_container" style="">
 
 
-<div style="position: relative; width: 100%; min-width: 1000px; padding-top: 35px; background: linear-gradient(to bottom, rgb(194, 212, 219) 0%, rgb(163, 179, 184) 100%) repeat scroll 0% 0% transparent; text-align: center; font-size: 0px;" id="sim_dir_naviguator">
+<div style="position: relative; width: 100%; padding-top: 35px; background: linear-gradient(to bottom, rgb(194, 212, 219) 0%, rgb(163, 179, 184) 100%) repeat scroll 0% 0% transparent; text-align: center; font-size: 0px;" id="sim_dir_naviguator">
 	<span style="display: inline-block; position: relative; width: 1000px; text-align: left; font-size: 0px;">
 	<div style="position: absolute; left: 88px; bottom: 100%; padding-bottom: 5px; color: rgb(24, 144, 186); font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold;">
 	</div>
 	<div id="sim_dir_nav_container" style="position: relative; padding: 0px 27px;">
 		<span style="position: relative; vertical-align: bottom; display: inline-block; margin-right: 11px;">
-            <span style="display: inline-block; position: relative; vertical-align: bottom; width: 50px; height: 63px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; overflow: hidden; border-radius: 8px 8px 0px 0px; background-color: rgb(163, 106, 63);">
+            <span style="display: inline-block; position: relative; vertical-align: bottom; width: 50px; height: 63px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; overflow: hidden; border-radius: 8px 8px 0px 0px; background-color: rgb(37, 163, 16);">
                 <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
 		<div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
 			<div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
@@ -249,7 +249,7 @@
 		<tbody>
 		<tr>
 			<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
-				<span id="sim_nav_sel_searchbar_2_button" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: auto; -moz-user-select: none; outline: medium none black; outline-offset: 0px; overflow: hidden; box-sizing: border-box; color: rgb(255, 255, 255); border-radius: 8px 8px 0px 0px; padding: 3px 12px; font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold; background-color: rgb(60, 199, 65);">
+				<span id="sim_nav_sel_searchbar_2_button" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: auto; -moz-user-select: none; outline: medium none black; outline-offset: 0px; overflow: hidden; box-sizing: border-box; color: rgb(255, 255, 255); border-radius: 8px 8px 0px 0px; padding: 3px 12px; font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold; background-color: rgb(244, 33, 51);">
                	<input name="subjectname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
 
                     <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
@@ -328,6 +328,7 @@
                     document.getElementById("loginname").innerHTML = x[0].childNodes[0].nodeValue;
                     document.getElementById("email_id").innerHTML = "abc@xyz.com";
                     document.getElementById("lastLogin").innerHTML = y[0].childNodes[0].nodeValue;
+                    document.getElementById("dashboardHeading").innerHTML= x[0].childNodes[0].nodeValue+" Dashboard "
                 }
             };
             a.open("GET", "/userdetails/", true);
@@ -1412,13 +1413,164 @@ function showmessages(){
 
 
 			-->
+<div style="position: relative; z-index: 1; width: 100%; border-bottom: 3px solid rgb(101, 149, 94); border-top: 3px solid rgb(140, 186, 37);" id="sel_menu_bar_container">
+
+    <div style="">
+	<div style="position: relative; width: 100%; background-color: rgb(255, 255, 255); text-align: center; font-size: 0px;">
+		<table style="font-size: 1em; position: relative; margin: 0px 10% 2px; width: 80%;" id="menu_main_table" cellspacing="0" cellpadding="0">
+		<tbody>
+		<tr>
+
+			<td style="width: 50%;position: relative; vertical-align: middle; text-align: center; font-size: 13px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; padding: 12px 17px; font-weight: bold; color: rgba(125, 124, 124, 1);" onclick="abc();">
+				Administration
+            </td>
+			<td style="width: 50%;position: relative; vertical-align: middle; text-align: center; font-size: 13px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; padding: 12px 17px; font-weight: bold; color: rgba(125, 124, 124, 1);">
+            Assesments
+            </td>
+		</tr>
+		</tbody>
+		</table>
+
+
+				<div id="administration_tab" onblur="hide()" style="position: absolute; top: 100%; visibility: hidden; background-color: rgb(255, 255, 255); width: 80%; margin: 0px 10% 2px;">
+
+                <table style="font-size: 1em; position: absolute; top: 0px; background-color: rgb(255, 255, 255); left: 0px; border-radius: 10px; border: 2px solid rgb(208, 208, 208);" cellspacing="0" cellpadding="0">
+				<tbody>
+				<tr>
+					<td style="text-align: left; font-size: 1em; padding: 11px 0px; vertical-align: top; border-left: 1px dotted rgb(208, 208, 208);">
+						<table style="font-size: 11px; position: relative; color: rgb(102, 102, 102); font-family: Verdana,Geneva,sans-serif;" cellspacing="0" cellpadding="0">
+						<tbody>
+						<tr>
+							<td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 161px; padding: 0px 8px; font-weight: bold;">
+								INSTRUCTOR
+							</td>
+						</tr>
+						<tr>
+							<td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 161px; padding: 0px 8px;">
+								<table style="font-size: 11px; position: relative; color: rgb(102, 102, 102); font-family: Verdana,Geneva,sans-serif; margin-top: 11px;" cellspacing="0" cellpadding="0">
+								<tbody>
+								<tr>
+									<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+										»&nbsp;
+									</td>
+									<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+										<a href="#" tabindex="0" style="outline: medium none black; outline-offset: 0px; color: rgb(102, 102, 102); font-size: 1em; text-decoration: none; cursor: pointer;" onclick="hideadministrationtab();">Account Summary</a>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+						</tbody>
+						</table>
+					</td>
+					<td style="text-align: left; font-size: 1em; padding: 11px 0px; vertical-align: top; border-left: 2px dotted rgb(208, 208, 208);">
+						<table style="font-size: 11px; position: relative; color: rgb(102, 102, 102); font-family: Verdana,Geneva,sans-serif;" cellspacing="0" cellpadding="0">
+						<tbody>
+						<tr>
+							<td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 161px; padding: 0px 8px; font-weight: bold;">
+								CLASSES
+							</td>
+						</tr>
+						<tr>
+							<td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 161px; padding: 0px 8px;">
+								<table style="font-size: 11px; position: relative; color: rgb(102, 102, 102); font-family: Verdana,Geneva,sans-serif; margin-top: 11px;" cellspacing="0" cellpadding="0">
+								<tbody>
+								<tr>
+									<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+										»&nbsp;
+									</td>
+									<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+										<a href="#" tabindex="0" style="outline: medium none black; outline-offset: 0px; color: rgb(102, 102, 102); font-size: 1em; text-decoration: none; cursor: pointer;" onclick="hideadministrationtab();">Class List</a>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+								<table style="font-size: 11px; position: relative; color: rgb(102, 102, 102); font-family: Verdana,Geneva,sans-serif; margin-top: 11px;" cellspacing="0" cellpadding="0">
+								<tbody>
+								<tr>
+									<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+										»&nbsp;
+									</td>
+									<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+										<a href="#" tabindex="0" style="outline: medium none black; outline-offset: 0px; color: rgb(102, 102, 102); font-size: 1em; text-decoration: none; cursor: pointer;" onclick="hideadministrationtab();">Assessment</a>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+						</tbody>
+						</table>
+					</td>
+					<td style="text-align: left; font-size: 1em; padding: 11px 0px; vertical-align: top; border-left: 2px dotted rgb(208, 208, 208);">
+						<table style="font-size: 11px; position: relative; color: rgb(102, 102, 102); font-family: Verdana,Geneva,sans-serif;" cellspacing="0" cellpadding="0">
+						<tbody>
+						<tr>
+							<td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 161px; padding: 0px 8px; font-weight: bold;">
+								STUDENTS
+							</td>
+						</tr>
+						<tr>
+							<td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 161px; padding: 0px 8px;">
+								<table style="font-size: 11px; position: relative; color: rgb(102, 102, 102); font-family: Verdana,Geneva,sans-serif; margin-top: 11px;" cellspacing="0" cellpadding="0">
+								<tbody>
+								<tr>
+									<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+										»&nbsp;
+									</td>
+									<td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+										<a href="#" tabindex="0" style="outline: medium none black; outline-offset: 0px; color: rgb(102, 102, 102); font-size: 1em; text-decoration: none; cursor: pointer;" onclick= "hideadministrationtab();">Student Roster</a>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+						</tbody>
+						</table>
+					</td>
+				</tr>
+				</tbody>
+				</table>
+			</div>
+
+
+
+
+	</div>
+</div>
+</div>
+
+        <script>
+
+            function abc(){
+                document.getElementById('administration_tab').style.visibility='visible';
+            }
+            function hideadministrationtab(){
+                document.getElementById('administration_tab').style.visibility='hidden';
+            }
+        </script>
+
+<!--
+        <div style="position: relative; z-index: 1; width: 100%; border-bottom: 3px solid rgb(101, 149, 94); border-top: 3px solid rgb(140, 186, 37);">
+        Hello
+        </div>
+-->
+
+
 
 		<div class="template_main_body">
 
 
 <table width=100%>
+
+
 <tr>
-<h2 id="dashboardHeading" onclick="dashboard()" align="center" style="font-family: Arial,Sans-Serif; font-size: 20px; background-color: rgb(79, 136, 155); border-bottom: 3px ridge rgb(29, 140, 228); margin: 5px; padding-top: 15px; color: rgb(255, 255, 255); height: 40px;"><a href="/dashboard/" style="color: rgb(255, 255, 255); width: 150px;margin: auto" >DashBoard</a></h2>
+
+<h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px ridge rgb(29, 140, 228); border-radius: 5px; background-color: rgb(224, 224, 224); font: bold 20px Arial,Sans-Serif; color: rgb(62, 45, 45);" onclick="dashboard()" align="center"><a style="color:#133A82; font: bold 14px Verdana" href="/dashboard/" id="dashboardHeading">
+ Dashboard </a></h2>
+
 </tr>
 
 
@@ -1522,7 +1674,7 @@ Address:<strong> </strong><strong></strong>
 						</div>
 					</div>
 					<div class="sim_im_section_in">
-			<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="nofont"><img src="/aleks/gif/boxy/spacer.hcache:1.gif" alt="" border="0" height="10" width="1"></td></tr></tbody></table>
+			<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="nofont"><img src="#" alt="" border="0" height="10" width="1"></td></tr></tbody></table>
   <div id="id_cache_128" style="position: relative; border: thin solid #FFCA00; padding: 5px 10px;background-color: #FFFFBF; color: #000000; ">
 
       <table width="95%">
@@ -1530,13 +1682,13 @@ Address:<strong> </strong><strong></strong>
           <td style="width:35px;text-align: center;" align="center"><img src="/images/icons/list.png" style="vertical-align: middle" alt="Alert"></td>
           <td id="id_cache_128_txt" style="text-align: left; ">
  Your account set up needs to be completed. Please configure your email settings.<br>
-   <button id="button_1" type="button" class="sim_butt" name="_" onclick="javascript:g_NG('/alekscgi/x/Isl.exe/1o_u-IgNsIkHrQEF3-FxygIISSq9ubn2AYFz_ZaS3dM-0EVamJMX8SvC8gF9Qvgknh4MAtYNU0BmgH_z22mROOAifBGZ1_PM5UehRRgLFd4VU?1oiPvmAdTNWDDqezfZIM9pxXHB2t2jYc8rav2dxO6B2k6dq');" value="true">Set Email Preferences</button>
+   <button id="button_1" type="button" class="sim_butt" name="_" onclick="javascript:g_NG('#');" value="true">Set Email Preferences</button>
 
         </td>
       </tr>
     </tbody></table>
   </div>
- <table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="nofont"><img src="/aleks/gif/boxy/spacer.hcache:1.gif" alt="" border="0" height="10" width="1"></td></tr></tbody></table>
+ <table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="nofont"><img src="#" alt="" border="0" height="10" width="1"></td></tr></tbody></table>
     <script> var _op_id_cache_136 = false; </script>
     <div>
     <div class="sub_section_title">
@@ -1563,7 +1715,7 @@ Address:<strong> </strong><strong></strong>
 						</tr>
 						</tbody></table>
 						<div style="position: absolute; bottom:1px; right:1px; font: 11px Verdana;">
-			<a class="sim_edit_link" href="javascript:g_NG('/alekscgi/x/Isl.exe/1o_u-IgNsIkHrQEF3-FxygIISSq9ubn2AYFz_ZaS3dM-0EVamJMX8SvC8gF9Qvgknh4MAtYNU0BmgH_z22mROOAifBGZ1_PM5UehRRgLFd4VU?1oiPvmAdTNWDDqezfZIM9pxXHB2dKVnCPFvbEFQh');">Edit</a>
+			<a class="sim_edit_link" href="#">Edit</a>
 						</div>
 					</div>
 					<div class="sim_im_section_in">
@@ -1745,7 +1897,7 @@ Address:<strong> </strong><strong></strong>
                      <span style="position: relative; left: 0px; top: 0px; display: inline-block; vertical-align: middle; width: 100%; height: 100%; transform: translateZ(0px);">
                         <div style="width: 100%; height: 300px; border-radius: 8px; background-color: rgb(239, 245, 248); position: relative;">
                            <div style="font: bold 12px Verdana; color: rgb(255, 255, 255);">
-                              <span style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 31px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgb(244, 159, 151);">
+                              <span style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 31px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgba(245, 135, 98, 0.97);">
                                  <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
                                  <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
                                     <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
