@@ -6,7 +6,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Critical Velos</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/liteaccordion.jquery.min.js"></script>
 </head>
+
+<script>
+        $(document).ready(function(){
+
+     });
+
+</script>
+
+
 <body>
 
     <div class="template_body" style="">
@@ -45,67 +56,97 @@
             </a>
          </div>
 
-<div id="pic_table" style="width: 100%; height: 400px;border: 2px solid rgb(74, 58, 156); background: url(http://1.bp.blogspot.com/-4QXn3QzBRAs/UG7WEMqZBPI/AAAAAAAADig/KmUm9EvLILM/s640/inidna-flag-black-and-white-with-color-photo.jpg);">
-		
-         <!--
-         <div style="width: 900px; height: 450px; background-color: green;">
-		                 <div id="id_text1_2" style="">
-		 -->
 
+      <div id="featured_slide">
+              <ol>
+      <li>
+        <h2><span>Slide 1</span></h2>
+        <div><img src="/images/slide-3.jpg" alt=""></div>
+      </li>
+      <li>
+        <h2><span>Slide 2</span></h2>
+        <div><img src="/images/classroomhighquality.jpg" alt=""></div>
+      </li>
+      <li>
+        <h2><span>Slide 3</span></h2>
+        <div><img src="/images/slide-2.jpg" alt=""></div>
+      </li>
+      <li>
+        <h2><span>Slide 4</span></h2>
+        <div><img src="/images/classroomhighquality.jpg" alt=""></div>
+      </li>
+      <li>
+        <h2><span>Slide 5</span></h2>
+        <div><img src="/images/slide-2.jpg" alt=""></div>
+      </li>
+    </ol></div>
+    <!-- #######################################################################################################
+    <ol>
+      <li>
+        <h2 class="selected" style="height: 48px; left: 0px; width: 360px;"><span>Slide 1</span><b>1</b></h2>
+        <div style="width: 720px; left: 0px; padding-left: 48px;">
+            <img src="/images/slide-3.jpg" alt=""></div>
+      </li>
+      <li class="slide">
+        <h2 class="" style="height: 48px; left: 768px; width: 360px;"><span>Slide 2</span><b>2</b></h2>
+        <div style="width: 720px; left: 768px; padding-left: 48px;">
+            <img src="/images/classroomhighquality.jpg" alt=""></div>
+      </li>
+      <li class="slide">
+        <h2 class="" style="height: 48px; left: 816px; width: 360px;"><span>Slide 3</span><b>3</b></h2>
+        <div style="width: 720px; left: 816px; padding-left: 48px;">
+            <img src="/images/slide-3.jpg" alt=""></div>
+      </li>
+      <li class="slide">
+        <h2 class="" style="height: 48px; left: 864px; width: 360px;"><span>Slide 4</span><b>4</b></h2>
+        <div style="width: 720px; left: 864px; padding-left: 48px;">
+            <img src="/images/classroomhighquality.jpg" alt=""></div>
+      </li>
+      <li class="slide">
+        <h2 class="" style="height: 48px; left: 912px; width: 360px;"><span>Slide 5</span><b>5</b></h2>
+        <div style="width: 720px; left: 912px; padding-left: 48px;">
+            <img src="/images/slide-2.jpg" alt=""></div>
+      </li>
+    </ol>
+    <!-- ####################################################################################################### -->
+  </div>
+<!--
+        <div id="slide">
+<div class="slider">
+<ul class="items">
+<li><img src="/images/classroomhighquality.jpg" alt=""/>
+<div class="banner">
+<strong>ASSESSMENT</strong>
+<span>Assess yourself or your Child or your Students</span>
+<p>Assesment is very much needed in order to tell u where u stand bla bla content to be filled baadmein</p>
+<a class="button1" href="#">read more</a></div>
+</li>
+<li><img src="/images/slide-2.jpg" alt=""/>
+<div class="banner">
+<strong>Android App - Attendance App</strong>
+<span>Mark Attendance and Reporting</span>
+<p>Now manage data and everything in cloud.. parents can check their students falanaa dhimakaana etc etc..</p>
+<a class="button1" href="#">read more</a></div>
+</li>
+<li><img src="/images/classroomhighquality.jpg" alt=""/>
+<div class="banner">
+<strong>Any other Projects etc</strong>
+<span>critical Velos Product </span>
+<p>innovative product of future etc etc etc..</p>
+<a class="button1" href="#">read more</a></div>
+</li>
+<li><img src="/images/slide-3.jpg" alt=""/>
+<div class="banner">
+<strong>Like this Add more and more products</strong>
+<span>critical Velos Product </span>
+<p>Coming soon.</p>
+<a class="button1" href="#">read more</a></div>
+</li>
+</ul>
+</div>
+</div>
+-->
 
-                    <div class="login_outbox" style="" >
-
-                        <div class="login_innerbox" style="">
-
-                            <div style=" margin: 0px 10px;; ">
-
-                                <form name="login" id="login" style="padding: 0em; margin: 0em" method="POST" action="/dashboard/"  target="_top">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="_form_" value="login">
-                                    <label for="username" id="label_username" style="color:white; display: none">User Name</label>
-                                    <br>
-                                    <input type="text" name="username" id="username" value="" size="15" maxlength="40" style="border: 1px inset #B9B9B9; width: 
-178px; height: 23px; padding: 0px; margin: 0; font:vectipedebook,Arial,sans-serif;" placeholder=" User Name">
-
-                                    <div style="PADDING-TOP: 5px">
-                                        <label for="password" id="label_password" style="color:white; display: none">Password</label>
-                                        <br>
-
-                                        <input type="password" autocomplete="off" name="password" id="password" value="" size="15" maxlength="40" style="border: 1px
-inset #B9B9B9; width: 
-178px;height: 23px; padding: 0px; font:vectipedebook,Arial,sans-serif;margin: 0px" placeholder=" Password">
-                                    </div>
-
-                                    <div style="PADDING-TOP: 10px">
-                                        <font color="white" size="1"><div style="width:65pxpx;"><button class="login_search" name="login" style="padding-bottom: 2px; padding-left: 5px; padding-right: 5px; padding-top: 2px" type="submit" value="true">LOG IN</button> </div><input type="hidden" name="opt_home_page" value="#">
-<input type="hidden" name="opt_error_page" value="">
-<input type="hidden" name="return_url" value=""></font>
-                                    </div>
-									
-                                </form>
-
-
-
-
-                                <div id="id_text1_4_insert_shortcut_2_insert_shortcut_13" style=" margin: 5px 0px;; ">
-								<a class="white_link" href="#" style="font-style: italic" target="_blank">Forgot your login info?</a>
-								<br>
-								<a class="white_link" href="#" style="font-style: italic" target="_blank">SIGN UP NOW</a>
-                                </div>
-
-                            </div>
-
-
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-		 </div>
         <!--   Footers of the page   -->
 
         <div class="footer_div" style="">
@@ -139,5 +180,28 @@ inset #B9B9B9; width:
 
     </div>
     </div>
+
+
+<script type="text/javascript">
+$("#featured_slide").liteAccordion({
+    theme: "os-tpl",
+
+    containerWidth: 960, // fixed (px)
+    containerHeight: 360, // fixed (px) - overall height of the slider
+    headerWidth: 48, // fixed (px) - slide spine title
+
+    firstSlide: 3, // displays slide (n) on page load
+	activateOn: "click", // click or mouseover
+    autoPlay: false, // automatically cycle through slides
+    pauseOnHover: true, // pause slides on hover
+    rounded: false, // square or rounded corners
+    enumerateSlides: true, // put numbers on slides
+
+    slideSpeed: 800, // slide animation speed
+    cycleSpeed: 6000 // time between slide cycles
+
+});
+
+</script>
 
 </body>
