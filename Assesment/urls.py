@@ -36,6 +36,8 @@ urlpatterns = patterns('',
             (r'^averagemasteryofsubject_topicwise$', 'AssessingPie.teacher_dashboard_data.get_averagemastery_of_subject_topicwise'),
             (r'^ques/$', 'AssessingPie.views.ques'),
             (r'^home_scan/$', 'AssessingPie.views.whatisscan'),
+            (r'^login/$', 'AssessingPie.views.login'),
+
 
 
 

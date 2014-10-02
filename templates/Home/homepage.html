@@ -26,7 +26,7 @@
                 <img align="baseline" alt="CRITICAL VELOS" border="0" hspace="0" src="/images/logo.png" style="width: 224px; height: 45px">
             </a>
         <div style=" float: right;; " aria-label="Quick links" role="navigation">
-            <a style="padding-right: 10px;" class="wlnk" href="/dashboard/">LOGIN</a>
+            <a style="padding-right: 10px;" class="wlnk" href="/login/">LOGIN</a>
             <a style="padding-right: 10px;" class="wlnk" href="#">ABOUT US</a>
             <a style="padding-right: 10px;" class="wlnk" href="/ques/">CAREERS</a>
             <a style="padding-right: 10px;" class="wlnk" href="/contact_us/">CONTACT US</a>
@@ -34,7 +34,7 @@
              <a style="padding-right: 10px;" class="wlnk" href="/notrecentlyloggedinall_by_teacher/">UserInformation</a>
         </div>
         </div>
-        <div id="id_letterheads_5_insert_shortcut_15" class="top_header" style="" aria-label="Content categories" role="navigation">
+        <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
              <a href="/" class="ssb">
                 <span class="ssb" onmouseover="sel('1',''); return true;" onmouseout="uns('1',''); return true;" style="font-family: Arial,Sans-Serif; color: #5c69c7; width:10%;padding: 5px;margin: 1px 1px 1px 5px;">
                 <span class="sub" id="sbut_1" align="center" style="text-align: center">HOME</span></span>
@@ -185,20 +185,19 @@
 <script type="text/javascript">
 $("#featured_slide").liteAccordion({
     theme: "os-tpl",
+    containerWidth: $("#insert_shortcut").width(), // fixed (px)
+    containerHeight: 400, // fixed (px) - overall height of the slider
+    headerWidth: 40, // fixed (px) - slide spine title
 
-    containerWidth: 960, // fixed (px)
-    containerHeight: 360, // fixed (px) - overall height of the slider
-    headerWidth: 48, // fixed (px) - slide spine title
-
-    firstSlide: 3, // displays slide (n) on page load
+    firstSlide: 1, // displays slide (n) on page load
 	activateOn: "click", // click or mouseover
-    autoPlay: false, // automatically cycle through slides
+    autoPlay: true, // automatically cycle through slides
     pauseOnHover: true, // pause slides on hover
     rounded: false, // square or rounded corners
     enumerateSlides: true, // put numbers on slides
 
-    slideSpeed: 800, // slide animation speed
-    cycleSpeed: 6000 // time between slide cycles
+    slideSpeed: 5000, // slide animation speed
+    cycleSpeed: 15000 // time between slide cycles
 
 });
 
