@@ -361,7 +361,7 @@ Adds a new Topic:
                 prerequisite_topics should have Type list of  Key of kind Topic
                 subject_key list of  Key of kind Subject
 """
-@ndb.transactional
+@ndb.transactional(retries=5)
 def addTopic(school_key, name, prerequisite_topics, subject_key):
    try:
        logging.info("CV Logs : Inside addTopic")
@@ -592,7 +592,7 @@ Adds a new Class:
                 
   
 """
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def addClass(name, school_key, section_details, year_session):  
     try:
         logging.info("CV Logs : Inside addClass")
@@ -682,7 +682,7 @@ def addUserInfo(firstname, lastname, date_of_birth, sex, address, email, contact
 Adds a new Assessment:
                 list_topic_key: list of topics covered in the assessment
 """
-# @ndb.transactional(xg=True)
+# @ndb.transactional(xg=True,retries=5)
 def addAssessment(name, list_topic_key, school_key, date, due_date, published, teacher_key, class_key):
     try :     
         logging.info("CV Logs : Inside addAssessment")
@@ -804,7 +804,7 @@ Assigns an exsisting assessment to an existing student:
                             student_key: key to student entity
                             assessment_key: key of assessment entity
 """
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def assign_assessment_to_student(student_key, assessment_key):
     student_assessment = None
     logging.info("CV Logs : Inside assign_assessment_to_student")
@@ -1082,7 +1082,7 @@ Assigns  existing questions  to an existing topic:
                             topic_key: key to topic entity
                             questions_in_topic_keys : list of keys of questions covered in topic
 """
-@ndb.transactional
+@ndb.transactional(retries=5)
 def assign_questions_to_topic(topic_key, questions_in_topic_keys, school_key):
     topic = None
     topic_question = None
@@ -1117,7 +1117,7 @@ Assigns  existing questions  to an existing state:
                             topic_key: key to state entity
                             questions_in_topic_keys : list of keys of questions covered in topic
 """
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def assign_questions_to_state(state_key, questions_in_state_keys, school_key):
     state = None
     question_state = None
@@ -1157,7 +1157,7 @@ Assigns  existing questions  to an existing state:
                             topic_key: key to state entity
                             questions_in_topic_keys : list of keys of questions covered in topic
 """
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def map_state_to_questions(topic_key, state_questions_map,school_key):
     state = None
     question_state = None
@@ -1176,7 +1176,7 @@ def map_state_to_questions(topic_key, state_questions_map,school_key):
         logging.exception("")
         logging.error("CV Logs: failed to map_state_to_questions")
     
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def map_state_to_questions_dummy( state_questions_map,school_key):
     state = None
     question_state = None
@@ -1206,7 +1206,7 @@ Assigns  existing topics  to an existing state:
                             topic_key: key to state entity
                             states_in_topic_keys : list of keys of states covered in topic
 """
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def assign_states_to_topic(topic_key, states_in_topic_keys, school_key):
     topic = None
     state_topic = None
@@ -1283,7 +1283,7 @@ Assigns  existing topics  to an existing subject:
                             topic_key: key to state entity
                             states_in_topic_keys : list of keys of states covered in topic
 """
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def assign_topics_to_subject(subject_key, topics_in_subject_key, school_key):
     subject = None
     topic_subject = None
@@ -1337,7 +1337,7 @@ Assigns  existing students  to an existing class:
                             class_key: key to Class entity
                             students_in_class_key : list of keys of students enrolled  in class
 """
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def assign_students_to_class(class_key, students_in_class_key):
     class_entity = None
     logging.info("CV Logs : Inside assign_students_to_class ")
@@ -1367,7 +1367,7 @@ def assign_students_to_class(class_key, students_in_class_key):
 
 
 
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def assign_assessments_to_class(class_key, assessment_keys):
     class_entity = None
     students = []
@@ -1402,7 +1402,7 @@ Assigns  existing classes  to an existing teacher:
                             teacher_key: key to Class entity
                             students_in_class_key : list of keys of students enrolled  in class
 """
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def assign_classes_to_teacher(teacher_key, classes_under_teacher):
     
     logging.info("CV Logs :Inside  assign_classes_to_teacher():")
@@ -1451,7 +1451,7 @@ Assigns  existing students  to an existing class:
                             class_key: key to Class entity
                             students_in_class_key : list of keys of students enrolled  in class
 """
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def assign_subjects_to_class(class_key, subjects_in_class_key):
     class_entity = None
     try:
@@ -1465,7 +1465,7 @@ def assign_subjects_to_class(class_key, subjects_in_class_key):
     class_entity.put()     
     return Constant.UPDATION_SUCCESSFULL  
 
-@ndb.transactional(xg=True)
+@ndb.transactional(xg=True,retries=5)
 def assign_subjects_to_teacher(teacher_key, subjects_in_class_key):
     class_entity = None
     try:
