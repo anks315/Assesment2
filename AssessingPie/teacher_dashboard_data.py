@@ -83,7 +83,7 @@ def get_assessment_coverage_of_class(request):
     key = request.GET['id']
     classkey = ndb.Key(urlsafe=key)
     assessmentcoveragedict = Query.get_assessment_coverage_of_class(teacherkey,classkey)
-    logging.error(assessmentcoveragedict)
+    logging.error("&&&&&&&&&&&&&&&&&&777"+str(assessmentcoveragedict))
     t = loader.get_template('Dashboard/assessmentcoveragebyclass')
     c = Context({'assessmentcoveragedict': assessmentcoveragedict,})
     return HttpResponse(t.render(c),content_type="text/xml")
@@ -120,7 +120,7 @@ def get_assessment_coverage_of_subject(request):
     key = request.GET['subjectid']
     subjectkey = ndb.Key(urlsafe=key)
     assessmentcoveragedict = Query.get_assessment_coverage_of_subject(teacherkey,classkey,subjectkey)
-    logging.error("101010")
+    logging.error("101010"+str(assessmentcoveragedict))
     t = loader.get_template('Dashboard/assessmentcoverageofsubject')
     c = Context({'assessmentcoveragedict': assessmentcoveragedict,})
     return HttpResponse(t.render(c),content_type="text/xml")
