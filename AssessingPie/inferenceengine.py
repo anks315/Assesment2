@@ -1,6 +1,7 @@
 __author__ = 'ankur'
 import logging
 import Query
+from gaesessions import get_current_session
 import models
 import Constant
 class Question:
@@ -178,7 +179,7 @@ class InferenceBuffer:
         self.blockCache = BlockCache()
         self.blockCache = BlockCache()
 
-def generatestates(userbuffer,topicname):
+def generatestates(userbuffer,topickey):
     logging.error("entered g")
     statesgen =[]
     numoftype = userbuffer.typeCache.getlength()
@@ -210,8 +211,9 @@ def generatestates(userbuffer,topicname):
             templist.append(userbuffer.typeCache.gettypekey(items))
         queryreadydict[statenum]=templist
         statenum+=1
+    session = get_current_session()
 
-
+    Query.map_state_to_questions_dummy(queryreadydict,session['schoolkey'])
 
 
 
