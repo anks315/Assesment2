@@ -69,6 +69,9 @@ def signup_school(name, address):
            return Constant.ERROR_OPERATION_FAIL 
       logging.info("CV Logs : success to sign up for school :" + school.name)  
       return school
+  
+  
+
 
 """
 Sign up for a teacher
@@ -76,12 +79,12 @@ Sign up for a teacher
 basic_info object of UserInfo:
 First of all make an address instance : address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
 then make a basic_info object using   : user_basicinfo=Query.addUserInfo("Ankit","Bhatia",datetime.date(int(2009),int(8),int(6)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
-dummy schoolcode= CVSchool5678
+dummy schoolcode= 01
 returns username
 
-usage example : Query.signup_teacher(user_basicinfo, "CVSchool5678",'')
+usage example : Query.signup_teacher("sulabh@cv",user_basicinfo, "01",'password')
 """
-def signup_teacher(basic_info, school_code, pwd):
+def signup_teacher(username,basic_info, school_code, pwd):
       logging.info("CV Logs : inside signup_teacher ")
       try:
           school = School.query(School.code == school_code).get()
@@ -89,17 +92,18 @@ def signup_teacher(basic_info, school_code, pwd):
               logging.error("CV Logs : bad value for school :" )
               return Constant.ERROR_NO_DATA_FOUND
           school_key = school.key
-          teacher = addTeacher(basic_info, school_key, pwd)
+          teacher = addTeacher(username,basic_info, school_key, pwd)
           if not  isinstance(teacher, Teacher):
                logging.error("CV Logs : failed adding teacher :" )
                return Constant.ERROR_BAD_VALUE 
-          username = teacher.basic_info.firstname + "_" + teacher.basic_info.lastname
       except Exception:
           logging.exception("")
           logging.error("CV Logs : failed to sign up for teacher :" +basic_info.firstname)
           return Constant.ERROR_OPERATION_FAIL
       logging.info("CV Logs : success to sign up for teacher :" +basic_info.firstname)  
       return username
+  
+ 
 
 
 def check_username(username):
@@ -129,13 +133,13 @@ Sign up for a student
 basic_info object of UserInfo:
 First of all make an address instance : address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
 then make a basic_info object using   : user_basicinfo=Query.addUserInfo("Ankit","Bhatia",datetime.date(int(2009),int(8),int(6)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
-dummy schoolcode= CVSchool5678
+dummy schoolcode= 01
 returns username
 
-usage example : Query.signup_student(user_basicinfo, "CVSchool5678",'')
+usage example : Query.signup_student("ankit@bhatia",user_basicinfo, "01",'pass')
 """
 
-def signup_student(basic_info, school_code, pwd):
+def signup_student(username,basic_info, school_code, pwd):
       logging.info("CV Logs : inside signup_student ")
       try:
           
@@ -144,11 +148,10 @@ def signup_student(basic_info, school_code, pwd):
               logging.error("CV Logs : bad value for school :" )
               return Constant.ERROR_NO_DATA_FOUND
           school_key = school.key
-          student = addStudent(basic_info, school_key, pwd)
+          student = addStudent(username,basic_info, school_key, pwd)
           if not  isinstance(student, Student):
                logging.error("CV Logs :adding student failed :" )
                return Constant.ERROR_BAD_VALUE
-          username = student.basic_info.firstname + "_" + student.basic_info.lastname
       except Exception:
           logging.exception("")
           logging.info("CV Logs : failed to sign up for student :" +basic_info.firstname)
@@ -529,7 +532,7 @@ def deleteSchool(school_key):
 Adds a new Teacher:
                 address: should be an Address entity
 """
-def addTeacher(basic_info, school_key, pwd):
+def addTeacher(username,basic_info, school_key, pwd):
     logging.info("CV Logs : Inside addTeacher")
     school = None
     if not isinstance(basic_info, UserInfo):
@@ -541,7 +544,6 @@ def addTeacher(basic_info, school_key, pwd):
          schoolkey=School.query(School.name=='CVSchool').get()
          if schoolkey==None:
               return Constant.ERROR_INCONSISTENT_STATE
-         username = basic_info.firstname + "_" + basic_info.lastname
          teacher = Teacher(parent=school_key, username=username, basic_info=basic_info, school=school_key) 
          teacher.put()  
          vaultinfo = User(username=username, type=Constant.TEACHER, key=teacher.key, pwd=pwd,parent=schoolkey.key)
@@ -751,7 +753,7 @@ Adds a new Student:
                 class_deatils=  class name from Class in Constant.py
                 section_details=section name from Section in Constant.py
 """
-def addStudent(basic_info, school_key, pwd):
+def addStudent(username,basic_info, school_key, pwd):
     logging.info("CV Logs : Inside addStudent")
     if not (isinstance(basic_info, UserInfo)) :
             return Constant.ERROR_BAD_VALUE           
@@ -759,7 +761,6 @@ def addStudent(basic_info, school_key, pwd):
 
          if not school_key.kind()==School._get_kind():
              return Constant.ERROR_BAD_VALUE
-         username = basic_info.firstname + "_" + basic_info.lastname
          schoolkey=School.query(School.name=='CVSchool').get()
          logging.error(""+str(school_key))
          if schoolkey==None:
@@ -1452,7 +1453,7 @@ def assign_classes_to_teacher(teacher_key, classes_under_teacher):
 Assigns  existing teachers  to an existing school:
                             school_key: key to school entity
                             states_in_topic_keys : list of keys of states covered in topic
-
+a
 def assign_teachers_to_school(school_key,teachers_in_school_keys):
     school=None
     try:

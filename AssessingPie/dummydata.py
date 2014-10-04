@@ -3,6 +3,7 @@ from google.appengine.ext import ndb
 import Query
 import logging
 import datetime
+import time
 
 #from Constant import Constant,UserType,Subject
 import Constant
@@ -16,7 +17,7 @@ def fill():
       try: 
             address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
             school=Query.addSchool("CVSchool", address1)
-            
+            time.sleep(15)
             ankit_user=Query.addUserInfo("Ankit","Bhatia",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
             kavya_user=Query.addUserInfo("Kavya","Singh",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_FEMALE, address1, "kavya@gmail.com", 7667654766)
             prajjwal_user=Query.addUserInfo("Prajjwal","Ojha",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_MALE, address1, "prajjwal@gmail.com", 87654766)
@@ -26,7 +27,7 @@ def fill():
             sarthaj_user=Query.addUserInfo("Sarthak","Tiwari",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_MALE, address1, "vivek@gmail.com", 8787877)
             mishika_user=Query.addUserInfo("Mishika","Singh",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_FEMALE, address1, "kavya@gmail.com", 7667654766)
             prasoon_user=Query.addUserInfo("Prasoon","Garg",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_MALE, address1, "prajjwal@gmail.com", 87654766)
-            pravesh_user=Query.addUserInfo("Pravesh Pal","Sahay",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
+            pravesh_user=Query.addUserInfo("Pravesh","Sahay",datetime.datetime(int(2009),int(8),int(6),int(23),int(12),int(8)),Constant.Constant.SEX_FEMALE, address1, "8778", 654766)
    
             
             
@@ -36,16 +37,16 @@ def fill():
             #userinfo8=Query.addUserInfo("Samarath","Tiwari",datetime.datetime.now(),Constant.SEX_FEMALE, address1, "8778", 654766)
             
             
-            student_vivek=Query.addStudent(ankit_user, school.key,'password')
-            student_kavya=Query.addStudent(kavya_user, school.key,'pwd')
-            student_prajjwal=Query.addStudent(prajjwal_user, school.key,'pwd')
-            student_shiv=Query.addStudent(shiv_user, school.key,'pwd')
+            student_vivek=Query.addStudent("Ankit_Bhatia",ankit_user, school.key,'password')
+            student_kavya=Query.addStudent("Kavya_Singh",kavya_user, school.key,'pwd')
+            student_prajjwal=Query.addStudent("Prajjwal_Ojha",prajjwal_user, school.key,'pwd')
+            student_shiv=Query.addStudent("Shiv_Sahay",shiv_user, school.key,'pwd')
             
             
-            student_sarthak=Query.addStudent(sarthaj_user, school.key,'pwd')
-            student_mishika=Query.addStudent(mishika_user, school.key,'pwd')
-            student_prasoon=Query.addStudent(prasoon_user, school.key,'pwd')
-            student_pravesh=Query.addStudent(pravesh_user, school.key,'pwd')
+            student_sarthak=Query.addStudent("Sarthak_Tiwari",sarthaj_user, school.key,'pwd')
+            student_mishika=Query.addStudent("Mishika_Singh",mishika_user, school.key,'pwd')
+            student_prasoon=Query.addStudent("Prasoon_Garg", prasoon_user,school.key,'pwd')
+            student_pravesh=Query.addStudent("Pravesh_Sahay",pravesh_user, school.key,'pwd')
             #teacher1=Query.addTeacher("teacher1", userinfo1, school.key)
             
             
@@ -65,10 +66,10 @@ def fill():
             
             
             
-            teacher_vijay=Query.addTeacher( vijay_user, school.key,"password")
-            teacher_sulabh=Query.addTeacher( sulabh_user, school.key,"")
+            teacher_vijay=Query.addTeacher("Vijay_Mehta",vijay_user, school.key,"password")
+            teacher_sulabh=Query.addTeacher("Sulabj_Jain" ,sulabh_user, school.key,"")
             
-            
+          
             
             
             a=Query.assign_classes_to_teacher(teacher_vijay.key,[class_VA.key])
@@ -406,9 +407,12 @@ def fill():
             Query.update_assessment_detail_of_student(student_key=student_prajjwal.key,  assessment_key=assessment10.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=80,school_key=school.key,completion_date=datetime.datetime.now())
             Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment11.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=70,school_key=school.key,completion_date=datetime.datetime.now())
             Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment12.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=60,school_key=school.key,completion_date=datetime.datetime.now())
-            a=Query.map_state_to_questions_dummy( {1:[question_number1.key,question_number2.key,question_number3.key]}, school.key)
-            a=Query.login("Vijay_Mehta","password")
-            a=Query.login("Ankit_Bhatia","password")
+            #a=Query.map_state_to_questions_dummy( {1:[question_number1.key,question_number2.key,question_number3.key]}, school.key)
+            #a=Query.login("Vijay_Mehta","pass")
+            #a=Query.login("sulabh@12","pass")
+            #a=Query.signup_teacher("sulabh@12",sulabh_user, "01",'pass')
+            #a=Query.signup_student("ankit@123", ankit_user,"01",'pass')
+            
             '''
             
             a=Query.get_mastery_by_topic(topic_number.key, student_vivek.key)
