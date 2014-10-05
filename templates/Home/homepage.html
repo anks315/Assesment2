@@ -32,59 +32,74 @@
             <a style="padding-right: 10px;" class="wlnk" href="#">FAQ</a>
              <a style="padding-right: 10px;" class="wlnk" href="/notrecentlyloggedinall_by_teacher/">UserInformation</a>
         </div>
-        </div>
+
         <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
-            <a href="http://www.aleks.com/about_aleks" class="ssb">
-				<span class="ssbs" onmouseover="sel('1',''); return true;" onmouseout="uns('1',''); return true;" id="but_1"><span class="subs" id="sbut_1">WHAT&nbsp;IS&nbsp;ALEKS?</span></span>
-			</a>
              <a href="/" class="ssb">
-                <span class="ssb" style="font-family: Arial,Sans-Serif; color: #5c69c7; width:10%;padding: 5px;margin: 1px 1px 1px 5px;">
+                <span class="ssb" onmouseover="sel('1');" onmouseout="uns('1');" id="but_1" style="padding: 5px;margin: 1px;">
                 <span class="sub" id="sbut_1" align="center" style="text-align: center">HOME</span></span>
             </a>
             <a href="/home_scan/" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
+                <span class="ssb" onmouseover="sel('2');" onmouseout="uns('2');" id="but_2" style="padding: 5px;margin: 1px;">
                 <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN?</span></span>
             </a>
 
             <a href="#" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
-                <span class="sub">TAKE&nbsp;A&nbsp;FREE&nbsp;TRIAL</span></span>
+                <span class="ssb" onmouseover="sel('3');" onmouseout="uns('3');" id="but_3" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_3">TAKE&nbsp;A&nbsp;FREE&nbsp;TRIAL</span></span>
             </a>
 
 
             <a href="#" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
-                <span class="sub">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
+                <span class="ssb" onmouseover="sel('4');" onmouseout="uns('4');" id="but_4" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_4">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
             </a>
          </div>
 
+        <script>
+            function sel(a){
+               // alert('sel'+a);
+             document.getElementById('but_'+a).className='ssbs';
+             document.getElementById('sbut_'+a).className='subs';
 
-      <div id="featured_slide">
+
+            }
+
+            function uns(a){
+                  //  alert('uns '+a);
+
+             document.getElementById('but_'+a).className='ssb';
+             document.getElementById('sbut_'+a).className='sub';
+            }
+
+        </script>
+
+
+      <div id="featured_slide" style="">
               <ol>
       <li>
-        <h2><span>Slide 1</span></h2>
-        <div><img src="/images/slide-3.jpg" alt=""></div>
+        <h2><span></span></h2>
+        <div><img src="/images/slide-3.jpg" alt="">
+           </div>
       </li>
       <li>
-        <h2><span>Slide 2</span></h2>
+        <h2><span></span></h2>
         <div><img src="/images/classroomhighquality.jpg" alt=""></div>
       </li>
       <li>
-        <h2><span>Slide 3</span></h2>
+        <h2><span></span></h2>
         <div><img src="/images/slide-2.jpg" alt=""></div>
       </li>
       <li>
-        <h2><span>Slide 4</span></h2>
+        <h2><span></span></h2>
         <div><img src="/images/classroomhighquality.jpg" alt=""></div>
       </li>
       <li>
-        <h2><span>Slide 5</span></h2>
+        <h2><span></span></h2>
         <div><img src="/images/slide-2.jpg" alt=""></div>
       </li>
     </ol></div>
 
-  </div>
-    <!--   Footers of the page   -->
+            <!--   Footers of the page   -->
 
         <div class="footer_div" style="">
 
@@ -101,30 +116,26 @@
                 SCAN® is a registered trademark of Critical Velos. </div>
         </div>
 
-        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;; ">
+        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;">
             <div style="margin-bottom: 10px">
                 <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
             </div>
         </div>
 
-
-
-
-
         <div id="id_letterheads_9_insert_shortcut_33" style=" clear: both;; "></div>
-
-
-
     </div>
-    </div>
+
+  </div>
+</div>
+
 
 
 <script type="text/javascript">
 $("#featured_slide").liteAccordion({
     theme: "os-tpl",
     containerWidth: $("#insert_shortcut").width(), // fixed (px)
-    containerHeight: 400, // fixed (px) - overall height of the slider
-    headerWidth: 40, // fixed (px) - slide spine title
+    containerHeight: 420, // fixed (px) - overall height of the slider
+    headerWidth: 0, // fixed (px) - slide spine title
 
     firstSlide: 1, // displays slide (n) on page load
 	activateOn: "click", // click or mouseover

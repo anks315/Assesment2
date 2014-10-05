@@ -42,35 +42,55 @@
                 <img align="baseline" alt="CRITICAL VELOS" border="0" hspace="0" src="/images/logo.png" style="width: 224px; height: 45px">
             </a>
         <div style=" float: right;; " aria-label="Quick links" role="navigation">
-            <a style="padding-right: 10px;" class="wlnk" href="/dashboard/">LOGIN</a>
-            <a style="padding-right: 10px;" class="wlnk" href="#">ABOUT US</a>
-            <a style="padding-right: 10px;" class="wlnk" href="/ques/">CAREERS</a>
+            <a style="padding-right: 10px;" class="wlnk" href="/login/">LOGIN</a>
             <a style="padding-right: 10px;" class="wlnk" href="/contact_us/">CONTACT US</a>
             <a style="padding-right: 10px;" class="wlnk" href="#">FEEDBACK</a>
-             <a style="padding-right: 10px;" class="wlnk" href="/notrecentlyloggedinall_by_teacher/">UserInformation</a>
+            <a style="padding-right: 10px;" class="wlnk" href="#">FAQ</a>
+            <a style="padding-right: 10px;" class="wlnk" href="/notrecentlyloggedinall_by_teacher/">UserInformation</a>
         </div>
-        </div>
-        <div id="id_letterheads_5_insert_shortcut_15" class="top_header" style="" aria-label="Content categories" role="navigation">
+
+ <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
              <a href="/" class="ssb">
-                <span class="ssb" onmouseover="sel('1',''); return true;" onmouseout="uns('1',''); return true;" style="font-family: Arial,Sans-Serif; color: #5c69c7; width:10%;padding: 5px;margin: 1px 1px 1px 5px;">
+                <span class="ssb" onmouseover="sel('1');" onmouseout="uns('1');" id="but_1" style="padding: 5px;margin: 1px;">
                 <span class="sub" id="sbut_1" align="center" style="text-align: center">HOME</span></span>
             </a>
             <a href="/home_scan/" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
+                <span class="ssb" onmouseover="sel('2');" onmouseout="uns('2');" id="but_2" style="padding: 5px;margin: 1px;">
                 <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN?</span></span>
             </a>
 
             <a href="#" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
-                <span class="sub">COURSE&nbsp;PRODUCTS</span></span>
+                <span class="ssb" onmouseover="sel('3');" onmouseout="uns('3');" id="but_3" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_3">TAKE&nbsp;A&nbsp;FREE&nbsp;TRIAL</span></span>
             </a>
 
 
             <a href="#" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
-                <span class="sub">UPCOMING&nbsp;PROJECTS</span></span>
+                <span class="ssb" onmouseover="sel('4');" onmouseout="uns('4');" id="but_4" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_4">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
             </a>
          </div>
+
+
+                <script>
+            function sel(a){
+               // alert('sel'+a);
+             document.getElementById('but_'+a).className='ssbs';
+             document.getElementById('sbut_'+a).className='subs';
+
+
+            }
+
+            function uns(a){
+                  //  alert('uns '+a);
+
+             document.getElementById('but_'+a).className='ssb';
+             document.getElementById('sbut_'+a).className='sub';
+            }
+
+        </script>
+
+
 
 <div id="pic_table" style="width: 100%; height: 450px; background: url(/images/classroomhighquality.jpg);">
 		
@@ -86,7 +106,7 @@
 
                             <div style=" margin: 0px 10px;; ">
 
-                                <form name="login" id="login" style="padding: 0em; margin: 0em" method="POST" action="/#/"  target="_top">
+                                <form name="login" id="login" style="padding: 0em; margin: 0em" method="POST" action="/dashboard/"  target="_top">
                                     {% csrf_token %}
                                     <input type="hidden" name="_form_" value="login">
                                     <label for="username" id="label_username" style="color:white; display: none">User Name</label>
@@ -351,9 +371,7 @@ inset #B9B9B9; width:
 
 		 </div>
 
-    </div>
-
-        <!--   Footers of the page   -->
+            <!--   Footers of the page   -->
 
         <div class="footer_div" style="">
 
@@ -370,20 +388,18 @@ inset #B9B9B9; width:
                 SCAN® is a registered trademark of Critical Velos. </div>
         </div>
 
-        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;; ">
+        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;padding:5px 15px 5px 15px; ">
             <div style="margin-bottom: 10px">
                 <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
             </div>
         </div>
 
-
-
-
-
         <div id="id_letterheads_9_insert_shortcut_33" style=" clear: both;; "></div>
-
-
+    </div>
 
     </div>
+    </div>
+
+
 
 </body>

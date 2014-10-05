@@ -6,8 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Critical Velos</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/jquery-1.11.1.js"></script>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 </head>
 <script>
 
@@ -62,28 +62,48 @@
             <a style="padding-right: 10px;" class="wlnk" href="#">FAQ</a>
             <a style="padding-right: 10px;" class="wlnk" href="/notrecentlyloggedinall_by_teacher/">UserInformation</a>
         </div>
-        </div>
+
         <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
              <a href="/" class="ssb">
-                <span class="ssb" style="font-family: Arial,Sans-Serif; color: #5c69c7; width:10%;padding: 5px;margin: 1px 1px 1px 5px;">
+                <span class="ssb" onmouseover="sel('1');" onmouseout="uns('1');" id="but_1" style="padding: 5px;margin: 1px;">
                 <span class="sub" id="sbut_1" align="center" style="text-align: center">HOME</span></span>
             </a>
             <a href="/home_scan/" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
+                <span class="ssb" onmouseover="sel('2');" onmouseout="uns('2');" id="but_2" style="padding: 5px;margin: 1px;">
                 <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN?</span></span>
             </a>
 
             <a href="#" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
-                <span class="sub">TAKE&nbsp;A&nbsp;FREE&nbsp;TRIAL</span></span>
+                <span class="ssb" onmouseover="sel('3');" onmouseout="uns('3');" id="but_3" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_3">TAKE&nbsp;A&nbsp;FREE&nbsp;TRIAL</span></span>
             </a>
 
 
             <a href="#" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
-                <span class="sub">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
+                <span class="ssb" onmouseover="sel('4');" onmouseout="uns('4');" id="but_4" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_4">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
             </a>
          </div>
+
+
+                <script>
+            function sel(a){
+               // alert('sel'+a);
+             document.getElementById('but_'+a).className='ssbs';
+             document.getElementById('sbut_'+a).className='subs';
+
+
+            }
+
+            function uns(a){
+                  //  alert('uns '+a);
+
+             document.getElementById('but_'+a).className='ssb';
+             document.getElementById('sbut_'+a).className='sub';
+            }
+
+        </script>
+
 
 
         <!-- abc -->
@@ -182,11 +202,9 @@
 		 </div>
 -->
 
+               <!--   Footers of the page   -->
 
-    </div>
-       <!--   Footers of the page   -->
-
-        <div class="footer_div" style="">
+         <div class="footer_div" style="">
 
         <div class="sm_font" style=" float:right; text-align:right;; ">
             <div style="margin-bottom: 10px">
@@ -201,38 +219,16 @@
                 SCAN® is a registered trademark of Critical Velos. </div>
         </div>
 
-        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;; ">
+        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;padding:5px 15px 5px 15px; ">
             <div style="margin-bottom: 10px">
                 <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
             </div>
-        </div>        <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
-             <a href="/" class="ssb">
-                <span class="ssb" style="font-family: Arial,Sans-Serif; color: #5c69c7; width:10%;padding: 5px;margin: 1px 1px 1px 5px;">
-                <span class="sub" id="sbut_1" align="center" style="text-align: center">HOME</span></span>
-            </a>
-            <a href="/home_scan/" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN?</span></span>
-            </a>
-
-            <a href="#" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
-                <span class="sub">TAKE&nbsp;A&nbsp;FREETRIAL</span></span>
-            </a>
-
-
-            <a href="#" class="ssb">
-                <span class="ssb" style="width:15%;padding: 5px;margin: 1px;">
-                <span class="sub">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
-            </a>
-         </div>
-
-
-
-
+        </div>
 
         <div id="id_letterheads_9_insert_shortcut_33" style=" clear: both;; "></div>
-
+    </div>
+</div>
 
     </div>
+
 </body>
