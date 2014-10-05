@@ -285,6 +285,31 @@ def askquestion(block,antecedentid):
 
     return list()
 
+def signout(request):
+    session = get_current_session()
+    if session['type'] == Constant.Constant.STUDENT:
+        del session['studentkey']
+        del session['schoolkey']
+        del session['studentname']
+        del session['email']
+        del session['studentaddress']
+        del session['contactnumber']
+        del session['dateofbirth ']
+        del session['sex']
+        del session['lastlogin']
+
+    if session['type'] == Constant.Constant.TEACHER:
+            del session['teacherkey']
+            del session['schoolkey']
+            del session['teachername']
+            del session['email']
+            del session['teacheraddress']
+            del session['contactnumber']
+            del session['dateofbirth ']
+            del session['sex']
+            del session['lastlogin']
+
+    return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
 def dashboard(request):
 
