@@ -17,12 +17,6 @@ from django.core.context_processors import csrf
 val=0
 readytolearn=""
 assessmentkey = ''
-def numberline(request):
-    return render_to_response('AssessingPie/numberline.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
-
-def graph(request):
-    return render_to_response('AssessingPie/graph.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
-
 def asknextquestion(request):
 
 
@@ -154,7 +148,7 @@ def  inferquestion(request):
             implication=-1
             antecedent=[]
             numalreadyinferred=0
-            return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+            return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
     if request.method=='POST':
         if request.POST['answer']=='yes':
@@ -209,7 +203,7 @@ def  inferquestion(request):
                 antecedent=[]
                 numalreadyinferred=0
                 inferenceengine.generatestates(usersdict[session['infer']],topicname)
-                return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
             currentblocknumber+=1
             numalreadyinferred=0
             logging.error(currentblocknumber)
@@ -229,7 +223,7 @@ def  inferquestion(request):
                 antecedent=[]
                 numalreadyinferred=0
                 inferenceengine.generatestates(usersdict[session['infer']],topicname)
-                return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
             if usersdict[session['infer']].blockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
                 logging.error("asking question")
@@ -295,8 +289,8 @@ def askquestion(block,antecedentid):
 def dashboard(request):
 
     subjectsenrolled=['Maths','Science','English']
-    if request.method=='POST':
 
+    if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
 
@@ -331,38 +325,11 @@ def dashboard(request):
             session['lastlogin']=user_information[2]
             return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
         return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
-    else :
-            return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+    else:
+        return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+
 def ques(request):
     return render_to_response('Home/Questions.html',{},context_instance = RequestContext(request))
 
-def signout(request):
-    session = get_current_session()
-    if session['type'] == Constant.Constant.STUDENT:
-        del session['studentkey']
-        del session['schoolkey']
-        del session['studentname']
-        del session['email']
-        del session['studentaddress']
-        del session['contactnumber']
-        del session['dateofbirth ']
-        del session['sex']
-        del session['lastlogin']
-
-    if session['type'] == Constant.Constant.TEACHER:
-            del session['teacherkey']
-            del session['schoolkey']
-            del session['teachername']
-            del session['email']
-            del session['teacheraddress']
-            del session['contactnumber']
-            del session['dateofbirth ']
-            del session['sex']
-            del session['lastlogin']
-
-    return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 def whatisscan(request):
     return render_to_response('Home/Home_scan.html',{},context_instance = RequestContext(request))
-
-def login(request):
-    return render_to_response('Home/login.html',{},context_instance = RequestContext(request))
