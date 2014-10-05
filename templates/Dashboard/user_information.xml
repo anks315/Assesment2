@@ -7,5 +7,11 @@
 <last_login>
 {{ last_login }}
 </last_login>
+<email>
+    {{ email }}
+</email>
+    <contactnumber>
+        {{ contactnumber }}
+    </contactnumber>
 </user>
  </root>

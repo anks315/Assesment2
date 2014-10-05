@@ -325,8 +325,11 @@
                     xmlDoc = a.responseXML;
                     x = a.responseXML.documentElement.getElementsByTagName("user_name");
                     y = a.responseXML.documentElement.getElementsByTagName("last_login");
+
+                    z =a.responseXML.documentElement.getElementsByTagName("email");
+                    w =a.responseXML.documentElement.getElementsByTagName("contactnumber");
                     document.getElementById("loginname").innerHTML = x[0].childNodes[0].nodeValue;
-                    document.getElementById("email_id").innerHTML = "abc@xyz.com";
+                    document.getElementById("email_id").innerHTML = z[0].childNodes[0].nodeValue;
                     document.getElementById("lastLogin").innerHTML = y[0].childNodes[0].nodeValue;
                     document.getElementById("dashboardHeading").innerHTML= x[0].childNodes[0].nodeValue+" Dashboard "
                 }
