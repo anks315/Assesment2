@@ -1356,3 +1356,33 @@ tr.unselectable td, tr.unselectable td div {font-weight: bold;}
 .liteAccordion.ie7 .slide > h2 b, .liteAccordion.ie8 .slide > h2 b{top:44%; left:5%}
 .liteAccordion.ie7.stitch .slide > h2 b, .liteAccordion.ie8.stitch .slide > h2 b{top:36%}
 .liteAccordion.ie9.stitch{box-shadow:0 5px 15px rgba(0,0,0,0.4)}
+
+
+
+.banners_home{
+position: absolute;
+top: 300px;
+right: 20px;
+color: #f50026;
+font-size: 24px;
+font-style: italic;
+border-radius: 3px;
+background-color: #FFF;
+width: 400px;
+    padding: 3px;
+    font-weight: bold;
+}
+
+.banners_home_author{
+position: absolute;
+top: 340px;
+right: 20px;
+color: #3a25c8;
+font-size: 12px;
+font-style: italic;
+border-radius: 2px;
+background-color: #FFF;
+width: 150px;
+    font-weight: bolder;
+
+}
