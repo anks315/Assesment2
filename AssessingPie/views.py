@@ -359,3 +359,6 @@ def ques(request):
 
 def whatisscan(request):
     return render_to_response('Home/Home_scan.html',{},context_instance = RequestContext(request))
+
+def login(request):
+    return render_to_response('Home/login.html',{},context_instance = RequestContext(request))
