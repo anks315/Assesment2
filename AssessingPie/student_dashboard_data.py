@@ -11,12 +11,12 @@ def userdetails(request):
     type =session.get('type',-1)
     if type == Constant.Constant.STUDENT:
         t = loader.get_template('Dashboard/user_information.xml')
-        c = Context({'user_name':session.get('studentname',-1),'last_login':session.get('lastlogin',-1)})
+        c = Context({'user_name':session.get('studentname',-1),'last_login':session.get('lastlogin',-1),'email':session.get('email',-1),'contactnumber':session.get('contactnumber',-1)})
         return HttpResponse(t.render(c),
         content_type="text/xml")
     if  type == Constant.Constant.TEACHER :
         t = loader.get_template('Dashboard/user_information.xml')
-        c = Context({'user_name':session.get('teachername',-1),'last_login':session.get('lastlogin',-1)})
+        c = Context({'user_name':session.get('teachername',-1),'last_login':session.get('lastlogin',-1),'email':session.get('email',-1),'contactnumber':session.get('contactnumber',-1)})
         return HttpResponse(t.render(c),
         content_type="text/xml")
 

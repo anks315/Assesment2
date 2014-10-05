@@ -336,6 +336,7 @@ def dashboard(request):
             session['dateofbirth '] =student.basic_info.date_of_birth
             session['sex']=student.basic_info.sex
             session['lastlogin']=user_information[2]
+
             return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
         if session['type'] == Constant.Constant.TEACHER:
             teacher = user_information[1]
