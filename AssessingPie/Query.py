@@ -2229,7 +2229,7 @@ def get_subject_details_of_teacher_in_class(teacher_key, class_key):
         for subject in subjects_of_teacher:
             if subject.class_key == class_key:
                 dict_subjects.update({subject.key.urlsafe():subject.name})       
-        logging.info("CV Logs : success to get subject details  of class for teacher" + class_entity.name + ":" + class_entity.section_details)
+        logging.info("CV Logs : success to get subject details  of class for teacher")
         return dict_subjects
     except Exception:
             logging.error("CV Logs : Failed to subject details  of class for teacher" )
