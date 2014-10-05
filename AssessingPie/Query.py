@@ -2565,7 +2565,8 @@ def get_average_mastery_of_a_subject(teacher_key, class_key, subject_key):
 
     dict_data = {}
     try:
-        if not (subject_key.kind()==Subject._get_kind() or teacher_key.kind()==Teacher._get_kind()):
+        subject =subject_key.get()
+        if not ( teacher_key.kind()==Teacher._get_kind()):
             return Constant.ERROR_BAD_VALUE
         mastery = get_average_mastery_by_subject_detailed(teacher_key, class_key, subject_key)
         dict_data.update({subject.name:mastery})
@@ -2573,6 +2574,7 @@ def get_average_mastery_of_a_subject(teacher_key, class_key, subject_key):
         logging.info("CV Logs : success to get_average_mastery_of_a_subject")
         return dict_data
     except Exception:
+        logging.exception("")
         logging.error("CV Logs : failed to get_average_mastery_of_a_subject")
         return Constant.ERROR_OPERATION_FAIL
 
