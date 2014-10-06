@@ -21,6 +21,15 @@ def userdetails(request):
         content_type="text/xml")
 
         #return render_to_response('Dashboard/user_information.xml',{'user_name':user_name,'last_login':last_login},context_instance = RequestContext(request),content_type="text/xml;")
+def subjectdetailsofstudent(request):
+    session = get_current_session()
+    type =session.get('type',-1)
+    if type == Constant.Constant.STUDENT:
+         subjectdetails = Query.get_subject_details_by_student(session['studentkey'])
+         t = loader.get_template('Dashboard/subjectdetailsofstudent')
+         c = Context({'subjectdetails':subjectdetails,})
+         return HttpResponse(t.render(c),content_type="text/xml")
+
 
 def getmasterybysubject(request):
     session = get_current_session()

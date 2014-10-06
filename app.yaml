@@ -4,6 +4,10 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
+automatic_scaling:
+  max_idle_instances: 40
+  min_pending_latency: 5.0s
+
 handlers:
 - url: /images
   static_dir: static/images
@@ -12,6 +16,7 @@ handlers:
   static_files: static/images/\1
   upload: static/images/.*
 
+subjectdetailsofstudent$
 - url: /js
   static_dir: static/js
 
@@ -20,6 +25,9 @@ handlers:
   upload: static/css/.*
 
 - url: /assessment(.*)
+  script: main.app
+
+- url: /subjectdetailsofstudent(.*)
   script: main.app
 
 - url: /numberline/(.*)

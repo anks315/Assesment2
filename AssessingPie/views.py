@@ -314,16 +314,13 @@ def signout(request):
 def dashboard(request):
 
     subjectsenrolled=['Maths','Science','English']
+    session = get_current_session()
 
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
 
         user_information= Query.login(username,password)
-
-
-        session = get_current_session()
-
         session['type'] = user_information[0]
         if session['type'] == Constant.Constant.STUDENT:
             student = user_information[1]
@@ -352,7 +349,11 @@ def dashboard(request):
             return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
         return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
     else:
-        return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+        if session['type'] == Constant.Constant.TEACHER:
+            return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+        if session['type'] == Constant.Constant.STUDENT:
+            return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+
 
 def ques(request):
     return render_to_response('Home/Questions.html',{},context_instance = RequestContext(request))
