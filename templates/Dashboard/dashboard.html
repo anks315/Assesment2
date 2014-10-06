@@ -30,6 +30,7 @@
       //  alert("ready");
 
       dashboard();
+       populate_list_of_subjects();
 
 
     });
@@ -261,7 +262,7 @@
 
                 //Now Call the function which wuld populate subjects
 
-                populate_list_of_subjects(list_of_subjects);
+              //  populate_list_of_subjects(list_of_subjects);
 
 
             }
@@ -276,26 +277,15 @@
     }
           //var list_to_populate="";
 
-    function populate_list_of_subjects(list) {
+    function populate_list_of_subjects() {
 
-            var lists = "";
-            var a = "";
+
 
                   var div_to_be_loaded = "<table style=\"width: 98%; margin: 2px;\" class=\"tableSB custom_tableSB\" cellspacing=\"0\" cellpadding=\"0\">";
 
+        var a="{{ subjects }}".replace(/&quot;/g,"\"");
+                    alert(a);
 
-
-            for (i = 0; i < list.length; i++) {
-
-                a = a + list[i] + " , ";
-
-                //      lists= lists+ "<tr onclick=\"showreportbysubjects("+list[i]+");\" style=\"border: 2px none rgb(0, 0, 0); background-color: rgb(112, 179, 71); color: rgb(255, 255, 255);\"><td colspan=\"1\" width=\"100%\" ><h5><a>"+list[i]+"</a></h5></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
-
-                lists = lists + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('" + list[i] + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + list[i] + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
-
-
-                //      alert(lists);
-            }
 
             document.getElementById("subjectList").innerHTML = lists;
             document.getElementById("subjects_enrolled").innerHTML = a;
@@ -365,7 +355,7 @@
 
                 //Now Call the function which wuld populate subjects
 
-                populate_list_of_subjects(list_of_subjects);
+
 
 
             }
@@ -427,7 +417,7 @@
 
                 //Now Call the function which wuld populate subjects
 
-                populate_list_of_subjects(list_of_subjects);
+               // populate_list_of_subjects(list_of_subjects);
 
 
             }
