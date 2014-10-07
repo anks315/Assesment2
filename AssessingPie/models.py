@@ -38,6 +38,7 @@ class Question(ndb.Model):
     
     no_states_contained_in = ndb.IntegerProperty(default=0)
     instance = ndb.StructuredProperty(QuestionInstance, required=True)
+    topic_type=ndb.StringProperty()
     
 """
 This class models a state entity 
@@ -126,6 +127,7 @@ class Topic(ndb.Model):
     states_in_topic_key = ndb.KeyProperty(kind='Topic_States')
     questions_in_topic_key = ndb.KeyProperty(kind='Topic_Questions')
     assessments_in_topic=ndb.KeyProperty(kind='Assessment')
+    types=ndb.StringProperty(repeated=True)
     
     
     

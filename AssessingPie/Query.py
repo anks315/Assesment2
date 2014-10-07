@@ -200,6 +200,26 @@ def addQuestion(question_instance, school_key):
        logging.exception("")
        logging.error("CV Logs : failed to add question  :" )
        return Constant.ERROR_BAD_VALUE 
+
+def add_types_to_topic(topic_key, types):
+   logging.info("CV Logs : Inside add_types_to_topic") 
+   try:
+       if not isinstance(types,list):
+           return Constant.ERROR_BAD_VALUE
+       topic=topic_key.get()
+       if len(topic.types)==0:
+           topic.types=types
+       else:
+           topic.extend(types)
+       topic.put()
+       logging.info("CV Logs : success to add_types_to_topic :" )
+       return Constant.UPDATION_SUCCESSFULL;  
+   except Exception:
+       logging.exception("")
+       logging.error("CV Logs : failed to add_types_to_topic  :" )
+       return Constant.ERROR_BAD_VALUE 
+       
+
        
 """
 update a question :
@@ -368,7 +388,7 @@ Adds a new Topic:
                 subject_key list of  Key of kind Subject
 """
 @ndb.transactional(retries=5)
-def addTopic(school_key, name, prerequisite_topics, subject_key):
+def addTopic(school_key, name, prerequisite_topics, subject_key,types=[]):
    try:
        logging.info("CV Logs : Inside addTopic")
        #subject = subject_key.get()
@@ -1103,7 +1123,7 @@ Assigns  existing questions  to an existing topic:
                             questions_in_topic_keys : list of keys of questions covered in topic
 """
 @ndb.transactional(retries=5)
-def assign_questions_to_topic(topic_key, questions_in_topic_keys, school_key):
+def assign_questions_to_topic(topic_key, questions_in_topic_keys, school_key,topic_type):
     topic = None
     topic_question = None
     try:
@@ -1112,10 +1132,13 @@ def assign_questions_to_topic(topic_key, questions_in_topic_keys, school_key):
         for question_key in questions_in_topic_keys:
                    if not question_key.kind()==Question._get_kind():
                        return Constant.ERROR_BAD_VALUE
+                   question_entity=question_key.get()
+                   question_entity.topic_type=topic_type
+                   question_entity.put()
         topic_question_key = topic.questions_in_topic_key
     except Exception :
         logging.exception("")
-        logging.error("CV Logs: failed to assign questons to topic : " )
+        logging.error("CV Logs: failed to assign questions to topic : " )
         return Constant.ERROR_BAD_VALUE
         
     if topic_question_key == None:   
@@ -1129,6 +1152,43 @@ def assign_questions_to_topic(topic_key, questions_in_topic_keys, school_key):
         topic_question.put()
     
     logging.info("CV Logs: success to assign questons to topic : " + topic.name)          
+    return Constant.UPDATION_SUCCESSFULL
+
+
+def get_all_schools():
+    dict_school = {}
+    try:
+        schools=School.query().fetch()
+        for school in schools:
+            dict_school.update({school.name:school.key.urlsafe()})
+        return dict_school
+    except Exception :
+        logging.exception("")
+        logging.error("CV Logs: failed to assign questions to topic : " )
+        return Constant.ERROR_BAD_VALUE
+    
+    
+    logging.info("CV Logs: success to assign questons to topic : " )          
+    return Constant.UPDATION_SUCCESSFULL
+
+def get_class_of_school(school_key):
+    dict_class = {}
+    try:
+        logging.error("@@@@@@@@@@@@@@@@@@@"+str(school_key))
+        classes=Class.query(Class.school_key==school_key).fetch()
+        if classes==None:
+            return dict_class
+        for class_entity in classes:
+            dict_class.update({class_entity.name+" "+class_entity.section_details:class_entity.key.urlsafe()})
+        return dict_class
+        
+    except Exception :
+        logging.exception("")
+        logging.error("CV Logs: failed to assign questions to topic : " )
+        return Constant.ERROR_BAD_VALUE
+    
+    
+    logging.info("CV Logs: success to assign questons to topic : " )          
     return Constant.UPDATION_SUCCESSFULL
 
 
@@ -1418,6 +1478,29 @@ def assign_assessments_to_class(class_key, assessment_keys):
         logging.error("CV Logs :Failed Assign asssessment to class ") 
     logging.error("CV Logs :Success assign asssessment to class ")    
     return Constant.UPDATION_SUCCESSFULL  
+
+
+@ndb.transactional(xg=True,retries=5)
+def assign_assessment_to_students(assessment_key, student_keys):
+    class_entity = None
+    students = []
+    logging.info("CV Logs : Inside assign_assessment_to_students ")
+    try:
+        students = ndb.get_multi(student_keys)
+        for student in students:
+                    assessment = assessment_key.get()
+                    assigned = assign_assessment_to_student(student.key, assessment.key)
+                    if not assigned == Constant.UPDATION_SUCCESSFULL:
+                        return Constant.ERROR_OPERATION_FAIL
+                    logging.error(str(student.class_details)) 
+    except Exception:
+        logging.exception("")
+        logging.error("CV Logs :Failed assign_assessment_to_students ") 
+    logging.error("CV Logs :Success assign_assessment_to_students ")    
+    return Constant.UPDATION_SUCCESSFULL  
+
+
+
 
 
 
@@ -1719,7 +1802,34 @@ def get_topics_by_subject(subject_key):
             return Constant.ERROR_OPERATION_FAIL
             
     logging.info("CV Logs : success to get topics for subject :" )
+
+
+
+
+def get_topic_details_by_subject(subject_key):
+    logging.info("CV Logs : Inside get_topics_by_subject ")
+    dict_topics = {}
+    try:
+        subject = subject_key.get()
+        topics_in_subject_key = subject.topics_in_subject_key
+        if topics_in_subject_key == None:
+            return Constant.ERROR_NO_DATA_FOUND
+        topic_keys_entity = topics_in_subject_key.get()
+        topic_keys = topic_keys_entity.topics_in_subject_key
+        if topic_keys == None:
+            return dict_topics
+        topics = ndb.get_multi(topic_keys)
+        for topic in topics:
+            dict_topics.update({topic.name:topic.key.urlsafe()})
+        return dict_topics
+
+    except Exception:
+            logging.info("CV Logs : failed to get topics for subject :" )
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL
     
+
+
     
 """
 lists assessments associated to a student 
