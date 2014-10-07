@@ -30,7 +30,9 @@
       //  alert("ready");
 
       dashboard();
+       populate_list_of_subjects();
 
+   //  alert("ready");
 
     });
 
@@ -154,8 +156,8 @@
                       <!--
                         <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
 					-->
-							<div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showsubjects();">
-							<div id="selected_subject_name" style="font-style:italic;color:#AAA;">
+							<div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" >
+							<div id="selected_report_name" style="font-style:italic;color:#AAA;">
 								Enter Your Search
 							</div>
 						</div>
@@ -190,8 +192,7 @@
 <script>
 
 
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
+
 
     // alert("1");
     var list_subjects=[];
@@ -211,13 +212,21 @@
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
               //  alert('asd');
                 xmlDoc = xmlhttp.responseXML;
-                x = xmlhttp.responseXML.documentElement.getElementsByTagName("user_name");
-                y = xmlhttp.responseXML.documentElement.getElementsByTagName("last_login");
+                username = xmlhttp.responseXML.documentElement.getElementsByTagName("user_name");
+                lastlogin = xmlhttp.responseXML.documentElement.getElementsByTagName("last_login");
+                email_id = xmlhttp.responseXML.documentElement.getElementsByTagName("email");
+                contactno = xmlhttp.responseXML.documentElement.getElementsByTagName("contactnumber");
               //  z = xmlhttp.responseXML.documentElement.getElementsByTagName("email");
-                document.getElementById("loginname").innerHTML = x[0].childNodes[0].nodeValue;
-                document.getElementById("email_id").innerHTML = "abc@xyz.com";
-                document.getElementById("lastLogin").innerHTML = y[0].childNodes[0].nodeValue;
+                    document.getElementById("loginname").innerHTML = username[0].childNodes[0].nodeValue;
+                    document.getElementById("email_id").innerHTML = email_id[0].childNodes[0].nodeValue;
+                    document.getElementById("lastLogin").innerHTML = lastlogin[0].childNodes[0].nodeValue;
+                    document.getElementById("contactno").innerHTML = contactno[0].childNodes[0].nodeValue;
+                    document.getElementById("dashboardHeading").innerHTML= username[0].childNodes[0].nodeValue+" Dashboard "
+
+
               //  document.getElementById("email_id").innerHTML = z[0].childNodes[0].nodeValue;
+
+
             }
         }
         xmlhttp.open("GET", "/userdetails/", true);
@@ -227,6 +236,10 @@
 
        function loadMasteryDetails() {
         var xmlhttp;
+
+
+       var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Subject  </th><th>Mastery in (%)</th></tr>";
+
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
             xmlhttp.overrideMimeType("text/xml");
@@ -240,7 +253,6 @@
 
                 xmlDoc = xmlhttp.responseXML;
 
-                div_to_be_loaded = "";
                 no_of_subject = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
 
                 var list_of_subjects= [];
@@ -249,19 +261,22 @@
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
                     var subject_name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
                     var score = parseInt(x.getElementsByTagName("score")[0].childNodes[0].nodeValue);
+
+                    var innerdiv = "<tr><td><a href=\"#\">" + subject_name + "</a></td><td>" + score + "</td></tr>";
+                    div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+
+                   /*
                     var upperDiv="<div style=\"display: inline-block; width: 260px; height: 15px;\"><table style=\"font-size: 1em;\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td style=\"text-align: left; font: bold 10px Verdana; height: 15px; vertical-align: top; overflow: visible;\"><div style=\"width: 40px; height: 35px; border-radius: 4px; color: rgb(255, 255, 255); background-color: rgb(84, 180, 220); font: bold 10px/35px Verdana; text-align: center; margin: 0px 6px 0px 0px;\">"+score+"%</div></td><td style=\"text-align: left; font: bold 10px Verdana; height: 15px; vertical-align: top;\"><div style=\"width: 210px; height: 15px; border-radius: 4px; background-color: rgb(209, 221, 225);\"><div style=\"width:"+score+"%; height: 15px; border-radius: 4px; background-color: rgb(84, 180, 220);\"></div></div></td></tr></tbody></table></div>";
                     var lowerdiv = "<div style=\"color: rgb(24, 144, 186); font-size: 12px; padding: 0px 2px 10px 50px;\"><span style=\"display: inline-block; position: relative; vertical-align: middle; width: auto; height: auto; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px;\"><input tabindex=\"0\" style=\"position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;\" type=\"button\"><div style=\"float: left; clear: both; position: relative; width: auto; height: auto;\"><div style=\"float: left; clear: both; position: relative; width: auto; height: auto;\"><span style=\"text-decoration: none;\">" + subject_name + "</span></div></div></span></div>";
                     div_to_be_loaded += upperDiv + lowerdiv;
                     list_of_subjects.push(subject_name);
-
+*/
                 }
 
+
+                 div_to_be_loaded+="</tbody></table>";
                 document.getElementById("masteryDetails").innerHTML = div_to_be_loaded;
-
-
-                //Now Call the function which wuld populate subjects
-
-                populate_list_of_subjects(list_of_subjects);
 
 
             }
@@ -276,34 +291,60 @@
     }
           //var list_to_populate="";
 
-    function populate_list_of_subjects(list) {
-
-            var lists = "";
-            var a = "";
-
-                  var div_to_be_loaded = "<table style=\"width: 98%; margin: 2px;\" class=\"tableSB custom_tableSB\" cellspacing=\"0\" cellpadding=\"0\">";
+    function populate_list_of_subjects() {
 
 
 
-            for (i = 0; i < list.length; i++) {
+     var xmlhttp;
+          var div_to_be_loaded = "<table style=\"width: 98%; margin: 2px;\" class=\"tableSB custom_tableSB\" cellspacing=\"0\" cellpadding=\"0\">";
 
-                a = a + list[i] + " , ";
+         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+         xmlhttp = new XMLHttpRequest();
+         xmlhttp.overrideMimeType("text/xml");
+     } else {
+         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+     }
+     xmlhttp.onreadystatechange = function() {
 
-                //      lists= lists+ "<tr onclick=\"showreportbysubjects("+list[i]+");\" style=\"border: 2px none rgb(0, 0, 0); background-color: rgb(112, 179, 71); color: rgb(255, 255, 255);\"><td colspan=\"1\" width=\"100%\" ><h5><a>"+list[i]+"</a></h5></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-                lists = lists + "<tr style=\"background-color: rgb(255,255,255); height:12px; color: rgb(255, 255, 255); border-radius: 20px;\"><td colspan=\"1\" width=\"100%\" height=\"100%\" ><button onclick=\"showreportbysubjects('" + list[i] + "')\" style=\"width: 100%; height:80%; color: rgb(255, 255, 255); background-color: rgb(71, 174, 76); border-radius: 15px;\"><a>" + list[i] + "</a></button></td><td><div><img src=\"/images/icons/subject.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+             xmlDoc = xmlhttp.responseXML;
 
 
-                //      alert(lists);
-            }
+             lists = "";
+             no_of_subjects = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
 
-            document.getElementById("subjectList").innerHTML = lists;
-            document.getElementById("subjects_enrolled").innerHTML = a;
+             var list_of_subjects = [];
+             for (i = 0; i < no_of_subjects; i++) {
 
-        }
+
+                 x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
+                 var subjectname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+
+
+                 var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+
+ div_to_be_loaded = div_to_be_loaded +"<tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\" onclick=\"showreportbysubjects('" + subjectname + "')\">"+subjectname+"</div></td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+
+
+             }
+
+                   div_to_be_loaded+="</table>";
+
+               document.getElementById("subjectList").innerHTML = div_to_be_loaded;
+
+         }
+     };
+
+
+     xmlhttp.open("GET", "/subjectdetailsofstudent", true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+
+    }
     function abc()
     {
-        alert("Kapil");
+        alert("cv");
     }
 
 
@@ -319,6 +360,11 @@
         //Now cal AJAX to load divisions correspondingly
 
         document.getElementById('subjectList').style.display='none';
+
+        document.getElementById('selected_class_name').innerHTML=subject.toUpperCase();
+
+
+
         list_pending_assignments(subject);
         learningprogress_bydate_sub(subject);
         get_ready_tolearn(subject);
@@ -328,14 +374,15 @@
 
         //return list of pending assignments
     function list_pending_assignments(subject){
-       // alert("pending");
 
-                var xmlhttp;
+        var xmlhttp;
+
+        var  div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Pending Assesments of "+subject+"</th><th>Due Date</th></tr>";
+
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
             xmlhttp.overrideMimeType("text/xml");
         } else {
-            // code for IE6, IE5
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
@@ -344,28 +391,38 @@
 
                 xmlDoc = xmlhttp.responseXML;
 
-                div_to_be_loaded = "";
-                no_of_subject = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
+                no_of_assesment = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
 
-                var list_of_subjects= [];
-                for (i = 0; i < no_of_subject; i++) {
+                for (i = 0; i < no_of_assesment; i++) {
 
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
-                    var subject_name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                    var score = parseInt(x.getElementsByTagName("score")[0].childNodes[0].nodeValue);
-                    var upperDiv="<div style=\"display: inline-block; width: 260px; height: 15px;\"><table style=\"font-size: 1em;\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td style=\"text-align: left; font: bold 10px Verdana; height: 15px; vertical-align: top; overflow: visible;\"><div style=\"width: 40px; height: 35px; border-radius: 4px; color: rgb(255, 255, 255); background-color: rgb(84, 180, 220); font: bold 10px/35px Verdana; text-align: center; margin: 0px 6px 0px 0px;\">"+score+"%</div></td><td style=\"text-align: left; font: bold 10px Verdana; height: 15px; vertical-align: top;\"><div style=\"width: 210px; height: 15px; border-radius: 4px; background-color: rgb(209, 221, 225);\"><div style=\"width:"+score+"%; height: 15px; border-radius: 4px; background-color: rgb(84, 180, 220);\"></div></div></td></tr></tbody></table></div>";
-                    var lowerdiv = "<div style=\"color: rgb(24, 144, 186); font-size: 12px; padding: 0px 2px 10px 50px;\"><span style=\"display: inline-block; position: relative; vertical-align: middle; width: auto; height: auto; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px;\"><input tabindex=\"0\" style=\"position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;\" type=\"button\"><div style=\"float: left; clear: both; position: relative; width: auto; height: auto;\"><div style=\"float: left; clear: both; position: relative; width: auto; height: auto;\"><span style=\"text-decoration: none;\">" + subject_name + "</span></div></div></span></div>";
-                    div_to_be_loaded += upperDiv + lowerdiv;
-                    list_of_subjects.push(subject_name);
+                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
+                    var subject_name = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
+                    //alert(subject==subject_name);
+                    if (subject_name==subject)
+                    {
+
+                    var assesmentKey = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                    var assesmentid =  x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
+                    var duedate = x.getElementsByTagName("due_date")[0].childNodes[0].nodeValue.trim();
+
+                    var innerdiv = "<tr><td><a href=\"#\">" + assesmentid + "</a></td><td>" + duedate + "</td></tr>";
+
+
+                     div_to_be_loaded += innerdiv;
+
+                    }
+
 
                 }
 
-                document.getElementById("masteryDetails").innerHTML = div_to_be_loaded;
 
 
-                //Now Call the function which wuld populate subjects
+                    div_to_be_loaded+="</tbody></table>";
 
-                populate_list_of_subjects(list_of_subjects);
+                //alert(div_to_be_loaded);
+                document.getElementById("pending_assignment").innerHTML = div_to_be_loaded;
+
+
 
 
             }
@@ -382,12 +439,15 @@
 
     function list_all_pending_assessments(){
 
-       var xmlhttp;
+
+        var xmlhttp;
+
+        var  div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Pending Assesments in All Subjects</th><th>Due Date</th></tr>";
+
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
             xmlhttp.overrideMimeType("text/xml");
         } else {
-            // code for IE6, IE5
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
@@ -396,38 +456,32 @@
 
                 xmlDoc = xmlhttp.responseXML;
 
-                div_to_be_loaded = "";
-                no_of_pendingassesments = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
+                no_of_assesment = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
 
-                var list_of_subjects= [];
-                for (i = 0; i < no_of_pendingassesments; i++) {
+                for (i = 0; i < no_of_assesment; i++) {
 
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
                     var subject_name = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
-                    var assessmentname = x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
-                    var date = x.getElementsByTagName("due_date")[0].childNodes[0].nodeValue.trim();
-                    var key=x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
-                    //alert(key);
-                    var innerdiv="<table style=\"width: 100%; font-size: 1em; background-color: rgb(213, 218, 216); border-radius: 5px;\" cellpadding=\"2\" cellspacing=\"5\"><tbody><tr style=\"background-color: #7AC1AC; border-radius: 5px;padding:5px\"><td style=\"width:32%; background-color: #cce0ef\"><a href=\"/assessment?id="+key+"\">"+assessmentname+"</a></td><td style=\"width:32%; color: #ac4637;background-color: #cce0ef\">"+subject_name+"</td><td style=\"width:30% ;color: #3DAC9E;background-color: #cce0ef\">"+date+"</td></tr></tbody></table>";
+                    //alert(subject==subject_name);
 
+                    var assesmentKey = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                    var assesmentid =  x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
+                    var duedate = x.getElementsByTagName("due_date")[0].childNodes[0].nodeValue.trim();
 
+                    var innerdiv = "<tr><td><a href=\"#\">" + assesmentid + "</a></td><td>" + duedate + "</td></tr>";
 
-
-
-              //      var upperDiv="<div style=\"display: inline-block; width: 260px; height: 15px;\"><table style=\"font-size: 1em;\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td style=\"text-align: left; font: bold 10px Verdana; height: 15px; vertical-align: top; overflow: visible;\"><div style=\"width: 40px; height: 35px; border-radius: 4px; color: rgb(255, 255, 255); background-color: rgb(84, 180, 220); font: bold 10px/35px Verdana; text-align: center; margin: 0px 6px 0px 0px;\">"+assessmentname+"%</div></td><td style=\"text-align: left; font: bold 10px Verdana; height: 15px; vertical-align: top;\"><div style=\"width: 210px; height: 15px; border-radius: 4px; background-color: rgb(209, 221, 225);\"><div style=\"width:"+assessmentname+"%; height: 15px; border-radius: 4px; background-color: rgb(84, 180, 220);\"></div></div></td></tr></tbody></table></div>";
-                //    var lowerdiv = "<div style=\"color: rgb(24, 144, 186); font-size: 12px; padding: 0px 2px 10px 50px;\"><span style=\"display: inline-block; position: relative; vertical-align: middle; width: auto; height: auto; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px;\"><input tabindex=\"0\" style=\"position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;\" type=\"button\"><div style=\"float: left; clear: both; position: relative; width: auto; height: auto;\"><div style=\"float: left; clear: both; position: relative; width: auto; height: auto;\"><span style=\"text-decoration: none;\"><a href=\"/assessment?id="+key+"\">" + subject_name + "</a></span></div></div></span></div>";
-                  //  alert(lowerdiv);
-                    div_to_be_loaded += innerdiv;
-                    list_of_subjects.push(subject_name);
+                     div_to_be_loaded += innerdiv;
 
                 }
 
+
+
+                    div_to_be_loaded+="</tbody></table>";
+
+                //alert(div_to_be_loaded);
                 document.getElementById("pendingassesments").innerHTML = div_to_be_loaded;
 
 
-                //Now Call the function which wuld populate subjects
-
-                populate_list_of_subjects(list_of_subjects);
 
 
             }
@@ -440,12 +494,16 @@
 
 
 
+
+
+
     }
 
 
 
     function learningprogress_bydate_sub(subject){
   //  alert('learningprogress');
+
 
         var data = google.visualization.arrayToDataTable([
           ['Date', 'Mastered', 'Attempted'],
@@ -476,12 +534,119 @@
     function get_ready_tolearn(subject){
     //alert('getting readytolearn');
 
-        topic="Some data to be loaded from the template";
-        document.getElementById('readytolearntopic').innerHTML=topic;
+
+
+         var xmlhttp;
+
+           var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.overrideMimeType("text/xml");
+         } else {
+             // code for IE6, IE5
+             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         xmlhttp.onreadystatechange = function() {
+
+             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                             no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
+
+                     for (i = 0; i < no_of_topics; i++) {
+
+                       x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
+                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
+
+
+
+                var innerdiv = "<tr><td><a href=\"#\">" + name + "</a></td><td>" + question + "</td></tr>";
+
+                         div_to_be_loaded=div_to_be_loaded+innerdiv;
+
+                     }
+
+
+
+                 div_to_be_loaded+="</tbody></table>";
+                 document.getElementById("readytoLearn").innerHTML = div_to_be_loaded;
+         }
+     };
+
+     xmlhttp.open("GET", "/readytolearnbysubject/", true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+
+
+
+
+
     }
 
 
     function getdonutmastery_subject(subject){
+
+
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+
+        var xmlhttp;
+
+
+        var options = {
+          title: "Your Donut in subject : "+subject,
+          pieHole: 0.7
+        };
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.overrideMimeType("text/xml");
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                xmlDoc = xmlhttp.responseXML;
+
+                no_of_subjects = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
+
+
+                for (i = 0; i < no_of_subjects; i++) {
+
+                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
+                    var subject_name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                    //alert(subject==subject_name);
+                    if (subject_name==subject) {
+
+                        var score = parseFloat(x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim());
+
+                    }
+
+
+                }
+          var data = google.visualization.arrayToDataTable([
+          ['Knowledge', 'Fraction'],
+          ['Dont Know',    100-score]  ,  //4 data to be replaced by template value
+          ['Already Know',    score]  //6 data to be replaced by template value
+
+        ]);
+
+        var chart = new google.visualization.PieChart(document.getElementById('subjectdonutmastery'));
+        chart.draw(data, options);
+
+            }
+        }
+
+        xmlhttp.open("GET", "/masterybysubject/", true);
+        xmlhttp.overrideMimeType("text/xml");
+        xmlhttp.send();
+
+
+
+/*
 
         var data = google.visualization.arrayToDataTable([
           ['Knowledge', 'Fraction'],
@@ -490,14 +655,10 @@
 
         ]);
 
-        var options = {
-          title: 'Your Donut in this Subject',
-          pieHole: 0.7
-        };
+
 
          // document.getElementById('subjectdonutmastery').
-        var chart = new google.visualization.PieChart(document.getElementById('subjectdonutmastery'));
-        chart.draw(data, options);
+       */
 
 
     }
@@ -664,12 +825,31 @@
 </div>
 
 </div>
+
+
+        <script>
+
+            function abc(){
+                document.getElementById('administration_tab').style.visibility='visible';
+            }
+            function hideadministrationtab(){
+                document.getElementById('administration_tab').style.visibility='hidden';
+            }
+        </script>
+
+
 			
 		<div class="template_main_body">
 
+
 <table width=100%>
+
+
 <tr>
-<h2 id="dashboardHeading" onclick="dashboard()" align="center" style="font-family: Arial,Sans-Serif; font-size: 20px; background-color: rgb(79, 136, 155); border-bottom: 3px ridge rgb(29, 140, 228); margin: 5px; padding-top: 15px; color: rgb(255, 255, 255); height: 40px;"><a href="/dashboard/" style="color: rgb(255, 255, 255); width: 150px;margin: auto" >DashBoard</a></h2>
+
+<h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px ridge rgb(29, 140, 228); border-radius: 5px; background-color: rgb(224, 224, 224); font: bold 20px Arial,Sans-Serif; color: rgb(62, 45, 45);" onclick="dashboard()" align="center"><a style="color:#133A82; font: bold 14px Verdana" href="/dashboard/" id="dashboardHeading">
+ Dashboard </a></h2>
+
 </tr>
 			
 
@@ -713,25 +893,39 @@
                      </table>
                      <table style="font-size: 1em; width: 100%;" cellpadding="0" cellspacing="0" >
                         <tbody>
-                           <tr>
+
+                        <!--
+                        <tr>
                               <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;">
                                  <div style="font: 12px Verdana; color: rgb(150, 175, 189); padding: 4px 0px 0px 10px;">Subjects enrolled</div>
-                                 <div id ="subjects_enrolled" style="font: 12px Verdana; color: rgb(96, 123, 138); padding: 0px 0px 4px 10px;"></div>
-                              </td>
-                              <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;"></td>
+                                    </td>
+                              <td id ="subjects_enrolled" style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;"></td>
+                           </tr>
+
+                           -->
+                           <tr>
+                              <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;">
+                                 <div style="font: 12px Verdana; color: rgb(150, 175, 189); padding: 4px 0px 0px 10px;">Email : </div>
+                                 </td>
+                              <td id="email_id" style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;"></td>
                            </tr>
                            <tr>
                               <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;">
-                                 <div style="font: 12px Verdana; color: rgb(150, 175, 189); padding: 4px 0px 0px 10px;">Email:</div>
-                                 <div id="email_id" style="font: 12px Verdana; color: rgb(96, 123, 138); padding: 0px 0px 4px 10px;"></div>
+                                 <div style="font: 12px Verdana; color: rgb(150, 175, 189); padding: 4px 0px 0px 10px;">Last Login : </div>
                               </td>
-                              <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;"></td>
+
+                                         <td id="lastLogin" style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;"></td>
+
                            </tr>
-                           <tr>
+
+
+                                                   <tr>
                               <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;">
-                                 <div style="font: 12px Verdana; color: rgb(150, 175, 189); padding: 4px 0px 0px 10px;">Last Login:</div>
-                                 <div id="lastLogin" style="font: 12px Verdana; color: rgb(96, 123, 138); padding: 0px 0px 4px 10px;">2,270</div>
+                                 <div style="font: 12px Verdana; color: rgb(150, 175, 189); padding: 4px 0px 0px 10px;">Contact No : </div>
                               </td>
+
+                                         <td id="contactno" style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;"></td>
+
                            </tr>
                         </tbody>
                      </table>
@@ -788,12 +982,11 @@
                            </div>
                            <div style="position: relative; z-index: 0;">
 
-                              <div style="position: relative;">
-                                 <div id="masteryDetails" style="padding: 20px 20% 10px 15%; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+                              <div id="masteryDetails" style="position: relative;padding: 15px 10px 5px 10px;">
+
                                     <script>loadMasteryDetails()</script>
 
 
-                                 </div>
                               </div>
                            </div>
                         </div>
@@ -829,12 +1022,8 @@
                                                        <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+                                 <div id="chart_div" style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
-                                 <div id="chart_div" style="height: 150px; width: 90%; margin: 5%;">
-
-
-                                 </div>
 
 
                                  </div>
@@ -878,24 +1067,7 @@
                                                        <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
-
-
-
-                                     <!--kapil  -->
-
-
-
-
-
-                                 <div id="pendingassesments" style="display: inline-block; width: 90%;margin:5%;">
-
-
-
-
-                                 </div>
-
-
+                                 <div id="pendingassesments" style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
                                  </div>
                               </div>
@@ -946,12 +1118,8 @@
                                                        <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+                                 <div id="subjectdonutmastery" style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
-                                 <div id="subjectdonutmastery" style="height: 150px; width: 90%; margin: 5%;">
-
-
-                                 </div>
 
 
                                  </div>
@@ -990,21 +1158,10 @@
                            <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div id="readytoLearn" style="padding: 20px 20% 10px 15%; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+                                 <div id="readytoLearn" style="padding: 20px 20px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
                                <!--     <script>get_ready_tolearn(subject)</script>     -->
 
 
-                                     <table style="font-size: 1em; width: 100%;" cellpadding="0" cellspacing="0" >
-                        <tbody>
-                           <tr>
-                              <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;">
-                                 <div style="font: 12px Verdana; color: rgb(174, 189, 180); padding: 4px 0px 0px 10px;">U r Ready To Learn </div>
-                                 <div id ="readytolearntopic" style="font: 18px Verdana; color: rgb(101, 74, 138); padding: 0px 0px 4px 10px;">This is the Topic</div>
-                              </td>
-                              <td style="vertical-align: baseline; text-align: left; font-size: 20px; width: 50%;"></td>
-                           </tr>
-                        </tbody>
-                                         </table>
 
                                  </div>
                               </div>
@@ -1042,12 +1199,9 @@
                                                        <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
-
-                                 <div id="pending_assignment" style="height: 150px; width: 90%; margin: 5%;">
+                                 <div id="pending_assignment" style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
 
-                                 </div>
 
 
                                  </div>
@@ -1088,12 +1242,8 @@
                                            <div style="position: relative; z-index: 0;">
 
                               <div style="position: relative;">
-                                 <div style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
+                                 <div id="subject_chart_div" style="padding: 20px 5px 10px 15px; height: 237px; overflow-y: auto; overflow-x: auto; position: relative;">
 
-                                 <div id="subject_chart_div" style="height: 150px; width: 90%; margin: 5%;">
-
-
-                                 </div>
 
 
                                  </div>
