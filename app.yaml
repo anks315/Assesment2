@@ -58,7 +58,6 @@ handlers:
   script: main.app
 
 - url: /readytolearnbysubject/(.*)
-  login: required
   script: main.app
 
 - url: /notrecentlyloggedin_by_class/(.*)
@@ -97,7 +96,7 @@ handlers:
 - url: /averagemasterybysubjectallclass/(.*)
   script: main.app
 
-- url: /learningprogress_by_date/(.*)
+- url: /learningprogress_by_date(.*)
   script: main.app
 
 - url: /mastery_by_student_by_class/(.*)

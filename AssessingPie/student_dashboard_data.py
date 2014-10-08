@@ -5,6 +5,7 @@ import Query
 import Constant
 from gaesessions import get_current_session
 import logging
+from google.appengine.ext import ndb
 
 def userdetails(request):
     session = get_current_session()
@@ -86,7 +87,9 @@ def getlearningprogressdatewise(request):
 
     session = get_current_session()
     studentkey = session.get('studentkey',-1)
-    learningprogressdict = Query.get_learning_progress_date_wise_dummy(studentkey)
+    key = request.GET['id']
+    subjectkey = ndb.Key(urlsafe=key)
+    learningprogressdict = Query.get_learning_progress_date_wise_dummy(studentkey,subjectkey)
     t = loader.get_template('Dashboard/learningprogress_by_date')
     c = Context({'learningprogressdict':learningprogressdict,})
     return HttpResponse(t.render(c),
