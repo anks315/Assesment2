@@ -171,8 +171,8 @@ text-decoration:none;
 }
 
 div.top_header{
-    border-top: 1px solid #E21A23;
-    border-bottom: 1px solid #E21A23;
+    border-top: 2px ridge #E21A23;
+    border-bottom: 2px ridge #E21A23;
     margin: 20px 0px 30px;
 
 }
@@ -187,7 +187,7 @@ span.ssb {
 font-family:vectipedebook, Arial bold, Sans-Serif;
 font-weight:700;
 text-transform:uppercase;
-font-size:12px;
+font-size:13px;
 color:#32484C;
 display:inline-block;
 padding:8px 0;
@@ -196,7 +196,7 @@ padding:8px 0;
 span.ssbs {
 font-family:vectipedebook, Arial bold, Sans-Serif;
 font-weight:700;
-font-size:12px;
+font-size:13px;
 text-transform:uppercase;
 color:#32484C;
 display:inline-block;
@@ -214,7 +214,7 @@ margin:7px 15px 7px 0;
 a.ssb:link {
 text-decoration:none;
 color:#32484C;
-font-weight:700;
+font-weight:bolder;
 font-size:10pt;
 }
 
@@ -420,7 +420,7 @@ margin-left:15px;
 }
 
 div.footer_div {
-border-top:1px solid #E21A23;;
+border-top:2px solid #E21A23;;
 padding-top:5px;
 
 margin:20px 0 0;
@@ -1270,7 +1270,7 @@ tr.unselectable td, tr.unselectable td div {font-weight: bold;}
 .liteAccordion, .liteAccordion *{padding:0; margin:0; border:0; box-sizing:content-box}
 .liteAccordion >ol{position:relative; overflow:hidden; height:100%; margin:0; padding:0; list-style-type:none}
 .liteAccordion >ol >li{list-style-type:none}
-.liteAccordion .slide > h2{color:black; font-size:16px; font-weight:normal; margin:0; z-index:100; position:absolute; top:0; left:0; -webkit-backface-visibility:hidden; -webkit-transform:translateX(-100%) rotate(-90deg); -webkit-transform-origin:right top; -moz-transform:translateX(-100%) rotate(-90deg); -moz-transform-origin:right top; -o-transform:translateX(-100%) rotate(-90deg); -o-transform-origin:right top; transform:translateX(-100%) rotate(-90deg); transform-origin:right top}
+.liteAccordion .slide > h2{color:black; font-size:14px; font-weight:normal; margin:0; z-index:100; position:absolute; top:0; left:0; -webkit-backface-visibility:hidden; -webkit-transform:translateX(-100%) rotate(-90deg); -webkit-transform-origin:right top; -moz-transform:translateX(-100%) rotate(-90deg); -moz-transform-origin:right top; -o-transform:translateX(-100%) rotate(-90deg); -o-transform-origin:right top; transform:translateX(-100%) rotate(-90deg); transform-origin:right top}
 .liteAccordion .slide > h2 span{display:block; padding-right:8%; text-align:right; height:90%; margin-top:5px; -webkit-user-select:none; -khtml-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none}
 .liteAccordion .slide > h2 b{display:inline-block; position:absolute; top:13%; left:10%; text-align:center; -webkit-transform:rotate(90deg); -moz-transform:rotate(90deg); -o-transform:rotate(90deg); transform:rotate(90deg)}
 .liteAccordion .slide > h2:hover{cursor:pointer}
@@ -1282,7 +1282,7 @@ tr.unselectable td, tr.unselectable td div {font-weight: bold;}
 .liteAccordion.os-tpl .slide > h2{color:#F8F9F3; background-color:#8199A9; line-height:225%; text-transform:uppercase; font-size:13px; font-weight:bold; font-family:Georgia,"Times New Roman",Times,serif; border-top:2px solid #F8F9F3;}
 .liteAccordion.os-tpl .slide > h2 span{}
 .liteAccordion.os-tpl .slide > h2 b{font-size:24px; font-weight:normal;}
-.liteAccordion.os-tpl .slide > h2:hover, .liteAccordion.os-tpl .slide > h2.selected{color:#F8F9F3; background-color:#002E5D;}
+.liteAccordion.os-tpl .slide > h2:hover, .liteAccordion.os-tpl .slide > h2.selected{color:#F8F9F3; background-color: #4c76c7;}
 .liteAccordion.os-tpl .slide > h2.selected{cursor:default;}
 .liteAccordion.os-tpl .slide > h2.selected b{}
 .liteAccordion.os-tpl .slide > div{}
@@ -1308,9 +1308,9 @@ tr.unselectable td, tr.unselectable td div {font-weight: bold;}
 .liteAccordion.light .slide > div{background:#a0a0a0; margin-left:5px}
 
 /**************************************** Stitch */
-.liteAccordion.stitch{position:relative; padding:5px 0 5px 5px; border:11px solid #353535; background:#353535; -webkit-box-shadow:0 -1px 0 #5b5b5b inset,0 5px 15px rgba(0,0,0,0.4); -moz-box-shadow:0 -1px 0 #5b5b5b inset,0 5px 15px rgba(0,0,0,0.4); -o-box-shadow:0 -1px 0 #5b5b5b inset,0 5px 15px rgba(0,0,0,0.4); box-shadow:0 -1px 0 #5b5b5b inset,0 5px 15px rgba(0,0,0,0.4)}
-.liteAccordion.stitch:before{content:''; width:100%; height:100%; position:absolute; top:-9px; left:-9px; background:#353535; border:9px solid transparent; -webkit-border-image:url('bg_stitch.png') 9 repeat; -moz-border-image:url('bg_stitch.png') 9 repeat; -o-border-image:url('bg_stitch.png') 9 repeat; border-image:url('bg_stitch.png') 9 repeat}
-.liteAccordion.stitch .slide > h2{background:#353535}
+.liteAccordion.stitch{position:relative; padding:5px 0 5px 5px; border:10px solid #F0F1F0; background:#5b61e2; -webkit-box-shadow:0 -1px 0 #5b5b5b inset,0 5px 15px rgba(0,0,0,0.4); -moz-box-shadow:0 -1px 0 #5b5b5b inset,0 5px 15px rgba(0,0,0,0.4); -o-box-shadow:0 -1px 0 #5b5b5b inset,0 5px 15px rgba(0,0,0,0.4); box-shadow:0 -1px 0 #5b5b5b inset,0 5px 15px rgba(0,0,0,0.4)}
+.liteAccordion.stitch:before{content:''; width:100%; height:100%; position:absolute; top:-9px; left:-9px; background:#F0F1F0; border:9px solid transparent; -webkit-border-image:url('bg_stitch.png') 9 repeat; -moz-border-image:url('bg_stitch.png') 9 repeat; -o-border-image:url('bg_stitch.png') 9 repeat; border-image:url('bg_stitch.png') 9 repeat}
+.liteAccordion.stitch .slide > h2{background: #f9faed;}
 .liteAccordion.stitch .slide > h2 span{height:auto; padding-right:5%; color:white; text-shadow:-1px 1px 0 #5b5b5b; border:9px solid transparent; background-image:url('bg_noise.png'); margin-top:0; -webkit-border-image:url('bg_stitch.png') 9 repeat; -moz-border-image:url('bg_stitch.png') 9 repeat; -o-border-image:url('bg_stitch.png') 9 repeat; border-image:url('bg_stitch.png') 9 repeat}
 .liteAccordion.stitch .slide > h2.selected:after{content:''; display:block; height:11px; width:11px; position:absolute; bottom:-3px; right:38px; -webkit-transform:rotate(45deg); -moz-transform:rotate(45deg); -o-transform:rotate(45deg); transform:rotate(45deg); -ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)"; filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2); border:9px solid transparent; border-top:0; border-left:0; -webkit-border-image:url('bg_stitch.png') 9 repeat; -moz-border-image:url('bg_stitch.png') 9 repeat; -o-border-image:url('bg_stitch.png') 9 repeat; border-image:url('bg_stitch.png') 9 repeat; background-image:url('bg_noise.png')}
 .liteAccordion.stitch .slide:nth-child(1) > h2 span, .liteAccordion.stitch .slide:nth-child(1) > h2:after{background-color:#c25252}

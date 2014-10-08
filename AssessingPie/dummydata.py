@@ -13,6 +13,7 @@ from models import QuestionInstance,State_Questions,Topic_States,Question,State,
 from models import School,Student,UserInfo,Subject,Assessment,Student_Assessments
 from  models import Topic_Questions,State_Questions,Topic_States,Subject_Topics
 from models import Topic,User  
+from School import School1
 def fill():
       try: 
             address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
@@ -95,18 +96,18 @@ def fill():
             
             
             
-            topic_number=Query.addTopic(school_key=school.key,name="Number_System", prerequisite_topics=[],subject_key=subject_maths.key)
-            topic_trig=Query.addTopic(school_key=school.key,name="Trigonimetric_Ratio", prerequisite_topics=[topic_number.key],subject_key=subject_maths.key)
-            topic_height=Query.addTopic(school_key=school.key,name="Height & Distance", prerequisite_topics=[topic_trig.key,topic_number.key],subject_key=subject_maths.key)
-            topic_circle=Query.addTopic(school_key=school.key,name="Circle_operation", prerequisite_topics=[topic_number.key],subject_key=subject_maths.key)
+            topic_number=Query.addTopic(school_key=school.key,name="Number_System", prerequisite_topics=[],subject_key=subject_maths.key,types=["type1","type2","type3"])
+            topic_trig=Query.addTopic(school_key=school.key,name="Trigonimetric_Ratio", prerequisite_topics=[topic_number.key],subject_key=subject_maths.key,types=["type1","type2","type3"])
+            topic_height=Query.addTopic(school_key=school.key,name="Height & Distance", prerequisite_topics=[topic_trig.key,topic_number.key],subject_key=subject_maths.key,types=["type1","type2","type3"])
+            topic_circle=Query.addTopic(school_key=school.key,name="Circle_operation", prerequisite_topics=[topic_number.key],subject_key=subject_maths.key,types=["type1","type2","type3"])
            
             
             
             
-            topic_part=Query.addTopic(school_key=school.key,name="Part of Speech", prerequisite_topics=[],subject_key=subject_english.key)
-            topic_tenses=Query.addTopic(school_key=school.key,name="Tenses", prerequisite_topics=[],subject_key=subject_english.key)
-            topic_sentences=Query.addTopic(school_key=school.key,name="Sentences", prerequisite_topics=[topic_part.key],subject_key=subject_english.key)
-            topic_voices=Query.addTopic(school_key=school.key,name="Voices", prerequisite_topics=[topic_sentences.key,topic_part.key],subject_key=subject_english.key)
+            topic_part=Query.addTopic(school_key=school.key,name="Part of Speech", prerequisite_topics=[],subject_key=subject_english.key,types=["type1","type2","type3"])
+            topic_tenses=Query.addTopic(school_key=school.key,name="Tenses", prerequisite_topics=[],subject_key=subject_english.key,types=["type1","type2","type3"])
+            topic_sentences=Query.addTopic(school_key=school.key,name="Sentences", prerequisite_topics=[topic_part.key],subject_key=subject_english.key,types=["type1","type2","type3"])
+            topic_voices=Query.addTopic(school_key=school.key,name="Voices", prerequisite_topics=[topic_sentences.key,topic_part.key],subject_key=subject_english.key,types=["type1","type2","type3"])
             #topic5=Query.addTopic(school_key=school.key,name="Ellipse ", prerequisite_topics=[topic.key],subject_key=subject1.key)
             
             
@@ -165,7 +166,7 @@ def fill():
             question_height3=Query.addQuestion(questioninstance_height3,school.key)
             question_height4=Query.addQuestion(questioninstance_height4,school.key)
             
-            questioninstance_circle1
+            
             
             
             question_circle1=Query.addQuestion(questioninstance_circle1,school.key)
@@ -250,17 +251,17 @@ def fill():
             Query.assign_questions_to_state(state1.key, [question_number1.key,question_number2.key,question_number3.key,question_number4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key,question_height1.key,question_height2.key,question_height3.key,question_height4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)         
             Query.assign_questions_to_state(state2.key, [question_sentence1.key,question_sentence2.key,question_sentence3.key,question_sentence4.key,question_part1.key,question_part2.key,question_part3.key,question_part4.key,question_tense1.key,question_tense2.key,question_tense3.key,question_tense4.key],school.key)               
             
-            Query.assign_questions_to_topic(topic_number.key,[question_number1.key,question_number2.key,question_number3.key,question_number4.key],school.key)
-            Query.assign_questions_to_topic(topic_trig.key,[question_trig1.key,question_trig2.key,question_trig3.key,question_trig4.key],school.key)
-            Query.assign_questions_to_topic(topic_circle.key,[question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)
-            Query.assign_questions_to_topic(topic_height.key,[question_height1.key,question_height2.key,question_height3.key,question_height4.key],school.key)
+            Query.assign_questions_to_topic(topic_number.key,[question_number1.key,question_number2.key,question_number3.key,question_number4.key],school.key,"type1")
+            Query.assign_questions_to_topic(topic_trig.key,[question_trig1.key,question_trig2.key,question_trig3.key,question_trig4.key],school.key,"type2")
+            Query.assign_questions_to_topic(topic_circle.key,[question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key,"type2")
+            Query.assign_questions_to_topic(topic_height.key,[question_height1.key,question_height2.key,question_height3.key,question_height4.key],school.key,"type1")
             
             
             
             
-            Query.assign_questions_to_topic(topic_part.key,[question_part1.key,question_part2.key,question_part3.key,question_part4.key],school.key)
-            Query.assign_questions_to_topic(topic_sentences.key,[question_sentence2.key,question_sentence3.key,question_sentence4.key,question_sentence1.key],school.key)
-            Query.assign_questions_to_topic(topic_tenses.key,[question_tense1.key,question_tense2.key,question_tense3.key,question_tense4.key],school.key)
+            Query.assign_questions_to_topic(topic_part.key,[question_part1.key,question_part2.key,question_part3.key,question_part4.key],school.key,"type31")
+            Query.assign_questions_to_topic(topic_sentences.key,[question_sentence2.key,question_sentence3.key,question_sentence4.key,question_sentence1.key],school.key,"type3")
+            Query.assign_questions_to_topic(topic_tenses.key,[question_tense1.key,question_tense2.key,question_tense3.key,question_tense4.key],school.key,"type2")
            
             
             #a=Query.assign_states_to_topic_by_name("Number  System",[state1.key,state2.key,state3.key],school.key)            #Query.assign_assessment_state_to_student(student.key, assessment1.key,state1.key)
@@ -407,11 +408,18 @@ def fill():
             Query.update_assessment_detail_of_student(student_key=student_prajjwal.key,  assessment_key=assessment10.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height4.key,score=80,school_key=school.key,completion_date=datetime.datetime.now())
             Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment11.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle1.key,score=70,school_key=school.key,completion_date=datetime.datetime.now())
             Query.update_assessment_detail_of_student(student_key=student_prasoon.key, assessment_key=assessment12.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_circle3.key,score=60,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.assign_assessment_to_students(assessment10.key, [student_kavya.key,student_prasoon.key])
             #a=Query.map_state_to_questions_dummy( {1:[question_number1.key,question_number2.key,question_number3.key]}, school.key)
             #a=Query.login("Vijay_Mehta","pass")
             #a=Query.login("sulabh@12","pass")
             #a=Query.signup_teacher("sulabh@12",sulabh_user, "01",'pass')
             #a=Query.signup_student("ankit@123", ankit_user,"01",'pass')
+            '''a=Query.get_all_schools()
+            b=Query.get_class_of_school(school.key)
+            a=str(a)+"    "+str(b)
+            a=Query.get_topic_details_by_subject(subject_maths.key)'''
+            
+            
             
             '''
             
