@@ -190,7 +190,7 @@
 
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-
+                       document.getElementById("formsubmit").disabled = false;
                      var select = document.getElementById("topics");
                      for (var option in select){
                                                   select.remove(option);
@@ -296,7 +296,7 @@ Select Inference Topic
 
                       <b>Topic:&nbsp;&nbsp;</b>  <select name="topickey" id="topics"></select></br><br>
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="submit" value="Start Inference">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="submit" id="formsubmit" disabled value="Start Inference">
 
 
                     </form>

@@ -107,8 +107,7 @@ antecedent=[]
 numalreadyinferred=0
 
 def contactus(request):
-        flush()
-        fill()
+
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
 
 def topicnames(request):
@@ -123,8 +122,7 @@ def assesstopicname(request):
         return render_to_response('AssessingPie/assesstopicname.html',{},context_instance = RequestContext(request))
 
 
-topicname = ''
-inferschoolkey = ''
+
 def  inferquestion(request):
 
     global currentantecedentnumber
@@ -134,21 +132,19 @@ def  inferquestion(request):
     global  numalreadyinferred
     global antecedent
     global implication
-    global topickey
-    global inferschoolkey
     session = get_current_session()
     if request.method == 'GET':
           key = request.GET['topickey']
-          topickey = ndb.Key(urlsafe=key)
+          session['topickey']  = ndb.Key(urlsafe=key)
           key = request.GET['schoolkey']
-          inferschoolkey = ndb.Key(urlsafe=key)
+          session['inferschoolkey'] = ndb.Key(urlsafe=key)
 
 
     c=session.get('infer',-1)
     if c==-1:
         session['infer']=users.get_current_user()
 
-        usersdict[session['infer']]= inferenceengine.InferenceBuffer(topickey)
+        usersdict[session['infer']]= inferenceengine.InferenceBuffer(session['topickey'])
         blocknumber = usersdict[session['infer']].typeCache.getlength()
     else:
         if request.method!='POST':
@@ -162,7 +158,7 @@ def  inferquestion(request):
             antecedent=[]
             numalreadyinferred=0
             session['infer']=users.get_current_user()
-            usersdict[session['infer']]= inferenceengine.InferenceBuffer(topickey)
+            usersdict[session['infer']]= inferenceengine.InferenceBuffer(session['topickey'])
             blocknumber = usersdict[session['infer']].typeCache.getlength()
 
     if request.method=='POST':
@@ -217,7 +213,7 @@ def  inferquestion(request):
                 implication=-1
                 antecedent=[]
                 numalreadyinferred=0
-                inferenceengine.generatestates(usersdict[session['infer']],topickey,inferschoolkey)
+                inferenceengine.generatestates(usersdict[session['infer']],session['topickey'], session['inferschoolkey'])
                 return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
             currentblocknumber+=1
             numalreadyinferred=0
@@ -237,7 +233,7 @@ def  inferquestion(request):
                 implication=-1
                 antecedent=[]
                 numalreadyinferred=0
-                inferenceengine.generatestates(usersdict[session['infer']],topickey,inferschoolkey)
+                inferenceengine.generatestates(usersdict[session['infer']],session['topickey'], session['inferschoolkey'])
                 return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
             if usersdict[session['infer']].blockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
