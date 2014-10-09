@@ -1390,14 +1390,55 @@ width: 150px;
 
 
 /*Form related CSS*/
+#form1 .register-switch {
+  min-height: 32px;
+  margin-bottom: 15px;
+  padding: 4px;
+  background: rgba(32, 130, 152, 1);
+  border-radius: 2px;
+    width:305px;
+    font-size: 13px;
+font-weight: 500;
+
+}
+
+#form1 .register-switch-input {
+  display: none;
+}
+
+#form1 .register-switch-label {
+  float: left;
+  width: 25%;
+  line-height: 32px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+    min-height: 32px;
+}
+#form1 .register-switch-input:checked + .register-switch-label {
+
+  color: #434248;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+  background: white;
+  border-radius: 2px;
+  background-image: -webkit-linear-gradient(top, #fefefe, #eeeeee);
+  background-image: -moz-linear-gradient(top, #fefefe, #eeeeee);
+  background-image: -o-linear-gradient(top, #fefefe, #eeeeee);
+  background-image: linear-gradient(to bottom, #fefefe, #eeeeee);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+
 .p12 {
 	margin-bottom:13px;
     margin-top: 5px;
 }
 
-#form1{position:relative;vertical-align:top;z-index:1;font-family:Arial,Helvetica,sans-serif;}
+#form1{position:relative;vertical-align:top;z-index:1;font-family:Arial,Helvetica,sans-serif;border: 1px solid #ffffff;}
 #form1 fieldset{border:none;padding:0;}
-#form1 label{display:block;min-height:47px;position:relative;width:382px;}
+#form1 label{display:block;min-height:47px;position:relative;width:400px;}
 #form1 label.message{height:184px;width:550px;}.p27{margin-right:27px;}
 #form1 input{outline:none;border:1px solid #333333;color:#32484C;font-family:Arial,Helvetica,sans-serif;font-size:13px;margin:0;height:16px;line-height:16px;background:none;padding:7px 8px;width:292px;display:inline-block;}#form1 .area .error{float:none;}
 #form1 textarea{height:146px;margin:0;width:532px;line-height:16px;resize:none;background:none;outline:none;border:1px solid #000;padding:7px 8px;overflow:auto;color:#32484C;font-family:Arial,Helvetica,sans-serif;font-size:13px;display:block;}

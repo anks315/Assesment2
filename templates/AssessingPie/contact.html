@@ -272,13 +272,25 @@ $(window).load(function() {
         </script>
 
 
-<div style="width: 100%; height: 450px; background: #FFFFFF; border-radius: 5px;border: 2px ridge #E21A23;" >
+<div style="width: 100%; height: 450px; background: #f1f1ff; border-radius: 5px;border: 2px ridge #E21A23;" >
 <h4 style="margin: 5px; padding: 5px 5px 5px 20px; color: #32484C" align="left">
-Contact Form
-</h4>
+Contact Form</h4>
          <div style="margin: 5px; padding: 5px 5px 5px 20px;">
-                <form id="form1">
+                <form id="form1" action="#" method="get">
+
                 <div class="success">Contact form submitted!<strong> We will be in touch soon.</strong></div>
+
+                    <div class="register-switch" id="account_types">
+                      <input type="radio" name="account_type" value="School" id="type_school" class="register-switch-input" onclick="loadForm('School')" checked>
+                      <label for="type_school" class="register-switch-label">School</label>
+                      <input type="radio" name="account_type" value="Teacher" id="type_teacher" class="register-switch-input"  onclick="loadForm('Teacher')"  >
+                      <label for="type_teacher" class="register-switch-label">Teacher</label>
+                      <input type="radio" name="account_type" value="Parent" id="type_parent" class="register-switch-input" onclick="loadForm('Parent')" >
+                      <label for="type_parent" class="register-switch-label">Parent</label>
+                      <input type="radio" name="account_type" value="Student" id="type_student" class="register-switch-input" onclick="loadForm('Student')" >
+                      <label for="type_student" class="register-switch-label">Student</label>
+                    </div>
+
                 <fieldset>
                 <label class="name">
                 <input type="text" value="Name:">
