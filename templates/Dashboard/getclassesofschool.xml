@@ -1,0 +1,12 @@
+<root>
+  {% for key, value in classdict.items %}
+    <class>
+        <key>
+           {{ value }}
+        </key>
+        <name>
+            {{ key }}
+        </name>
+    </class>
+    {% endfor %}
+</root>

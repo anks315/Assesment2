@@ -164,9 +164,9 @@ def infertrue(userbuffer,block,antecedentid,antecedent):
 
 
 class InferenceBuffer:
-    def __init__(self):
+    def __init__(self,topickey):
         self.typeCache = TypeCache()
-        question_db = Query.get_questions_by_topic_name("Number_System")
+        question_db = Query.get_questions_of_topic(topickey)
 
         typeid=-1
         for tempques in question_db:
@@ -179,7 +179,7 @@ class InferenceBuffer:
         self.blockCache = BlockCache()
         self.blockCache = BlockCache()
 
-def generatestates(userbuffer,topickey):
+def generatestates(userbuffer,topickey,schoolkey):
     logging.error("entered g")
     statesgen =[]
     numoftype = userbuffer.typeCache.getlength()
@@ -213,8 +213,8 @@ def generatestates(userbuffer,topickey):
         statenum+=1
     session = get_current_session()
 
-    Query.map_state_to_questions_dummy(queryreadydict,session['schoolkey'])
-
+    #Query.map_state_to_questions_dummy(queryreadydict,session['schoolkey'])
+    Query.map_state_to_questions(topickey,queryreadydict,schoolkey)
 
 
 

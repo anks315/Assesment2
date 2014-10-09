@@ -1,0 +1,240 @@
+
+
+
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Critical Velos</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/liteaccordion.jquery.min.js"></script>
+
+    <script>
+        function getallschools() {
+            var xmlhttp;
+
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+                xmlhttp.overrideMimeType("text/xml");
+            } else {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                   numberofschools= xmlhttp.responseXML.documentElement.getElementsByTagName("school").length;
+                    alert(numberofschools);
+                    for (i = 0; i < numberofschools; i++) {
+
+                     var  x = xmlhttp.responseXML.documentElement.getElementsByTagName("school")[i];
+                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+
+                        var select = document.getElementById("schools");
+                        var option = document.createElement("option");
+                        option.text = name;
+                        option.value=key;
+                        select.add(option);
+
+
+
+
+
+
+                     }
+
+                }
+            };
+            xmlhttp.open("GET", "/getallschools", true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+        }
+
+
+        function getclasses() {
+            var xmlhttp;
+
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+                xmlhttp.overrideMimeType("text/xml");
+            } else {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                     var select = document.getElementById("classes");
+                     for (var option in select){
+                                                  select.remove(option);
+                                               }
+                   numberofschools= xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
+                    alert(numberofschools);
+                    for (i = 0; i < numberofschools; i++) {
+
+                     var  x = xmlhttp.responseXML.documentElement.getElementsByTagName("class")[i];
+                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+
+
+
+
+                        var option = document.createElement("option");
+                        option.text = name;
+                        option.value=key;
+                        select.add(option);
+
+
+
+
+
+
+                     }
+
+                }
+            };
+            schoolkey=document.getElementById("schools").value;
+
+            xmlhttp.open("GET", "/getclassesofschool?schoolkey=" + schoolkey, true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+        }
+
+
+
+        function getsubjects() {
+
+            var xmlhttp;
+
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+                xmlhttp.overrideMimeType("text/xml");
+            } else {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    alert("hiii");
+
+                     var select = document.getElementById("subjects");
+                     for (var option in select){
+                                                  select.remove(option);
+                                               }
+                   numberofsubjects= xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
+                    alert(numberofsubjects);
+                    for (i = 0; i < numberofschools; i++) {
+
+                     var  x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
+                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+
+
+
+
+                        var option = document.createElement("option");
+                        option.text = name;
+                        option.value=key;
+                        select.add(option);
+
+
+
+
+
+
+                     }
+
+                }
+            };
+
+            classkey=document.getElementById("classes").value;
+            alert(classkey);
+            xmlhttp.open("GET", "/getsubjectsofclass?classkey=" + classkey, true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+        }
+
+
+         function gettopics() {
+
+            var xmlhttp;
+
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+                xmlhttp.overrideMimeType("text/xml");
+            } else {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    alert("hiii");
+
+                     var select = document.getElementById("topics");
+                     for (var option in select){
+                                                  select.remove(option);
+                                               }
+                   var numberoftopics= xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
+                    alert(numberoftopics);
+                    for (i = 0; i < numberoftopics; i++) {
+
+                     var  x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
+                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                     var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+
+
+
+
+                        var option = document.createElement("option");
+                        option.text = name;
+                        option.value=key;
+                        select.add(option);
+
+
+
+
+
+
+                     }
+
+                }
+            };
+
+          var  subjectkey=document.getElementById("subjects").value;
+            alert(subjectkey);
+            xmlhttp.open("GET", "/gettopicsofsubject?subjectkey=" + subjectkey, true);
+     xmlhttp.overrideMimeType("text/xml");
+     xmlhttp.send();
+        }
+    </script>
+</head>
+
+
+
+
+<body onload="getallschools()">
+
+ <select id="schools" name="schoolkey" onchange="getclasses()" form="inferform"></select>
+ <br>
+  <select id="classes" onchange="getsubjects()"></select>
+ <br>
+  <select id="subjects" onchange="gettopics()"> </select>
+ <br>
+
+<form name="input" action="/inference" method="get" id="inferform">
+     {% csrf_token %}
+
+  <select name="topickey" id="topics"></select>
+<input type="submit" value="Start Inference">
+
+
+</form>
+
+</body>
+</html>

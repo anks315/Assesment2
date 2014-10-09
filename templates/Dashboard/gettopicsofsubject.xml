@@ -1,0 +1,12 @@
+<root>
+  {% for key, value in topicdict.items %}
+    <topic>
+        <key>
+           {{value}}
+        </key>
+        <name>
+            {{key}}
+        </name>
+    </topic>
+    {% endfor %}
+</root>
