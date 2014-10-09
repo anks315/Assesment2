@@ -13,7 +13,7 @@ from models import QuestionInstance,State_Questions,Topic_States,Question,State,
 from models import School,Student,UserInfo,Subject,Assessment,Student_Assessments
 from  models import Topic_Questions,State_Questions,Topic_States,Subject_Topics
 from models import Topic,User  
-from School import School1
+
 def fill():
       try: 
             address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
