@@ -1,7 +1,6 @@
+<!DOCTYPE html>
 
-
-
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,7 +9,8 @@
     <script src="/js/jquery-1.11.1.js"></script>
     <script src="/js/liteaccordion.jquery.min.js"></script>
 
-    <script>
+
+      <script>
         function getallschools() {
             var xmlhttp;
 
@@ -21,6 +21,11 @@
                 // code for IE6, IE5
                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
+              var select = document.getElementById("schools");
+             var option = document.createElement("option");
+                        option.text = '';
+                        option.value='';
+                        select.add(option);
             xmlhttp.onreadystatechange = function () {
 
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -33,7 +38,7 @@
                      var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
                      var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
 
-                        var select = document.getElementById("schools");
+
                         var option = document.createElement("option");
                         option.text = name;
                         option.value=key;
@@ -64,6 +69,7 @@
                 // code for IE6, IE5
                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
+
             xmlhttp.onreadystatechange = function () {
 
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -72,6 +78,11 @@
                      for (var option in select){
                                                   select.remove(option);
                                                }
+
+                      var option = document.createElement("option");
+                        option.text = '';
+                        option.value='';
+                        select.add(option);
                    numberofschools= xmlhttp.responseXML.documentElement.getElementsByTagName("class").length;
 
                     for (i = 0; i < numberofschools; i++) {
@@ -121,11 +132,15 @@
 
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-
                      var select = document.getElementById("subjects");
                      for (var option in select){
                                                   select.remove(option);
                                                }
+
+                    var option = document.createElement("option");
+                        option.text = '';
+                        option.value='';
+                        select.add(option);
                    numberofsubjects= xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
 
                     for (i = 0; i < numberofschools; i++) {
@@ -180,6 +195,10 @@
                      for (var option in select){
                                                   select.remove(option);
                                                }
+                    var option = document.createElement("option");
+                        option.text = '';
+                        option.value='';
+                        select.add(option);
                    var numberoftopics= xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
 
                     for (i = 0; i < numberoftopics; i++) {
@@ -208,33 +227,112 @@
 
           var  subjectkey=document.getElementById("subjects").value;
 
+
             xmlhttp.open("GET", "/gettopicsofsubject?subjectkey=" + subjectkey, true);
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
         }
     </script>
+
 </head>
-
-
 
 
 <body onload="getallschools()">
 
- <select id="schools" name="schoolkey" onchange="getclasses()" form="inferform"></select>
- <br>
-  <select id="classes" onchange="getsubjects()"></select>
- <br>
-  <select id="subjects" onchange="gettopics()"> </select>
- <br>
+    <div class="template_body" style="">
+        <div class="template_inner_body" style="">
+            <a class="symbol" href="#" target="_top">
+                <img align="baseline" alt="CRITICAL VELOS" border="0" hspace="0" src="/images/logo.png" style="width: 224px; height: 45px">
+            </a>
+        <div style=" float: right;; " aria-label="Quick links" role="navigation">
+            <a style="padding-right: 10px;" class="wlnk" href="/login/">LOGIN</a>
+            <a style="padding-right: 10px;" class="wlnk" href="/contact_us/">CONTACT US</a>
+            <a style="padding-right: 10px;" class="wlnk" href="#">FEEDBACK</a>
+            <a style="padding-right: 10px;" class="wlnk" href="#">FAQ</a>
+        </div>
 
-<form name="input" action="/inference" method="get" id="inferform">
-     {% csrf_token %}
+        <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
+             <a href="/" class="ssb">
+                <span class="ssb" onmouseover="sel('1');" onmouseout="uns('1');" id="but_1" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_1" align="center" style="text-align: center">HOME</span></span>
+            </a>
+            <a href="/home_scan/" class="ssb">
+                <span class="ssb" onmouseover="sel('2');" onmouseout="uns('2');" id="but_2" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN?</span></span>
+            </a>
 
-  <select name="topickey" id="topics"></select>
-<input type="submit" value="Start Inference">
+            <a href="#" class="ssb">
+                <span class="ssb" onmouseover="sel('3');" onmouseout="uns('3');" id="but_3" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_3">TAKE&nbsp;A&nbsp;FREE&nbsp;TRIAL</span></span>
+            </a>
 
 
-</form>
+            <a href="#" class="ssb">
+                <span class="ssb" onmouseover="sel('4');" onmouseout="uns('4');" id="but_4" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_4">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
+            </a>
+         </div>
+
+
+
+
+<div style="width: 100%; height: 450px; background: #FFFFFF; border-radius: 5px;border: 2px ridge #E21A23;" >
+<h4 style="margin: 5px; padding: 5px 5px 5px 20px; color: #32484C" align="left">
+Select Inference Topic
+</h4>
+
+
+
+
+                <div>
+                    <b>School:&nbsp;&nbsp;</b> <select id="schools" name="schoolkey" onchange="getclasses()" form="form11"></select>
+                       <br>
+                    <b>Class:&nbsp;&nbsp;</b> <select id="classes" onchange="getsubjects()"></select>
+                        <br>
+                     <b>Subject:&nbsp;&nbsp;</b> <select id="subjects" onchange="gettopics()"> </select>
+                        <br>
+                    <form name="input" action="/inference" method="get" id="form11">
+                             {% csrf_token %}
+
+                      <b>Topic:&nbsp;&nbsp;</b>  <select name="topickey" id="topics"></select></br><br>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="submit" value="Start Inference">
+
+
+                    </form>
+                </div>
+  </div>
+            <!--   Footers of the page   -->
+
+        <div class="footer_div" style="">
+
+        <div class="sm_font" style=" float:right; text-align:right;; ">
+            <div style="margin-bottom: 10px">
+                <a aria-label="Facebook" href="#" target="_blank" title="Facebook">
+                    <img border="0" src="/images/facebook_icon.png">
+                </a>&nbsp;&nbsp;
+                <a aria-label="Twitter" href="#" target="_blank" title="Twitter">
+                    <img border="0" src="/images/twitter_icon.png">
+                </a>&nbsp;&nbsp;
+            </div>
+            <div style="margin-bottom: 5px">
+                SCAN® is a registered trademark of Critical Velos. </div>
+        </div>
+
+        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;">
+            <div style="margin-bottom: 10px">
+                <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
+            </div>
+        </div>
+
+        <div id="id_letterheads_9_insert_shortcut_33x" style=" clear: both;; "></div>
+    </div>
+
+  </div>
+</div>
+
+
 
 </body>
+
 </html>

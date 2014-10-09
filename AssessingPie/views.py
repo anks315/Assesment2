@@ -115,7 +115,7 @@ def topicnames(request):
         return render_to_response('AssessingPie/topicname.html',{},context_instance = RequestContext(request))
 
 def infer(request):
-        return render_to_response('Home/inferenceform.html',{},context_instance = RequestContext(request))
+        return render_to_response('AssessingPie/testpage.html',{},context_instance = RequestContext(request))
 
 
 
@@ -161,7 +161,9 @@ def  inferquestion(request):
             implication=-1
             antecedent=[]
             numalreadyinferred=0
-            return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+            session['infer']=users.get_current_user()
+            usersdict[session['infer']]= inferenceengine.InferenceBuffer(topickey)
+            blocknumber = usersdict[session['infer']].typeCache.getlength()
 
     if request.method=='POST':
         if request.POST['answer']=='yes':
@@ -216,7 +218,7 @@ def  inferquestion(request):
                 antecedent=[]
                 numalreadyinferred=0
                 inferenceengine.generatestates(usersdict[session['infer']],topickey,inferschoolkey)
-                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+                return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
             currentblocknumber+=1
             numalreadyinferred=0
             logging.error(currentblocknumber)
@@ -236,7 +238,7 @@ def  inferquestion(request):
                 antecedent=[]
                 numalreadyinferred=0
                 inferenceengine.generatestates(usersdict[session['infer']],topickey,inferschoolkey)
-                return render_to_response('AssessingPie/abc.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+                return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
             if usersdict[session['infer']].blockCache.getimplication(currentblocknumber,currentantecedentnumber) ==-1:
                 logging.error("asking question")
