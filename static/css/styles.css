@@ -63,6 +63,14 @@ border: 5px solid rgba(231, 233, 231, 1);
 
 }
 
+.active{
+    padding: 5px;
+    margin:2px;
+    border-radius:4px;
+    /*
+    box-shadow: 2px -2px 1px #1200C0 inset, 0px 1px 2px rgba(185, 46, 46, 0.4);
+    */
+}
 div.template_main_header {
 
 
@@ -98,6 +106,8 @@ div.home, div.searchclass,div.searchstudent { float: left; }
 p {
 margin-top:0;
 line-height:16pt;
+text-align: justify;
+
 }
 
 a:link,a:visited {
@@ -449,7 +459,7 @@ color:#63A08F;
 }
 
 div.menu_left,div.submenu_left,div.menu_top,div.submenu_top {
-width:232px;
+
 position:relative;
 font-size:14px;
 overflow:hidden;
@@ -467,7 +477,9 @@ padding-left:18px;
 
 div.menu_left {
 border-top:2px solid #FFF;
-background-color:#EBE8DA;
+background-color: #8dabeb;
+    border-radius: 4px;
+    margin: 3px;
 }
 
 div.submenu_left {
@@ -480,7 +492,7 @@ border-top:0;
 }
 
 div.menu_left a,div.menu_top a {
-width:224px;
+
 padding-left:8px;
 }
 
@@ -912,7 +924,7 @@ text-decoration:none;
 }
 
 span.menu_left,span.menu_top,span.user_guide_submenu,span.selected_user_guide_submenu {
-padding-left:8px;
+padding-left:20px;
 }
 
 div.menu_left a,div.submenu_left a,div.menu_top a,div.submenu_top a,div.user_guide_menu a,div.user_guide_submenu a,div.selected_user_guide_menu a,div.selected_user_guide_submenu a {
@@ -930,7 +942,7 @@ text-transform:uppercase;
 }
 
 a.about_us_menu:hover,a.about_us_menu:focus,div.about_us_menu:hover,div.about_us_menu:focus,a.selected_about_us_menu:link,div.selected_about_us_menu,td.header_about,div.header_about,td.header_support,div.header_support {
-background-color: rgba(138, 164, 183, 1)
+background-color: rgb(28, 84, 183)
 }
 
 a.he_menu:hover,a.he_menu:focus,div.he_menu:hover,div.he_menu:focus,a.selected_he_menu:link,div.selected_he_menu,div.hetop_menu,div.selected_hetop_menu,td.header_highered,div.header_highered {
@@ -1446,3 +1458,7 @@ font-weight: 500;
 #form1 .success{display:none;position:absolute;left:0px;top:-19px;color:#717171;font-size:12px;}
 #form1 .error,#form1 .empty{color:#f00;font-size:10px;line-height:1.25em;display:none;font-family:Arial,Helvetica,sans-serif;overflow:hidden;position:relative;left:0px;top:0px;}
 #form1 .message .error,#form1 .message .empty{left:0px;top:0px;}.link-form{float:right; padding: 2px 50px;}
+
+/*Home_scan Page*/
+
+.
