@@ -190,7 +190,7 @@
 
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-                       document.getElementById("formsubmit").disabled = false;
+
                      var select = document.getElementById("topics");
                      for (var option in select){
                                                   select.remove(option);
@@ -232,6 +232,10 @@
      xmlhttp.overrideMimeType("text/xml");
      xmlhttp.send();
         }
+      function enablesubmit() {
+
+           document.getElementById("formsubmit").disabled = false;
+      }
     </script>
 
 </head>
@@ -291,18 +295,18 @@ Select Inference Topic
 
 
                 <div>
-                    <b>School:&nbsp;&nbsp;</b> <select id="schools" name="schoolkey" onchange="getclasses()" form="form11"></select>
-                       <br>
-                    <b>Class:&nbsp;&nbsp;</b> <select id="classes" onchange="getsubjects()"></select>
-                        <br>
-                     <b>Subject:&nbsp;&nbsp;</b> <select id="subjects" onchange="gettopics()"> </select>
-                        <br>
+                   &nbsp; <b>School:&nbsp;&nbsp;</b> <select  style="width: 400px;" id="schools" name="schoolkey" onchange="getclasses()" form="form11"></select>
+                       <br> <br>
+                   &nbsp; <b>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> <select  style="width: 400px;" id="classes" onchange="getsubjects()"></select>
+                        <br><br>
+                  &nbsp;   <b>Subject:&nbsp;</b> <select  style="width: 400px;" id="subjects" onchange="gettopics()"> </select>
+                        <br><br>
                     <form name="input" action="/inference" method="get" id="form11">
                              {% csrf_token %}
 
-                      <b>Topic:&nbsp;&nbsp;</b>  <select name="topickey" id="topics"></select></br><br>
+                  &nbsp;    <b>Topic:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>  <select  style="width: 400px;" name="topickey" id="topics" onchange="enablesubmit()"></select></br><br>
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="submit" id="formsubmit" disabled value="Start Inference">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="submit" id="formsubmit" disabled value="Start Inference">
 
 
                     </form>

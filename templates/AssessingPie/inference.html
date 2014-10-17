@@ -9,7 +9,19 @@
     <script src="/js/jquery-1.11.1.js"></script>
     <script src="/js/liteaccordion.jquery.min.js"></script>
 
+<script>
+    function validate(form)
+    {
+        if ( ( form.answer[0].checked == false ) && ( form.answer[1].checked == false ) ) {
+            alert("Please choose your Answer");
+            return false;
 
+        }
+        else {
+            return true;
+        }
+    }
+</script>
 </head>
 
 
@@ -63,15 +75,16 @@
     <!--
 <span>Maths Subject</span>  -->
 
-<span><b><br><br>{{ nextquestion }}  ?</b></span></span><br><br>
+<span><br><br>{% autoescape off %}{{ nextquestion }}{% endautoescape %}  </span></span><br><br>
     <p> <b>Click on Yes or No and then Submit!!</b><br></p><br>
             <form name="input" action="/inference" method="post">
 
                  {% csrf_token %}
-                   <b>Agree?:<br> </b>
+                   <b>Agree?:<br><br> </b>
                 <input type="radio" name="answer" value="yes">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="answer" value="no">No <br>
-                           <input type="submit" value="Submit">
+                <input type="radio" name="answer" value="no">No <br><br>
+                           <input type="submit" onclick="return validate(this.form)" value="Submit">
+
              </form>
 <div class="clear"></div>
 </div>

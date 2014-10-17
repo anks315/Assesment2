@@ -407,7 +407,7 @@
                     var assesmentid =  x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
                     var duedate = x.getElementsByTagName("due_date")[0].childNodes[0].nodeValue.trim();
 
-                    var innerdiv = "<tr><td><a href=\"#\">" + assesmentid + "</a></td><td>" + duedate + "</td></tr>";
+                    var innerdiv = "<tr><td><a href=\"/assessment?id="+assesmentKey+"\">" + assesmentid + "</a></td><td>" + duedate + "</td></tr>";
 
 
                      div_to_be_loaded += innerdiv;

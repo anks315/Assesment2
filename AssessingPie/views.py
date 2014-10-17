@@ -107,7 +107,7 @@ antecedent=[]
 numalreadyinferred=0
 
 def contactus(request):
-
+        fill()
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
 
 def topicnames(request):
@@ -187,10 +187,10 @@ def  inferquestion(request):
                 currentantecedentnumber+=1
                 if len(alreadyinffered)!=0:
 
-                    question = "If student donot know: \n"
+                    question = "&nbsp;&nbsp<b>If student do not know:</b> &nbsp;&nbsp"
                     for x in antecedent:
                         question +=usersdict[session['infer']].typeCache.gettype(x)
-                    question = question+ "He will not be able to answer: " +   usersdict[session['infer']].typeCache.gettype(implication)
+                    question = question+ "<br> &nbsp;&nbsp<b>He will not be able to answer: </b>&nbsp;&nbsp" +   usersdict[session['infer']].typeCache.gettype(implication)
                     return render_to_response('AssessingPie/inference.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : question},context_instance = RequestContext(request))
                 else:
                      numalreadyinferred+=1
