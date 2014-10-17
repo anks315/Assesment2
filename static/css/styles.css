@@ -1373,29 +1373,25 @@ tr.unselectable td, tr.unselectable td div {font-weight: bold;}
 
 .banners_home{
 position: absolute;
-top: 300px;
-right: 20px;
-color: #f50026;
-font-size: 24px;
+top: 10%;
+right: 10%;
 font-style: italic;
 border-radius: 3px;
-background-color: #FFF;
-width: 400px;
-    padding: 3px;
-    font-weight: bold;
+width: 80%;
+padding: 3px;
+font-weight: bold;
 }
 
 .banners_home_author{
-position: absolute;
-top: 340px;
-right: 20px;
-color: #3a25c8;
+position: relative;
+top: 20px;
+left: 480px;
+color: #3713EC;
 font-size: 12px;
 font-style: italic;
 border-radius: 2px;
-background-color: #FFF;
 width: 150px;
-    font-weight: bolder;
+font-weight: bolder;
 
 }
 
@@ -1461,4 +1457,3 @@ font-weight: 500;
 
 /*Home_scan Page*/
 
-.
