@@ -107,7 +107,7 @@ antecedent=[]
 numalreadyinferred=0
 
 def contactus(request):
-        fill()
+        #fill()
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
 
 def topicnames(request):
