@@ -1245,14 +1245,23 @@ Assigns  existing questions  to an existing state:
 def map_state_to_questions(topic_key, state_questions_map,school_key):
     state = None
     question_state = None
+    topic_states=[]
+
     try:
         logging.info("CV Logs: Inside map_state_to_questions ")
-        topic = topic_key.get() 
+        topic = topic_key.get()
+        states=[]
         result=Constant.ERROR_OPERATION_FAIL
         for key in state_questions_map.keys():
             state=addState(type=Constant.STATE_IN_TOPIC,school_key=school_key)
+            states.append(state)
             result=assign_questions_to_state(state.key,state_questions_map[key], school_key)
+
             if not result==Constant.UPDATION_SUCCESSFULL:
+                return Constant.ERROR_OPERATION_FAIL
+
+        result1=assign_states_to_topic(topic_key,states,school_key)
+        if not result1==Constant.UPDATION_SUCCESSFULL:
                 return Constant.ERROR_OPERATION_FAIL
         logging.info("CV Logs: Success to map_state_to_questions")
         return result 
@@ -1305,7 +1314,7 @@ def assign_states_to_topic(topic_key, states_in_topic_keys, school_key):
     except Exception :
         logging.exception("")
         return Constant.ERROR_BAD_VALUE
-  
+    '''
     if state_topic_key == None:   
         
         state_topic = Topic_States(parent=school_key, topic_key=topic_key, states_in_topic_keys=states_in_topic_keys)
@@ -1317,7 +1326,12 @@ def assign_states_to_topic(topic_key, states_in_topic_keys, school_key):
          
          state_topic = state_topic_key.get()
          state_topic.states_in_topic_keys.extend(states_in_topic_keys)
-         state_topic.put()     
+         state_topic.put()
+    '''
+    state_topic = Topic_States(parent=school_key, topic_key=topic_key, states_in_topic_keys=states_in_topic_keys)
+    state_topic.put()
+    topic.states_in_topic_key = state_topic.key
+    topic.put()
     logging.info("CV Logs : success to assign states to topic :" + topic.name)     
     return Constant.UPDATION_SUCCESSFULL
 
