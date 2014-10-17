@@ -1,6 +1,7 @@
 from google.appengine.ext.ndb import Key
 from google.appengine.ext import ndb
 import logging
+#from lib.yaml.lib.yaml import scan
 import Constant
 from models import QuestionInstance, State_Questions, Topic_States, Question, State, Address, Teacher, Class, \
     Assessment_Record
@@ -728,6 +729,7 @@ def addAssessment(name, list_topic_key, school_key, date, due_date, published, t
         for topic in list_topic_key:
             topic_entity = topic.get()
             topic_entity.assessments_in_topic = assessment.key
+            topic_entity.assessment_count+=1
             topic_entity.put()
             topic_states_keys = get_state_keys_of_topic(topic)
             for topic_state_key in topic_states_keys:
@@ -2346,6 +2348,25 @@ def get_subject_details_of_teacher_in_class(teacher_key, class_key):
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL       
             
+
+
+def get_assessment_count_by_topic(topic_key,school_key):
+    logging.info("CV Logs : get_assessments_by_topic ")
+    assessments = []
+    try:
+        assessments=Assessment.query(ancestor=school_key).fetch()
+        for assessment in assessments:
+            if topic_key in assessment.topics_in_assessment_key:
+                assessments.append(assessment)
+        count=len(assessments)
+    except Exception:
+            logging.info("CV Logs : failed to get assessments of topic  for student :")
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL
+
+    logging.info("CV Logs : success to get assessments for student :")
+    return count
+
 
 
 def get_basic_details_of_teacher(teacher_key, class_key):
