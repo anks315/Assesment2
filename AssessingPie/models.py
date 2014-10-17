@@ -128,7 +128,7 @@ class Topic(ndb.Model):
     questions_in_topic_key = ndb.KeyProperty(kind='Topic_Questions')
     assessments_in_topic=ndb.KeyProperty(kind='Assessment')
     types=ndb.StringProperty(repeated=True)
-    
+    assessment_count=ndb.IntegerProperty(default=0)
     
     
 """

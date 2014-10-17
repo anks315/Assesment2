@@ -1,9 +1,14 @@
+from AssessingPie.models import UserInfo
+
 __author__ = 'ankur'
 import logging
 import Query
+from models import UserInfo, User,Teacher
 from gaesessions import get_current_session
 import models
 import Constant
+import datetime
+import time
 class Question:
     def __init__(self,key,typeid,questionstring):
         self.key=key
@@ -212,10 +217,16 @@ def generatestates(userbuffer,topickey,schoolkey):
         queryreadydict[statenum]=templist
         statenum+=1
     session = get_current_session()
-
+    #user_name = User.query((User.username == 'Vijay_Mehta')).get()
+    teacher = Teacher.query(Teacher.username == 'Vijay_Mehta',ancestor=schoolkey).get()
+    logging.info('@@@@@@@@@@@@@@@@@@@@@@'+str(teacher))
     #Query.map_state_to_questions_dummy(queryreadydict,session['schoolkey'])
     Query.map_state_to_questions(topickey,queryreadydict,schoolkey)
+    count=topickey.get().assessment_count
+    count+=1
+    class_v=(teacher.classes_under_teacher)[0]
+    #teacher=UserInfo.query()
+    assessment1=Query.addAssessment(name="Know Your Numbers : "+str(count),list_topic_key=[topickey],school_key=schoolkey,date=datetime.datetime.now(),due_date=datetime.datetime(int(2014),int(11),int(12),int(23),int(12),int(8)),published=True,teacher_key=teacher.key,class_key=class_v)
 
 
-
-    logging.error(queryreadydict)
+    logging.error(str(assessment1))
