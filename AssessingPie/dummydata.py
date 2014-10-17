@@ -96,7 +96,7 @@ def fill():
             
             
             
-            topic_number=Query.addTopic(school_key=school.key,name="Number_System", prerequisite_topics=[],subject_key=subject_maths.key,types=["type1","type2","type3"])
+            topic_number=Query.addTopic(school_key=school.key,name="Know Your Numbers", prerequisite_topics=[],subject_key=subject_maths.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
             topic_trig=Query.addTopic(school_key=school.key,name="Trigonimetric_Ratio", prerequisite_topics=[topic_number.key],subject_key=subject_maths.key,types=["type1","type2","type3"])
             topic_height=Query.addTopic(school_key=school.key,name="Height & Distance", prerequisite_topics=[topic_trig.key,topic_number.key],subject_key=subject_maths.key,types=["type1","type2","type3"])
             topic_circle=Query.addTopic(school_key=school.key,name="Circle_operation", prerequisite_topics=[topic_number.key],subject_key=subject_maths.key,types=["type1","type2","type3"])
@@ -115,15 +115,19 @@ def fill():
             
             
             
-            questioninstance_number1=Query.addQuestionInstance(problem_statement="sum of 2+3 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4","6","7","8"], answers=["5"],school_key=school.key)
+            questioninstance_number1=Query.addQuestionInstance(problem_statement="Which one is greatest ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["92","392","4456","89742"], answers=["89742"],school_key=school.key)
             
-            questioninstance_number2=Query.addQuestionInstance(problem_statement="sum of 222+30 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252","600","227","8"], answers=["252"],school_key=school.key)
-            questioninstance_number3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["252","600","227","8"], answers=["6"],school_key=school.key)
+            questioninstance_number2=Query.addQuestionInstance(problem_statement="Which one is smallest?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["92","392","4456","89742"], answers=["92"],school_key=school.key)
+            #questioninstance_number3=Query.addQuestionInstance(problem_statement="Which one is greatest ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1902","1920","9201","9021","9210"], answers=["9210"],school_key=school.key)
 
-            questioninstance_number4=Query.addQuestionInstance(problem_statement="Value of sin 90 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["-1","2","0","1"], answers=["1"],school_key=school.key)
+            #questioninstance_number4=Query.addQuestionInstance(problem_statement="Which one is smallest ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1902","1920","9201","9021","9210"], answers=["9210"],school_key=school.key)
 
-        
-        
+            questioninstance_number3=Query.addQuestionInstance(problem_statement="Arrange the following numbers in ascending order :\
+(a) 847, 9754, 8320, 571 ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1)847,9754,8320,571","2)571,847,8320,9754","3)9754,8320,847,571","4)8320,9754,571,847"], answers=["2)571,847,8320,9754"],school_key=school.key)
+
+            questioninstance_number4=Query.addQuestionInstance(problem_statement="Arrange the following numbers in ascending order :\
+ (b) 9801, 25751, 36501, 38802", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["38802,36501,25751,9801","2)9801,25571,36501,38802"], answers=["2)9801,25571,36501,38802"],school_key=school.key)
+
             questioninstance_trig1=Query.addQuestionInstance(problem_statement="sin(90+A) ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["sinA","CosA","-SinA","-CosA"], answers=["252"],school_key=school.key)
             questioninstance_trig2=Query.addQuestionInstance(problem_statement="Area of square of arm length a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["pie*a*a","a*a","a*a*a","-a*a"], answers=["a*a"],school_key=school.key)
             questioninstance_trig3=Query.addQuestionInstance(problem_statement="Area of circle of arm radius a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["4","6","7","8"], answers=["pie*a*a"],school_key=school.key)
@@ -151,6 +155,8 @@ def fill():
             question_number2=Query.addQuestion(questioninstance_number2,school.key)
             question_number3=Query.addQuestion(questioninstance_number3,school.key)
             question_number4=Query.addQuestion(questioninstance_number4,school.key)
+            #question_number5=Query.addQuestion(questioninstance_number5,school.key)
+            #question_number6=Query.addQuestion(questioninstance_number6,school.key)
            
             
             question_trig1=Query.addQuestion(questioninstance_trig1,school.key)
@@ -280,15 +286,15 @@ def fill():
           
           
           
-            a=assessment1=Query.addAssessment(name="Assessment1",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment2=Query.addAssessment(name="Assessment2",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment3=Query.addAssessment(name="Assessment3",list_topic_key=[topic_trig.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment4=Query.addAssessment(name="Assessment4",list_topic_key=[topic_height.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment5=Query.addAssessment(name="Assessment5",list_topic_key=[topic_height.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            a=assessment1=Query.addAssessment(name="Know Your Numbers :1",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment2=Query.addAssessment(name="Know Your Numbers :2",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment3=Query.addAssessment(name="Know Your Numbers :3",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment4=Query.addAssessment(name="Know Your Numbers :4",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment5=Query.addAssessment(name="Know Your Numbers :5",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
             
             
-            assessment6=Query.addAssessment(name="Assessment6",list_topic_key=[topic_circle.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            assessment7=Query.addAssessment(name="Assessment7",list_topic_key=[topic_circle.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment6=Query.addAssessment(name="Know Your Numbers :6",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment7=Query.addAssessment(name="Assessment 7",list_topic_key=[topic_number.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
            
             
             assessment8=Query.addAssessment(name="Assessment8",list_topic_key=[topic_part.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime.now(),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
