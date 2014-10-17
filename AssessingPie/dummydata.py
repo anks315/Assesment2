@@ -123,10 +123,10 @@ def fill():
             #questioninstance_number4=Query.addQuestionInstance(problem_statement="Which one is smallest ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1902","1920","9201","9021","9210"], answers=["9210"],school_key=school.key)
 
             questioninstance_number3=Query.addQuestionInstance(problem_statement="Which series is in ascending order :\
- 847, 9754, 8320, 571 ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1)847,9754,8320,571","2)571,847,8320,9754","3)9754,8320,847,571","4)8320,9754,571,847"], answers=["2)571,847,8320,9754"],school_key=school.key)
+ ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1)847,9754,8320,571","2)571,847,8320,9754","3)9754,8320,847,571","4)8320,9754,571,847"], answers=["2)571,847,8320,9754"],school_key=school.key)
 
             questioninstance_number4=Query.addQuestionInstance(problem_statement="Which series is in descending order :\
-  9801, 25751, 36501, 38802", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1)38802,36501,25751,9801","2)9801,25571,36501,38802","3)25571,9801,36501,38802","4)36501,9801,25571,38802"], answers=["2)9801,25571,36501,38802"],school_key=school.key)
+  ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1)38802,36501,25751,9801","2)9801,25571,36501,38802","3)25571,9801,36501,38802","4)36501,9801,25571,38802"], answers=["2)9801,25571,36501,38802"],school_key=school.key)
 
             questioninstance_trig1=Query.addQuestionInstance(problem_statement="sin(90+A) ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["sinA","CosA","-SinA","-CosA"], answers=["252"],school_key=school.key)
             questioninstance_trig2=Query.addQuestionInstance(problem_statement="Area of square of arm length a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["pie*a*a","a*a","a*a*a","-a*a"], answers=["a*a"],school_key=school.key)
