@@ -1254,7 +1254,7 @@ def map_state_to_questions(topic_key, state_questions_map,school_key):
         result=Constant.ERROR_OPERATION_FAIL
         for key in state_questions_map.keys():
             state=addState(type=Constant.STATE_IN_TOPIC,school_key=school_key)
-            states.append(state)
+            states.append(state.key)
             result=assign_questions_to_state(state.key,state_questions_map[key], school_key)
 
             if not result==Constant.UPDATION_SUCCESSFULL:

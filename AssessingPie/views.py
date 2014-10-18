@@ -62,6 +62,9 @@ def asknextquestion(request):
                 strknow+=",,"
                 val+=1
         maxsta =maxstate(session['studentname'])
+        logging.error(val)
+        logging.error(getnumquestions(session['studentname']))
+
         if val==getnumquestions(session['studentname']):
 
             readytolearn="Congratulations!!you have completed maths donut"
@@ -69,9 +72,11 @@ def asknextquestion(request):
             logging.error(maxstate(session['studentname']))
 
             states = usersdict[session['studentname']].states[maxstatesize(session['studentname']) + 1]
+            logging.error(states)
             currentstate= usersdict[session['studentname']].states[maxstatesize(session['studentname'])][maxstate(session['studentname'])]
             for state in states:
                 stateset = set(state.questionstuple)
+                logging.error(stateset)
                 currentstateset = set(currentstate.questionstuple)
                 if stateset.issuperset(currentstateset):
                     quetionkey = stateset.difference(currentstateset)
@@ -81,7 +86,7 @@ def asknextquestion(request):
                     studentkey= session.get('studentkey',-1)
                     schoolkey= session.get('schoolkey',-1)
 
-                    a=Query.update_assessment_detail_of_student(student_key=studentkey, assessment_key=ndb.Key(urlsafe=assessmentkey),current_state_key= currentstate.key, next_state_key=currentstate.key,next_question_key=next(iter(quetionkey)),score=int(score),school_key=schoolkey,start_date=datetime.date(int(2012),int(6),int(8)))
+                    a=Query.update_assessment_detail_of_student(student_key=studentkey, assessment_key=ndb.Key(urlsafe=assessmentkey),current_state_key= currentstate.key, next_state_key=currentstate.key,next_question_key=next(iter(quetionkey)),score=int(score),school_key=schoolkey,completion_date=datetime.datetime.now())
                     logging.error(a)
                     readytolearn+=usersdict[session['studentname']].questions[next(iter(quetionkey))].questionstring
 
@@ -107,7 +112,8 @@ antecedent=[]
 numalreadyinferred=0
 
 def contactus(request):
-        #fill()
+        flush()
+        fill()
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
 
 def topicnames(request):

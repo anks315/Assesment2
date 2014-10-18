@@ -254,7 +254,7 @@ def fill():
            
             
              
-            Query.assign_questions_to_state(state1.key, [question_number1.key,question_number2.key,question_number3.key,question_number4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key,question_height1.key,question_height2.key,question_height3.key,question_height4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)         
+            Query.assign_questions_to_state(state1.key, [question_number1.key,question_number2.key,question_number3.key,question_number4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key,question_height1.key,question_height2.key,question_height3.key,question_height4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)
             Query.assign_questions_to_state(state2.key, [question_sentence1.key,question_sentence2.key,question_sentence3.key,question_sentence4.key,question_part1.key,question_part2.key,question_part3.key,question_part4.key,question_tense1.key,question_tense2.key,question_tense3.key,question_tense4.key],school.key)               
             
             Query.assign_questions_to_topic(topic_number.key,[question_number1.key,question_number2.key,question_number3.key,question_number4.key],school.key,"type1")

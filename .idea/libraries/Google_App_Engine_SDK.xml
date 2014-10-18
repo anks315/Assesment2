@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Google App Engine SDK" type="python">
     <CLASSES>
-      <root url="file://$USER_HOME$/google_appengine" />
+      <root url="file://$USER_HOME$/Downloads/python_appengine-sdk/google_appengine" />
     </CLASSES>
     <SOURCES />
   </library>
