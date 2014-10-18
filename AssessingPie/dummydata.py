@@ -117,13 +117,13 @@ def fill():
             
             questioninstance_number1=Query.addQuestionInstance(problem_statement="Sum of of 2 and 3 ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["5"],school_key=school.key)
             
-            questioninstance_number2=Query.addQuestionInstance(problem_statement="Sum of 222+30  ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["17"],school_key=school.key)
+            questioninstance_number2=Query.addQuestionInstance(problem_statement="Sum of 222+30  ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["252"],school_key=school.key)
             #questioninstance_number3=Query.addQuestionInstance(problem_statement="Which one is greatest ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1902","1920","9201","9021","9210"], answers=["9210"],school_key=school.key)
 
             #questioninstance_number4=Query.addQuestionInstance(problem_statement="Which one is smallest ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1902","1920","9201","9021","9210"], answers=["9210"],school_key=school.key)
 
             questioninstance_number3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9  \
- ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["30"],school_key=school.key)
+ ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["6"],school_key=school.key)
 
 
 

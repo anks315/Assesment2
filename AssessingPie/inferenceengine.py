@@ -217,6 +217,7 @@ def generatestates(userbuffer,topickey,schoolkey):
         queryreadydict[statenum]=templist
         statenum+=1
     session = get_current_session()
+    logging.error(queryreadydict)
     #user_name = User.query((User.username == 'Vijay_Mehta')).get()
     teacher = Teacher.query(Teacher.username == 'Vijay_Mehta',ancestor=schoolkey).get()
     logging.info('@@@@@@@@@@@@@@@@@@@@@@'+str(teacher))

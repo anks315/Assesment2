@@ -57,17 +57,17 @@ class  UserBuffer:
 
             queskeylist =[]
             logging.error(type(questions))
-            if type(questions)!=int:
 
-                for question in questions:
-                    queskeylist.append(question.key)
-                questiontuple = tuple(queskeylist)
-                key=tempstate.key
-                size = len(questiontuple)
-                temp = self.states.get(size)
-                if temp is None:
-                    self.states[size]=[]
-                self.states[size].append(State(questiontuple,initialprob,key))
+
+            for question in questions:
+                queskeylist.append(question.key)
+            questiontuple = tuple(queskeylist)
+            key=tempstate.key
+            size = len(questiontuple)
+            temp = self.states.get(size)
+            if temp is None:
+                self.states[size]=[]
+            self.states[size].append(State(questiontuple,initialprob,key))
 
 
 
