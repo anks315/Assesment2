@@ -969,7 +969,7 @@ def update_assessment_detail_of_student(score, student_key, assessment_key, curr
                     assessment_record.put()
                 assessment.no_of_user_completed += 1
                 assessment.put()
-                
+
     except Exception :
             logging.exception("")
             logging.info("CV Logs : failed to update assessment :")
@@ -1227,6 +1227,7 @@ def assign_questions_to_state(state_key, questions_in_state_keys, school_key):
          question_state.put()
     for question_key in questions_in_state_keys:
          question = question_key.get()
+
          question.no_states_contained_in = question.no_states_contained_in + 1
          question.put()
     logging.info("CV Logs: success to  assign questions to state  ")     
@@ -1248,6 +1249,11 @@ def map_state_to_questions(topic_key, state_questions_map,school_key):
     topic_states=[]
 
     try:
+
+        topic=topic_key.get()
+        questions=get_questions_of_topic(topic_key)
+        for question in questions:
+            question.no_states_contained_in=0
         logging.info("CV Logs: Inside map_state_to_questions ")
         topic = topic_key.get()
         states=[]
