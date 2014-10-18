@@ -202,6 +202,8 @@
 
 
         function loadloginDetails(){
+
+
          var xmlhttp;
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -237,7 +239,12 @@
     }
 
        function loadMasteryDetails() {
-        var xmlhttp;
+
+
+        document.getElementById('masteryDetails').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('masteryDetails').style.display='block';
+
+           var xmlhttp;
 
 
        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Subject  </th><th>Mastery in (%)</th></tr>";
@@ -377,6 +384,10 @@
         //return list of pending assignments
     function list_pending_assignments(subject){
 
+
+        document.getElementById('pending_assignment').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('pending_assignment').style.display='block';
+
         var xmlhttp;
 
         var  div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Pending Assesments of "+subject+"</th><th>Due Date</th></tr>";
@@ -441,6 +452,10 @@
 
     function list_all_pending_assessments(){
 
+
+
+        document.getElementById('pendingassesments').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('pendingassesments').style.display='block';
 
         var xmlhttp;
 
@@ -507,6 +522,10 @@
   //  alert('learningprogress');
 
 
+        document.getElementById('subject_chart_div').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('subject_chart_div').style.display='block';
+
+
         var data = google.visualization.arrayToDataTable([
           ['Date', 'Mastered', 'Attempted'],
           ['2004',  33,      56],
@@ -536,6 +555,10 @@
     function get_ready_tolearn(subject){
     //alert('getting readytolearn');
 
+
+
+        document.getElementById('readytoLearn').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('readytoLearn').style.display='block';
 
 
          var xmlhttp;
@@ -588,6 +611,10 @@
 
     function getdonutmastery_subject(subject){
 
+
+
+        document.getElementById('subjectdonutmastery').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('subjectdonutmastery').style.display='block';
 
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
