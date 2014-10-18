@@ -54,16 +54,20 @@ class  UserBuffer:
         for tempstate in state_db:
 
             questions = Query.get_questions_of_state(tempstate.key)
+
             queskeylist =[]
-            for question in questions:
-                queskeylist.append(question.key)
-            questiontuple = tuple(queskeylist)
-            key=tempstate.key
-            size = len(questiontuple)
-            temp = self.states.get(size)
-            if temp is None:
-                self.states[size]=[]
-            self.states[size].append(State(questiontuple,initialprob,key))
+            logging.error(type(questions))
+            if type(questions)!=int:
+
+                for question in questions:
+                    queskeylist.append(question.key)
+                questiontuple = tuple(queskeylist)
+                key=tempstate.key
+                size = len(questiontuple)
+                temp = self.states.get(size)
+                if temp is None:
+                    self.states[size]=[]
+                self.states[size].append(State(questiontuple,initialprob,key))
 
 
 
