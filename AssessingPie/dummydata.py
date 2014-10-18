@@ -117,16 +117,15 @@ def fill():
             
             questioninstance_number1=Query.addQuestionInstance(problem_statement="Sum of of 2 and 3 ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["5"],school_key=school.key)
             
-            questioninstance_number2=Query.addQuestionInstance(problem_statement="Sum of 12 and 15 ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["17"],school_key=school.key)
+            questioninstance_number2=Query.addQuestionInstance(problem_statement="Sum of 222+30  ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["17"],school_key=school.key)
             #questioninstance_number3=Query.addQuestionInstance(problem_statement="Which one is greatest ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1902","1920","9201","9021","9210"], answers=["9210"],school_key=school.key)
 
             #questioninstance_number4=Query.addQuestionInstance(problem_statement="Which one is smallest ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1902","1920","9201","9021","9210"], answers=["9210"],school_key=school.key)
 
-            questioninstance_number3=Query.addQuestionInstance(problem_statement="value of : 50-20  \
+            questioninstance_number3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9  \
  ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["30"],school_key=school.key)
 
-            questioninstance_number4=Query.addQuestionInstance(problem_statement="value of 8/2 :\
-  ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["4"],school_key=school.key)
+
 
             questioninstance_trig1=Query.addQuestionInstance(problem_statement="sin(90+A) ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["sinA","CosA","-SinA","-CosA"], answers=["252"],school_key=school.key)
             questioninstance_trig2=Query.addQuestionInstance(problem_statement="Area of square of arm length a ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["pie*a*a","a*a","a*a*a","-a*a"], answers=["a*a"],school_key=school.key)
@@ -154,7 +153,7 @@ def fill():
             question_number1=Query.addQuestion(questioninstance_number1,school.key)
             question_number2=Query.addQuestion(questioninstance_number2,school.key)
             question_number3=Query.addQuestion(questioninstance_number3,school.key)
-            question_number4=Query.addQuestion(questioninstance_number4,school.key)
+            #question_number4=Query.addQuestion(questioninstance_number4,school.key)
             #question_number5=Query.addQuestion(questioninstance_number5,school.key)
             #question_number6=Query.addQuestion(questioninstance_number6,school.key)
            
@@ -254,10 +253,10 @@ def fill():
            
             
              
-            Query.assign_questions_to_state(state1.key, [question_number1.key,question_number2.key,question_number3.key,question_number4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key,question_height1.key,question_height2.key,question_height3.key,question_height4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)         
+            Query.assign_questions_to_state(state1.key, [question_number1.key,question_number2.key,question_number3.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key,question_height1.key,question_height2.key,question_height3.key,question_height4.key,question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key)
             Query.assign_questions_to_state(state2.key, [question_sentence1.key,question_sentence2.key,question_sentence3.key,question_sentence4.key,question_part1.key,question_part2.key,question_part3.key,question_part4.key,question_tense1.key,question_tense2.key,question_tense3.key,question_tense4.key],school.key)               
             
-            Query.assign_questions_to_topic(topic_number.key,[question_number1.key,question_number2.key,question_number3.key,question_number4.key],school.key,"type1")
+            Query.assign_questions_to_topic(topic_number.key,[question_number1.key,question_number2.key,question_number3.key],school.key,"type1")
             Query.assign_questions_to_topic(topic_trig.key,[question_trig1.key,question_trig2.key,question_trig3.key,question_trig4.key],school.key,"type2")
             Query.assign_questions_to_topic(topic_circle.key,[question_circle1.key,question_circle2.key,question_circle3.key,question_circle4.key],school.key,"type2")
             Query.assign_questions_to_topic(topic_height.key,[question_height1.key,question_height2.key,question_height3.key,question_height4.key],school.key,"type1")
@@ -358,7 +357,7 @@ def fill():
             
             a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment1.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=20,school_key=school.key,completion_date=datetime.datetime.now())
             
-            a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number4.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
+            a=Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment7.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_number2.key,score=100,school_key=school.key,completion_date=datetime.datetime.now())
            
             Query.update_assessment_detail_of_student(student_key=student_sarthak.key, assessment_key=assessment9.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_trig3.key,score=75,school_key=school.key,completion_date=datetime.datetime.now())
             '''a=Query.update_assessment_detail_of_student(student_key=student_prajjwal.key, assessment_key=assessment4.key,current_state_key= state2.key, next_state_key=state3.key,next_question_key=question_height1.key,score=30,school_key=school.key,completion_date=datetime.datetime.now())
