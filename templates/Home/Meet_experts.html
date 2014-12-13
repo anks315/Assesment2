@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Critical Velos</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+       <script src="/js/jquery-1.11.1.js"></script>
+    <style>
+        #about-us{display:block; width:100%; line-height:1.6em;}
+#about-us h2{margin-bottom:40px; padding-bottom:20px; border-bottom:1px solid #CCCCCC;}
+
+#about-us #statements{margin-bottom:50px;}
+#about-us #statements p{margin:20px 0 0 0; padding:0;}
+#about-us #statements p:first-child{margin-top:0;}
+
+#about-us #team{margin-bottom:0;}
+#about-us #team ul{margin:0; padding:0; list-style:none;}
+#about-us #team ul li{position:relative; margin-bottom:50px;}
+#about-us #team ul li div{}
+#about-us #team ul li div:first-child{}
+#about-us #team ul li div img{padding:4px; border:1px solid #CCCCCC;}
+#about-us #team ul li p{margin:15px 0 0 0; padding:0;}
+#about-us #team ul li p:first-child{}
+#about-us #team ul li .team_name{font-weight:bold;}
+#about-us #team ul li .team_title{margin:0; font-size:11px; line-height:normal;}
+#about-us #team ul li .team_description{}
+#about-us #team ul ul{position:absolute; top:0; right:0;}
+#about-us #team ul ul li{display:inline; margin:0 0 0 6px; background:none;}
+#about-us #team ul ul li:first-child{margin-left:0;}
+#about-us #team ul ul li a{}
+#about-us #team ul ul li a img{padding:0; border:none;}
+
+#about-us #client_logos{margin:0;}
+#about-us #client_logos ul{margin:0; padding:0; list-style:none;}
+#about-us #client_logos ul li{}
+#about-us #client_logos ul li:first-child{margin-left:0;}
+#about-us #client_logos ul li img{}
+
+.one_half,
+.one_third, .two_third,
+.one_quarter, .two_quarter, .three_quarter,
+.one_fifth, .two_fifth, .three_fifth, .four_fifth{display:inline-block; float:left; margin:0 0 0 20px; list-style:none;}
+
+.one_third, .two_third{margin:0 0 0 30px;}
+
+.first,
+.one_half:first-child,
+.one_third:first-child, .two_third:first-child,
+.one_quarter:first-child, .two_quarter:first-child, .three_quarter:first-child,
+.one_fifth:first-child, .two_fifth:first-child, .three_fifth:first-child, .four_fifth:first-child{margin-left:0;}
+
+.two_half, .three_third, .four_quarter, .five_fifth{display:block; width:100%; clear:both;}
+
+/*----------------------------------------------Half Grid-------------------------------------*/
+
+.one_half{width:470px;}
+
+/*----------------------------------------------Third Grid-------------------------------------*/
+
+.one_third{width:300px;}
+.two_third{width:630px;}
+
+/*----------------------------------------------Quarter Grid-------------------------------------*/
+
+.one_quarter{width:225px;}
+.two_quarter{width:470px;}
+.three_quarter{width:715px;}
+
+/*----------------------------------------------Fifth Grid-------------------------------------*/
+
+.one_fifth{width:176px;}
+.two_fifth{width:372px;}
+.three_fifth{width:568px;}
+.four_fifth{width:764px;}
+
+    </style>
+</head>
+
+
+<script>
+        $(document).ready(function(){
+
+
+            $("#goto_signup_form").click(function(){
+
+                $("#signup_box").slideDown("slow");
+               document.getElementById("login_box").style.display='none';
+                /* document.getElementById("signup_box").style.display='block';*/
+
+                });
+
+            $("#goto_loginbox").click(function(){
+
+               /* document.getElementById("login_box").style.display='block';*/
+                $("#login_box").slideDown("fast");
+                document.getElementById("signup_box").style.display='none';
+
+                });
+        });
+
+</script>
+
+
+<body>
+
+    <div class="template_body" style="">
+        <div class="template_inner_body" style="">
+            <a class="symbol" href="#" target="_top">
+                <img align="baseline" alt="CRITICAL VELOS" border="0" hspace="0" src="/images/logo.png" style="width: 224px; height: 45px">
+            </a>
+        <div style=" float: right;; " aria-label="Quick links" role="navigation">
+            <a style="padding-right: 10px;" class="wlnk" href="/login/">LOGIN</a>
+            <a style="padding-right: 10px;" class="wlnk" href="/contact_us/">CONTACT US</a>
+            <a style="padding-right: 10px;" class="wlnk" href="#">FEEDBACK</a>
+            <a style="padding-right: 10px;" class="wlnk" href="#">FAQ</a>
+        </div>
+
+ <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
+             <a href="/" class="ssb">
+                <span class="ssb" onmouseover="sel('1');" onmouseout="uns('1');" id="but_1" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_1" align="center" style="text-align: center">HOME</span></span>
+            </a>
+            <a href="/home_scan/" class="ssb">
+                <span class="ssb" onmouseover="sel('2');" onmouseout="uns('2');" id="but_2" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN?</span></span>
+            </a>
+
+            <a href="#" class="ssb">
+                <span class="ssb" onmouseover="sel('3');" onmouseout="uns('3');" id="but_3" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_3">TAKE&nbsp;A&nbsp;FREE&nbsp;TRIAL</span></span>
+            </a>
+
+
+            <a href="#" class="ssb">
+                <span class="ssb" onmouseover="sel('4');" onmouseout="uns('4');" id="but_4" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_4">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
+            </a>
+
+               <a href="/infer" class="ssb">
+                <span class="ssb" onmouseover="sel('5');" onmouseout="uns('5');" id="but_5" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_5">Inference Login</span></span>
+            </a>
+
+
+         </div>
+
+
+                <script>
+            function sel(a){
+               // alert('sel'+a);
+             document.getElementById('but_'+a).className='ssbs';
+             document.getElementById('sbut_'+a).className='subs';
+
+
+            }
+
+            function uns(a){
+                  //  alert('uns '+a);
+
+             document.getElementById('but_'+a).className='ssb';
+             document.getElementById('sbut_'+a).className='sub';
+            }
+
+        </script>
+
+
+
+<div id="pic_table" style="width: 100%; height: 450px; overflow:auto;box-shadow: 10px 10px 5px #888;border: 2px solid rgba(249, 240, 240, 1);">
+
+    <div class="wrapper row2">
+        <div id="container" class="clear">
+        <div id="about-us" class="clear">
+      <!-- ####################################################################################################### -->
+      <section id="statements" class="clear">
+        <p>In odio. Mauris feugiat. Nunc posuere, felis sit amet faucibus convallis, tortor enim viverra quam, hendrerit interdum dui quam ut lacus. Ut dui dui, viverra ac, vulputate scelerisque, viverra molestie, tortor. Nullam quis odio id justo accumsan ullamcorper. Mauris lectus enim, luctus vitae, viverra a, pharetra mollis, diam. Donec sed lorem eget nibh sagittis dictum. Curabitur libero. Integer molestie mi sed tellus.</p>
+        <p>Praesent imperdiet justo at sem. Nam accumsan dui eget diam.Nulla quis ante eget pede fringilla rutrum. Proin mollis tristique orci. Nam est. Fusce felis nisl, volutpat vel, sollicitudin eu, luctus sit amet, sem. Curabitur risus erat, scelerisque sit amet, mollis id, consectetuer eu, neque. Curabitur sodales semper arcu. Sed ullamcorper arcu eu ante. Vestibulum sed lacus. Quisque vitae libero. Sed quis turpis vitae lectus vehicula tincidunt. Aliquam quam mi, rutrum malesuada, consequat vitae, accumsan ut, lacus. Nulla dictum vestibulum lorem.</p>
+      </section>
+      <!-- ####################################################################################################### -->
+      <section id="team">
+        <h2>Vivamuslibero Auguer</h2>
+        <ul>
+          <li class="clear">
+            <div class="one_quarter"><img src="images/demo/team-member.gif" alt=""></div>
+            <div class="three_quarter">
+              <p class="team_name">Name Goes Here</p>
+              <p class="team_title">Job Title Here</p>
+              <div class="team_description">
+                <p>Praesent imperdiet justo at sem. Nam accumsan dui eget diam.Nulla quis ante eget pede fringilla rutrum. Proin mollis tristique orci. Nam est. Fusce felis nisl, volutpat vel, sollicitudin eu, luctus sit amet, sem. Curabitur risus erat, scelerisque sit amet, mollis id, consectetuer eu, neque.</p>
+                <p>Quisque vitae libero. Sed quis turpis vitae lectus vehicula tincidunt. Aliquam quam mi, rutrum malesuada, consequat vitae, accumsan ut, lacus. Nulla dictum vestibulum lorem.</p>
+              </div>
+              <ul>
+                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
+                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
+                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
+                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
+                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="clear">
+            <div class="one_quarter"><img src="images/demo/team-member.gif" alt=""></div>
+            <div class="three_quarter">
+              <p class="team_name">Name Goes Here</p>
+              <p class="team_title">Job Title Here</p>
+              <div class="team_description">
+                <p>Praesent imperdiet justo at sem. Nam accumsan dui eget diam.Nulla quis ante eget pede fringilla rutrum. Proin mollis tristique orci. Nam est. Fusce felis nisl, volutpat vel, sollicitudin eu, luctus sit amet, sem. Curabitur risus erat, scelerisque sit amet, mollis id, consectetuer eu, neque.</p>
+                <p>Quisque vitae libero. Sed quis turpis vitae lectus vehicula tincidunt. Aliquam quam mi, rutrum malesuada, consequat vitae, accumsan ut, lacus. Nulla dictum vestibulum lorem.</p>
+              </div>
+              <ul>
+                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
+                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
+                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
+                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
+                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <!-- ####################################################################################################### -->
+      <section id="client_logos">
+        <h2>Vivamuslibero Auguer</h2>
+        <ul class="clear">
+          <li class="one_fifth first"><img src="images/demo/logo.gif" alt=""></li>
+          <li class="one_fifth"><img src="images/demo/logo.gif" alt=""></li>
+          <li class="one_fifth"><img src="images/demo/logo.gif" alt=""></li>
+          <li class="one_fifth"><img src="images/demo/logo.gif" alt=""></li>
+          <li class="one_fifth"><img src="images/demo/logo.gif" alt=""></li>
+        </ul>
+      </section>
+      <!-- ####################################################################################################### -->
+    </div>
+    <!-- ####################################################################################################### -->
+    <!-- ####################################################################################################### -->
+    <!-- ####################################################################################################### -->
+    <!-- ####################################################################################################### -->
+  </div>
+</div>
+
+</div>
+
+            <!--   Footers of the page   -->
+
+        <div class="footer_div" style="">
+
+        <div class="sm_font" style=" float:right; text-align:right;; ">
+            <div style="margin-bottom: 10px">
+                <a aria-label="Facebook" href="#" target="_blank" title="Facebook">
+                    <img border="0" src="/images/facebook_icon.png">
+                </a>&nbsp;&nbsp;
+                <a aria-label="Twitter" href="#" target="_blank" title="Twitter">
+                    <img border="0" src="/images/twitter_icon.png">
+                </a>&nbsp;&nbsp;
+            </div>
+            <div style="margin-bottom: 5px">
+                SCAN® is a registered trademark of Critical Velos. </div>
+        </div>
+
+        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;padding:5px 15px 5px 15px; ">
+            <div style="margin-bottom: 10px">
+              <!--
+                <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
+                -->
+              <h3 style="border-radius: 10px; box-shadow: 3px 5px 1px rgba(227, 211, 211, 1);">Critical Velos Technical Solutions</h3>
+            </div>
+        </div>
+
+        <div id="id_letterheads_9_insert_shortcut_33" style=" clear: both; "></div>
+    </div>
+
+    </div>
+    </div>
+
+
+
+</body>

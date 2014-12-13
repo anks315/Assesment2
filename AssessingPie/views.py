@@ -122,8 +122,6 @@ def topicnames(request):
 def infer(request):
         return render_to_response('AssessingPie/testpage.html',{},context_instance = RequestContext(request))
 
-
-
 def assesstopicname(request):
         return render_to_response('AssessingPie/assesstopicname.html',{},context_instance = RequestContext(request))
 
@@ -380,3 +378,10 @@ def whatisscan(request):
 
 def login(request):
     return render_to_response('Home/login.html',{},context_instance = RequestContext(request))
+
+def meetExperts(request):
+    return render_to_response('Home/Meet_experts.html',{},context_instance = RequestContext(request))
+
+def vedicMaths(request):
+    return render_to_response('Home/vedicmaths.html',{},context_instance = RequestContext(request))
+

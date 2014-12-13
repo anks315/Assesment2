@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Critical Velos</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script src="/js/jquery-1.11.1.js"></script>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+</head>
+<script>
+
+    $(document).ready(function(){
+        generic_slidedownanimation(1);
+
+        // $("#header_tag").innerHTML="What is SCAN?";
+     });
+
+
+    function generic_slidedownanimation(a){
+
+        for(i=1;i<6;i++){
+
+            if(i==a){
+
+            }
+            else
+            {
+               //  alert('notequakl');
+               $("#detail_click_about_option"+i).hide();
+
+                 document.getElementById("about_option"+i).style.background="#8DABEB";
+                document.getElementById("about_option"+i).style.fontWeight="300";
+                // document.getElementById("span_about_option"+a).innerHTML.replace(' =>','');
+
+
+            }
+        }
+
+                 $("#detail_click_about_option"+a).slideDown("7000");
+
+
+                 document.getElementById("about_option"+a).style.background="#1C54B7";
+                document.getElementById("about_option"+a).style.fontWeight="700";
+                text= document.getElementById("span_about_option"+a).innerHTML;
+
+              //  document.getElementById("span_about_option"+a).innerHTML="  => "+text;
+
+
+
+
+    }
+
+
+
+</script>
+<body>
+
+    <div class="template_body" style="">
+        <div class="template_inner_body" style="">
+            <a class="symbol" href="/" target="_top">
+                <img align="baseline" alt="CRITICAL VELOS" border="0" hspace="0" src="/images/logo.png" style="border-radius: 10px; box-shadow: 3px 5px 1px rgba(227, 211, 211, 1);width: 224px; height: 45px">
+            </a>
+        <div style=" float: right;; " aria-label="Quick links" role="navigation">
+            <a style="padding-right: 10px;" class="wlnk" href="/login/">LOGIN</a>
+            <a style="padding-right: 10px;" class="wlnk" href="/contact_us/">CONTACT US</a>
+            <a style="padding-right: 10px;" class="wlnk" href="#">FEEDBACK</a>
+            <a style="padding-right: 10px;" class="wlnk" href="#">FAQ</a>
+        </div>
+
+        <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
+             <a href="/" class="ssb">
+                <span class="ssb" onmouseover="sel('1');" onmouseout="uns('1');" id="but_1" style="padding: 5px;margin:2px;">
+                <span class="sub" id="sbut_1" align="center" style="text-align: center">HOME</span></span>
+            </a>
+            <a href="/home_scan/" class="ssb">
+                <span class="ssb active" id="but_2">
+                <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN?</span></span>
+            </a>
+
+            <a href="#" class="ssb">
+                <span class="ssb" onmouseover="sel('3');" onmouseout="uns('3');" id="but_3" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_3">TAKE&nbsp;A&nbsp;FREE&nbsp;TRIAL</span></span>
+            </a>
+
+
+            <a href="#" class="ssb">
+                <span class="ssb" onmouseover="sel('4');" onmouseout="uns('4');" id="but_4" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_4">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
+            </a>
+
+                      <a href="/infer" class="ssb">
+                <span class="ssb" onmouseover="sel('5');" onmouseout="uns('5');" id="but_5" style="padding: 5px;margin: 1px;">
+                <span class="sub" id="sbut_5">Inference Login</span></span>
+            </a>
+         </div>
+
+
+                <script>
+            function sel(a){
+               // alert('sel'+a);
+             document.getElementById('but_'+a).className='ssbs';
+             document.getElementById('sbut_'+a).className='subs';
+
+
+            }
+
+            function uns(a){
+                  //  alert('uns '+a);
+
+             document.getElementById('but_'+a).className='ssb';
+             document.getElementById('sbut_'+a).className='sub';
+            }
+
+        </script>
+
+
+
+        <!-- abc -->
+        <div style="width: 98%;height: 450px;overflow-y: auto;box-shadow: 10px 10px 5px #888;border: 2px solid rgba(249, 240, 240, 1);">
+        <table style="width: 98%;height: 445px;margin: auto 5% auto auto;padding-left: 5%;padding-right: 5%;">
+ 	       <tbody>
+              <!--
+               <tr>
+                    <td height="80" width="30%">
+                        <img src="/images/cv_i.png" style="width: 80%;height: 100%;">
+                    </td>
+                    <td width="5%"></td>
+                    <td height="80" width="65%"><h1 id="header_tag">CRITICAL VELOS</h1></td>
+               </tr>
+ 	           <tr>
+                    <td height="30" width="30%"></td>
+                    <td width="5%"></td>
+                    <td height="30" width="65%"></td>
+               </tr>
+               -->
+              <tr height="30">
+
+              </tr>
+ 	           
+           <tr>
+                    <td style="margin-top: 20px;" valign="top" width="30%;" align="left">
+
+
+                           <div id="about_option1" class="about_us_menu menu_left " style="top: 20%; background: none repeat scroll 0% 0% rgb(28, 84, 183); font-weight: 700;" onclick="generic_slidedownanimation(1);">
+                                <span id="span_about_option1" class="about_us_menu menu_left" style="">Vedic Course Option 1</span>
+                            </div>
+
+                            <div style="background: none repeat scroll 0% 0% rgb(141, 171, 235); font-weight: 300;" id="about_option2" class="about_us_menu menu_left " onclick="generic_slidedownanimation(2);">
+                                <span id="span_about_option2" class="about_us_menu menu_left" style="">Vedic Course Option 2</span>
+                            </div>
+
+                            <div style="background: none repeat scroll 0% 0% rgb(141, 171, 235); font-weight: 300;" id="about_option3" class="about_us_menu menu_left " onclick="generic_slidedownanimation(3);">
+                                <span id="span_about_option3" class="about_us_menu menu_left" style="">Vedic Course Option 3</span>
+                            </div>
+
+                            <div style="background: none repeat scroll 0% 0% rgb(141, 171, 235); font-weight: 300;" id="about_option4" class="about_us_menu menu_left " onclick="generic_slidedownanimation(4);">
+                                <span id="span_about_option4" class="about_us_menu menu_left" style="">Vedic Course Option 4</span>
+                            </div>
+
+                            <div style="background: none repeat scroll 0% 0% rgb(141, 171, 235); font-weight: 300;" id="about_option5" class="about_us_menu menu_left " onclick="generic_slidedownanimation(5);">
+                                <span id="span_about_option5" class="about_us_menu menu_left" style="">Vedic Course Option 5</span>
+                            </div>
+
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td class="nofont"><img src="/images/icons/spacer.gif" alt="" height="80" width="1" border="0"></td>
+                                </tr></tbody>
+                        </table>
+                    </td>
+
+
+                   <td width="5%">
+                       <img src="/images/icons/spacer.gif" alt="" height="1" width="10" border="0">
+                   </td>
+
+                   <td valign="top" width="65%">
+                    <div id="detail_click_about_option1" style="">
+                        <p>We are a research based organization working on solutions that will be helpful for betterment of the society. We at Critical Velos believe that use of technology can bring revolutionary changes in the society. Hence we are working on solutions that are the need of 21st century. Our team is dedicated to develop products that can be used in various sectors of the society and take society further. We to enhance the performance of every individual with the help of our innovative and easy to use products.</p>
+                        <p>In addition to technology development we take utmost care that there is balance between technology and human work and there must not be any adverse effect of any of our solution.</p>
+                        <p>We understand that human values are invaluable hence use of technology should not affect the human values so one dimension of our research totally takes care of this concern. We make sure that human values should not be compromised wherever we use our technology.</p>
+                    </div>
+
+                    <div id="detail_click_about_option2" style="display: none">
+                        <p><strong>SCAN </strong>is our first education based product which is a result of continuous research and innovation. The aim of this product is to provide a healthy environment to students, teachers and parents which will be helpful in overall development of child. Our vision is that every child in the country should get ample of opportunities for his development and his best qualities should be known at early stages so that they can be developed to professional level.  </p>
+                        <p>With this product we are targeting to change the concept of Information to knowledge and study to learning. We have also taken care that we give ample of respect to all the teachers involved with child and that teacher-child relationship becomes stronger with Indian education entering a new era.</p>
+                        <p><a href="#">Read an overview of SCAN</a></p></div>
+
+                    <div id="detail_click_about_option3" style="display: none">
+                    <p><strong>SCAN</strong> is an Artificially Intelligent system that prepares itself uniquely for every child so that he can be assessed as per his qualities. It is not just an assessment prepared by a group of experts in which a set of questions are designed and result is analyzed. </p>
+                        <p>But we at <strong>Critical Velos </strong> strongly believe that along with experts the role of teacher directly associated with a student cannot be neglected and their inputs are necessary to assess a child and make a plan for them.  Hence we have come up with a unique system that is embedded with inputs of experts and will also take inputs from teachers that are directly associated with students. </p>
+                        <p>Based on these inputs every child is assessed uniquely at regular intervals and it helps in knowing his mistake at early stages and work on them before they turn into his weakness. </p>
+                        <p>Thus SCAN gives special care every child and helps him building his own dream future.</p>
+                    </div>
+
+                    <div id="detail_click_about_option4" style="display: none">
+                        <p>Our team consists of enthusiastic Young people passionate for working for society. Our team is has a rich experience in research field and have been involved in research work from last 5 years in various field. Our team is committed to embed latest technology in day to day solutions to solve real-time problems of the society.</p>
+                    </div>
+
+                    <div id="detail_click_about_option5" style="display: none">
+                        <p>This is going to be a huge success..</p>
+                    </div>
+
+
+
+
+                     </td>
+                </tr>
+ </tbody>
+            </table>
+
+</div>
+        <!-- abc
+
+
+<div id="pic_table" style="width: 100%; height: 400px;/* background: url(http://1.bp.blogspot.com/-4QXn3QzBRAs/UG7WEMqZBPI/AAAAAAAADig/KmUm9EvLILM/s640/inidna-flag-black-and-white-with-color-photo.jpg);*/">
+
+
+		 </div>
+-->
+
+               <!--   Footers of the page   -->
+
+         <div class="footer_div" style="">
+
+        <div class="sm_font" style=" float:right; text-align:right;; ">
+            <div style="margin-bottom: 10px">
+                <a aria-label="Facebook" href="#" target="_blank" title="Facebook">
+                    <img border="0" src="/images/facebook_icon.png">
+                </a>&nbsp;&nbsp;
+                <a aria-label="Twitter" href="#" target="_blank" title="Twitter">
+                    <img border="0" src="/images/twitter_icon.png">
+                </a>&nbsp;&nbsp;
+            </div>
+            <div style="margin-bottom: 5px">
+                SCAN® is a registered trademark of Critical Velos. </div>
+        </div>
+
+        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;padding:5px 15px 5px 15px; ">
+            <div style="margin-bottom: 10px">
+              <!--
+                <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
+                -->
+              <h3 style="border-radius: 10px; box-shadow: 3px 5px 1px rgba(227, 211, 211, 1);">Critical Velos Technical Solutions</h3>
+            </div>
+        </div>
+
+        <div id="id_letterheads_9_insert_shortcut_33" style=" clear: both; "></div>
+    </div>
+</div>
+
+    </div>
+
+</body>

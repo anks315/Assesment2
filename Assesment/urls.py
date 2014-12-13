@@ -45,6 +45,8 @@ urlpatterns = patterns('',
             (r'^ques/$', 'AssessingPie.views.ques'),
             (r'^home_scan/$', 'AssessingPie.views.whatisscan'),
             (r'^login/$', 'AssessingPie.views.login'),
+            (r'^meetexperts/$', 'AssessingPie.views.meetExperts'),
+            (r'^vedicMaths/$', 'AssessingPie.views.vedicMaths'),
 
 
 
