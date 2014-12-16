@@ -113,8 +113,10 @@ def insertintosurmise(userbuffer,tempset):
             if tobeadded==1:
                 userbuffer.surmiseRelation.addstate(x,tempset)
 
+
 def prepareblock(userbuffer,blocknumber):
     userbuffer.blockCache.initializeblock(blocknumber)
+
 
 def passedhstest(userbuffer,block,antecedent,implication):
     passed=True
@@ -127,6 +129,7 @@ def passedhstest(userbuffer,block,antecedent,implication):
                 return passed
     return passed
 
+
 def collectsurmisestate(userbuffer,antecedent):
     addlist=[]
     for questiontype in antecedent:
@@ -135,6 +138,7 @@ def collectsurmisestate(userbuffer,antecedent):
             if set(antecedent).intersection(state)==set([questiontype]):
                 addlist.append(state)
     return addlist
+
 
 def updatesurmise(userbuffer,antecedent,implication):
     addlist = collectsurmisestate(userbuffer,antecedent)
@@ -147,6 +151,7 @@ def updatesurmise(userbuffer,antecedent,implication):
                     addstate=addstate.union(state)
                     userbuffer.surmiseRelation.removestate(questiontype,state)
                     userbuffer.surmiseRelation.addstateifnotcontained(questiontype,addstate)
+
 
 
 def infertrue(userbuffer,block,antecedentid,antecedent):

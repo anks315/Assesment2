@@ -111,13 +111,16 @@ implication=-1
 antecedent=[]
 numalreadyinferred=0
 
+
 def contactus(request):
         flush()
         fill()
         return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
 
+
 def topicnames(request):
         return render_to_response('AssessingPie/topicname.html',{},context_instance = RequestContext(request))
+
 
 def infer(request):
         return render_to_response('AssessingPie/testpage.html',{},context_instance = RequestContext(request))
