@@ -16,6 +16,8 @@ class State :
         self.questionstuple = questionstuple
         self.prob = prob
         self.key=key
+
+
 class  UserBuffer:
     def __init__(self,topickey):
         self.count=0
@@ -70,9 +72,10 @@ class  UserBuffer:
             self.states[size].append(State(questiontuple,initialprob,key))
 
 
-
+readytolearn = {}
 usersdict ={}
 previousmin=-1
+completedtopics = {}
 
 def getnumquestions(userid):
     return len(usersdict[userid].questions)
@@ -85,11 +88,15 @@ def getcount(userid):
 
 def maxstate(userid) :
     return  usersdict[userid].maxprobstate
+
 def maxstatesize(userid):
     return  usersdict[userid].maxprobsize
 
 def nextquestion(userid) :
     return usersdict[userid].minquestion
+
+
+
 
 def update(userid,correct):
 

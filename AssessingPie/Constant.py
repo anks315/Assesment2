@@ -43,6 +43,7 @@ class Subject:
     SUBJECT_ENGLISH="English"
     SUBJECT_GEOLOGY="Geology"
     SUBJECT_SCIENCE="Science"
+    Subject_VEDIC = "Vedic Maths"
 
 '''class Topic:
     TOPIC_ADDITION="Addition"

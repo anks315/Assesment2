@@ -81,14 +81,17 @@ def fill():
             subject_maths=Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.SUBJECT_MATHS,school.key,class_VA.key)
             #subject2=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_SCIENCE,school.key,class1.key)
             subject_english=Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.SUBJECT_ENGLISH,school.key,class_VA.key)
+            subject_vedic = Query.addSubject(Constant.Subject.TYPE_CLASS, Constant.Subject.Subject_VEDIC,school.key,class_VA.key)
             #subject4=Query.addSubject(Subject.TYPE_CLASS, Subject.SUBJECT_GEOLOGY,school.key,class1.key)
-            
+
             a=Query.assign_subjects_to_class(class_VA.key, [subject_maths.key])
             a=Query.assign_subjects_to_class(class_VA.key, [subject_english.key])
+            a=Query.assign_subjects_to_class(class_VA.key, [subject_vedic.key])
             
             
             Query.assign_subjects_to_teacher(teacher_vijay.key,[subject_maths.key])
             a=Query.assign_subjects_to_teacher(teacher_vijay.key,[subject_english.key])
+            a=Query.assign_subjects_to_teacher(teacher_vijay.key,[subject_vedic.key])
 
            
             ##Query.login("Suraj_Singh", "pwd")
@@ -111,10 +114,14 @@ def fill():
             #topic5=Query.addTopic(school_key=school.key,name="Ellipse ", prerequisite_topics=[topic.key],subject_key=subject1.key)
             
             
+            topic_chap_one=Query.addTopic(school_key=school.key,name="Basic Concept of Vedic Maths", prerequisite_topics=[],subject_key=subject_vedic.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
+            topic_chap_two=Query.addTopic(school_key=school.key,name="Subtraction at a Look", prerequisite_topics=[topic_chap_one.key],subject_key=subject_vedic.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
+            topic_chap_three=Query.addTopic(school_key=school.key,name="Multiplication with 99999...", prerequisite_topics=[topic_chap_one.key],subject_key=subject_vedic.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
+            topic_chap_four=Query.addTopic(school_key=school.key,name="Magic with 11", prerequisite_topics=[topic_chap_one.key],subject_key=subject_vedic.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
+            topic_chap_five=Query.addTopic(school_key=school.key,name="Multiplying with 12(without using 12)", prerequisite_topics=[topic_chap_one.key],subject_key=subject_vedic.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
             
-            
-            
-            
+
+
             questioninstance_number1=Query.addQuestionInstance(problem_statement="Sum of of 2 and 3 ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["5"],school_key=school.key)
             
             questioninstance_number2=Query.addQuestionInstance(problem_statement="Sum of 222+30  ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["252"],school_key=school.key)
@@ -124,6 +131,80 @@ def fill():
 
             questioninstance_number3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9  \
  ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["6"],school_key=school.key)
+
+
+            questioninstance_base_one=Query.addQuestionInstance(problem_statement="Whether 2900 is base or not? y or n ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["n"],school_key=school.key)
+            questioninstance_complement_zeroinbetween = Query.addQuestionInstance(problem_statement="Find Complement of 3049 ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["6941"],school_key=school.key)
+            questioninstance_complement_zeroatend = Query.addQuestionInstance(problem_statement="Find Complement of 3420", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["6580"],school_key=school.key)
+            questioninstance_complement_decimalinbetween = Query.addQuestionInstance(problem_statement="Find Complement of 437.26", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["437.26"],school_key=school.key)
+
+            question_base_one=Query.addQuestion(questioninstance_base_one,school.key)
+            question_complement_zeroinbetween=Query.addQuestion(questioninstance_complement_zeroinbetween,school.key)
+            question_complement_zeroatend=Query.addQuestion(questioninstance_complement_zeroatend,school.key)
+            question_complement_decimalinbetween=Query.addQuestion(questioninstance_complement_decimalinbetween,school.key)
+
+
+            Query.assign_questions_to_topic(topic_chap_one.key,[question_base_one.key,question_complement_zeroinbetween.key,question_complement_zeroatend.key,questioninstance_complement_decimalinbetween.key],school.key,"type1")
+
+
+
+
+
+            questioninstance_subtractionfrombase=Query.addQuestionInstance(problem_statement="10000-3246=? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["6754"],school_key=school.key)
+            questioninstance_subtractionfrombiggerbase=Query.addQuestionInstance(problem_statement="10000-23=? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["9977"],school_key=school.key)
+            questioninstance_subtractionfrommultipleofbase=Query.addQuestionInstance(problem_statement="5000-248=? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["752"],school_key=school.key)
+            questioninstance_subtractionsamenumberofdigit=Query.addQuestionInstance(problem_statement="9000-5246=? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["3754"],school_key=school.key)
+            questioninstance_general_subtraction=Query.addQuestionInstance(problem_statement="96247-28519=? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["67728"],school_key=school.key)
+
+            question_subtractionfrombase=Query.addQuestion(questioninstance_subtractionfrombase,school.key)
+            question_subtractionfrombiggerbase=Query.addQuestion(questioninstance_subtractionfrombiggerbase,school.key)
+            question_subtractionfrommultipleofbasebase=Query.addQuestion(questioninstance_subtractionfrommultipleofbase,school.key)
+            question_subtractionsamenumberofdigit=Query.addQuestion(questioninstance_subtractionsamenumberofdigit,school.key)
+            question_general_subtraction=Query.addQuestion(questioninstance_general_subtraction,school.key)
+
+
+            Query.assign_questions_to_topic(topic_chap_two.key,[question_subtractionfrombase.key,question_subtractionfrombiggerbase.key,questioninstance_subtractionfrommultipleofbase.key,question_subtractionsamenumberofdigit.key,question_general_subtraction.key],school.key,"type1")
+
+
+
+
+
+            questioninstance_multiplication999=Query.addQuestionInstance(problem_statement="389 * 999=?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["388611"],school_key=school.key)
+            questioninstance_multiplication999less=Query.addQuestionInstance(problem_statement="243 * 9999=?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["2429757"],school_key=school.key)
+            questioninstance_multiplication999greater=Query.addQuestionInstance(problem_statement="7428 * 99=?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["735372"],school_key=school.key)
+
+            question_multiplication999=Query.addQuestion(questioninstance_multiplication999,school.key)
+            question_multiplication999less=Query.addQuestion(questioninstance_multiplication999less,school.key)
+            question_multiplication999greater=Query.addQuestion(questioninstance_multiplication999greater,school.key)
+
+            Query.assign_questions_to_topic(topic_chap_three.key,[question_multiplication999.key,question_multiplication999less.key,question_multiplication999greater.key],school.key,"type1")
+
+
+
+
+            questioninstance_magicwith11=Query.addQuestionInstance(problem_statement="4573 * 11=?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["50303"],school_key=school.key)
+            questioninstance_magicwith1111=Query.addQuestionInstance(problem_statement="2473 * 1111=?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["2747503"],school_key=school.key)
+
+            question_magicwith11=Query.addQuestion(questioninstance_magicwith11,school.key)
+            question_magicwith1111=Query.addQuestion(questioninstance_magicwith1111,school.key)
+
+
+            Query.assign_questions_to_topic(topic_chap_four.key,[question_magicwith11.key,question_magicwith1111.key],school.key,"type1")
+
+
+
+
+            questioninstance_multiplywith12=Query.addQuestionInstance(problem_statement="3785 * 12=?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["45420"],school_key=school.key)
+            questioninstance_multiplywith112=Query.addQuestionInstance(problem_statement="432 * 112=?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["48384"],school_key=school.key)
+            questioninstance_multiplywith1112=Query.addQuestionInstance(problem_statement="5321 * 1112=?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["5916952"],school_key=school.key)
+
+
+            question_multiplywith12=Query.addQuestion(questioninstance_multiplywith12,school.key)
+            question_multiplywith112=Query.addQuestion(questioninstance_multiplywith112,school.key)
+            question_multiplywith1112=Query.addQuestion(questioninstance_multiplywith1112,school.key)
+
+            Query.assign_questions_to_topic(topic_chap_five.key,[question_multiplywith12.key,question_multiplywith112.key,question_multiplywith1112.key],school.key,"type1")
+
 
 
 

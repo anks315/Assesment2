@@ -11,7 +11,7 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Knowledge', 'Fraction'],
-          ['Dont Know',    {{ num_dontknow }}]  ,
+          ['Dont Know',    100-{{ num_known }}]  ,
           ['Already Know',    {{ num_known }}]
 
         ]);
@@ -64,10 +64,12 @@
 <tr>
 	<th>Readytolearn(Outer Fringe)</th>
 </tr>
+ {% for readytolearntopic in readytolearn %}
 <tr>
-	<td>{{ readytolearn }}</td>
-</tr>
 
+   <td> {{ readytolearntopic }}</td>
+</tr>
+{% endfor %}
 </table>
 
         <!--<p >You are ready to learn :{{ readytolearn }}</p>--></div>

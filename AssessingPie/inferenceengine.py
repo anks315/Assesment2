@@ -232,5 +232,5 @@ def generatestates(userbuffer,topickey,schoolkey):
     count+=1
     class_v=(teacher.classes_under_teacher)[0]
     #teacher=UserInfo.query()
-    assessment1=Query.addAssessment(name="Know Your Numbers : "+str(count),list_topic_key=[topickey],school_key=schoolkey,date=datetime.datetime.now(),due_date=datetime.datetime(int(2014),int(11),int(12),int(23),int(12),int(8)),published=True,teacher_key=teacher.key,class_key=class_v)
+    assessment1=Query.addAssessment(name="Know Your Numbers : "+str(count),list_topic_key=[topickey,topickey],school_key=schoolkey,date=datetime.datetime.now(),due_date=datetime.datetime(int(2014),int(11),int(12),int(23),int(12),int(8)),published=True,teacher_key=teacher.key,class_key=class_v)
     a=Query.get_states_of_topic(topickey)
