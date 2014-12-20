@@ -46,6 +46,7 @@ class  UserBuffer:
                 self.minquestion=tempques.key
             else:
                  if(abs(int((len(state_db)+1)/2)-num_states) < previous_minquestion):
+                     previous_minquestion = abs(int(((len(state_db)+1)/2)-num_states))
                      self.minquestion = tempques.key
 
             self.questions[tempques.key]=Question(num_states,initialprob*num_states,questionstring,answer)
@@ -107,7 +108,7 @@ def update(userid,correct):
     count =-1
     if correct==True:
         numstate = usersdict[userid].questions[usersdict[userid].minquestion].num_states
-        subtractamount = (numstate * 0.1)/ (usersdict[userid].numstates-numstate)
+        #subtractamount = (numstate * 0.1)/ (usersdict[userid].numstates-numstate)
 
         usersdict[userid].minquestion=-1
         for statesize in usersdict[userid].states:
@@ -141,7 +142,7 @@ def update(userid,correct):
                                 usersdict[userid].minquestion=quest
     else:
         numstate = usersdict[userid].questions[usersdict[userid].minquestion].num_states
-        addamount = (numstate * 0.1)/ (usersdict[userid].numstates-numstate)
+        #addamount = (numstate * 0.1)/ (usersdict[userid].numstates-numstate)
 
         usersdict[userid].minquestion=-1
         for statesize in usersdict[userid].states:

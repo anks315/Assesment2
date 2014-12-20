@@ -111,6 +111,7 @@ def asknextquestion(request):
           #  nexttopickey=0;
            # while checknext==1:
             session['topicnumber']+=1
+
             nexttopickey =session['listoftopics'][session['topicnumber']]
                # prerequisitetopiclist = nexttopickey.prerequisite_topic
                # checknext=0

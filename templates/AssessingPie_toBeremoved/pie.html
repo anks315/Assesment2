@@ -4,6 +4,19 @@
   <head>
     <link rel="stylesheet" href="/css/question/table.css">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="/js/jspdf/libs/base64.js"></script>
+	<script type="text/javascript" src="/js/jspdf/libs/sprintf.js"></script>
+	<script type="text/javascript" src="/js/jspdf/jspdf.js"></script>
+
+    <script type="text/javascript" >
+    function demo2() {
+
+
+	var doc = new jsPDF();
+	doc.setFontSize(40);
+     doc.text(35, 25, "I Love you janu");
+       doc.output('datauri');}
+  </script>
 
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -72,9 +85,11 @@
 {% endfor %}
 </table>
 
-        <!--<p >You are ready to learn :{{ readytolearn }}</p>--></div>
+      </div>
 
    </div>
+
+  <div>  <button onclick="demo2()">Generate Pdf</button></div>
   <div id="chart_div" style="width:900px; height: 300px;"></div>
 
 

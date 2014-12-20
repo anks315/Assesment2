@@ -169,16 +169,16 @@ Adds a new question instance
     choices : List of options e.g. ["1","3","10"]
     answers :: List of correct answer e.g. ["1","3","10"]
 """
-def addQuestionInstance(problem_statement, type, school_key, choices=[], answers=[]):
+def addQuestionInstance(problem_statement, type, school_key, choices=[], answers=[],url=""):
    logging.info("CV Logs : Inside addQuestionInstance") 
    try :
-       question_instance = QuestionInstance(parent=school_key, problem_statement=problem_statement, type=type, choices=choices, answer=answers)
+       question_instance = QuestionInstance(parent=school_key, problem_statement=problem_statement, type=type, choices=choices, answer=answers,url=url)
        question_instance.put()
    except Exception:
        logging.exception("")
        logging.error("CV Logs : failed to add question instance :" +problem_statement)
        return Constant.ERROR_BAD_VALUE
-   logging.info("CV Logs : success to add question instance :" +problem_statement) 
+   logging.info("CV Logs : success to add question instance :" +str(question_instance))
    return question_instance;
   
 
@@ -2090,7 +2090,7 @@ def get_student_completion_date_in_assessment(student_key, assessment_key):
             return Constant.ERROR_OPERATION_FAIL
             
     logging.info("CV Logs : success to get score of assessment" + assessment.name + " for student :" + student.basic_info.firstname)
-    
+
 """
 //TODO
 get assessment state associated to a student 
@@ -2630,6 +2630,27 @@ def get_mastery_by_student_of_class(teacher_key, class_key, subject_key):
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
 
+
+def get_prerequisite_topics_of_topic(topic_key):
+    logging.info("CV Logs : Inside get_prerequisite_topics_of_topic ")
+
+    dict_prerequiste_topic = {}
+    try:
+        if not topic_key.kind()==Topic._get_kind():
+            return Constant.ERROR_BAD_VALUE
+
+
+        prerequisite_topics_keys=topic_key.get().prerequisite_topic
+        for topic_key_dummy in prerequisite_topics_keys:
+            dict_prerequiste_topic[topic_key_dummy.get().name]=topic_key.urlsafe()
+        logging.info("CV Logs : Success to get_prerequisite_topics_of_topic "+str(dict_prerequiste_topic))
+        return dict_prerequiste_topic
+    except Exception:
+        logging.error("CV Logs : failed  to get_mastery_by_student_of_class ")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
 '''
 //TODO Threhsold need to be set 
 '''
@@ -2822,6 +2843,71 @@ def get_ready_to_learn_of_class(teacher_key, class_key, subject_key):
         logging.error("CV Logs : failed to get_ready_to_learn_of_class")
         logging.exception("")
         return Constant.ERROR_OPERATION_FAIL
+
+
+def get_ready_to_learn_of_class(teacher_key, class_key, subject_key):
+    logging.info("CV Logs : Inside get_ready_to_learn_of_class ")
+
+    dict_ready_to_learn = {}
+    try:
+        count=0
+        if not (teacher_key.kind()==Teacher._get_kind() or subject_key.kind()==Subject._get_kind()):
+            return Constant.ERROR_BAD_VALUE
+        students = get_students_by_class(class_key)
+        topics = get_topics_by_subject(subject_key)
+        for topic in topics :
+            for student in students:
+                count += 1
+                ready_to_learn = get_ready_to_learn_topic(topic.key, student.key)
+                if isinstance(ready_to_learn, int):
+                    continue
+                if ready_to_learn == None:
+                    continue
+
+                if ready_to_learn in dict_ready_to_learn:
+                    dict_ready_to_learn[ready_to_learn] += 1
+                else:
+                    dict_ready_to_learn[ready_to_learn] = 0
+        for key in dict_ready_to_learn.keys():
+            dict_ready_to_learn[key] = ((dict_ready_to_learn[key] / float(count)) * 100)
+
+
+        logging.info("CV Logs : success to get_ready_to_learn_of_class")
+        return dict_ready_to_learn
+    except Exception:
+        logging.error("CV Logs : failed to get_ready_to_learn_of_class")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
+def get_ready_to_learn_of_assessment(assessment_key, student_key):
+    logging.info("CV Logs : get_ready_to_learn_of_assessment")
+    ready_to_learn_topics = {}
+    questions = []
+    completed = 0
+    total = 0
+    question_key = None
+    try:
+
+        if not (student_key.kind()==Student._get_kind() or assessment_key.kind()==Assessment._get_kind()):
+            return Constant.ERROR_BAD_VALUE
+        student=student_key.get()
+        topics_keys = assessment_key.get().topics_in_assessment_key;
+        for topic in topics_keys:
+            question = get_ready_to_learn_topic(topic, student.key)
+            if not isinstance(question, int):
+                ready_to_learn_topics[topic.get().name] = question
+        logging.info("CV Logs : success to get_ready_to_learn_of_assessment"+str(ready_to_learn_topics))
+        return ready_to_learn_topics
+    except Exception:
+        logging.error("CV Logs :failed  to get_ready_to_learn_of_assessment")
+        logging.exception("")
+        return Constant.ERROR_OPERATION_FAIL
+
+
+
+
 
 '''TODO
 def get_average_score_all_subject(subject_key, teacher_key):

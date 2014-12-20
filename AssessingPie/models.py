@@ -28,6 +28,7 @@ class QuestionInstance(ndb.Model):
     type = ndb.IntegerProperty(choices=set([Constant.QUESTION_TYPE_SINGLE, Constant.QUESTION_TYPE_MULTIPLE]))# QUESTION_TYPE_SINGLE=0,QUESTION_TYPE_MULTIPLE=1 
     choices = ndb.StringProperty(repeated=True)
     answer = ndb.StringProperty(repeated=True)
+    url=ndb.StringProperty(default="")
 
   
 """
