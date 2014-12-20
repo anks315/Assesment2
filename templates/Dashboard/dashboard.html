@@ -27,14 +27,9 @@
 
     $(document).ready(function(){
 
-        //  alert("ready");
-
         dashboard();
         populate_list_of_subjects();
         populate_list_of_courses();
-
-
-        //  alert("ready");
 
     });
 
@@ -42,154 +37,6 @@
 
 
 </script>
-
-
-<body>
-<div class="template_background">
-<div class="template_header" style="">
-    <div class="template_main_header" style="border-bottom: 2px solid rgba(28, 156, 88, 1);">
-
-        <table  width="100%">
-            <tr >
-                <td  width="5%" >
-                </td>
-                <td  width="25%">
-                    <a class="symbol" href="#" target="_top">
-                        <img align="baseline" alt="Critical Velos" border="0" hspace="0" src="/images/logo.png" style="width: 224px; height: 45px">
-                    </a>
-                </td>
-                <td width="25%">
-                </td>
-                <td  width="25%">
-                    <div style=" float: right;; " aria-label="Quick links" role="navigation">
-                        <a style="padding: 20px;" class="wlnk" href="#">Help</a>
-                        <a style="padding: 20px;" class="wlnk" href="#">SignOut</a>
-                    </div>
-                </td>
-                <td  width="12%">
-                </td>
-            </tr>
-        </table> </div>
-
-
-
-    <div id="sel_nav_bar_container" style="">
-
-
-        <div style="position: relative; width: 100%; padding-top: 35px; background: linear-gradient(to bottom, rgb(194, 212, 219) 0%, rgb(163, 179, 184) 100%) repeat scroll 0% 0% transparent; text-align: center; font-size: 0px;" id="sim_dir_naviguator">
-	<span style="display: inline-block; position: relative; width: 1000px; text-align: left; font-size: 0px;">
-	<div style="position: absolute; left: 88px; bottom: 100%; padding-bottom: 5px; color: rgb(24, 144, 186); font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold;">
-    </div>
-	<div id="sim_dir_nav_container" style="position: relative; padding: 0px 27px;">
-		<span style="position: relative; vertical-align: bottom; display: inline-block; margin-right: 11px;" onclick="dashboard()">
-            <span style="display: inline-block; position: relative; vertical-align: bottom; width: 50px; height: 63px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; overflow: hidden; border-radius: 8px 8px 0px 0px; background-color: rgb(37, 163, 16);">
-                <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
-		<div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-            <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                <img style="position: absolute; top: 50%; left: 50%; margin-top: -13px; margin-left: -13px;" src="/images/icons/home_dash.png" height="26" width="26">
-                <div style="position: absolute; left: 0px; bottom: -50px; width: 100%; height: 50px; box-shadow: 0px 0px 18px 9px rgba(0, 0, 0, 0.28);">
-                </div>
-            </div>
-        </div>
-		</span>
-
-        </span>
-
-        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px; margin-right: 11px;">
-		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
-            <tbody>
-            <tr>
-                <td style="vertical-align: baseline; text-align: left; font-size: 1em;">
-				<span id="sim_nav_sel_searchbar_1_button" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: auto; -moz-user-select: none; outline: medium none black; outline-offset: 0px; overflow: hidden; box-sizing: border-box; color: rgb(255, 255, 255); border-radius: 8px 8px 0px 0px; padding: 3px 12px; font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold; background-color: rgb(1, 80, 122);">
-                    <input disabled="" tabindex="-1" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
-				<div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
-                    <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
-                        <span style="text-decoration: none;">SUBJECT  </span><span>&nbsp;»</span>
-                    </div>
-                </div>
-				</span>
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align: baseline; text-align: left; font-size: 1em; padding: 11px 9px 8px; background-color: rgb(235, 235, 235);">
-                    <div style="width: 419px;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
-                        <div style="width: 417px; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
-                            <input name="classname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
-                            <!--
-                              <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
-                          -->
-                            <div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showsubjects();">
-                                <div id="selected_class_name" style="font-style:italic;color:#AAA;">
-                                    Enter Your Search
-                                </div>
-                            </div>
-                            <img style="top: 6px; right: 8px;" class="pulldownSB custom_pulldownSB" src="/images/icons/arrow_down_blue.png">
-                        </div>
-                        <div id="subjectList" style="display: none; top: 21px; left: 0px; min-width: 417px;" class="scroll_divSB custom_scroll_divSB">
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-		</span>
-
-        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px;">
-		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
-            <tbody>
-            <tr>
-                <td style="vertical-align: baseline; text-align: left; font-size: 1em;">
-				<span id="sim_nav_sel_searchbar_2_button" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: auto; -moz-user-select: none; outline: medium none black; outline-offset: 0px; overflow: hidden; box-sizing: border-box; color: rgb(255, 255, 255); border-radius: 8px 8px 0px 0px; padding: 3px 12px; font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold; background-color: rgb(244, 33, 51);">
-               	<input name="subjectname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
-
-                    <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
-                        <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
-                            <span style="text-decoration: none;">SPECIAL COURSES </span><span>&nbsp;»</span>
-                        </div>
-                    </div>
-				</span>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td style="vertical-align: baseline; text-align: left; font-size: 1em; padding: 11px 9px 8px; background-color: rgb(235, 235, 235);">
-                    <div style="width: 419px;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
-                        <div style="width: 417px; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
-                            <input name="subjectname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
-                            <!--
-                              <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
-                          -->
-                            <div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showcourses();">
-                                <div id="selected_course_name" style="font-style:italic;color:#AAA;">
-                                    Enter Your Search
-                                </div>
-                            </div>
-                            <img style="top: 6px; right: 8px;" class="pulldownSB custom_pulldownSB" src="/images/icons/arrow_down_red.png">
-                        </div>
-                        <div id="specialCourseList" style="display: none; top: 21px; left: 0px; min-width: 417px;" class="scroll_divSB custom_scroll_divSB">
-
-                        </div>
-                    </div>
-                </td>
-            </tr>
-
-
-            </tbody>
-        </table>
-		</span>
-    </div>
-	</span>
-        </div>
-    </div>
-
-
-
-
-
-
-</div>
-
 
 <!--
         Load Login Details
@@ -322,7 +169,7 @@
 <!--
 
 Populate List of Courses and Subjects in the top two search bars
-Input Template - subjectdetailsofstudent   for subjects
+Input Template - /subjectdetailsofstudent/   for subjects
                - --                        for Courses
 
         -->
@@ -914,6 +761,152 @@ Main
 
 
 
+<body>
+<div class="template_background">
+<div class="template_header" style="">
+    <div class="template_main_header" style="border-bottom: 2px solid rgba(28, 156, 88, 1);">
+
+        <table  width="100%">
+            <tr >
+                <td  width="5%" >
+                </td>
+                <td  width="25%">
+                    <a class="symbol" href="#" target="_top">
+                        <img align="baseline" alt="Critical Velos" border="0" hspace="0" src="/images/logo.png" style="width: 224px; height: 45px">
+                    </a>
+                </td>
+                <td width="25%">
+                </td>
+                <td  width="25%">
+                    <div style=" float: right;; " aria-label="Quick links" role="navigation">
+                        <a style="padding: 20px;" class="wlnk" href="#">Help</a>
+                        <a style="padding: 20px;" class="wlnk" href="#">SignOut</a>
+                    </div>
+                </td>
+                <td  width="12%">
+                </td>
+            </tr>
+        </table> </div>
+
+
+
+    <div id="sel_nav_bar_container" style="">
+
+
+        <div style="position: relative; width: 100%; padding-top: 35px; background: linear-gradient(to bottom, rgb(194, 212, 219) 0%, rgb(163, 179, 184) 100%) repeat scroll 0% 0% transparent; text-align: center; font-size: 0px;" id="sim_dir_naviguator">
+	<span style="display: inline-block; position: relative; width: 1000px; text-align: left; font-size: 0px;">
+	<div style="position: absolute; left: 88px; bottom: 100%; padding-bottom: 5px; color: rgb(24, 144, 186); font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold;">
+    </div>
+	<div id="sim_dir_nav_container" style="position: relative; padding: 0px 27px;">
+		<span style="position: relative; vertical-align: bottom; display: inline-block; margin-right: 11px;" onclick="dashboard()">
+            <span style="display: inline-block; position: relative; vertical-align: bottom; width: 50px; height: 63px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; overflow: hidden; border-radius: 8px 8px 0px 0px; background-color: rgb(37, 163, 16);">
+                <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+		<div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+            <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                <img style="position: absolute; top: 50%; left: 50%; margin-top: -13px; margin-left: -13px;" src="/images/icons/home_dash.png" height="26" width="26">
+                <div style="position: absolute; left: 0px; bottom: -50px; width: 100%; height: 50px; box-shadow: 0px 0px 18px 9px rgba(0, 0, 0, 0.28);">
+                </div>
+            </div>
+        </div>
+		</span>
+
+        </span>
+
+        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px; margin-right: 11px;">
+		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+				<span id="sim_nav_sel_searchbar_1_button" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: auto; -moz-user-select: none; outline: medium none black; outline-offset: 0px; overflow: hidden; box-sizing: border-box; color: rgb(255, 255, 255); border-radius: 8px 8px 0px 0px; padding: 3px 12px; font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold; background-color: rgb(1, 80, 122);">
+                    <input disabled="" tabindex="-1" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+				<div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+                    <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+                        <span style="text-decoration: none;">SUBJECT  </span><span>&nbsp;»</span>
+                    </div>
+                </div>
+				</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: baseline; text-align: left; font-size: 1em; padding: 11px 9px 8px; background-color: rgb(235, 235, 235);">
+                    <div style="width: 419px;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
+                        <div style="width: 417px; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
+                            <input name="classname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
+                            <!--
+                              <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
+                          -->
+                            <div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showsubjects();">
+                                <div id="selected_class_name" style="font-style:italic;color:#AAA;">
+                                    Enter Your Search
+                                </div>
+                            </div>
+                            <img style="top: 6px; right: 8px;" class="pulldownSB custom_pulldownSB" src="/images/icons/arrow_down_blue.png">
+                        </div>
+                        <div id="subjectList" style="display: none; top: 21px; left: 0px; min-width: 417px;" class="scroll_divSB custom_scroll_divSB">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+		</span>
+
+        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px;">
+		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+				<span id="sim_nav_sel_searchbar_2_button" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: auto; -moz-user-select: none; outline: medium none black; outline-offset: 0px; overflow: hidden; box-sizing: border-box; color: rgb(255, 255, 255); border-radius: 8px 8px 0px 0px; padding: 3px 12px; font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold; background-color: rgb(244, 33, 51);">
+               	<input name="subjectname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
+
+                    <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+                        <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+                            <span style="text-decoration: none;">SPECIAL COURSES </span><span>&nbsp;»</span>
+                        </div>
+                    </div>
+				</span>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td style="vertical-align: baseline; text-align: left; font-size: 1em; padding: 11px 9px 8px; background-color: rgb(235, 235, 235);">
+                    <div style="width: 419px;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
+                        <div style="width: 417px; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
+                            <input name="subjectname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
+                            <!--
+                              <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
+                          -->
+                            <div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showcourses();">
+                                <div id="selected_course_name" style="font-style:italic;color:#AAA;">
+                                    Enter Your Search
+                                </div>
+                            </div>
+                            <img style="top: 6px; right: 8px;" class="pulldownSB custom_pulldownSB" src="/images/icons/arrow_down_red.png">
+                        </div>
+                        <div id="specialCourseList" style="display: none; top: 21px; left: 0px; min-width: 417px;" class="scroll_divSB custom_scroll_divSB">
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+            </tbody>
+        </table>
+		</span>
+    </div>
+	</span>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
 </div>
 
 <div style="position: relative; z-index: 1; width: 100%; border-bottom: 3px solid rgb(101, 149, 94); border-top: 3px solid rgb(140, 186, 37);" id="sel_menu_bar_container">
@@ -1058,8 +1051,6 @@ Main
         document.getElementById('administration_tab').style.visibility='hidden';
     }
 </script>
-
-
 
 <div class="template_main_body">
 
@@ -1516,36 +1507,6 @@ Main
 </div>
 
 
-</div>
-
-<script>
-
-
-</script>
-
-<!--
-<script type="text/javascript">
-  google.load("visualization", "1", {packages:["corechart"]});
-  google.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Knowledge', 'Fraction'],
-      ['Dont Know',    4]  ,
-      ['Already Know',    6]
-
-    ]);
-
-    var options = {
-      title: 'Your Donut',
-      pieHole: 0.6
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-    chart.draw(data, options);
-  }
-</script>
--->
-
 <script type="text/javascript">
     google.load("visualization", "1", {packages:["corechart"]});
     google.setOnLoadCallback(drawChart);
@@ -1572,7 +1533,5 @@ Main
         chart.draw(data, options);
     }
 </script>
-
-
 
 </body>
