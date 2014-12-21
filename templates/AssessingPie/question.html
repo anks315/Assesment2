@@ -1,5 +1,655 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Critical Velos</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/liteaccordion.jquery.min.js"></script>
+    <script async="true" src="http://www.google-analytics.com/ga.js"></script>
+</head>
+
+{% comment %}
+
+<script type='text/javascript'>
+// 0/1 = start/end
+// 2 = state
+// 3 = length, ms
+// 4 = timer
+// 5 = epoch
+// 6 = disp el
+// 7 = lap count
+
+var t=[0, 0, 0, 0, 0, 0, 0, 1];
+
+function ss() {
+    t[t[2]]=(new Date()).valueOf();
+    t[2]=1-t[2];
+
+    if (0==t[2]) {
+        clearInterval(t[4]);
+        t[3]+=t[1]-t[0];
+        var row=document.createElement('tr');
+        var td=document.createElement('td');
+        td.innerHTML=(t[7]++);
+        row.appendChild(td);
+        td=document.createElement('td');
+        td.innerHTML=format(t[1]-t[0]);
+        row.appendChild(td);
+        td=document.createElement('td');
+        td.innerHTML=format(t[3]);
+        row.appendChild(td);
+        document.getElementById('lap').appendChild(row);
+        t[4]=t[1]=t[0]=0;
+        disp();
+    } else {
+        t[4]=setInterval(disp, 43);
+    }
+}
+function r() {
+    if (t[2]) ss();
+    t[4]=t[3]=t[2]=t[1]=t[0]=0;
+    disp();
+    document.getElementById('lap').innerHTML='';
+    t[7]=1;
+}
+
+function disp() {
+    if (t[2]) t[1]=(new Date()).valueOf();
+    t[6].value=format(t[3]+t[1]-t[0]);
+}
+
+function format(ms) {
+    // used to do a substr, but whoops, different browsers, different formats
+    // so now, this ugly regex finds the time-of-day bit alone
+    var d=new Date(ms+t[5]).toString().replace(/.*([0-9][0-9]:[0-9][0-9]:[0-9][0-9]).*/, '$1');
+    var x=String(ms%1000);
+    while (x.length&lt;3) x='0'+x;
+    d+='.'+x;
+    return d;
+}
+
+function load() {
+    t[5]=new Date(1970, 1, 1, 0, 0, 0, 0).valueOf();
+    t[6]=document.getElementById('disp');
+
+    disp();
+
+    if (!window.opener &amp;&amp; window==window.top) {
+        document.getElementById('remote').style.visibility='visible';
+    }
+}
+
+function remote() {
+    window.open(
+        document.location, '_blank', 'width=700,height=350'
+    );
+    return false;
+}
+
+
+
+</script>{% endcomment %}
+
+<script>
+        $(document).ready(function(){
+;
+(function($) {
+    $.fn.forms = function(o) {
+        return this.each(function() {
+            var th = $(this),
+                _ = th.data('forms') || {
+                    errorCl: 'error',
+                    emptyCl: 'empty',
+                    invalidCl: 'invalid',
+                    notRequiredCl: 'notRequired',
+                    successCl: 'success',
+                    successShow: '4000',
+                    mailHandlerURL: 'bat/MailHandler.php',
+                    ownerEmail: 'support@template-help.com',
+                    stripHTML: true,
+                    smtpMailServer: 'localhost',
+                    targets: 'input,textarea',
+                    controls: 'a[data-type=reset],a[data-type=submit]',
+                    validate: true,
+                    rx: {
+                        ".name": {
+                            rx: /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/,
+                            target: 'input'
+                        },
+                        ".state": {
+                            rx: /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/,
+                            target: 'input'
+                        },
+                        ".email": {
+                            rx: /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,
+                            target: 'input'
+                        },
+                        ".phone": {
+                            rx: /^\+?(\d[\d\-\+\(\) ]{5,}\d$)/,
+                            target: 'input'
+                        },
+                        ".fax": {
+                            rx: /^\+?(\d[\d\-\+\(\) ]{5,}\d$)/,
+                            target: 'input'
+                        },
+                        ".message": {
+                            rx: /.{20}/,
+                            target: 'textarea'
+                        }
+                    },
+                    preFu: function() {
+                        _.labels.each(function() {
+                            var label = $(this),
+                                inp = $(_.targets, this),
+                                defVal = inp.val(),
+                                trueVal = (function() {
+                                    var tmp = inp.is('input') ? (tmp = label.html().match(/value=['"](.+?)['"].+/), !!tmp && !!tmp[1] && tmp[1]) : inp.html()
+                                    return defVal == '' ? defVal : tmp
+                                })()
+                            trueVal != defVal && inp.val(defVal = trueVal || defVal)
+                            label.data({
+                                defVal: defVal
+                            })
+                            inp.bind('focus', function() {
+                                inp.val() == defVal && (inp.val(''), _.hideEmptyFu(label), label.removeClass(_.invalidCl))
+                            }).bind('blur', function() {
+                                _.validateFu(label)
+                                if (_.isEmpty(label))
+                                    inp.val(defVal), _.hideErrorFu(label.removeClass(_.invalidCl))
+                            }).bind('keyup', function() {
+                                label.hasClass(_.invalidCl) && _.validateFu(label)
+                            })
+                            label.find('.' + _.errorCl + ',.' + _.emptyCl).css({
+                                display: 'block'
+                            }).hide()
+                        })
+                        _.success = $('.' + _.successCl, _.form).hide()
+                    },
+                    isRequired: function(el) {
+                        return !el.hasClass(_.notRequiredCl)
+                    },
+                    isValid: function(el) {
+                        var ret = true
+                        $.each(_.rx, function(k, d) {
+                            if (el.is(k))
+                                ret = d.rx.test(el.find(d.target).val())
+                        })
+                        return ret
+                    },
+                    isEmpty: function(el) {
+                        var tmp
+                        return (tmp = el.find(_.targets).val()) == '' || tmp == el.data('defVal')
+                    },
+                    validateFu: function(el) {
+                        el.each(function() {
+                            var th = $(this),
+                                req = _.isRequired(th),
+                                empty = _.isEmpty(th),
+                                valid = _.isValid(th)
+                            if (empty && req)
+                                _.showEmptyFu(th.addClass(_.invalidCl))
+                            else
+                                _.hideEmptyFu(th.removeClass(_.invalidCl))
+                            if (!empty)
+                                if (valid)
+                                    _.hideErrorFu(th.removeClass(_.invalidCl))
+                                else
+                                    _.showErrorFu(th.addClass(_.invalidCl))
+                        })
+                    },
+                    getValFromLabel: function(label) {
+                        var val = $('input,textarea', label).val(),
+                            defVal = label.data('defVal')
+                        return label.length ? val == defVal ? 'nope' : val : 'nope'
+                    },
+                    submitFu: function() {
+                        _.validateFu(_.labels)
+                        if (!_.form.has('.' + _.invalidCl).length)
+                            $.ajax({
+                                type: "POST",
+                                url: _.mailHandlerURL,
+                                data: {
+                                    name: _.getValFromLabel($('.name', _.form)),
+                                    email: _.getValFromLabel($('.email', _.form)),
+                                    phone: _.getValFromLabel($('.phone', _.form)),
+                                    fax: _.getValFromLabel($('.fax', _.form)),
+                                    state: _.getValFromLabel($('.state', _.form)),
+                                    message: _.getValFromLabel($('.message', _.form)),
+                                    owner_email: _.ownerEmail,
+                                    stripHTML: _.stripHTML
+                                },
+                                success: function() {
+                                    _.showFu()
+                                }
+                            })
+                    },
+                    showFu: function() {
+                        _.success.slideDown(function() {
+                            setTimeout(function() {
+                                _.success.slideUp()
+                                _.form.trigger('reset')
+                            }, _.successShow)
+                        })
+                    },
+                    controlsFu: function() {
+                        $(_.controls, _.form).each(function() {
+                            var th = $(this)
+                            th.bind('click', function() {
+                                _.form.trigger(th.data('type'))
+                                return false
+                            })
+                        })
+                    },
+                    showErrorFu: function(label) {
+                        label.find('.' + _.errorCl).slideDown()
+                    },
+                    hideErrorFu: function(label) {
+                        label.find('.' + _.errorCl).slideUp()
+                    },
+                    showEmptyFu: function(label) {
+                        label.find('.' + _.emptyCl).slideDown()
+                        _.hideErrorFu(label)
+                    },
+                    hideEmptyFu: function(label) {
+                        label.find('.' + _.emptyCl).slideUp()
+                    },
+                    init: function() {
+                        _.form = _.me
+                        _.labels = $('label', _.form)
+                        _.preFu()
+                        _.controlsFu()
+                        _.form.bind('submit', function() {
+                            if (_.validate)
+                                _.submitFu()
+                            else
+                                _.form[0].submit()
+                            return false
+                        }).bind('reset', function() {
+                            _.labels.removeClass(_.invalidCl)
+                            _.labels.each(function() {
+                                var th = $(this)
+                                _.hideErrorFu(th)
+                                _.hideEmptyFu(th)
+                            })
+                        })
+                        _.form.trigger('reset')
+                    }
+                }
+            _.me || _.init(_.me = th.data({
+                forms: _
+            }))
+            typeof o == 'object' && $.extend(_, o)
+        })
+    }
+})(jQuery)
+$(window).load(function() {
+    $('#pro_contact-form').forms({
+        ownerEmail: '#'
+    })
+    $('#form1').forms({
+        ownerEmail: '#'
+    })
+})
+
+     });
+
+</script>
+
+<body >
+<div class="template_background">
+    <div class="template_header" style="">
+       <div class="template_main_header" style="border-bottom: 2px solid rgba(28, 156, 88, 1);">
+
+        <table  width="100%">
+            <tr >
+                <td  width="5%" >
+                </td>
+                <td  width="25%">
+                    <a class="symbol" href="#" target="_top">
+                        <img align="baseline" alt="Critical Velos" border="0" hspace="0" src="/images/logo.png" style="width: 224px; height: 45px">
+                    </a>
+                </td>
+                <td width="25%">
+                </td>
+                <td  width="25%">
+                    <div style=" float: right;; " aria-label="Quick links" role="navigation">
+                        <a style="padding: 20px;" class="wlnk" href="#">Help</a>
+                        <a style="padding: 20px;" class="wlnk" href="#">SignOut</a>
+                    </div>
+                </td>
+                <td  width="12%">
+                </td>
+            </tr>
+        </table> </div>
+
+
+
+    </div>
+
+
+
+    <div id="sel_nav_bar_container" style="">
+
+
+        <div style="position: relative; width: 100%; padding-top: 35px; background: linear-gradient(to bottom, rgb(194, 212, 219) 0%, rgb(163, 179, 184) 100%) repeat scroll 0% 0% transparent; text-align: center; font-size: 0px;" id="sim_dir_naviguator">
+	<span style="display: inline-block; position: relative; width: 1000px; text-align: left; font-size: 0px;">
+	<div style="position: absolute; left: 88px; bottom: 100%; padding-bottom: 5px; color: rgb(24, 144, 186); font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold;">
+    </div>
+	<div id="sim_dir_nav_container" style="position: relative; padding: 0px 27px;">
+		<span style="position: relative; vertical-align: bottom; display: inline-block; margin-right: 11px;" onclick="dashboard()">
+            <span style="display: inline-block; position: relative; vertical-align: bottom; width: 50px; height: 63px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; overflow: hidden; border-radius: 8px 8px 0px 0px; background-color: rgb(37, 163, 16);">
+                <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+		<div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+            <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                <img style="position: absolute; top: 50%; left: 50%; margin-top: -13px; margin-left: -13px;" src="/images/icons/home_dash.png" height="26" width="26">
+                <div style="position: absolute; left: 0px; bottom: -50px; width: 100%; height: 50px; box-shadow: 0px 0px 18px 9px rgba(0, 0, 0, 0.28);">
+                </div>
+            </div>
+        </div>
+		</span>
+
+        </span>
+
+        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px; margin-right: 11px;">
+		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+				<span id="sim_nav_sel_searchbar_1_button" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: auto; -moz-user-select: none; outline: medium none black; outline-offset: 0px; overflow: hidden; box-sizing: border-box; color: rgb(255, 255, 255); border-radius: 8px 8px 0px 0px; padding: 3px 12px; font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold; background-color: rgb(1, 80, 122);">
+                    <input disabled="" tabindex="-1" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+				<div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+                    <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+                        <span style="text-decoration: none;">SUBJECT  </span><span>&nbsp;»</span>
+                    </div>
+                </div>
+				</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: baseline; text-align: left; font-size: 1em; padding: 11px 9px 8px; background-color: rgb(235, 235, 235);">
+                    <div style="width: 419px;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
+                        <div style="width: 417px; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
+                            <input name="classname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
+                            <!--
+                              <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
+                          -->
+                            <div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showsubjects();">
+                                <div id="selected_class_name" style="font-style:italic;color:#AAA;">
+                                    Enter Your Search
+                                </div>
+                            </div>
+                            <img style="top: 6px; right: 8px;" class="pulldownSB custom_pulldownSB" src="/images/icons/arrow_down_blue.png">
+                        </div>
+                        <div id="subjectList" style="display: none; top: 21px; left: 0px; min-width: 417px;" class="scroll_divSB custom_scroll_divSB">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+		</span>
+
+        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px;">
+		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td style="vertical-align: baseline; text-align: left; font-size: 1em;">
+				<span id="sim_nav_sel_searchbar_2_button" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: auto; -moz-user-select: none; outline: medium none black; outline-offset: 0px; overflow: hidden; box-sizing: border-box; color: rgb(255, 255, 255); border-radius: 8px 8px 0px 0px; padding: 3px 12px; font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold; background-color: rgb(244, 33, 51);">
+               	<input name="subjectname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
+
+                    <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+                        <div style="float: left; clear: both; position: relative; width: 100%; height: auto;">
+                            <span style="text-decoration: none;">SPECIAL COURSES </span><span>&nbsp;»</span>
+                        </div>
+                    </div>
+				</span>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td style="vertical-align: baseline; text-align: left; font-size: 1em; padding: 11px 9px 8px; background-color: rgb(235, 235, 235);">
+                    <div style="width: 419px;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
+                        <div style="width: 417px; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
+                            <input name="subjectname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
+                            <!--
+                              <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
+                          -->
+                            <div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showcourses();">
+                                <div id="selected_course_name" style="font-style:italic;color:#AAA;">
+                                    Enter Your Search
+                                </div>
+                            </div>
+                            <img style="top: 6px; right: 8px;" class="pulldownSB custom_pulldownSB" src="/images/icons/arrow_down_red.png">
+                        </div>
+                        <div id="specialCourseList" style="display: none; top: 21px; left: 0px; min-width: 417px;" class="scroll_divSB custom_scroll_divSB">
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+            </tbody>
+        </table>
+		</span>
+    </div>
+	</span>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+<div style="position: relative; z-index: 1; width: 100%; border-bottom: 3px solid rgb(101, 149, 94); border-top: 3px solid rgb(140, 186, 37);" id="sel_menu_bar_container">
+    <div style="">
+        <div style="position: relative; width: 100%; background-color: rgb(255, 255, 255); text-align: center; font-size: 0px;">
+       <table style="font-size: 1em; position: relative; margin: 0px 10% 2px; width: 80%;" id="menu_main_table" cellpadding="0" cellspacing="0">
+                <tbody>
+                <tr>
+
+
+                    <td style="width: 50%; position: relative; vertical-align: middle; text-align: center; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; padding: 12px 17px; font-weight: bold; color: rgb(125, 124, 124); font-size: 20px;">Assesment in Progress !!!</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="template_main_body" style="background-color:#fffbff ;height: 400px;overflow-y: auto; margin-top: 1%;margin-bottom: 1%;box-shadow: 10px 10px 5px #888;border: 2px solid rgba(249, 240, 240, 1);">
+    <table>
+    <tr style="height: 15px;">
+
+
+
+    </tr>
+
+<tr>
+
+ <div style="margin: 10px; padding: 5px 5px 5px 20px;">
+
+
+<h1 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(249, 250, 237); font: bold 28px Verdana; color: rgb(91, 113, 153);" align="center"><time>00:00:00</time></h1>
+
+         <script>
+
+    $(document).ready(function(){
+        timer();
+
+        // $("#header_tag").innerHTML="What is SCAN?";
+     });
+
+         var h1 = document.getElementsByTagName('h1')[0],
+    start = document.getElementById('start'),
+    stop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
+
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+
+    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    timer();
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
+
+     </script>
+
+
+            <table style="width: 750px; margin: auto;">
+                <tbody>
+
+
+                <tr style="height: 30px;">
+
+                </tr>
+
+                <tr>
+                    <td style="width: 150px;position:absolute;">
+                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(244, 33, 51); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
+           Question) :
+
+            </h2>
+                    </td>
+                    <td>
+                                   <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(89, 163, 98); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
+             {{ nextquestion }}  ?
+
+            </h2>
+
+                    </td>
+                </tr>
+
+                <tr style="height: 20px;">
+
+                </tr>
+
+                 <form name="input" action="/assessment" method="post">
+
+              <tr>
+
+
+            <td style="width: 150px; ">
+                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(244, 33, 51); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
+            Answer :
+            </h2>
+                  </td>
+
+
+                  <td>
+                      <table>
+                          <tr>
+                              <td>
+                                  {% csrf_token %}
+                  <input style="margin: 5px;padding: 5px 20px 5px 20px;font: bold 14px Verdana; color: #FFFFFF;background-color: #b8eab7;border-radius: 5px;width: 380px;" type="text" name="answer">
+
+                              </td>
+                              <td>
+                                             <input style="margin:0px 0px 5px 5px;font: bold 14px Verdana;  color:#FFFFFF; background-color:#7B6CDE; border-radius: 5px; width: 150px; padding: 5px;" value="Submit" type="submit">
+
+                              </td>
+                          </tr>
+                      </table>
+
+                      <!--
+                 {% csrf_token %}
+
+-->
+</td></tr>
+                                     <tr style="height: 25px;">
+
+                </tr>
+
+
+                                     <tr>
+                    <td style="width: 150px;position:absolute;">
+                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(244, 33, 51); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
+          Note :
+
+            </h2>
+                    </td>
+                    <td>
+                                   <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(89, 163, 98); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
+
+1. Please answer in a proper format <br> 2. Do not use calculators. <br> 3. Do not take help of others
+
+            </h2>
+
+                    </td>
+                </tr>
+
+             </form>
+
+
+                </tbody>
+            </table>
+
+
+</div>
+
+    </tr>
+
+        </table>
+
+</div>
+<div class="footer_div" style="">
+
+    <div class="sm_font" style=" float:right; text-align:right;; ">
+        <div style="margin-bottom: 10px">
+            <a aria-label="Facebook" href="#" target="_blank" title="Facebook">
+                <img border="0" src="/images/facebook_icon.png">
+            </a>&nbsp;&nbsp;
+            <a aria-label="Twitter" href="#" target="_blank" title="Twitter">
+                <img border="0" src="/images/twitter_icon.png">
+            </a>&nbsp;&nbsp;
+        </div>
+        <div style="margin-bottom: 5px">
+            SCAN® is a registered trademark of Critical Velos. </div>
+    </div>
+
+    <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;padding:5px 15px 5px 15px; ">
+        <div style="margin-bottom: 10px">
+            <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
+        </div>
+    </div>
+
+    <div id="id_letterheads_9_insert_shortcut_33" style=" clear: both;; "></div>
+</div>
+
+
+</body>
+
+
+
+
+</html>
+
+
+{% comment %}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -159,17 +809,7 @@
              </form>
 <div class="clear"></div>
 
-
-
-
-
-
-
-
-
-
-
-							</div>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -186,7 +826,7 @@
 		<footer class="container" id="footer">
 			<div class="row">
 				<div class="twelve columns">
-                    Copyright &copy; CriticalVelos
+                    Copyright &copy; CriticalVeloss
 				</div>
 			</div>
 		</footer>
@@ -196,40 +836,6 @@
 		</div>
 
 		<script src="js/jquery.min.js"></script>
-		<script src="lib/jQueryUI/jquery-ui-1.8.18.custom.min.js"></script>
-		<script src="js/s_scripts.js"></script>
-		<script src="js/jquery.ui.extend.js"></script>
-		<script src="lib/qtip2/jquery.qtip.min.js"></script>
-		<script src="lib/jQplot/jquery.jqplot.min.js"></script>
-		<script src="lib/jQplot/jqplot.plugins.js"></script>
-		<script src="lib/fullcalendar/fullcalendar.min.js"></script>
-		<script src="js/jquery.list.min.js"></script>
-		<script src="js/pertho.js"></script>
-		<script>
-			$(document).ready(function() {
-				//* common functions
-				prth_common.init();
-                
-                //* nested accordion
-                prth_nested_accordion.init();
-				//* full calendar
-				prth_calendar.init();
-				//* filterable list
-				prth_flist.init();
-				//* smart gallery
-				prth_gallery.init();
-				//* home page charts resize
-				prth_charts.charts_resize();
-				//* home page charts
-				prth_charts.ds_plot1();
-				prth_charts.ds_plot2();
-				if(!jQuery.browser.mobile) {
-					// create image from visible chart
-					prth_charts.makeImage();
-				}
-				//* horizontal scrollable (charts)
-				prth_h_scrollable.init();
-			});
-		</script>
+
 	</body>
-</html>
+</html>{% endcomment %}
