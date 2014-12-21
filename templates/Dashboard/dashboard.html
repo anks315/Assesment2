@@ -170,9 +170,10 @@
 
 Populate List of Courses and Subjects in the top two search bars
 Input Template - /subjectdetailsofstudent/   for subjects
-               - --                        for Courses
+               -    /getspecialcourselist     for Courses
 
         -->
+
 <script>
 
     function populate_list_of_courses(){
@@ -201,7 +202,7 @@ Input Template - /subjectdetailsofstudent/   for subjects
 
 
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
-                    var subjectname = "Vedic Mathematics";//x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                    var subjectname = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
 
 
 
@@ -222,7 +223,7 @@ Input Template - /subjectdetailsofstudent/   for subjects
         };
 
 
-        xmlhttp.open("GET", "/subjectdetailsofstudent", true);
+        xmlhttp.open("GET", "/getspecialcourselist", true);
         xmlhttp.overrideMimeType("text/xml");
         xmlhttp.send();
 
@@ -812,7 +813,7 @@ Main
 
         </span>
 
-        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px; margin-right: 11px;">
+        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px; margin-right: 11px;opacity: 0.3;">
 		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
@@ -835,7 +836,7 @@ Main
                             <!--
                               <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
                           -->
-                            <div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showsubjects();">
+                            <div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="1showsubjects();">
                                 <div id="selected_class_name" style="font-style:italic;color:#AAA;">
                                     Enter Your Search
                                 </div>

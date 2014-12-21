@@ -110,7 +110,7 @@ handlers:
 - url: /getreadytolearn_ofsubject(.*)
   script: main.app
 
- - url: /getmasteryofsubject(.*)
+- url: /getmasteryofsubject(.*)
   script: main.app
 
 - url: /.*

@@ -452,3 +452,5 @@ def meetExperts(request):
 def vedicMaths(request):
     return render_to_response('Home/vedicmaths.html',{},context_instance = RequestContext(request))
 
+def xyz(request):
+    return render_to_response('Dashboard/dashboardaleks.html',{},context_instance = RequestContext(request))
