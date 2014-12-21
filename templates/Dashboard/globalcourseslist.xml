@@ -1,5 +1,5 @@
 <root>
-    {% for key, value in subjectdetails.items %}
+    {% for key, value in specialcourses.items %}
     <subject>
    <key>
 

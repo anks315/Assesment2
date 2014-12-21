@@ -108,7 +108,7 @@ def get_readytolearn_of_subject(request):
     subjectkey = ndb.Key(urlsafe=key)
     logging.error("99999999999999999999999999999999")
     readytolearn = Query.get_ready_to_learn_of_class(teacherkey,classkey,subjectkey)
-    t = loader.get_template('Dashboard/readytolearn_ofsubject')
+    t = loader.get_template('Dashboard/readytolearn_ofsubjectofclass')
     c = Context({'readytolearndict': readytolearn,})
     return HttpResponse(t.render(c),content_type="text/xml")
 

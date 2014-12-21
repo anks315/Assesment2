@@ -1,0 +1,15 @@
+<root>
+    {% for key, value in topicwisescore.items %}
+    <topic>
+   <name>
+
+   {{ key}}
+   </name>
+   <score>
+      {{ value }}
+   </score>
+   </topic>
+{% endfor %}
+
+
+</root>

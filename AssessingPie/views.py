@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from gaesessions import get_current_session
-from engine import nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer,maxstatesize,getnumquestions,readytolearn,completedtopics
+from engine import nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer,maxstatesize,getnumquestions,readytolearn,completedtopics,currentstatelist,scorelist,nextstatelist
 from django.template import RequestContext
 from google.appengine.api import users
 from dummydata import fill,flush
@@ -14,6 +14,11 @@ import  Query
 import datetime
 import Constant
 from django.core.context_processors import csrf
+
+
+# askquestion function call assessment engine to update states probabilty and choose next \
+# probable question to ask and redirect to question page.
+# If no effective next question to ask it redirect to report page
 
 def asknextquestion(request):
 
@@ -34,7 +39,10 @@ def asknextquestion(request):
             session['listoftopics']=listoftopics
             session['topicnumber'] = 0
             completedtopics[session['studentname']] ={}
+            scorelist[session['studentname']] = []
             readytolearn[session['studentname']]=[]
+            currentstatelist[session['studentname']]=[]
+            nextstatelist[session['studentname']]=[]
             session['score']=0
             usersdict[c]= UserBuffer(listoftopics[0])
     else:
@@ -70,6 +78,9 @@ def asknextquestion(request):
         logging.error(getnumquestions(session['studentname']))
 
         if val==getnumquestions(session['studentname']):
+            nextstatelist[session['studentname']].append(Constant.FULL_STATE)
+            currentstatelist[session['studentname']].append(usersdict[session['studentname']].states[maxstatesize(session['studentname'])][maxstate(session['studentname'])].key)
+            scorelist[session['studentname']].append(100)
             completedtopics[session['studentname']][listoftopics[session['topicnumber']]]=1
             logging.error("hii")
             #readytolearn[session['studentname']]=["Congratulations!!you have completed maths donut"]
@@ -89,37 +100,56 @@ def asknextquestion(request):
                         logging.error(next(iter(quetionkey)))
                         logging.error(currentstate.key)
                         score =(val/(float)(getnumquestions(session['studentname'])))*100
+                        scorelist[session['studentname']].append(int(score))
+                        currentstatelist[session['studentname']].append(currentstate.key)
+                        nextstatelist[session['studentname']].append(state.key)
+
                         session['score']+=score
-                        studentkey= session.get('studentkey',-1)
-                        schoolkey= session.get('schoolkey',-1)
-                        a=Query.update_assessment_detail_of_student(student_key=studentkey, assessment_key=ndb.Key(urlsafe=session['assessmentkey']),current_state_key= currentstate.key, next_state_key=currentstate.key,next_question_key=next(iter(quetionkey)),score=int(score),school_key=schoolkey,completion_date=datetime.datetime.now())
-                        logging.error(a)
+                        #studentkey= session.get('studentkey',-1)
+                        #schoolkey= session.get('schoolkey',-1)
+                        #a=Query.update_assessment_detail_of_student(student_key=studentkey, assessment_key=ndb.Key(urlsafe=session['assessmentkey']),current_state_key= currentstate.key, next_state_key=currentstate.key,next_question_key=next(iter(quetionkey)),score=int(score),school_key=schoolkey,completion_date=datetime.datetime.now())
+                        #logging.error(a)
                         readytolearn[session['studentname']].append(usersdict[session['studentname']].questions[next(iter(quetionkey))].questionstring)
+                        break
             else:
+                 scorelist[session['studentname']].append(0)
+                 currentstatelist[session['studentname']].append(Constant.Constant.EMPTY_STATE)
+                 nextstatelist[session['studentname']].append(-1);
                  for state in states:
                      questiontuple = state.questionstuple
                      readytolearn[session['studentname']].append(usersdict[session['studentname']].questions[questiontuple[0]].questionstring)
 
 
         if(session['topicnumber']==len(session['listoftopics'])-1):
+            Query.update_assessment_detail_of_student(int(session['score']/(len(session['listoftopics']))) ,scorelist[session['studentname']], session['studentkey'], session['assessmentkey'], currentstatelist[session['studentname']], nextstatelist[session['studentname']], readytolearn[session['studentname']], session['schoolkey'], datetime.datetime.now())
             del usersdict[session['studentname']]
             return render_to_response('AssessingPie_toBeremoved/pie.html',{'readytolearn':readytolearn[session['studentname']],'num_known': session['score']/(len(session['listoftopics'])) ,'st': maxsta,'state' : 'completed','know':strknow,},context_instance = RequestContext(request))
 
         else:
             del usersdict[session['studentname']]
-           # checknext=1;
-          #  nexttopickey=0;
-           # while checknext==1:
-            session['topicnumber']+=1
+            checknext=1;
+            nexttopickey=0;
+            while checknext==1:
+                session['topicnumber']+=1
+                if(session['topicnumber']==len(session['listoftopics'])):
+                   Query.update_assessment_detail_of_student(int(session['score']/(len(session['listoftopics']))) ,scorelist[session['studentname']], session['studentkey'], session['assessmentkey'], currentstatelist[session['studentname']], nextstatelist[session['studentname']], readytolearn[session['studentname']], session['schoolkey'], datetime.datetime.now())
+                   return render_to_response('AssessingPie_toBeremoved/pie.html',{'readytolearn':readytolearn[session['studentname']],'num_known': session['score']/(len(session['listoftopics'])) ,'st': maxsta,'state' : 'completed','know':strknow,},context_instance = RequestContext(request))
+                else:
+                    nexttopickey =session['listoftopics'][session['topicnumber']]
+                    prerequisitetopiclist = Query.get_prerequisite_topics_of_topic(nexttopickey)
+                    checknext=0;
+                    for topic in prerequisitetopiclist:
+                        if completedtopics[session['studentname']][topic] is None:
+                            checknext=1;
+                    if checknext==1:
+                        currentstatelist[session['studentname']].append(Constant.Constant.EMPTY_STATE)
+                        scorelist[session['studentname']].append(0)
+                        nextstatelist[session['studentname']].append(-1);
 
-            nexttopickey =session['listoftopics'][session['topicnumber']]
-               # prerequisitetopiclist = nexttopickey.prerequisite_topic
-               # checknext=0
-               # for topic in prerequisitetopiclist:
-               #     if completedtopics[session['studentname']][topic] is None:
-               #         checknext=1;
+
 
             usersdict[session['studentname']]=UserBuffer(nexttopickey)
+
             return render_to_response('AssessingPie/question.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : usersdict[session['studentname']].questions[nextquestion(session['studentname'])].questionstring,},context_instance = RequestContext(request))
 
 
@@ -127,6 +157,8 @@ def asknextquestion(request):
         return render_to_response('AssessingPie/question.html',{'logouturl':users.create_logout_url('/') ,'logger' : users.get_current_user() ,'nextquestion' : usersdict[session['studentname']].questions[nextquestion(session['studentname'])].questionstring,},context_instance = RequestContext(request))
 
 
+# redirect to home page
+# html : homepage.html
 def home(request):
 
      return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
@@ -141,6 +173,7 @@ antecedent=[]
 numalreadyinferred=0
 
 
+#Contact Us page
 def contactus(request):
         flush()
         fill()
@@ -358,9 +391,11 @@ def signout(request):
 
     return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
+
+# dashboard gets called when username and password
 def dashboard(request):
 
-    subjectsenrolled=['Maths','Science','English']
+
     session = get_current_session()
 
     if request.method == 'POST':
@@ -381,7 +416,7 @@ def dashboard(request):
             session['sex']=student.basic_info.sex
             session['lastlogin']=user_information[2]
 
-            return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+            return render_to_response('Dashboard/dashboard.html',{ },context_instance = RequestContext(request))
         if session['type'] == Constant.Constant.TEACHER:
             teacher = user_information[1]
             session['teacherkey']=teacher.key
@@ -393,13 +428,13 @@ def dashboard(request):
             session['dateofbirth '] = teacher.basic_info.date_of_birth
             session['sex']=teacher.basic_info.sex
             session['lastlogin']=user_information[2]
-            return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+            return render_to_response('Dashboard/teacherdashboard.html',{},context_instance = RequestContext(request))
         return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
     else:
         if session['type'] == Constant.Constant.TEACHER:
-            return render_to_response('Dashboard/teacherdashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+            return render_to_response('Dashboard/teacherdashboard.html',{},context_instance = RequestContext(request))
         if session['type'] == Constant.Constant.STUDENT:
-            return render_to_response('Dashboard/dashboard.html',{'subjects': subjectsenrolled },context_instance = RequestContext(request))
+            return render_to_response('Dashboard/dashboard.html',{},context_instance = RequestContext(request))
 
 
 def ques(request):

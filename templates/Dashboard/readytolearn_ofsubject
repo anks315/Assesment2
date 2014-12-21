@@ -1,13 +1,13 @@
 <root>
-{% for key, value in readytolearndict.items %}
+{% for key, value in readytolearnofsubject.items %}
+    {%  for items in key %}
    <question>
    <name>
    {{ key }}
    </name>
-   <percentage>
-      {{ value }}
-   </percentage>
+
    </question>
+{%  endfor %}
 {% endfor %}
 
 </root>

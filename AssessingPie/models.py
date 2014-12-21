@@ -1,9 +1,9 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import ndb
-from Constant import Constant
-from Constant import Subject
-
+from Constant import Constant ,Default
+from Constant import Subject_Name
+import datetime
 
 
 
@@ -39,6 +39,7 @@ class Question(ndb.Model):
     
     no_states_contained_in = ndb.IntegerProperty(default=0)
     instance = ndb.StructuredProperty(QuestionInstance, required=True)
+    topic_key=ndb.KeyProperty(kind='Topic')
     topic_type=ndb.StringProperty()
     
 """
@@ -86,7 +87,7 @@ This class models  a Subject entity
         
 class Subject(ndb.Expando):
     name = ndb.StringProperty(required=True)# from SUBJECT Constants in Constant.py
-    type=ndb.IntegerProperty(required=True,choices=[Subject.TYPE_CLASS,Subject.TYPE_GLOBAL])
+    type=ndb.IntegerProperty(required=True,choices=[Subject_Name.TYPE_CLASS,Subject_Name.TYPE_GLOBAL])
     topics_in_subject_key=ndb.KeyProperty(kind='Subject_Topics')
     class_key=ndb.KeyProperty(kind='Class')
     
@@ -127,7 +128,7 @@ class Topic(ndb.Model):
     student_level_count = ndb.IntegerProperty(repeated=True)  # NO_STUDENT_LEVEL_UPTO_25=0,NO_STUDENT_LEVEL_UPTO_50=1,NO_STUDENT_LEVEL_UPTO_75=2,NO_STUDENT_LEVEL_UPTO_100=3
     states_in_topic_key = ndb.KeyProperty(kind='Topic_States')
     questions_in_topic_key = ndb.KeyProperty(kind='Topic_Questions')
-    assessments_in_topic=ndb.KeyProperty(kind='Assessment')
+    assessments_in_topic=ndb.KeyProperty(kind='Assessment',repeated=True)
     types=ndb.StringProperty(repeated=True)
     assessment_count=ndb.IntegerProperty(default=0)
     
@@ -224,17 +225,19 @@ class Assessment(ndb.Model):
     states_in_assessment_key = ndb.KeyProperty(kind='State', repeated=True)
     class_key=ndb.KeyProperty(kind='Class',required=True)
     no_of_user_completed=ndb.IntegerProperty(default=0)
+    subject_key=ndb.KeyProperty(kind='Subject')
     
     
     
 class Assessment_Record(ndb.Model):  
     start_date=ndb.DateTimeProperty()
-    completion_date=ndb.DateTimeProperty()
+    completion_date=ndb.DateTimeProperty(default=Default.date)
     assessment_key=ndb.KeyProperty(kind=Assessment,required=True)
-    current_state=ndb.KeyProperty(kind=State)
-    next_state=ndb.KeyProperty(kind=State)
-    score=ndb.IntegerProperty(default=-1)
-    question_ready_to_learn=ndb.KeyProperty(kind=Question)
+    current_state=ndb.KeyProperty(kind=State,repeated=True)
+    next_state=ndb.KeyProperty(kind=State,repeated=True)
+    topic_scores=ndb.IntegerProperty(repeated=True)
+    question_ready_to_learn=ndb.KeyProperty(kind=Question,repeated=True)
+    total_score=ndb.IntegerProperty(default=-1)
    
  
 """

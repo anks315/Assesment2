@@ -74,6 +74,9 @@ class  UserBuffer:
 
 
 readytolearn = {}
+nextstatelist = {}
+scorelist ={}
+currentstatelist={}
 usersdict ={}
 previousmin=-1
 completedtopics = {}

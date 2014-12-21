@@ -79,6 +79,9 @@ handlers:
 - url: /subjectsofclass(.*)
   script: main.app
 
+- url: /getspecialcourselist(.*)
+  script: main.app
+
 - url: /assessmentcoveragebyclass(.*)
   script: main.app
 
@@ -97,9 +100,18 @@ handlers:
 - url: /learningprogress_by_date(.*)
   script: main.app
 
-- url: /mastery_by_student_by_class/(.*)
+- url: /mastery_by_student_by_class(.*)
   script: main.app
 
+
+- url: /gettopicwisescoreofsubject(.*)
+  script: main.app
+
+- url: /getreadytolearn_ofsubject(.*)
+  script: main.app
+
+ - url: /getmasteryofsubject(.*)
+  script: main.app
 
 - url: /.*
   script: main.app

@@ -50,7 +50,7 @@ def getpendingassessment(request):
     subjectlist = Query.get_subjects_by_student(studentkey)
     pendingassessmentbysubject = {}
     for subject in subjectlist:
-        pendingassessments = Query.get_pending_assessment_subject(subject.key,studentkey)
+        pendingassessments = Query.get_pending_assessments_by_subject(studentkey,subject.key)
         logging.error(pendingassessments)
         pendingassessmentbysubject[subject.name]= pendingassessments
     t = loader.get_template('Dashboard/pending_assessmentbysubject.xml')
@@ -95,3 +95,48 @@ def getlearningprogressdatewise(request):
     return HttpResponse(t.render(c),
     content_type="text/xml")
     #return render_to_response('Dashboard/learningprogress_by_date',{'learningprogressdict':learningprogressdict,},context_instance = RequestContext(request))
+
+
+def getspecialcourses(request):
+    session = get_current_session()
+    schoolkey=session.get('schoolkey',-1)
+    specialcourseslist=Query.get_global_subjects(schoolkey)
+    t = loader.get_template('Dashboard/globalcourseslist.xml')
+    c = Context({'specialcourses':specialcourseslist,})
+    return HttpResponse(t.render(c),
+    content_type="text/xml")
+
+
+
+def gettopicwisescoreofsubject(request):
+    session = get_current_session()
+    studentkey = session.get('studentkey',-1)
+    key = request.GET['id']
+    subjectkey = ndb.Key(urlsafe=key)
+    topicwisescore=Query.get_recent_assessment_topic_scores_of_student(studentkey,subjectkey)
+    t = loader.get_template('Dashboard/topicwisescoreofsubject.xml')
+    c = Context({'topicwisescore':topicwisescore,})
+    return HttpResponse(t.render(c),
+    content_type="text/xml")
+
+def getreadytolearnofsubject(request):
+    session = get_current_session()
+    studentkey = session.get('studentkey',-1)
+    key = request.GET['id']
+    subjectkey = ndb.Key(urlsafe=key)
+    readytolearnofsubject=Query.get_recent_assessment_next_questions_of_student(studentkey,subjectkey)
+    t = loader.get_template('Dashboard/readytolearn_ofsubject')
+    c = Context({'readytolearnofsubject':readytolearnofsubject,})
+    return HttpResponse(t.render(c),
+    content_type="text/xml")
+
+def getmasteryofsubject(request):
+    session = get_current_session()
+    studentkey = session.get('studentkey',-1)
+    key = request.GET['id']
+    subjectkey = ndb.Key(urlsafe=key)
+    mastery=Query.get_recent_assessment_score_of_student(studentkey,subjectkey)
+    t = loader.get_template('Dashboard/masteryofsubject.xml')
+    c = Context({'mastery':mastery,})
+    return HttpResponse(t.render(c),
+    content_type="text/xml")

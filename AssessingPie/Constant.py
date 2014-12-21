@@ -1,4 +1,5 @@
 import sys
+import datetime 
 class Constant:
     STUDENT=100
     SCHOOL=200
@@ -33,17 +34,18 @@ class Constant:
     ERROR_INVALID_USER=-6
     UPDATION_SUCCESSFULL=0
     MAX_MARKS=100
-    
+    FULL_STATE=1
+    EMPTY_STATE=0
     
 
-class Subject:
+class Subject_Name:
     TYPE_CLASS=0
     TYPE_GLOBAL=1
-    SUBJECT_MATHS="Mathematics"
-    SUBJECT_ENGLISH="English"
-    SUBJECT_GEOLOGY="Geology"
-    SUBJECT_SCIENCE="Science"
-    Subject_VEDIC = "Vedic Maths"
+    SUB_MATHS="Mathematics"
+    SUB_ENGLISH="English"
+    SUB_GEOLOGY="Geology"
+    SUB__SCIENCE="Science"
+    SUB_VEDIC = "Vedic Maths"
 
 '''class Topic:
     TOPIC_ADDITION="Addition"
@@ -66,7 +68,7 @@ class UserType:
     SCHOOL="School"
 
     
+class Default:
+    date=datetime.datetime(int(2000),int(8),int(8),int(8),int(8),int(8))   
     
     
-    
-
