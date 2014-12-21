@@ -281,7 +281,7 @@ def fill():
 
             assessment1=Query.addAssessment(name="Vedic Maths :1",list_topic_key=[topic_chap_one.key,topic_chap_two.key,topic_chap_three.key,topic_chap_four.key,topic_chap_five.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime(int(2014),int(11),int(12),int(23),int(12),int(8)),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
             
-            assessment2=Query.addAssessment(name="Vedic Maths :2",list_topic_key=[topic_chap_one.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime(int(2014),int(11),int(12),int(23),int(12),int(8)),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+            assessment2=Query.addAssessment(name="Vedic Maths :2",list_topic_key=[topic_chap_one.key,topic_chap_two.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime(int(2014),int(11),int(12),int(23),int(12),int(8)),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
            
             
             

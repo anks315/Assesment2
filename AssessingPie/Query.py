@@ -963,6 +963,29 @@ def update_assessment_detail_of_student(total_score,topic_scores, student_key, a
         return Constant.ERROR_BAD_VALUE
    
     try:
+                final_current_state=[]
+                
+                for state in current_state_key:
+                    
+                    if  state == None:
+                        
+                        state_inavlid=addState(type=Constant.STATE_INVALID,school_key=school_key)
+                        final_current_state.append(state_inavlid.key)
+                    else :
+                         final_current_state.append(state)
+                         
+                       
+                final_next_state=[]
+                for state in next_state_key:
+                  
+                    if state ==None:
+                        
+                        state_inavlid=addState(type=Constant.STATE_INVALID,school_key=school_key)
+                        
+                        final_next_state.append(state_inavlid.key)
+                    else :
+                         final_next_state.append(state)
+               
                 student_assessmnet_entity = student_assessment.get()
                 students_assessments = student_assessmnet_entity.attended_assessment_key
                 if students_assessments==None:
@@ -975,11 +998,11 @@ def update_assessment_detail_of_student(total_score,topic_scores, student_key, a
                 logging.info("CV Logs: reched`1"+str(student_records)) 
                 if  len(student_records) == 0 or len(student_records) == index:
                     logging.info("CV Logs: reched`2"+str(index)) 
-                    assessment_record = Assessment_Record(total_score=total_score,topic_scores=topic_scores, assessment_key=assessment_key, current_state=current_state_key, next_state=next_state_key, question_ready_to_learn=next_question_key, parent=school_key, completion_date=completion_date)
+                    assessment_record = Assessment_Record(total_score=total_score,topic_scores=topic_scores, assessment_key=assessment_key, current_state=final_current_state, next_state=final_next_state, question_ready_to_learn=next_question_key, parent=school_key, completion_date=completion_date)
                     assessment_record.put()
-                    logging.error("CV Logs: reched 3"+str(assessment_record)) 
+                    '''logging.error("CV Logs: reched 3"+str(assessment_record)) 
                     asess=Assessment_Record.query(ancestor=school_key).fetch()
-                    logging.error("CV Logs: reched 4"+str(asess)) 
+                    logging.error("CV Logs: reched 4"+str(asess)) '''
                     
                     
                     
@@ -988,8 +1011,8 @@ def update_assessment_detail_of_student(total_score,topic_scores, student_key, a
                 else :
                     assessment_record_key = student_records[index]
                     assessment_record = assessment_record_key.get()
-                    assessment_record.current_state = current_state_key
-                    assessment_record.next_state = next_state_key
+                    assessment_record.current_state = final_current_state
+                    assessment_record.next_state = final_next_state
                     assessment_record.question_ready_to_learn = next_question_key
                     assessment_record.total_score = total_score
                     assessment_record.topic_scores=topic_scores
@@ -1950,7 +1973,8 @@ def get_recent_assessment_score_of_student(student_key,subject_key):
                 logging.info("CV Logs : #######"+str(assesmentss))
                 
                 q_sorted_assessments_records = Assessment_Record.query(Assessment_Record.key.IN(assessments_records), ancestor=student.school)
-                sorted_assessments_records = q_sorted_assessments_records.order(Assessment_Record.completion_date).fetch()  
+                sorted_assessments_records = q_sorted_assessments_records.order(-Assessment_Record.completion_date).fetch() 
+               
                
                 #logging.error("CV Logs : failed to get get_mastery_by_subject_sc :"+str(len(q_sorted_assessments_records)))
                 return sorted_assessments_records[0].total_score
@@ -1982,15 +2006,27 @@ def get_recent_assessment_next_states_of_student(student_key,subject_key):
                 logging.info("CV Logs : #######"+str(assesmentss))
                 
                 q_sorted_assessments_records = Assessment_Record.query(Assessment_Record.key.IN(assessments_records), ancestor=student.school)
-                sorted_assessments_records = q_sorted_assessments_records.order(Assessment_Record.completion_date).fetch()  
+                sorted_assessments_records = q_sorted_assessments_records.order(-Assessment_Record.completion_date).fetch()  
                
                 #logging.error("CV Logs : failed to get get_mastery_by_subject_sc :"+str(len(q_sorted_assessments_records)))
                 
                 next_state_list= sorted_assessments_records[0].next_state
                 i=0
+                 
+                       
+                final_next_state=[]
+                for state_key in next_state_list:
+                    state=state_key.get()
+                    if state.type==Constant.STATE_INVALID:
+                        final_next_state.append(None)
+                    else :
+                         final_next_state.append(state)
+               
+                
+                
                 topics=sorted_assessments_records[0].assessment_key.get().topics_in_assessment_key
                 for topic_key in topics:
-                    dict_next_states[topic_key.get().name]=next_state_list[i]
+                    dict_next_states[topic_key.get().name]=final_next_state[i]
                     i=i+1
                 return dict_next_states
     except Exception:
@@ -2020,7 +2056,7 @@ def get_recent_assessment_topic_scores_of_student(student_key,subject_key):
                 logging.info("CV Logs : #######"+str(assesmentss))
                 
                 q_sorted_assessments_records = Assessment_Record.query(Assessment_Record.key.IN(assessments_records), ancestor=student.school)
-                sorted_assessments_records = q_sorted_assessments_records.order(Assessment_Record.completion_date).fetch()  
+                sorted_assessments_records = q_sorted_assessments_records.order(-Assessment_Record.completion_date).fetch()  
                
                 #logging.error("CV Logs : failed to get get_mastery_by_subject_sc :"+str(len(q_sorted_assessments_records)))
                 
@@ -2057,7 +2093,7 @@ def get_recent_assessment_next_questions_of_student(student_key,subject_key):
                 logging.info("CV Logs : #######"+str(assesmentss))
                 
                 q_sorted_assessments_records = Assessment_Record.query(Assessment_Record.key.IN(assessments_records), ancestor=student.school)
-                sorted_assessments_records = q_sorted_assessments_records.order(Assessment_Record.completion_date).fetch()  
+                sorted_assessments_records = q_sorted_assessments_records.order(-Assessment_Record.completion_date).fetch()  
                
                 #logging.error("CV Logs : failed to get get_mastery_by_subject_sc :"+str(len(q_sorted_assessments_records)))
                 
@@ -3000,17 +3036,15 @@ def get_mastery_by_student_of_class(teacher_key, class_key, subject_key):
 def get_prerequisite_topics_of_topic(topic_key):
     logging.info("CV Logs : Inside get_prerequisite_topics_of_topic ")
 
-    dict_prerequiste_topic = {}
+    #dict_prerequiste_topic = {}
     try:
         if not topic_key.kind()==Topic._get_kind():
             return Constant.ERROR_BAD_VALUE
 
 
         prerequisite_topics_keys=topic_key.get().prerequisite_topic
-        for topic_key_dummy in prerequisite_topics_keys:
-            dict_prerequiste_topic[topic_key_dummy.get().name]=topic_key.urlsafe()
-        logging.info("CV Logs : Success to get_prerequisite_topics_of_topic "+str(dict_prerequiste_topic))
-        return dict_prerequiste_topic
+        
+        return prerequisite_topics_keys
     except Exception:
         logging.error("CV Logs : failed  to get_mastery_by_student_of_class ")
         logging.exception("")
@@ -3352,7 +3386,7 @@ def get_mastery_by_subject_sc(subject_key, student_key):
                 logging.info("CV Logs : #######"+str(assesmentss))
                 
                 q_sorted_assessments_records = Assessment_Record.query(Assessment_Record.key.IN(assessments_records), ancestor=student.school)
-                sorted_assessments_records = q_sorted_assessments_records.order(Assessment_Record.completion_date).fetch()  
+                sorted_assessments_records = q_sorted_assessments_records.order(-Assessment_Record.completion_date).fetch()  
                
                 #logging.error("CV Logs : failed to get get_mastery_by_subject_sc :"+str(len(q_sorted_assessments_records)))
                 mastery=sorted_assessments_records[0].total_score
@@ -3476,7 +3510,7 @@ def get_growth_for_subject(student_key, subject_key):
                     dict_growth.update({i:int(growth)})
                     continue
                 q_sorted_assessments_records = Assessment_Record.query(Assessment_Record.key.IN(assessments_records), ancestor=student.school)
-                sorted_assessments_records = q_sorted_assessments_records.order(Assessment_Record.completion_date).fetch()        
+                sorted_assessments_records = q_sorted_assessments_records.order(-Assessment_Record.completion_date).fetch()        
                 # only one topic is present and only one assessment completed growth is the score of assessment
                 if len(sorted_assessments_records) == 1 and not total == 1:
                     i += 1
@@ -4030,7 +4064,6 @@ def add_states_to_topic_dummy(topic_name,states_in_topic_keys):
     logging.info("CV Logs : success to assign states to topic :"+topic.name)     
     return Constant.UPDATION_SUCCESSFULL'''
 """
-
 
 
 

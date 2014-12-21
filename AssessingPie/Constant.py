@@ -20,6 +20,7 @@ class Constant:
     NO_STUDENT_LEVEL_UPTO_100=3
     STATE_IN_TOPIC=0
     STATE_OF_TOPIC=1
+    STATE_INVALID=-1
     STATE_CONTAINED_TOPICS="contains_topic_keys"
     SEX_MALE=0
     SEX_FEMALE=1
@@ -34,8 +35,7 @@ class Constant:
     ERROR_INVALID_USER=-6
     UPDATION_SUCCESSFULL=0
     MAX_MARKS=100
-    FULL_STATE=1
-    EMPTY_STATE=0
+    
     
 
 class Subject_Name:
