@@ -139,7 +139,7 @@ def asknextquestion(request):
                    logging.error("ankur")
                    logging.error(int(session['score']/(len(session['listoftopics']))))
                    Query.update_assessment_detail_of_student(int(session['score']/(len(session['listoftopics']))) ,scorelist[session['studentname']], session['studentkey'], session['assessmentkey'], currentstatelist[session['studentname']], nextstatelist[session['studentname']], readytolearnquestionkey[session['studentname']], session['schoolkey'], datetime.datetime.now())
-                   return render_to_response('AssessingPie_toBeremoved/pie.html',{'readytolearn':readytolearn[session['studentname']],'num_known': session['score']/(len(session['listoftopics'])) ,'st': maxsta,'state' : 'completed','know':strknow,},context_instance = RequestContext(request))
+                   return render_to_response('AssessingPie_toBeremoved/pie.html',{'student name':session['studentname'],'readytolearn':readytolearn[session['studentname']],'num_known': session['score']/(len(session['listoftopics'])) ,},context_instance = RequestContext(request))
                 else:
                     nexttopickey =session['listoftopics'][session['topicnumber']]
                     prerequisitetopiclist = Query.get_prerequisite_topics_of_topic(nexttopickey)
@@ -409,6 +409,11 @@ def dashboard(request):
         password = request.POST['password']
 
         user_information= Query.login(username,password)
+        logging.error(user_information)
+        if user_information < 0:
+            return render_to_response('Home/login.html',{'invalid_message': "Enter Correct Credentials"},context_instance = RequestContext(request))
+
+
         session['type'] = user_information[0]
         if session['type'] == Constant.Constant.STUDENT:
             student = user_information[1]
@@ -450,7 +455,7 @@ def whatisscan(request):
     return render_to_response('Home/Home_scan.html',{},context_instance = RequestContext(request))
 
 def login(request):
-    return render_to_response('Home/login.html',{},context_instance = RequestContext(request))
+    return render_to_response('Home/login.html',{'invalid_message':''},context_instance = RequestContext(request))
 
 def meetExperts(request):
     return render_to_response('Home/Meet_experts.html',{},context_instance = RequestContext(request))
