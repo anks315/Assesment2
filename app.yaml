@@ -94,6 +94,9 @@ handlers:
 - url: /assessmentcoverageofsubject(.*)
   script: main.app
 
+- url: /getgrowthofsubject(.*)
+  script: main.app
+
 - url: /averagemasterybysubjectallclass/(.*)
   script: main.app
 
