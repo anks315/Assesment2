@@ -114,6 +114,7 @@
 
                                 <form name="login" id="login" style="padding: 0em; margin: 0em" method="POST" action="/dashboard/"  target="_top">
                                     {% csrf_token %}
+                                    <p> {{ invalid_message }}</p>
                                     <input type="hidden" name="_form_" value="login">
                                     <label for="username" id="label_username" style="color:white; display: none">User Name</label>
                                     <br>

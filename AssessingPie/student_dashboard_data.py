@@ -133,10 +133,25 @@ def getreadytolearnofsubject(request):
 def getmasteryofsubject(request):
     session = get_current_session()
     studentkey = session.get('studentkey',-1)
+    logging.error("ank")
+    logging.error(studentkey)
     key = request.GET['id']
     subjectkey = ndb.Key(urlsafe=key)
     mastery=Query.get_recent_assessment_score_of_student(studentkey,subjectkey)
     t = loader.get_template('Dashboard/masteryofsubject.xml')
     c = Context({'mastery':mastery,})
+    return HttpResponse(t.render(c),
+    content_type="text/xml")
+
+def getgrowthofsubject(request):
+    session = get_current_session()
+    studentkey = session.get('studentkey',-1)
+    logging.error("ank")
+    logging.error(studentkey)
+    key = request.GET['id']
+    subjectkey = ndb.Key(urlsafe=key)
+    growthdict=Query.get_learning_progress(studentkey,subjectkey)
+    t = loader.get_template('Dashboard/growthofsubject.xml')
+    c = Context({'growth':growthdict,})
     return HttpResponse(t.render(c),
     content_type="text/xml")

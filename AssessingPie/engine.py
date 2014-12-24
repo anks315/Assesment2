@@ -4,10 +4,10 @@ import models
 import Query
 
 class Question:
-    def __init__(self,num_states,probsum,questionstring,answer):
+    def __init__(self,key,num_states,probsum,questionstring,answer):
         self.num_states = num_states
         self.probsum = probsum
-
+        self.key=key
         self.questionstring = questionstring
         self.answer = answer
 
@@ -49,7 +49,7 @@ class  UserBuffer:
                      previous_minquestion = abs(int(((len(state_db)+1)/2)-num_states))
                      self.minquestion = tempques.key
 
-            self.questions[tempques.key]=Question(num_states,initialprob*num_states,questionstring,answer)
+            self.questions[tempques.key]=Question(tempques.key,num_states,initialprob*num_states,questionstring,answer)
 
 
 
@@ -74,6 +74,7 @@ class  UserBuffer:
 
 
 readytolearn = {}
+readytolearnquestionkey = {}
 nextstatelist = {}
 scorelist ={}
 currentstatelist={}

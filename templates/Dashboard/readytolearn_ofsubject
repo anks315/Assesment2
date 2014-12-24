@@ -1,13 +1,8 @@
 <root>
 {% for key, value in readytolearnofsubject.items %}
-    {%  for items in key %}
-   <question>
-   <name>
-   {{ key }}
-   </name>
-
-   </question>
-{%  endfor %}
+    <question>
+   {{ value }}
+    </question>
 {% endfor %}
 
 </root>

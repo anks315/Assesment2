@@ -63,7 +63,7 @@ key Property: Uses question_in_state_key: contains key of relationship entity St
     
 
 class State(ndb.Expando):  # Dynamic property will be applied in case of type STATE_OF_TOPIC [List of topic_ids]
-    type = ndb.IntegerProperty(choices=set([Constant.STATE_IN_TOPIC, Constant.STATE_OF_TOPIC]))  # STATE_IN_TOPIC=0,STATE_OF_TOPIC=1
+    type = ndb.IntegerProperty(choices=set([Constant.STATE_IN_TOPIC, Constant.STATE_OF_TOPIC,Constant.STATE_INVALID]))  # STATE_IN_TOPIC=0,STATE_OF_TOPIC=1
     question_in_state_key = ndb.KeyProperty(kind='State_Questions')
     
     
