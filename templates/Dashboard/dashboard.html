@@ -3,7 +3,6 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Critical Velos</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 
@@ -24,6 +23,7 @@
         $("#subject_dashboard_row2").hide();
 
         list_all_pending_assessments();
+        get_growthofsubject("chart_div");
 
     }
 
@@ -207,7 +207,7 @@ Input Template - /subjectdetailsofstudent/   for subjects
 
                     var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
 
-                    div_to_be_loaded = div_to_be_loaded +"<tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\" onclick=\"showreportbycourses('" + subjectname + "')\">"+subjectname+"</div></td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+                    div_to_be_loaded = div_to_be_loaded +"<tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\" onclick=\"showreportbycourses('" + subjectname +"','"+ key + "')\">"+subjectname+"</div></td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
 
 
                 }
@@ -323,7 +323,7 @@ Main
     }
 
 
-    function showreportbycourses(coursename){
+    function showreportbycourses(coursename,coursekey){
 
         //  alert("caled");
 
@@ -340,11 +340,11 @@ Main
 
         //Populate boxes
 
-        document.getElementById('div_title6').innerHTML="Course Statistics ";
-        document.getElementById('div_title2').innerHTML="Course Information ";
-        document.getElementById('div_title5').innerHTML="Donut Mastery ";
-        document.getElementById('div_title7').innerHTML="SpeedoMeter (Type Wise) ";
-        document.getElementById('div_title8').innerHTML="Knowledge Space ";
+        document.getElementById('div_title6').innerHTML="Course Statistics ";   //readytoLearn
+        document.getElementById('div_title2').innerHTML="Course Information ";  //masteryDetails
+        document.getElementById('div_title5').innerHTML="Donut Mastery ";       //subjectdonutmastery
+        document.getElementById('div_title7').innerHTML="SpeedoMeter (Type Wise) ";     //pending_assignment
+        document.getElementById('div_title8').innerHTML="Knowledge Space ";       //subject_chart_div
 
         //apil
 
@@ -362,7 +362,7 @@ Main
         //document.getElementById("masteryDetails").innerHTML="";
         getdonutmastery_subject(coursename);
         get_ready_tolearn(coursename,"subject_chart_div");
-        get_topicwisescoreofsubject(coursename,"readytoLearn");
+        get_topicwisescoreofsubject(coursekey,"readytoLearn");
 
         {#        list_pending_assignments(subject);#}
         {#        learningprogress_bydate_sub(subject);#}
@@ -526,83 +526,6 @@ Main
 
 
     }
-
-</script>
-
-{% comment %}
-        List Pending assignments of all subject and populate pending_assignment id
-        input template : /pendingassessmentbysubject/
-
-{% endcomment %}
-
-<script>
-
-    function list_all_pending_assessments(){
-
-
-
-        document.getElementById('pendingassesments').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
-        document.getElementById('pendingassesments').style.display='block';
-
-        var xmlhttp;
-
-        var  div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Pending Assesments in All Subjects</th><th>Due Date</th></tr>";
-
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.overrideMimeType("text/xml");
-        } else {
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-                xmlDoc = xmlhttp.responseXML;
-
-                no_of_assesment = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
-
-                for (i = 0; i < no_of_assesment; i++) {
-
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
-                    var subject_name = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
-                    //alert(subject==subject_name);
-
-                    var assesmentKey = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
-                    var assesmentid =  x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
-                    var duedate = x.getElementsByTagName("due_date")[0].childNodes[0].nodeValue.trim();
-
-                    var innerdiv = "<tr><td><a href=\"/assessment?id="+assesmentKey+"\">" + assesmentid + "</a></td><td>" + duedate + "</td></tr>";
-
-                    div_to_be_loaded += innerdiv;
-
-                }
-
-
-
-                div_to_be_loaded+="</tbody></table>";
-
-                //alert(div_to_be_loaded);
-                document.getElementById("pendingassesments").innerHTML = div_to_be_loaded;
-
-
-
-
-            }
-        }
-
-        xmlhttp.open("GET", "/pendingassessmentbysubject/", true);
-        xmlhttp.overrideMimeType("text/xml");
-        xmlhttp.send();
-
-
-
-
-
-
-
-    }
-
 
 </script>
 
@@ -835,7 +758,7 @@ Main
                 no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
 
                 for (i = 0; i < no_of_topics; i++) {
-
+                        alert('i = '+i);
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
                     var score = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
@@ -850,12 +773,13 @@ Main
 
 
 
+                alert(div_to_be_loaded);
                 div_to_be_loaded+="</tbody></table>";
                 document.getElementById(divid).innerHTML = div_to_be_loaded;
             }
         };
 
-        xmlhttp.open("GET", "/gettopicwisescoreofsubject/", true);
+        xmlhttp.open("GET", "/gettopicwisescoreofsubject?id="+subject, true);
         xmlhttp.overrideMimeType("text/xml");
         xmlhttp.send();
 
@@ -977,7 +901,7 @@ Main
                             <!--
                               <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
                           -->
-                            <div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="showsubjects();">
+                            <div style="width: 382px; height: 20px; padding-top: 1px;" class="selectedSB custom_selectedSB" id="sim_nav_sel_searchbar_1_selected" onclick="1showsubjects();">
                                 <div id="selected_class_name" style="font-style:italic;color:#AAA;">
                                     Enter Your Search
                                 </div>
@@ -1198,18 +1122,38 @@ Main
 
 
 <table width=100%>
+<tr>
 
 
+
+
+                       <div style="font: bold 18px Verdana; color: rgb(255, 255, 255);">
+                     <span onclick="dashboard()" style="display: inline-block; position: relative; vertical-align: middle; width: 100%; height: 40px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color: rgba(77, 125, 224, 0.89);">
+                        <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
+                        <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                            <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
+                                <div id="dashboardHeading" style="height: 30px; margin:auto;padding: 10px 40px 5px 400px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Student Information</div>
+                                         </div>
+                        </div>
+                     </span>
+                   </div>
+</tr>
+
+{% comment %}
 <tr>
 
     <div>
+
+
         <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px ridge rgb(29, 140, 228); border-radius: 5px; background-color: rgb(224, 224, 224); font: bold 20px Arial,Sans-Serif; color: rgb(62, 45, 45);" onclick="dashboard()" align="center">
+
             <a style="color:#133A82; font: bold 14px Verdana" id="dashboardHeading" onclick="dashboard()">Dashboard </a>
         </h2>
     </div>
 
 </tr>
 
+{% endcomment %}
 
 <!--  First Row.. -->
 
@@ -1648,6 +1592,86 @@ Main
     <div id="id_letterheads_9_insert_shortcut_33" style=" clear: both;; "></div>
 </div>
 
+<script>
+
+//subject,
+    function get_growthofsubject(divid){
+        //alert('getting readytolearn');
+
+//readytoLearn
+
+        document.getElementById(divid).innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById(divid).style.display='block';
+
+
+        var xmlhttp;
+
+
+
+        var subjects=new Array();
+        var growth=new Array();
+
+        var data = new google.visualization.DataTable();
+
+
+
+        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.overrideMimeType("text/xml");
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                no_of_subs = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
+
+                for (i = 0; i < no_of_subs; i++) {
+//                        alert('i = '+i);
+                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
+                    var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                    var score = parseInt(x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim());
+
+
+                    data.addRow([name,score]);
+
+
+                }
+
+
+
+
+
+                 var options = {'title':'Growth Subject Wise ',
+                     'width':400,
+                     'height':300};
+
+
+
+               // alert(div_to_be_loaded);
+                //div_to_be_loaded+="</tbody></table>";
+              //  document.getElementById(divid).innerHTML = div_to_be_loaded;
+
+
+        var chart = new google.visualization.LineChart(document.getElementById(divid));
+        chart.draw(data, options);
+            }
+        };
+
+        xmlhttp.open("GET", "/growthbysubject/", true);
+        xmlhttp.overrideMimeType("text/xml");
+        xmlhttp.send();
+
+
+
+
+
+    }
+
+</script>
 
 <script type="text/javascript">
     google.load("visualization", "1", {packages:["corechart"]});
@@ -1671,9 +1695,86 @@ Main
 
         };
 
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.LineChart(document.getElementById('12chart_div'));
         chart.draw(data, options);
     }
+</script>
+
+{% comment %}
+        List Pending assignments of all subject and populate pending_assignment id
+        input template : /pendingassessmentbysubject/
+
+{% endcomment %}
+
+<script>
+
+    function list_all_pending_assessments(){
+
+
+
+        document.getElementById('pendingassesments').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('pendingassesments').style.display='block';
+
+        var xmlhttp;
+
+        var  div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Pending Assesments in All Subjects</th><th>Due Date</th></tr>";
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.overrideMimeType("text/xml");
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                xmlDoc = xmlhttp.responseXML;
+
+                no_of_assesment = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
+
+                for (i = 0; i < no_of_assesment; i++) {
+
+                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
+                    var subject_name = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
+                    //alert(subject==subject_name);
+
+                    var assesmentKey = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                    var assesmentid =  x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
+                    var duedate = x.getElementsByTagName("due_date")[0].childNodes[0].nodeValue.trim();
+
+                    var innerdiv = "<tr><td><a href=\"/assessment?id="+assesmentKey+"\">" + assesmentid + "</a></td><td>" + duedate + "</td></tr>";
+
+                    div_to_be_loaded += innerdiv;
+
+                }
+
+
+
+                div_to_be_loaded+="</tbody></table>";
+
+                //alert(div_to_be_loaded);
+                document.getElementById("pendingassesments").innerHTML = div_to_be_loaded;
+
+
+
+
+            }
+        }
+
+        xmlhttp.open("GET", "/pendingassessmentbysubject/", true);
+        xmlhttp.overrideMimeType("text/xml");
+        xmlhttp.send();
+
+
+
+
+
+
+
+    }
+
+
 </script>
 
 </body>
