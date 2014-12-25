@@ -83,7 +83,7 @@ def asknextquestion(request):
             nextstatelist[session['studentname']].append(None)
             currentstatelist[session['studentname']].append(usersdict[session['studentname']].states[maxstatesize(session['studentname'])][maxstate(session['studentname'])].key)
             scorelist[session['studentname']].append(100)
-            completedtopics[session['studentname']][listoftopics[session['topicnumber']]]=1
+            completedtopics[session['studentname']][session['listoftopics'][session['topicnumber']]]=1
             logging.error("hii")
             #readytolearn[session['studentname']]=["Congratulations!!you have completed maths donut"]
         else:
