@@ -465,3 +465,7 @@ def vedicMaths(request):
 
 def xyz(request):
     return render_to_response('Dashboard/dashboardaleks.html',{},context_instance = RequestContext(request))
+
+
+def testreport(request):
+    return render_to_response('AssessingPie_toBeremoved/pie.html',{'student_name':"Courage",'subject_name':"Vedic Maths",'readytolearn':["Sum is 2?","Difference divident","Hiii i am there"],'num_known': 80 ,},context_instance = RequestContext(request))

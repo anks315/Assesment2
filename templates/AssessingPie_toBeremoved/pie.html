@@ -19,13 +19,13 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Knowledge', 'Fraction'],
-          ['Dont Know',    100-{{ num_known }}]  ,
-          ['Already Know',    {{ num_known }}]
+          ['Mastered',    100-{{ num_known }}]  ,
+          ['Not Mastered',    {{ num_known }}]
 
         ]);
 
         var options = {
-          title: 'Your Maths Donut',
+          title: 'Mastery Donut',
           pieHole: 0.4
         };
 
@@ -48,7 +48,7 @@
 
 
         var options = {
-          title: 'Your History With Critical Velos',
+          title: 'Your Growth line in {{ subject_name }}',
              animation:{
         duration: 1000,
         easing: 'out'
@@ -79,17 +79,29 @@
 
     //var text = "";
 
-    doc.text(20, 20, 'Hello Ankit Bhatia');
-     doc.text(20, 30, "Ready to Learn");
+        doc.setTextColor( 63, 0, 255);
+
+    doc.text(85, 20, 'Report Card');
+    	doc.setFontSize(6);
+    doc.text(92, 25, 'Powered by Critical Velos');
+    doc.setFontSize(10);
+     doc.setTextColor( 175, 64, 53);
+    doc.text(10,40,'Student Name:');
+    doc.text(35,40,"{{ student_name }}");
+
+    doc.text(120,40,'Course Name:');
+    doc.text(145,40,"{{ subject_name }}");
+
+   //  doc.text(20, 30, "Ready to Learn");
     {% for readytolearntopic in readytolearn %}
 
 
 
-     doc.text(20, 10, "{{ readytolearntopic }}");
+    // doc.text(20, 10, "{{ readytolearntopic }}");
 
     {% endfor %}
     var donutimage = donutchart.getImageURI();
-    doc.addImage(donutimage, 'PNG', 15, 40, 100, 100);
+  //  doc.addImage(donutimage, 'PNG', 15, 40, 100, 100);
 
     doc.output('datauri');
     }
@@ -100,15 +112,44 @@
   </head>
 
   <body >
+ <div id="report_heading">
+ <img src="/images/cv_i.png" align="right"  style="margin-top: 0%;width:5%;height: 5%;"/>
+ <p><h1 style=" text-align: center;color: blue;"><br>Report Card<br></h1>
+    <h6 style=" margin-left: 41%;color: blue;">Powered by Critical Velos</h6></p>
 
+
+ </div>
+ <div style="float: right">  <button style="background-color:lightskyblue;" onclick="generateReport()">Generate Pdf</button></div>
+     <br>
+ <div id="student_details">
+     <hr style="color: blue">
+
+     <p>
+     <h4 style="margin-left:10%;display: inline;color: red;"><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Student Name: &nbsp{{ student_name }}
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     Course Name: &nbsp{{ subject_name }}</h4></p>
+
+
+     <br>
+     <hr style="color: blue">
+
+ </div>
+ <br>
   <div>
-    <div align="left" id="donutchart" style="width: 900px; height: 300px;"></div>
-    <div align="left" id="readytolearn" style="margin-left:400px;">
+    <h3 style="color: blue"> &nbsp&nbsp&nbsp 1.) Course Analysis </h3><br>
+    <div  id="donutchart" style="float:left;width: 40%; height:5%;"></div>
+
+
+    <div id="readytolearn" style="margin-left:50%;" >
 
 <table class="gridtable">
-    <col width="350">
+
 <tr>
-	<th>Readytolearn(Outer Fringe)</th>
+	<h6>Readytolearn(Outer Fringe)</h6>
 </tr>
  {% for readytolearntopic in readytolearn %}
 <tr>
@@ -120,10 +161,20 @@
 
       </div>
 
-   </div>
+  </div>
+ <br>
+  <br>
+  <br>
+  <br>
+ <br>
+ <br>
+ <hr color="blue">
 
-  <div>  <button onclick="generateReport()">Generate Pdf</button></div>
-  <div id="chart_div" style="width:900px; height: 300px;"></div>
+<h3 style="color: blue"> &nbsp&nbsp&nbsp 2.) Course History </h3><br>
+<div align="right" id="chart_div" style="float:left;width:100%; height: 40%;"></div>
+
+
+
 
 
 

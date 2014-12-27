@@ -21,6 +21,9 @@ handlers:
   static_files: static/css/\1
   upload: static/css/.*
 
+- url: /testreport(.*)
+  script: main.app
+
 - url: /assessment(.*)
   script: main.app
 
