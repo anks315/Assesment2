@@ -11,8 +11,13 @@
 </head>
 <script>
 
+    var title_selected=1;
+
+    var scrolposition = 100;
+
     $(document).ready(function(){
         generic_slidedownanimation(1);
+
 
         // $("#header_tag").innerHTML="What is SCAN?";
      });
@@ -32,6 +37,7 @@
 
                  document.getElementById("about_option"+i).style.background="#8DABEB";
                 document.getElementById("about_option"+i).style.fontWeight="300";
+                title_selected=i;
                 // document.getElementById("span_about_option"+a).innerHTML.replace(' =>','');
 
 
@@ -40,7 +46,7 @@
 
                  $("#detail_click_about_option"+a).slideDown("7000");
 
-
+                title_selected=a;
                  document.getElementById("about_option"+a).style.background="#1C54B7";
                 document.getElementById("about_option"+a).style.fontWeight="700";
                 text= document.getElementById("span_about_option"+a).innerHTML;
@@ -66,7 +72,7 @@
             <a style="padding-right: 10px;" class="wlnk" href="/login/">LOGIN</a>
             <a style="padding-right: 10px;" class="wlnk" href="/contact_us/">CONTACT US</a>
             <a style="padding-right: 10px;" class="wlnk" href="#">FEEDBACK</a>
-            <a style="padding-right: 10px;" class="wlnk" href="#">FAQ</a>
+            <a style="padding-right: 10px;" class="wlnk" href="#">TAKE A FREE TOUR</a>
         </div>
 
         <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
@@ -76,12 +82,12 @@
             </a>
             <a href="/home_scan/" class="ssb">
                 <span class="ssb active" id="but_2">
-                <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN?</span></span>
+                <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN</span></span>
             </a>
 
-            <a href="#" class="ssb">
+            <a href="/vedicMaths/" class="ssb">
                 <span class="ssb" onmouseover="sel('3');" onmouseout="uns('3');" id="but_3" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_3">TAKE&nbsp;A&nbsp;FREE&nbsp;TRIAL</span></span>
+                <span class="sub" id="sbut_3">Vedic Maths</span></span>
             </a>
 
 
@@ -118,8 +124,8 @@
 
 
         <!-- abc -->
-        <div style="width: 98%;height: 450px;overflow-y: auto;box-shadow: 10px 10px 5px #888;border: 2px solid rgba(249, 240, 240, 1);">
-        <table style="width: 98%;height: 445px;margin: auto 5% auto auto;padding-left: 5%;padding-right: 5%;">
+        <div style="width: 98%;height: 440px;overflow-y: auto;box-shadow: 10px 10px 5px #888;border: 2px solid rgba(249, 240, 240, 1);">
+        <table style="width: 98%;height: 425px;margin: auto 5% auto auto;padding-left: 5%;padding-right: 5%;">
  	       <tbody>
 
               <tr height="30">
@@ -178,7 +184,9 @@
                         <p>It was to His Holiness’s extreme amazement that the sutras dealt with mathematics in all its branches. He realized only sixteen sutras cover all branches of mathematics – arithmetic, algebra, geometry, trigonometry, physics, plain and spherical geometry, conics, calculus, both differential and integral, applied mathematics of various kinds, dynamics, hydrostatics, static, kinematics and all.</p>
                         <p>Vedic Mathematics (1965) that is a pioneer work of Bharati Krishna Tirthaji, has techniques of Vedic mathematics. It is considered as a first work towards Vedic Mathematics.
 In late 1960s a copy of his book reached London and from there Vedic Mathematics was reborn. It was taken up as a new alternative system of mathematics. British mathematicians got interested in Vedic mathematics. Many lectures on this were delivered which later on were collected in the book – Introductory Lectures on Vedic Mathematics. After the visit of Andrew Nicholas to India between 1981 and 1987, interest in Vedic maths started to develop in India.</p>
-                       </div>
+
+
+                    </div>
 
                     <div class="detail_vedic_scan" id="detail_click_about_option2" style="display: none">
                         <p>Mathematics has been a subject that has probably most vast implications in education. Some mathematical concepts and calculations are also used in many other branches of education (like Physics, Chemistry, Accounts etc). Ranging from elementary classes (like Class I, II) to higher level competitions (Management, Engineering etc) maths plays an important part in success of the student. </p>
@@ -239,6 +247,10 @@ In late 1960s a copy of his book reached London and from there Vedic Mathematics
 
 
 
+                    <div style="position: relative;right:10px;float: right;">
+                        <button style="background-color: #4c76c7;color: #fffbff; font-weight: bolder;" onclick="jquerytextslide()">Readmore..</button>
+                    </div>
+
 
                      </td>
                 </tr>
@@ -286,5 +298,24 @@ In late 1960s a copy of his book reached London and from there Vedic Mathematics
 </div>
 
     </div>
+
+
+<script>
+    function jquerytextslide(){
+
+//alert(scrolposition);
+       $( "#detail_click_about_option"+ title_selected).scrollTop(scrolposition);
+        $( "#detail_click_about_option"+ title_selected).animate({top:scrolposition});
+                scrolposition=scrolposition+100;
+
+
+
+{#        var scrolindex = $( "#detail_click_about_option"+ 1).scrollTop();#}
+{#        $( "#detail_click_about_option"+ 1).scrollTop(scrolindex);#}
+{#       // alert(conntenttoscroll);#}
+
+    }
+
+</script>
 
 </body>

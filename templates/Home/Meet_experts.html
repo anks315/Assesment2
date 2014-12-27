@@ -8,7 +8,9 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
        <script src="/js/jquery-1.11.1.js"></script>
     <style>
-        #about-us{display:block; width:100%; line-height:1.6em;}
+
+
+#about-us{display:block; width:99%; line-height:1.6em;}
 #about-us h2{margin-bottom:40px; padding-bottom:20px; border-bottom:1px solid #CCCCCC;}
 
 #about-us #statements{margin-bottom:50px;}
@@ -21,9 +23,9 @@
 #about-us #team ul li div{}
 #about-us #team ul li div:first-child{}
 #about-us #team ul li div img{padding:4px; border:1px solid #CCCCCC;}
-#about-us #team ul li p{margin:15px 0 0 0; padding:0;}
+#about-us #team ul li p{margin:5px 0 0 0; padding:0;}
 #about-us #team ul li p:first-child{}
-#about-us #team ul li .team_name{font-weight:bold;}
+#about-us #team ul li .team_name{font-weight:bold;font-size:15px;}
 #about-us #team ul li .team_title{margin:0; font-size:11px; line-height:normal;}
 #about-us #team ul li .team_description{}
 #about-us #team ul ul{position:absolute; top:0; right:0;}
@@ -49,34 +51,38 @@
 .one_half:first-child,
 .one_third:first-child, .two_third:first-child,
 .one_quarter:first-child, .two_quarter:first-child, .three_quarter:first-child,
-.one_fifth:first-child, .two_fifth:first-child, .three_fifth:first-child, .four_fifth:first-child{margin-left:0;}
+.one_fifth:first-child, .two_fifth:first-child, .three_fifth:first-child, .four_fifth:first-child{margin-left:10px;}
 
-.two_half, .three_third, .four_quarter, .five_fifth{display:block; width:100%; clear:both;}
+.two_half, .three_third, .four_quarter, .five_fifth{display:block; width:98%; clear:both;}
 
 /*----------------------------------------------Half Grid-------------------------------------*/
 
-.one_half{width:470px;}
+.one_half{width:50%;}
 
 /*----------------------------------------------Third Grid-------------------------------------*/
 
-.one_third{width:300px;}
-.two_third{width:630px;}
+.one_third{width:30%;}
+.two_third{width:60%;}
 
 /*----------------------------------------------Quarter Grid-------------------------------------*/
 
-.one_quarter{width:225px;}
-.two_quarter{width:470px;}
-.three_quarter{width:715px;}
+.one_quarter{width:25%;float: left}
+.two_quarter{width:50%;float: right}
+.three_quarter{width:75%;}
 
 /*----------------------------------------------Fifth Grid-------------------------------------*/
 
-.one_fifth{width:176px;}
-.two_fifth{width:372px;}
-.three_fifth{width:568px;}
-.four_fifth{width:764px;}
+.one_fifth{width:20%;}
+.two_fifth{width:40%;}
+.three_fifth{width:60%;}
+.four_fifth{width:80%;}
+
+        .clear{width: 98%;}
 
     </style>
 </head>
+
+
 
 
 <script>
@@ -107,14 +113,14 @@
 
     <div class="template_body" style="">
         <div class="template_inner_body" style="">
-            <a class="symbol" href="#" target="_top">
+            <a class="symbol" href="/" target="_top">
                 <img align="baseline" alt="CRITICAL VELOS" border="0" hspace="0" src="/images/logo.png" style="width: 224px; height: 45px">
             </a>
         <div style=" float: right;; " aria-label="Quick links" role="navigation">
             <a style="padding-right: 10px;" class="wlnk" href="/login/">LOGIN</a>
             <a style="padding-right: 10px;" class="wlnk" href="/contact_us/">CONTACT US</a>
             <a style="padding-right: 10px;" class="wlnk" href="#">FEEDBACK</a>
-            <a style="padding-right: 10px;" class="wlnk" href="#">FAQ</a>
+             <a style="padding-right: 10px;" class="wlnk" href="#">TAKE A FREE TOUR</a>
         </div>
 
  <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
@@ -124,12 +130,12 @@
             </a>
             <a href="/home_scan/" class="ssb">
                 <span class="ssb" onmouseover="sel('2');" onmouseout="uns('2');" id="but_2" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN?</span></span>
+                <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN</span></span>
             </a>
 
-            <a href="#" class="ssb">
+            <a href="/vedicMaths/" class="ssb">
                 <span class="ssb" onmouseover="sel('3');" onmouseout="uns('3');" id="but_3" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_3">TAKE&nbsp;A&nbsp;FREE&nbsp;TRIAL</span></span>
+                <span class="sub" id="sbut_3">Vedic Maths</span></span>
             </a>
 
 
@@ -167,76 +173,56 @@
 
 
 
-<div id="pic_table" style="width: 100%; height: 450px; overflow:auto;box-shadow: 10px 10px 5px #888;border: 2px solid rgba(249, 240, 240, 1);">
+<div id="pic_table" style="width: 100%; height: 430px; overflow:auto;box-shadow: 10px 10px 5px #888;border: 2px solid rgba(249, 240, 240, 1);">
 
-    <div class="wrapper row2">
+    <div style="padding: 10px;margin: 5px;" class="wrapper row2">
         <div id="container" class="clear">
         <div id="about-us" class="clear">
-      <!-- ####################################################################################################### -->
-      <section id="statements" class="clear">
-        <p>In odio. Mauris feugiat. Nunc posuere, felis sit amet faucibus convallis, tortor enim viverra quam, hendrerit interdum dui quam ut lacus. Ut dui dui, viverra ac, vulputate scelerisque, viverra molestie, tortor. Nullam quis odio id justo accumsan ullamcorper. Mauris lectus enim, luctus vitae, viverra a, pharetra mollis, diam. Donec sed lorem eget nibh sagittis dictum. Curabitur libero. Integer molestie mi sed tellus.</p>
-        <p>Praesent imperdiet justo at sem. Nam accumsan dui eget diam.Nulla quis ante eget pede fringilla rutrum. Proin mollis tristique orci. Nam est. Fusce felis nisl, volutpat vel, sollicitudin eu, luctus sit amet, sem. Curabitur risus erat, scelerisque sit amet, mollis id, consectetuer eu, neque. Curabitur sodales semper arcu. Sed ullamcorper arcu eu ante. Vestibulum sed lacus. Quisque vitae libero. Sed quis turpis vitae lectus vehicula tincidunt. Aliquam quam mi, rutrum malesuada, consequat vitae, accumsan ut, lacus. Nulla dictum vestibulum lorem.</p>
+{% comment %}
+<section id="statements" class="clear">
+        <p>We are a research based organization working on solutions that will be helpful for betterment of the society. We at Critical Velos believe that use of technology can bring revolutionary changes in the society. Hence we are working on solutions that are the need of 21st century. Our team is dedicated to develop products that can be used in various sectors of the society and take society further. We to enhance the performance of every individual with the help of our innovative and easy to use products.</p>
+        <p>In addition to technology development we take utmost care that there is balance between technology and human work and there must not be any adverse effect of any of our solution.</p>
+        <p>We understand that human values are invaluable hence use of technology should not affect the human values so one dimension of our research totally takes care of this concern. We make sure that human values should not be compromised wherever we use our technology.</p>
       </section>
-      <!-- ####################################################################################################### -->
+      {% endcomment %}
+
       <section id="team">
-        <h2>Vivamuslibero Auguer</h2>
+        <h2>Team Critical Velos</h2>
         <ul>
-          <li class="clear">
-            <div class="one_quarter"><img src="images/demo/team-member.gif" alt=""></div>
-            <div class="three_quarter">
-              <p class="team_name">Name Goes Here</p>
-              <p class="team_title">Job Title Here</p>
+            <div class="one_third" ><img style="width: 100%;height: 100%;" src="/images/team/kapil.jpg" alt=""></div>
+            <div class="two_third">
+              <p class="team_name"><strong>Kapil Bhandari</strong></p>
+              <p class="team_title">Chief Architect of Critical Velos Pvt Ltd</p>
               <div class="team_description">
-                <p>Praesent imperdiet justo at sem. Nam accumsan dui eget diam.Nulla quis ante eget pede fringilla rutrum. Proin mollis tristique orci. Nam est. Fusce felis nisl, volutpat vel, sollicitudin eu, luctus sit amet, sem. Curabitur risus erat, scelerisque sit amet, mollis id, consectetuer eu, neque.</p>
-                <p>Quisque vitae libero. Sed quis turpis vitae lectus vehicula tincidunt. Aliquam quam mi, rutrum malesuada, consequat vitae, accumsan ut, lacus. Nulla dictum vestibulum lorem.</p>
+                <p>Kapil Bhandari is a Graduate in CSE from PEC Chandigarh having 2 Years of Industrial Experience with Samsung Electronics on Android Framework and MDM. Have technical interests in Security and Algorithms and currently doing research work on use of  Mobile Device Management and VPN for Education system and contribute to the society.</p>
+                <p>This website is developed by mr bhandari.</p>
               </div>
-              <ul>
-                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
-                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
-                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
-                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
-                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
-              </ul>
+  {% comment %}            <ul>
+                <li><a href="#"><img src="/images/icons/bar-chart.png" alt=""></a></li>
+                <li><a href="#"><img src="/images/icons/bar-chart.png"  alt=""></a></li>
+                <li><a href="#"><img src="/images/icons/bar-chart.png"  alt=""></a></li>
+                <li><a href="#"><img src="/images/icons/bar-chart.png"  alt=""></a></li>
+                <li><a href="#"><img src="/images/icons/bar-chart.png"  alt=""></a></li>
+              </ul>{% endcomment %}
             </div>
-          </li>
-          <li class="clear">
-            <div class="one_quarter"><img src="images/demo/team-member.gif" alt=""></div>
-            <div class="three_quarter">
-              <p class="team_name">Name Goes Here</p>
-              <p class="team_title">Job Title Here</p>
-              <div class="team_description">
-                <p>Praesent imperdiet justo at sem. Nam accumsan dui eget diam.Nulla quis ante eget pede fringilla rutrum. Proin mollis tristique orci. Nam est. Fusce felis nisl, volutpat vel, sollicitudin eu, luctus sit amet, sem. Curabitur risus erat, scelerisque sit amet, mollis id, consectetuer eu, neque.</p>
-                <p>Quisque vitae libero. Sed quis turpis vitae lectus vehicula tincidunt. Aliquam quam mi, rutrum malesuada, consequat vitae, accumsan ut, lacus. Nulla dictum vestibulum lorem.</p>
-              </div>
-              <ul>
-                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
-                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
-                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
-                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
-                <li><a href="#"><img src="images/demo/social-icon.png" alt=""></a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+          </ul>
       </section>
-      <!-- ####################################################################################################### -->
-      <section id="client_logos">
-        <h2>Vivamuslibero Auguer</h2>
-        <ul class="clear">
-          <li class="one_fifth first"><img src="images/demo/logo.gif" alt=""></li>
-          <li class="one_fifth"><img src="images/demo/logo.gif" alt=""></li>
-          <li class="one_fifth"><img src="images/demo/logo.gif" alt=""></li>
-          <li class="one_fifth"><img src="images/demo/logo.gif" alt=""></li>
-          <li class="one_fifth"><img src="images/demo/logo.gif" alt=""></li>
+
+
+
+{% comment %}            <section id="client_logos">
+        <h2>Our Partners</h2>
+        <ul class="clear" style="display: inline">
+          <li class="one_fifth first"><img src="/images/logo.png" alt=""></li>
+          <li class="one_fifth"><img src="/images/logo.png" alt=""></li>
+          <li class="one_fifth"><img src="/images/logo.png" alt=""></li>
+          <li class="one_fifth"><img src="/images/logo.png" alt=""></li>
+          <li class="one_fifth"><img src="/images/logo.png" alt=""></li>
         </ul>
-      </section>
-      <!-- ####################################################################################################### -->
+      </section>{% endcomment %}
+
+       </div>
     </div>
-    <!-- ####################################################################################################### -->
-    <!-- ####################################################################################################### -->
-    <!-- ####################################################################################################### -->
-    <!-- ####################################################################################################### -->
-  </div>
 </div>
 
 </div>

@@ -8,7 +8,7 @@ padding:0;
 body {
     font-family: ArumSansRg, Arial, Sans-Serif;
     font-size: 16px;
-    color: #32484C;
+    color: #24214c;
     background-color: #ebe8da;
 }
 
@@ -22,7 +22,7 @@ padding-top:15px;
 }
 
 div.template_inner_body{
-    padding:15px;
+    padding:10px 10px 0px 10px;
 }
 
 div.template_background {
@@ -1041,11 +1041,19 @@ table {
 
 }
 .detail_vedic_scan{
-    height: 380px;
+    height: 350px;
     margin: 10px;
     padding: 5px;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
+
+.detail_vedic_scan p{
+   margin:20px 0 0 0;
+    padding:0;
+    font-size: 14px;
+
+}
+
 .bordered {
     border: solid #ccc 1px;
     -moz-border-radius: 6px;
