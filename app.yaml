@@ -36,6 +36,9 @@ handlers:
 - url: /graph/(.*)
   script: main.app
 
+- url: /getcourseinformation(.*)
+  script: main.app
+
 - url: /signout/(.*)
   script: main.app
 

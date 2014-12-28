@@ -351,7 +351,7 @@ Main
 
 
 
-        document.getElementById('masteryDetails').innerHTML="<table style=\"width: 80%; margin: 2px;\" class=\"tableSB custom_tableSB\" cellspacing=\"0\" cellpadding=\"0\"><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Total Students Enrolled  - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>23</td></tr><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Average Course Rate  - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>23</td></tr><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Total qualified Rate  - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>20</td></tr><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Course Rate - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>60%</td></tr></table>";
+        //document.getElementById('masteryDetails').innerHTML="<table style=\"width: 80%; margin: 2px;\" class=\"tableSB custom_tableSB\" cellspacing=\"0\" cellpadding=\"0\"><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Total Students Enrolled  - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>23</td></tr><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Average Course Rate  - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>23</td></tr><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Total qualified Rate  - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>20</td></tr><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Course Rate - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>60%</td></tr></table>";
         //document.getElementById('readytoLearn').innerHTML="<div style=\"position:absolute; top:70px; left:170px; width:50px; height:100px;\"><img src=\"/images/icons/dice3.gif\"/></div><div style=\"position:absolute; top:150px; left:75px; width:400px; height:100px;\"><strong><p> Please <a href=\"#\">Take A Sample Assesment </a>to enable this functionality ..</p></strong></div>";
       //  document.getElementById('pending_assignment').innerHTML="<div style=\"position:absolute; top:70px; left:170px; width:50px; height:100px;\"><img src=\"/images/icons/dice3.gif\"/></div><div style=\"position:absolute; top:150px; left:75px; width:400px; height:100px;\"><strong><p> Please <a href=\"#\">Take A Sample Assesment </a>to enable this functionality ..</p></strong></div>";
       //  document.getElementById('subject_chart_div').innerHTML="<div style=\"position:absolute; top:70px; left:170px; width:50px; height:100px;\"><img src=\"/images/icons/dice3.gif\"/></div><div style=\"position:absolute; top:150px; left:75px; width:400px; height:100px;\"><strong><p> Please <a href=\"#\">Take A Sample Assesment </a>to enable this functionality ..</p></strong></div>";
@@ -362,7 +362,13 @@ Main
         //document.getElementById("masteryDetails").innerHTML="";
         getdonutmastery_subject(coursename);
         get_ready_tolearn(coursename,"subject_chart_div");
-        get_topicwisescoreofsubject(coursekey,"readytoLearn");
+
+
+
+       // get_topicwisescoreofsubject(coursekey,"readytoLearn");
+
+
+        get_course_information(coursekey,"masteryDetails");
 
         {#        list_pending_assignments(subject);#}
         {#        learningprogress_bydate_sub(subject);#}
@@ -770,10 +776,6 @@ Main
                     div_to_be_loaded=div_to_be_loaded+innerdiv;
 
                 }
-
-
-
-
                 div_to_be_loaded+="</tbody></table>";
                 document.getElementById(divid).innerHTML = div_to_be_loaded;
             }
@@ -788,6 +790,42 @@ Main
 
 
     }
+
+ function get_course_information(coursekey,divid){
+
+
+
+      
+        document.getElementById(divid).innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById(divid).style.display='block';
+
+
+        var xmlhttp;
+
+        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.overrideMimeType("text/xml");
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                totalstudents = xmlhttp.responseXML.documentElement.getElementsByTagName("total_students")[0].childNodes[0].nodeValue.trim();
+                num_completed = xmlhttp.responseXML.documentElement.getElementsByTagName("number_completed")[0].childNodes[0].nodeValue.trim();
+                average_score= xmlhttp.responseXML.documentElement.getElementsByTagName("average_score")[0].childNodes[0].nodeValue.trim();
+
+                     document.getElementById(divid).innerHTML = "<table style=\"width: 80%; margin: 2px;\" class=\"tableSB custom_tableSB\" cellspacing=\"0\" cellpadding=\"0\"><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Total Students Enrolled  - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>"+ totalstudents+"</td></tr><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Number of Students completed   - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>"+num_completed+"</td></tr><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div>Average Score of Students - </td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div>"+average_score+"</td></tr><tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\"</div></td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div></td></tr></table>";
+            }
+        };
+
+        xmlhttp.open("GET", "/getcourseinformation?id="+coursekey, true);
+        xmlhttp.overrideMimeType("text/xml");
+        xmlhttp.send();
+}
 </script>
 
 {#     display or hide courses or subjects list    #}
@@ -847,7 +885,7 @@ Main
                 <td  width="25%">
                     <div style=" float: right;; " aria-label="Quick links" role="navigation">
                         <a style="padding: 20px;" class="wlnk" href="#">Help</a>
-                        <a style="padding: 20px;" class="wlnk" href="#">SignOut</a>
+                        <a style="padding: 20px;" class="wlnk" href="/signout/">SignOut</a>
                     </div>
                 </td>
                 <td  width="12%">
