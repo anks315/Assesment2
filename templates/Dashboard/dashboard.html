@@ -303,7 +303,7 @@ Main
 
     function showreportbysubjects(subject){
 
-        // alert("caled");
+
 
         $("#dashboard_row1").hide();
         $("#dashboard_row2").hide();
@@ -325,7 +325,7 @@ Main
 
     function showreportbycourses(coursename,coursekey){
 
-        //  alert("caled");
+
 
         $("#dashboard_row1").show();
         $("#dashboard_row2").hide();
@@ -409,7 +409,7 @@ Main
 
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
                     var subject_name = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
-                    //alert(subject==subject_name);
+
                     if (subject_name==subject)
                     {
 
@@ -431,7 +431,7 @@ Main
 
                 div_to_be_loaded+="</tbody></table>";
 
-                //alert(div_to_be_loaded);
+
                 document.getElementById("pending_assignment").innerHTML = div_to_be_loaded;
 
 
@@ -488,7 +488,7 @@ Main
 
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
                     var subject_name = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
-                    //alert(subject==subject_name);
+
                     if (subject_name==subject)
                     {
 
@@ -510,7 +510,7 @@ Main
 
                 div_to_be_loaded+="</tbody></table>";
 
-                //alert(div_to_be_loaded);
+
                 document.getElementById("pending_assignment").innerHTML = div_to_be_loaded;
 
 
@@ -584,7 +584,7 @@ Main
 
 
     function get_ready_tolearn(subject,divid){
-        //alert('getting readytolearn');
+
 
 //readytoLearn
 
@@ -688,7 +688,7 @@ Main
 
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
                     var subject_name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                    //alert(subject==subject_name);
+
                     if (subject_name==subject) {
 
                         var score = parseFloat(x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim());
@@ -733,7 +733,7 @@ Main
 <script>
 
     function get_topicwisescoreofsubject(subject,divid){
-        //alert('getting readytolearn');
+
 
 //readytoLearn
 
@@ -758,7 +758,7 @@ Main
                 no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
 
                 for (i = 0; i < no_of_topics; i++) {
-                        alert('i = '+i);
+
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
                     var score = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
@@ -773,7 +773,7 @@ Main
 
 
 
-                alert(div_to_be_loaded);
+
                 div_to_be_loaded+="</tbody></table>";
                 document.getElementById(divid).innerHTML = div_to_be_loaded;
             }
@@ -1597,7 +1597,7 @@ Main
 
 //subject,
     function get_growthofsubject(divid){
-        //alert('getting readytolearn');
+
 
 //readytoLearn
 
@@ -1631,12 +1631,12 @@ Main
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
              var   no_of_subs = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
-             alert(no_of_subs);
+
 
 
 
                 for (i = 0; i < no_of_subs; i++) {
-//                        alert('i = '+i);
+//
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
 
@@ -1764,7 +1764,7 @@ Main
 
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
                     var subject_name = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
-                    //alert(subject==subject_name);
+
 
                     var assesmentKey = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
                     var assesmentid =  x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
@@ -1780,7 +1780,7 @@ Main
 
                 div_to_be_loaded+="</tbody></table>";
 
-                //alert(div_to_be_loaded);
+
                 document.getElementById("pendingassesments").innerHTML = div_to_be_loaded;
 
 
