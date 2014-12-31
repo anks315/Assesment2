@@ -75,6 +75,7 @@ class  UserBuffer:
 
 readytolearn = {}
 readytolearnquestionkey = {}
+topictimespend ={}
 nextstatelist = {}
 scorelist ={}
 currentstatelist={}
