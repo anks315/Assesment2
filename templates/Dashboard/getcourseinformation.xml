@@ -1,0 +1,12 @@
+<root>
+  <total_students>
+      {{total_students}}
+  </total_students>
+  <number_completed>
+      {{ number_completed }}
+  </number_completed>
+  <average_score>
+     {{average_score}}
+  </average_score>
+
+</root>

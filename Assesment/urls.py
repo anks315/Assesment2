@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'Assesment.views.home', name='home'),
     # url(r'^Assesment/', include('Assesment.foo.urls')),
+    (r'^getcourseinformation$', 'AssessingPie.student_dashboard_data.getcourseinformation'),
     (r'^testreport$', 'AssessingPie.views.testreport'),
     (r'^signout/$', 'AssessingPie.views.signout'),
     (r'^subjectdetailsofstudent$', 'AssessingPie.student_dashboard_data.subjectdetailsofstudent'),

@@ -155,3 +155,12 @@ def getgrowthofsubject(request):
     c = Context({'growth':growthdict,})
     return HttpResponse(t.render(c),
     content_type="text/xml")
+
+def getcourseinformation(request):
+    key = request.GET['id']
+    subjectkey = ndb.Key(urlsafe=key)
+    courseinformation=Query.get_course_detail_by_subject(subjectkey)
+    t = loader.get_template('Dashboard/getcourseinformation.xml')
+    c = Context({'total_students':courseinformation['Total_Students'],'number_completed':courseinformation['100_Score_Students'],'average_score':courseinformation['Average_Score']})
+    return HttpResponse(t.render(c),
+    content_type="text/xml")

@@ -28,6 +28,7 @@ def asknextquestion(request):
 
     c=session.get('studentname',-1)
     if c != -1:
+
         if request.method != 'POST':
             usersdict.pop(c, None)
             assessmentkey = request.GET['id']
@@ -166,6 +167,12 @@ def asknextquestion(request):
 # redirect to home page
 # html : homepage.html
 def home(request):
+     session = get_current_session();
+     if session.get('studentname',-1)!=-1:
+        if session['type'] == Constant.Constant.TEACHER:
+            return render_to_response('Dashboard/teacherdashboard.html',{},context_instance = RequestContext(request))
+        if session['type'] == Constant.Constant.STUDENT:
+            return render_to_response('Dashboard/dashboard.html',{},context_instance = RequestContext(request))
 
      return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
@@ -373,6 +380,7 @@ def askquestion(block,antecedentid):
 
 def signout(request):
     session = get_current_session()
+
     if session['type'] == Constant.Constant.STUDENT:
         del session['studentkey']
         del session['schoolkey']
