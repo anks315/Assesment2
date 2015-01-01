@@ -76,7 +76,7 @@
                 document.getElementById("email_id").innerHTML = email_id[0].childNodes[0].nodeValue;
                 document.getElementById("lastLogin").innerHTML = lastlogin[0].childNodes[0].nodeValue;
                 document.getElementById("contactno").innerHTML = contactno[0].childNodes[0].nodeValue;
-                document.getElementById("dashboardHeading").innerHTML= "Hello "+username[0].childNodes[0].nodeValue.trim()+" !!";
+                document.getElementById("dashboardHeading").innerHTML= username[0].childNodes[0].nodeValue+" Dashboard ";
 
 
             }
@@ -708,7 +708,7 @@ Main
             }
         };
 
-        //alert("/getreadytolearn_ofsubject?id="+subjectkey);
+        alert("/getreadytolearn_ofsubject?id="+subjectkey);
         xmlhttp.open("GET", "/getreadytolearn_ofsubject?id="+subjectkey, true);
         xmlhttp.overrideMimeType("text/xml");
         xmlhttp.send();
@@ -907,29 +907,30 @@ Main
 
 
 
-<body style="border-left: 4px solid #133A82;border-right: 4px solid #133A82">
-    <div class="template_body" style="padding: 10px;border-radius: 20px;">
-
-<div class="template_header" style="padding: 0px;">
+<body>
+<div class="template_background">
+<div class="template_header" style="">
+<div class="template_header" style="">
     <div class="template_main_header" style="border-bottom: 2px solid rgba(28, 156, 88, 1);">
 
         <table  width="100%">
             <tr >
-                <td width="3%">
-
+                <td  width="5%" >
                 </td>
-                <td  width="22%">
+                <td  width="25%">
                     <a class="symbol" href="#" target="_top">
                         <img align="baseline" alt="Critical Velos" border="0" hspace="0" src="/images/logo.png" style="width: 224px; height: 45px">
                     </a>
                 </td>
-                <td width="50%">
+                <td width="25%">
                 </td>
                 <td  width="25%">
                     <div style=" float: right;; " aria-label="Quick links" role="navigation">
                         <a style="padding: 20px;" class="wlnk" href="#">Help</a>
-                        <a style="padding: 20px;" class="wlnk" href="/signout/">SignOut</a>
+                        <a style="padding: 20px;" class="wlnk" href="#">SignOut</a>
                     </div>
+                </td>
+                <td  width="12%">
                 </td>
             </tr>
         </table> </div>
@@ -939,11 +940,11 @@ Main
     <div id="sel_nav_bar_container" style="">
 
 
-        <div style="position: relative; width: 100%; padding-top: 10px; background: linear-gradient(to bottom, rgb(194, 212, 219) 0%, rgb(163, 179, 184) 100%) repeat scroll 0% 0% transparent; text-align: center; font-size: 0px;" id="sim_dir_naviguator">
+        <div style="position: relative; width: 100%; padding-top: 35px; background: linear-gradient(to bottom, rgb(194, 212, 219) 0%, rgb(163, 179, 184) 100%) repeat scroll 0% 0% transparent; text-align: center; font-size: 0px;" id="sim_dir_naviguator">
 	<span style="display: inline-block; position: relative; width: 1000px; text-align: left; font-size: 0px;">
 	<div style="position: absolute; left: 88px; bottom: 100%; padding-bottom: 5px; color: rgb(24, 144, 186); font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold;">
     </div>
-	<div id="sim_dir_nav_container" style="position: relative; padding: 0px 5px;">
+	<div id="sim_dir_nav_container" style="position: relative; padding: 0px 27px;">
 		<span style="position: relative; vertical-align: bottom; display: inline-block; margin-right: 11px;" onclick="dashboard()">
             <span style="display: inline-block; position: relative; vertical-align: bottom; width: 50px; height: 63px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; overflow: hidden; border-radius: 8px 8px 0px 0px; background-color: rgb(37, 163, 16);">
                 <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
@@ -1053,7 +1054,7 @@ Main
 
 </div>
 
-
+</div>
 
 <div style="position: relative; z-index: 1; width: 100%; border-bottom: 3px solid rgb(101, 149, 94); border-top: 3px solid rgb(140, 186, 37);" id="sel_menu_bar_container">
 
@@ -1198,7 +1199,7 @@ Main
     }
 </script>
 
-<div class="template_main_body" style="">
+<div class="template_main_body">
 
 
 <table width=100%>
@@ -1212,7 +1213,7 @@ Main
                         <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
                         <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
                             <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
-                                <div id="dashboardHeading" style="height: 30px; margin:auto;padding: 10px 40px 5px 20px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Student Information</div>
+                                <div id="dashboardHeading" style="height: 30px; margin:auto;padding: 10px 40px 5px 400px; line-height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Student Information</div>
                                          </div>
                         </div>
                      </span>
@@ -1648,37 +1649,28 @@ Main
 </div>
 
 
+<div class="footer_div" style="">
 
-               <!--   Footers of the page   -->
-
-         <div class="footer_div" style="">
-
-        <div class="sm_font" style=" float:right; text-align:right;; ">
-            <div style="margin-bottom: 10px">
-                <a aria-label="Facebook" href="#" target="_blank" title="Facebook">
-                    <img border="0" src="/images/facebook_icon.png">
-                </a>&nbsp;&nbsp;
-                <a aria-label="Twitter" href="#" target="_blank" title="Twitter">
-                    <img border="0" src="/images/twitter_icon.png">
-                </a>&nbsp;&nbsp;
-            </div>
-            <div style="margin-bottom: 5px">
-                SCAN® is a registered trademark of Critical Velos. </div>
+    <div class="sm_font" style=" float:right; text-align:right;; ">
+        <div style="margin-bottom: 10px">
+            <a aria-label="Facebook" href="#" target="_blank" title="Facebook">
+                <img border="0" src="/images/facebook_icon.png">
+            </a>&nbsp;&nbsp;
+            <a aria-label="Twitter" href="#" target="_blank" title="Twitter">
+                <img border="0" src="/images/twitter_icon.png">
+            </a>&nbsp;&nbsp;
         </div>
-
-        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;padding:5px 15px 5px 15px; ">
-            <div style="margin-bottom: 10px">
-              <!--
-                <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
-                -->
-              <h3 style="border-radius: 10px; box-shadow: 3px 5px 1px rgba(227, 211, 211, 1);">Critical Velos Technical Solutions</h3>
-            </div>
-        </div>
-
-        <div id="id_letterheads_9_insert_shortcut_33" style=" clear: both; "></div>
+        <div style="margin-bottom: 5px">
+            SCAN® is a registered trademark of Critical Velos. </div>
     </div>
 
+    <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;padding:5px 15px 5px 15px; ">
+        <div style="margin-bottom: 10px">
+            <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
+        </div>
+    </div>
 
+    <div id="id_letterheads_9_insert_shortcut_33" style=" clear: both;; "></div>
 </div>
 
 <script>
