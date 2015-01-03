@@ -14,7 +14,7 @@ from  models import Topic_Questions,State_Questions,Topic_States,Subject_Topics
 from models import Topic,User,Subject 
 
 def fill():
-      try: 
+    try:
             flush()
             address1=Query.addAddress(type=Constant.Constant.ADDRESS_TYPE_HOME,state="UP",city="Meerut",street="12")
             school=Query.addSchool("CVSchool", address1)
@@ -114,11 +114,11 @@ def fill():
             #topic5=Query.addTopic(school_key=school.key,name="Ellipse ", prerequisite_topics=[topic.key],subject_key=subject1.key)
             
             
-            topic_chap_one=Query.addTopic(school_key=school.key,name="Basic Concept of Vedic Maths", prerequisite_topics=[],subject_key=SUB_vedic.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
-            topic_chap_two=Query.addTopic(school_key=school.key,name="Subtraction at a Look", prerequisite_topics=[topic_chap_one.key],subject_key=SUB_vedic.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
-            topic_chap_three=Query.addTopic(school_key=school.key,name="Multiplication with 99999...", prerequisite_topics=[topic_chap_one.key],subject_key=SUB_vedic.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
-            topic_chap_four=Query.addTopic(school_key=school.key,name="Magic with 11", prerequisite_topics=[topic_chap_one.key],subject_key=SUB_vedic.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
-            topic_chap_five=Query.addTopic(school_key=school.key,name="Multiplying with 12(without using 12)", prerequisite_topics=[topic_chap_one.key],subject_key=SUB_vedic.key,types=["Comparing Numbers","Numbers Formation","Arrangement_Ascending"])
+            topic_chap_one=Query.addTopic(school_key=school.key,name="Basic Concept of Vedic Maths", prerequisite_topics=[],subject_key=SUB_vedic.key,types=["Base of A Number","Complement with zero in between","Complement with zero at end","Complement with decimal in between"])
+            topic_chap_two=Query.addTopic(school_key=school.key,name="Subtraction at a Look", prerequisite_topics=[topic_chap_one.key],subject_key=SUB_vedic.key,types=["Subtraction from base","Subtraction from bigger base","Subtraction from multiple of base","Subtraction with same number of digit","General Subtraction"])
+            topic_chap_three=Query.addTopic(school_key=school.key,name="Multiplication with 99999...", prerequisite_topics=[topic_chap_one.key],subject_key=SUB_vedic.key,types=["Multiplication of 999.. with same number of digit","Multiplication of 999.. with less number of digit","Multiplication of 999.. with greater number of digit"])
+            topic_chap_four=Query.addTopic(school_key=school.key,name="Magic with 11", prerequisite_topics=[topic_chap_one.key],subject_key=SUB_vedic.key,types=["Multipyling with 11","Multiplying with 1111.."])
+            topic_chap_five=Query.addTopic(school_key=school.key,name="Multiplying with 12(without using 12)", prerequisite_topics=[topic_chap_one.key],subject_key=SUB_vedic.key,types=["Multiply with 12","Multiply with 112","Multiply with 1112"])
             
 
 
@@ -129,8 +129,7 @@ def fill():
 
             #questioninstance_number4=Query.addQuestionInstance(problem_statement="Which one is smallest ?", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["1902","1920","9201","9021","9210"], answers=["9210"],school_key=school.key)
 
-            questioninstance_number3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9  \
- ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["6"],school_key=school.key)
+            questioninstance_number3=Query.addQuestionInstance(problem_statement="quotient of 58 by 9", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=[], answers=["6"],school_key=school.key)
 
 
             questioninstance_base_one=Query.addQuestionInstance(problem_statement="Whether 2900 is base or not? y or n ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["n"],school_key=school.key,url="")
@@ -144,7 +143,11 @@ def fill():
             question_complement_decimalinbetween=Query.addQuestion(questioninstance_complement_decimalinbetween,school.key)
 
 
-            Query.assign_questions_to_topic(topic_chap_one.key,[question_base_one.key,question_complement_zeroinbetween.key,question_complement_zeroatend.key,question_complement_decimalinbetween.key],school.key,"type1")
+            Query.assign_questions_to_topic(topic_chap_one.key,[question_base_one.key],school.key,"Base of A Number")
+            Query.assign_questions_to_topic(topic_chap_one.key,[question_complement_zeroinbetween.key],school.key,"Complement with zero in between")
+            Query.assign_questions_to_topic(topic_chap_one.key,[question_complement_zeroatend.key],school.key,"Complement with zero at end")
+            Query.assign_questions_to_topic(topic_chap_one.key,[question_complement_decimalinbetween.key],school.key,"Complement with decimal in between")
+            '''
             state_chapone_one=Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
             state_chapone_two=Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
             state_chapone_three = Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
@@ -153,23 +156,23 @@ def fill():
             state_chapone_six = Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
             state_chapone_seven = Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
             state_chapone_eight = Query.addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school.key)
-
-            Query.assign_questions_to_state(state_chapone_one.key, [question_base_one.key],school.key)
-            Query.assign_questions_to_state(state_chapone_two.key, [question_base_one.key,question_complement_zeroinbetween.key],school.key)
+            '''
+         #   Query.assign_questions_to_state(state_chapone_one.key, [question_base_one.key],school.key)
+          #  Query.assign_questions_to_state(state_chapone_two.key, [question_base_one.key,question_complement_zeroinbetween.key],school.key)
            # Query.assign_questions_to_state(state_chapone_three.key, [question_base_one.key,question_complement_decimalinbetween.key],school.key)
            # Query.assign_questions_to_state(state_chapone_four.key, [question_base_one.key,question_complement_zeroatend.key],school.key)
            # Query.assign_questions_to_state(state_chapone_five.key, [question_base_one.key,question_complement_zeroinbetween.key,question_complement_decimalinbetween.key],school.key)
-            Query.assign_questions_to_state(state_chapone_six.key, [question_base_one.key,question_complement_zeroinbetween.key,question_complement_zeroatend.key],school.key)
+           # Query.assign_questions_to_state(state_chapone_six.key, [question_base_one.key,question_complement_zeroinbetween.key,question_complement_zeroatend.key],school.key)
            # Query.assign_questions_to_state(state_chapone_seven.key, [question_base_one.key,question_complement_zeroatend.key,question_complement_decimalinbetween.key],school.key)
-            Query.assign_questions_to_state(state_chapone_eight.key, [question_base_one.key,question_complement_zeroatend.key,question_complement_decimalinbetween.key,question_complement_zeroinbetween.key],school.key)
+            #Query.assign_questions_to_state(state_chapone_eight.key, [question_base_one.key,question_complement_zeroatend.key,question_complement_decimalinbetween.key,question_complement_zeroinbetween.key],school.key)
+
+            Query.map_state_to_topic_type(topic_chap_one.key, {1:["Base of A Number"],2:["Base of A Number","Complement with zero in between"],3:["Base of A Number","Complement with zero in between","Complement with zero at end"],4:["Base of A Number","Complement with zero in between","Complement with zero at end","Complement with decimal in between"]},school.key)
+
+            #Query.assign_states_to_topic(topic_chap_one.key,[state_chapone_one.key,state_chapone_two.key,state_chapone_six.key,state_chapone_eight.key],school.key)
 
 
 
-            Query.assign_states_to_topic(topic_chap_one.key,[state_chapone_one.key,state_chapone_two.key,state_chapone_six.key,state_chapone_eight.key],school.key)
-
-
-
-
+            '''
             questioninstance_subtractionfrombase=Query.addQuestionInstance(problem_statement="10000-3246=? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["6754"],school_key=school.key,url="")
             questioninstance_subtractionfrombiggerbase=Query.addQuestionInstance(problem_statement="10000-23=? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["9977"],school_key=school.key,url="")
             questioninstance_subtractionfrommultipleofbase=Query.addQuestionInstance(problem_statement="5000-248=? ", type=Constant.Constant.QUESTION_TYPE_SINGLE, choices=["yes","no"], answers=["752"],school_key=school.key,url="")
@@ -278,18 +281,18 @@ def fill():
             Query.assign_states_to_topic(topic_chap_five.key, [state_chapfive_one.key,state_chapfive_two.key,state_chapfive_three.key],school.key)
 
 
-
+            '''
             assessment1=Query.addAssessment(name="Vedic Maths :1",list_topic_key=[topic_chap_one.key,topic_chap_two.key,topic_chap_three.key,topic_chap_four.key,topic_chap_five.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime(int(2014),int(11),int(12),int(23),int(12),int(8)),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-            
-            assessment2=Query.addAssessment(name="Vedic Maths :2",list_topic_key=[topic_chap_one.key,topic_chap_two.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime(int(2014),int(11),int(12),int(23),int(12),int(8)),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
-           
+
+            assessment2=Query.addAssessment(name="Vedic Maths :2",list_topic_key=[topic_chap_one.key],school_key=school.key,date=datetime.datetime.now(),due_date=datetime.datetime(int(2014),int(11),int(12),int(23),int(12),int(8)),published=True,teacher_key=teacher_vijay.key,class_key=class_VA.key)
+
             
             
             a=Query.get_global_subjects(school.key)
             a=Query.get_subject_details_by_student(student_vivek.key);
-           
-            a=Query.update_assessment_detail_of_student(total_score=50,topic_scores=[20,40,20,21,56],student_key= student_vivek.key,assessment_key= assessment1.key, current_state_key=[state_chapfive_one.key,state_chapfive_two.key,state_chapfive_three.key,state_chapfive_three.key,state_chapfive_three.key], next_state_key=[state_chapfive_one.key,state_chapfive_two.key,state_chapfive_three.key,state_chapfive_three.key,state_chapfive_three.key] \
-                                                      , next_question_key=[question_multiplywith12.key,question_general_subtraction.key,question_multiplywith12.key,question_multiplywith12.key,question_multiplywith12.key], school_key=school.key, completion_date=datetime.datetime(int(2014),int(8),int(8),int(8),int(8),int(8)))
+
+            #a=Query.update_assessment_detail_of_student(total_score=50,topic_scores=[20,40,20,21,56],student_key= student_vivek.key,assessment_key= assessment1.key, current_state_key=[state_chapfive_one.key,state_chapfive_two.key,state_chapfive_three.key,state_chapfive_three.key,state_chapfive_three.key], next_state_key=[state_chapfive_one.key,state_chapfive_two.key,state_chapfive_three.key,state_chapfive_three.key,state_chapfive_three.key] \
+            #                                          , next_question_key=[question_multiplywith12.key,question_general_subtraction.key,question_multiplywith12.key,question_multiplywith12.key,question_multiplywith12.key], school_key=school.key, completion_date=datetime.datetime(int(2014),int(8),int(8),int(8),int(8),int(8)))
             
             
             
@@ -304,14 +307,14 @@ def fill():
             a=Query.get_recent_assessment_next_states_of_student(student_vivek.key,SUB_vedic.key)
             a=Query.get_recent_assessment_topic_scores_of_student(student_vivek.key,SUB_vedic.key)
             a=Query.get_recent_assessment_next_questions_of_student(student_vivek.key,SUB_vedic.key)
-            return str(a)+str(b)      
-            
-            
-      except Exception :
+            return str(a)+str(b)
+
+
+    except Exception :
             logging.exception("")
             return Constant.Constant.ERROR_OPERATION_FAIL
-        
-      return Constant.Constant.UPDATION_SUCCESSFULL
+
+
 
 def flush():
     ndb.delete_multi(School.query().fetch(keys_only=True)) 
