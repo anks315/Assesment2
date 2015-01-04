@@ -89,16 +89,16 @@
     doc.setLineWidth(0.1);
     doc.line(0, 33, 220, 33); // horizontal line
     doc.setFontSize(10);
-     doc.setTextColor( 175, 64, 53);
+    doc.setTextColor( 175, 64, 53);
     doc.text(15,43,'Student Name:');
     doc.text(40,43,"{{ student_name }}");
 
     doc.text(130,43,'Course Name:');
     doc.text(155,43,"{{ subject_name }}");
- doc.line(0, 50, 220, 50); // horizontal line
+    doc.line(0, 50, 220, 50); // horizontal line
     doc.setFontSize(12);
     doc.setTextColor( 63, 0, 255);
-  doc.text(10,60,'1.)Course Analysis');
+    doc.text(10,60,'1.)Course Analysis');
    //  doc.text(20, 30, "Ready to Learn");
     {% for readytolearntopic in readytolearn %}
 
@@ -139,11 +139,22 @@ doc.line(0, 110, 220,110); // horizontal line
 
   </head>
 
-  <body >
+  <body style="width:90%;height: 700px;margin:auto;margin-top:10px;overflow-y: auto;border: 7px solid #0001b7;padding:15px;border-radius: 10px;">
  <div id="report_heading">
- <img src="/images/cv_i.png" align="right"  style="margin-top: 0%;width:5%;height: 5%;"/>
- <p><h1 style=" text-align: center;color: blue;"><br>Report Card<br></h1>
-    <h6 style=" margin-left: 41%;color: blue;">Powered by Critical Velos</h6></p>
+<table>
+    <tr>
+        <td style="width:80%;">
+             <p><h1 style=" text-align: center;color: blue;"><br>Report Card<br></h1>
+    <h6 style=" text-align: center;color: blue;">Powered by Critical Velos</h6></p>
+        </td>
+        <td style="width: 20%">
+            <img src="/images/cv_i.png" align="right"  style="width:50%;height: 50%;"/>
+        </td>
+    </tr>
+</table>
+
+
+
 
 
  </div>
@@ -152,17 +163,16 @@ doc.line(0, 110, 220,110); // horizontal line
  <div id="student_details">
      <hr style="color: blue">
 
-     <p>
-     <h4 style="margin-left:10%;display: inline;color: red;"><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Student Name: &nbsp{{ student_name }}
-      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-     Course Name: &nbsp{{ subject_name }}</h4></p>
-
-
-     <br>
+        <table style="width: 100%">
+            <tr>
+                <td>
+                    <h4 style="float: left;display: inline;color: red;"> &nbsp&nbsp&nbsp Student Name: &nbsp{{ student_name }}</h4>
+                </td>
+                <td>
+                    <h4 style="float: right;display: inline;color: red;">Course Name: &nbsp{{ subject_name }}&nbsp;&nbsp;</h4>
+                </td>
+            </tr>
+        </table>
      <hr style="color: blue">
 
  </div>
@@ -193,9 +203,6 @@ doc.line(0, 110, 220,110); // horizontal line
  <br>
   <br>
   <br>
-  <br>
- <br>
- <br>
  <hr color="blue">
 
 <h3 style="color: blue"> &nbsp&nbsp&nbsp 2.) Course History </h3><br>

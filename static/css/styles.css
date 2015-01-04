@@ -8,14 +8,14 @@ padding:0;
 body {
     font-family: ArumSansRg, Arial, Sans-Serif;
     font-size: 16px;
-    color: #24214c;
+    color: #000000;
     background-color: #ebe8da;
 }
 
 div.template_body {
 margin-right:auto;
 margin-left:auto;
-width:80%;
+width:90%;
 min-height: 100%;
 background-color: #FBFBFB;
 padding-top:15px;
@@ -55,7 +55,7 @@ div.template_main_body {
 width: 96%;
 margin: 5px 1% 5px 1%;
     padding: 1%;
-height: 400px;
+height: 380px;
     overflow-y: auto;
 padding-bottom: 20px;
 background-color: rgba(229, 246, 229, 1);
@@ -1050,7 +1050,12 @@ table {
     overflow-y: auto;
     border-radius: 5px;
 }
-
+.p{
+       margin:20px 0 0 0;
+    padding:0;
+    font-size: 14px;
+    color: #1a20b7;
+}
 .detail_vedic_scan p{
    margin:20px 0 0 0;
     padding:0;
