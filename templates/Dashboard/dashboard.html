@@ -262,7 +262,7 @@ Input Template - /subjectdetailsofstudent/   for subjects
 
                     var key = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
 
-                    div_to_be_loaded = div_to_be_loaded +"<tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\" onclick=\"showreportbysubjects('" + subjectname + "')\">"+subjectname+"</div></td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
+                    div_to_be_loaded = div_to_be_loaded +"<tr class=\"listed_elementSB custom_listed_elementSB\"><td class=\"custom_listed_elementSB_first\" colspan=\"1\" width=\"100%\"><div class=\"sim_sb_entry_tag_left\" onclick=\"showreportbysubjects('" + subjectname +","+ key + "')\">"+subjectname+"</div></td><td><div class=\"sim_nb_stu sim_sb_entry_tag_right\"><img src=\"/images/icons/students_12x13.png\" valign=\"bottom\" border=\"0\"></div></td></tr>";
 
 
                 }
@@ -301,8 +301,9 @@ Main
 
 <script>
 
-    function showreportbysubjects(subject){
+    function showreportbysubjects(subject,subjectkey){
 
+        alert("hii");
 
 
         $("#dashboard_row1").hide();
@@ -319,7 +320,7 @@ Main
         list_pending_assignments(subject);
         learningprogress_bydate_sub(subject);
         get_ready_tolearn(subject,"readytoLearn");
-        getdonutmastery_subject(subject);
+        getdonutmastery_subject(subject,subjectkey);
     }
 
 
@@ -360,15 +361,17 @@ Main
 
 
         //document.getElementById("masteryDetails").innerHTML="";
-        getdonutmastery_subject(coursename);
-        get_ready_tolearn(coursename,"subject_chart_div");
+        getdonutmastery_subject(coursename,coursekey);
 
 
 
-       // get_topicwisescoreofsubject(coursekey,"readytoLearn");
+
+       get_topicwisescoreofsubject(coursekey,"readytoLearn");
 
 
         get_course_information(coursekey,"masteryDetails");
+        get_ready_tolearn(coursekey,"subject_chart_div");
+       
 
         {#        list_pending_assignments(subject);#}
         {#        learningprogress_bydate_sub(subject);#}
@@ -600,7 +603,7 @@ Main
 
         var xmlhttp;
 
-        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
+        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic Name </th><th>URL</th></tr>";
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
             xmlhttp.overrideMimeType("text/xml");
@@ -612,20 +615,21 @@ Main
 
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-                no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
+
+                 no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
 
                 for (i = 0; i < no_of_topics; i++) {
 
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
-                    var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                    var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
+                    var type = x.getElementsByTagName("type")[0].childNodes[0].nodeValue.trim();
+                    var url = x.getElementsByTagName("url")[0].childNodes[0].nodeValue.trim();
 
 
 
-                    var innerdiv = "<tr><td><a href=\"#\">" + name + "</a></td><td>" + question + "</td></tr>";
 
-                    div_to_be_loaded=div_to_be_loaded+innerdiv;
+                    var innerdiv = "<tr><td><a href=\"#\"> **</a></td><td>" + type + "</td></tr>";
 
+                    div_to_be_loaded = div_to_be_loaded + innerdiv;
                 }
 
 
@@ -635,15 +639,12 @@ Main
             }
         };
 
-        xmlhttp.open("GET", "/readytolearnbysubject/", true);
+        xmlhttp.open("GET", "/getreadytolearn_ofsubject?id="+subject, true);
         xmlhttp.overrideMimeType("text/xml");
         xmlhttp.send();
 
 
-
-
-
-    }
+ }
 
 </script>
 
@@ -656,7 +657,7 @@ Main
 <script>
 
 
-    function getdonutmastery_subject(subject){
+    function getdonutmastery_subject(subject,subjectkey){
 
 
 
@@ -683,26 +684,17 @@ Main
         }
         xmlhttp.onreadystatechange = function() {
 
+
+
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
                 xmlDoc = xmlhttp.responseXML;
+               var x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[0];
 
-                no_of_subjects = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
-
-
-                for (i = 0; i < no_of_subjects; i++) {
-
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("subject")[i];
-                    var subject_name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-
-                    if (subject_name==subject) {
-
-                        var score = parseFloat(x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim());
-
-                    }
+               var score = parseFloat(x.getElementsByTagName("mastery")[0].childNodes[0].nodeValue.trim());
 
 
-                }
+
                 var data = google.visualization.arrayToDataTable([
                     ['Knowledge', 'Fraction'],
                     ['Dont Know',    100-score]  ,  //4 data to be replaced by template value
@@ -714,9 +706,9 @@ Main
                 chart.draw(data, options);
 
             }
-        }
+        };
 
-        xmlhttp.open("GET", "/masterybysubject/", true);
+        xmlhttp.open("GET", "/getmasteryofsubject?id="+subjectkey, true);
         xmlhttp.overrideMimeType("text/xml");
         xmlhttp.send();
 

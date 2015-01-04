@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from gaesessions import get_current_session
-from engine import topictimespend,nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer,maxstatesize,getnumquestions,readytolearn,completedtopics,currentstatelist,scorelist,nextstatelist,readytolearnquestionkey
+from engine import topictimespend,nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer,maxstatesize,getnumquestions,readytolearnurl,readytolearn,completedtopics,currentstatelist,scorelist,nextstatelist,readytolearnquestionkey
 from django.template import RequestContext
 from google.appengine.api import users
 from dummydata import fill,flush
@@ -44,6 +44,7 @@ def asknextquestion(request):
             scorelist[session['studentname']] = []
             topictimespend[session['studentname']]=[]
             readytolearn[session['studentname']]=[]
+            readytolearnurl[session['studentname']]=[]
             readytolearnquestionkey[session['studentname']]=[]
             currentstatelist[session['studentname']]=[]
             nextstatelist[session['studentname']]=[]
@@ -115,7 +116,8 @@ def asknextquestion(request):
                         #a=Query.update_assessment_detail_of_student(student_key=studentkey, assessment_key=ndb.Key(urlsafe=session['assessmentkey']),current_state_key= currentstate.key, next_state_key=currentstate.key,next_question_key=next(iter(quetionkey)),score=int(score),school_key=schoolkey,completion_date=datetime.datetime.now())
                         #logging.error(a)
                         topictimespend[session['studentname']].append(0)
-                        readytolearn[session['studentname']].append(usersdict[session['studentname']].questions[next(iter(quetionkey))].questionstring)
+                        readytolearn[session['studentname']].append(usersdict[session['studentname']].questions[next(iter(quetionkey))].type)
+                        readytolearnurl[session['studentname']].append(usersdict[session['studentname']].questions[next(iter(quetionkey))].url)
                         readytolearnquestionkey[session['studentname']].append(usersdict[session['studentname']].questions[next(iter(quetionkey))].key)
                         break
             else:
@@ -125,14 +127,15 @@ def asknextquestion(request):
                  topictimespend[session['studentname']].append(0)
                  for state in states:
                      questiontuple = state.questionstuple
-                     readytolearn[session['studentname']].append(usersdict[session['studentname']].questions[questiontuple[0]].questionstring)
+                     readytolearn[session['studentname']].append(usersdict[session['studentname']].questions[questiontuple[0]].type)
+                     readytolearnurl[session['studentname']].append(usersdict[session['studentname']].questions[questiontuple[0]].url)
                      readytolearnquestionkey[session['studentname']].append(usersdict[session['studentname']].questions[questiontuple[0]].key)
 
 
         if(session['topicnumber']==len(session['listoftopics'])-1):
             Query.update_assessment_detail_of_student(int(session['score']/(len(session['listoftopics']))) ,scorelist[session['studentname']],topictimespend[session['studentname']], session['studentkey'], session['assessmentkey'], currentstatelist[session['studentname']], nextstatelist[session['studentname']], readytolearnquestionkey[session['studentname']], session['schoolkey'], datetime.datetime.now())
             del usersdict[session['studentname']]
-            return render_to_response('AssessingPie_toBeremoved/pie.html',{'readytolearn':readytolearn[session['studentname']],'num_known': session['score']/(len(session['listoftopics'])) ,'st': maxsta,'state' : 'completed','know':strknow,},context_instance = RequestContext(request))
+            return render_to_response('AssessingPie_toBeremoved/pie.html',{'readytolearn':zip(readytolearn[session['studentname']],readytolearnurl[session['studentname']]), 'num_known': session['score']/(len(session['listoftopics'])) ,'st': maxsta,'state' : 'completed','know':strknow,},context_instance = RequestContext(request))
 
         else:
             del usersdict[session['studentname']]
@@ -144,7 +147,7 @@ def asknextquestion(request):
                    logging.error("ankur")
                    logging.error(int(session['score']/(len(session['listoftopics']))))
                    Query.update_assessment_detail_of_student(int(session['score']/(len(session['listoftopics']))) ,scorelist[session['studentname']],topictimespend[session['studentname']], session['studentkey'], session['assessmentkey'], currentstatelist[session['studentname']], nextstatelist[session['studentname']], readytolearnquestionkey[session['studentname']], session['schoolkey'], datetime.datetime.now())
-                   return render_to_response('AssessingPie_toBeremoved/pie.html',{'student name':session['studentname'],'readytolearn':readytolearn[session['studentname']],'num_known': session['score']/(len(session['listoftopics'])) ,},context_instance = RequestContext(request))
+                   return render_to_response('AssessingPie_toBeremoved/pie.html',{'student name':session['studentname'],'readytolearn':zip(readytolearn[session['studentname']],readytolearnurl[session['studentname']]),'num_known': session['score']/(len(session['listoftopics'])) ,},context_instance = RequestContext(request))
                 else:
                     nexttopickey =session['listoftopics'][session['topicnumber']]
                     prerequisitetopiclist = Query.get_prerequisite_topics_of_topic(nexttopickey)

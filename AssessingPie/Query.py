@@ -1333,9 +1333,12 @@ def assign_types_to_state(state_key,topic_key, types_in_state, school_key):
          type_state.types_in_state.extend(types_in_state)
          type_state.put()
     topic_types=topic.types
-    logging.info("CV Logs:@@@@@ "+str(topic_types)) 
-    for types in topic_types:
-        index=topic_types.index(types)
+    #logging.info("CV Logs:@@@@@ "+str(topic_types)) 
+    
+    for types in types_in_state:
+        
+        
+        index=topic.types.index(types)
         count=topic.state_count_types[index]
         topic.state_count_types[index]=count+1
         
@@ -1410,7 +1413,9 @@ def map_state_to_topic_type(topic_key, state_types_map,school_key):
     try:
 
         topic=topic_key.get()
+        
         topic.state_count_types=[0]*len(topic.types)
+        logging.info("CV Logs: ######## Inside map_state_to_questions "+str(topic.state_count_types))
         topic.put()
         
         logging.info("CV Logs: Inside map_state_to_questions ")
@@ -1892,25 +1897,35 @@ def get_a_question_of_each_type(topic_key):
         return Constant.ERROR_BAD_VALUE    
     try:
         question_in_topic_reln_key = topic.questions_in_topic_key
+        logging.error("DEBUG: topic is "+str(topic)+"question_in_topic_reln_key "+str(question_in_topic_reln_key))
         if question_in_topic_reln_key == None:
             return Constant.ERROR_NO_DATA_FOUND 
         questions_in_topic = question_in_topic_reln_key.get()
+        
+        logging.error("DEBUG: questions_in_topic is "+str(questions_in_topic))
         question_key_list = questions_in_topic.questions_in_topic_keys
+        logging.error("DEBUG: ququestion_key_list is "+str(question_key_list))
         questions = ndb.get_multi(question_key_list)
+        logging.error("DEBUG: ququestion is "+str(questions))
         for question in questions:
                 type=question.topic_type
                 if type in question_of_types:
+                    logging.error("DEBUG: ququestion is "+str(question)+"typeis"+str(type))
                     question_of_types[type].append(question.key)
                 else :
+                    logging.error("DEBUG: else ququestion is "+str(question)+"typeis"+str(type))
                     question_of_types[type]=[question.key]
+        logging.error("DEBUG: question_of_types is "+str(question_of_types))
         for type_multi in question_of_types:
             length=len(question_of_types[type_multi])
+            logging.error("DEBUG: (question_of_types[type_multi]) is "+str(question_of_types[type_multi]))
             if length>1:
                 random_index=randint(0,length-1)
                 question_dict[type_multi]=question_of_types[type_multi][random_index]
-            elif length ==0:
-                question_dict[type_multi]=question_of_types[0]
+            elif length ==1:
+                question_dict[type_multi]=question_of_types[type_multi][0]
             else :
+                logging.error("DEBUG: Inside None is "+str(question_of_types[type_multi]))
                 question_dict[type_multi]=None
             
         
@@ -2436,6 +2451,60 @@ def get_recent_assessment_next_questions_of_student(student_key,subject_key):
             logging.info("CV Logs : failed to get assessments for student :")
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL  
+
+
+
+
+
+
+def get_recent_assessment_next_type_url_of_student(student_key,subject_key):
+    logging.info("CV Logs : get_assessments_by_student ")
+    
+    dict_topic_questions={}
+    dict_topic_type_url={}
+    try:
+        student=student_key.get()
+        if not (student_key.kind()==Student._get_kind() or subject_key.kind()==Subject._get_kind()):
+            return Constant.ERROR_BAD_VALUE
+        
+    
+        assessments_records = get_completed_assessment_records_by_subject(student_key,subject_key)
+        logging.info("CV Logs : get_completed_assessment_records_by_subject"+str(assessments_records ))
+        if len(assessments_records) == 0:
+                return Constant.ERROR_NO_DATA_FOUND
+                
+        else :
+                
+                assesmentss=Assessment_Record.query(ancestor=student.school).fetch()
+                logging.info("CV Logs : #######"+str(assesmentss))
+                
+                q_sorted_assessments_records = Assessment_Record.query(Assessment_Record.key.IN(assessments_records), ancestor=student.school)
+                sorted_assessments_records = q_sorted_assessments_records.order(-Assessment_Record.completion_date).fetch()  
+               
+                #logging.error("CV Logs : failed to get get_mastery_by_subject_sc :"+str(len(q_sorted_assessments_records)))
+                
+                question_list= sorted_assessments_records[0].question_ready_to_learn
+                i=0
+                topics=sorted_assessments_records[0].assessment_key.get().topics_in_assessment_key
+                for question in question_list:
+                    topic_name=question.get().topic_key.get().name
+                    if(dict_topic_questions.has_key(topic_name)):
+                        value=dict_topic_questions[topic_name]
+                        if not isinstance(value,list):
+                           dict_topic_questions[topic_name]=[value] 
+                        dict_topic_questions[topic_name].append(question.get())                                         
+                    else:
+                        dict_topic_questions[topic_name]=[question.get()]
+                    
+                for key in dict_topic_questions:
+                    question=dict_topic_questions[key][0]
+                    dict_topic_type_url[key]=[question.topic_type,question.instance.url]
+                return dict_topic_type_url
+    except Exception:
+            logging.info("CV Logs : failed to get assessments for student :")
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL  
+
 
 
 

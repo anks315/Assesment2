@@ -124,7 +124,7 @@ def getreadytolearnofsubject(request):
     studentkey = session.get('studentkey',-1)
     key = request.GET['id']
     subjectkey = ndb.Key(urlsafe=key)
-    readytolearnofsubject=Query.get_recent_assessment_next_questions_of_student(studentkey,subjectkey)
+    readytolearnofsubject=Query.get_recent_assessment_next_type_url_of_student(studentkey,subjectkey)
     t = loader.get_template('Dashboard/readytolearn_ofsubject')
     c = Context({'readytolearnofsubject':readytolearnofsubject,})
     return HttpResponse(t.render(c),

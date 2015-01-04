@@ -179,12 +179,13 @@ doc.line(0, 110, 220,110); // horizontal line
 <tr>
 	<h6>Readytolearn(Outer Fringe)</h6>
 </tr>
- {% for readytolearntopic in readytolearn %}
+ {% for readytolearntopic,readytolearnurl in readytolearn %}
 <tr>
 
-   <td> {{ readytolearntopic }}</td>
+   <td><a href="{{ readytolearnurl }}" >{{ readytolearntopic }}</a></td>
 </tr>
 {% endfor %}
+</tr>
 </table>
 
       </div>
