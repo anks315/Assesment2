@@ -10,7 +10,7 @@ from Query import addSubject, addTopic
 from models import QuestionInstance,State_Questions,Topic_States,Question,State,Address,Teacher,Class,\
     Assessment_Record
 from models import School,Student,UserInfo,Subject,Assessment,Student_Assessments
-from  models import Topic_Questions,State_Questions,Topic_States,Subject_Topics
+from  models import Topic_Questions,State_Questions,Topic_States,Subject_Topics,State_Types
 from models import Topic,User,Subject 
 
 def fill():
@@ -340,4 +340,5 @@ def flush():
     ndb.delete_multi(Topic.query().fetch(keys_only=True))
     ndb.delete_multi(User.query().fetch(keys_only=True))
     ndb.delete_multi(Assessment_Record.query().fetch(keys_only=True))
+    ndb.delete_multi(State_Types.query().fetch(keys_only=True))
     

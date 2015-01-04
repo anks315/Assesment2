@@ -1,8 +1,14 @@
 <root>
+
 {% for key, value in readytolearnofsubject.items %}
-    <question>
-   {{ value }}
-    </question>
+   <topic>
+    <type>
+   {{ value.0 }}
+    </type>
+    <url>
+       {{ value.1 }}
+    </url>
+    </topic>
 {% endfor %}
 
 </root>
