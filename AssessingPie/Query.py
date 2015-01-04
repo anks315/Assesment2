@@ -1,6 +1,7 @@
 from google.appengine.ext.ndb import Key
 from google.appengine.ext import ndb
 import logging
+from random import randint
 import datetime
 #from lib.yaml.lib.yaml import scan
 import Constant
@@ -8,7 +9,7 @@ from models import QuestionInstance, State_Questions, Topic_States, Question, St
     Assessment_Record, Subject
 from models import School, Student, UserInfo, Subject, Assessment, Student_Assessments
 from  models import Topic_Questions, State_Questions, Topic_States, Subject_Topics, Assessment_Record
-from models import Topic, User
+from models import Topic, User,State_Types
 from Constant import Constant, UserType, Subject_Name,Default
 
 
@@ -390,7 +391,7 @@ Adds a new Topic:
                 subject_key list of  Key of kind Subject
 """
 @ndb.transactional(retries=5)
-def addTopic(school_key, name, prerequisite_topics, subject_key,types=[]):
+def addTopic(school_key, name, prerequisite_topics, subject_key,types):
    try:
        logging.info("CV Logs : Inside addTopic")
        #subject = subject_key.get()
@@ -398,7 +399,7 @@ def addTopic(school_key, name, prerequisite_topics, subject_key,types=[]):
             if not topic_key.kind()==Topic._get_kind():
 
                return Constant.ERROR_BAD_VALUE
-       topic = Topic(parent=school_key, name=name, prerequisite_topic=prerequisite_topics, subject_key=subject_key) 
+       topic = Topic(parent=school_key, name=name, prerequisite_topic=prerequisite_topics, subject_key=subject_key,types=types,state_count_types=[0]*len(types)) 
        topic.put()
        result = assign_topics_to_subject(subject_key, [topic.key], school_key)
        if result == Constant.UPDATION_SUCCESSFULL:
@@ -1243,6 +1244,11 @@ def get_all_schools():
     logging.info("CV Logs: success to assign questons to topic : " )          
     return Constant.UPDATION_SUCCESSFULL
 
+
+    
+    
+
+
 def get_class_of_school(school_key):
     dict_class = {}
     try:
@@ -1304,6 +1310,55 @@ def assign_questions_to_state(state_key, questions_in_state_keys, school_key):
     return Constant.UPDATION_SUCCESSFULL
 
 
+def assign_types_to_state(state_key,topic_key, types_in_state, school_key):
+    state = None
+    type_state = None
+    try:
+        logging.info("CV Logs: Inside assign_questions_to_topic ")
+        state = state_key.get() 
+        topic=topic_key.get()
+        type_state_key = state.type_in_state_key
+    except Exception :
+        logging.exception("")
+        logging.error("CV Logs: invalid values")
+    if type_state_key == None:   
+        
+        type_state = State_Types(parent=school_key, state_key=state_key, types_in_state=types_in_state)
+        type_state.put()    
+        state.type_in_state_key = type_state.key
+        state.put()
+    else:
+        
+         type_state = type_state_key.get()
+         type_state.types_in_state.extend(types_in_state)
+         type_state.put()
+    topic_types=topic.types
+    logging.info("CV Logs:@@@@@ "+str(topic_types)) 
+    for types in topic_types:
+        index=topic_types.index(types)
+        count=topic.state_count_types[index]
+        topic.state_count_types[index]=count+1
+        
+        topic.put()
+    logging.info("CV Logs: success to  assign questions to state  ")     
+    return Constant.UPDATION_SUCCESSFULL
+
+
+
+def get_state_count_of_types(topic_key):
+    dict_states={}
+    try:
+        logging.info("CV Logs: get_state_count_of_type")
+        topic= topic_key.get() 
+        topic_types=topic.types
+        for types in topic_types:
+            index=topic_types.index(types)
+            count=topic.state_count_types[index]
+            dict_states[types]=count
+    except Exception :
+            logging.exception("")  
+    return dict_states
+
 
 
 
@@ -1345,6 +1400,45 @@ def map_state_to_questions(topic_key, state_questions_map,school_key):
         logging.exception("")
         logging.error("CV Logs: failed to map_state_to_questions")
     
+
+@ndb.transactional(xg=True,retries=5)
+def map_state_to_topic_type(topic_key, state_types_map,school_key):
+    state = None
+    question_state = None
+    topic_states=[]
+
+    try:
+
+        topic=topic_key.get()
+        topic.state_count_types=[0]*len(topic.types)
+        topic.put()
+        
+        logging.info("CV Logs: Inside map_state_to_questions ")
+       
+        states=[]
+        result=Constant.ERROR_OPERATION_FAIL
+        for key in state_types_map.keys():
+            state=addState(type=Constant.STATE_IN_TOPIC,school_key=school_key)
+            states.append(state.key)
+            result=assign_types_to_state(state.key,topic_key,state_types_map[key], school_key)
+
+            if not result==Constant.UPDATION_SUCCESSFULL:
+                return Constant.ERROR_OPERATION_FAIL
+
+        result1=assign_states_to_topic(topic_key,states,school_key)
+        if not result1==Constant.UPDATION_SUCCESSFULL:
+                return Constant.ERROR_OPERATION_FAIL
+        logging.info("CV Logs: Success to map_state_to_questions")
+        return result 
+    except Exception :
+        logging.exception("")
+        logging.error("CV Logs: failed to map_state_to_questions")
+
+
+
+
+
+
 @ndb.transactional(xg=True,retries=5)
 def map_state_to_questions_dummy( state_questions_map,school_key):
     state = None
@@ -1390,26 +1484,15 @@ def assign_states_to_topic(topic_key, states_in_topic_keys, school_key):
     except Exception :
         logging.exception("")
         return Constant.ERROR_BAD_VALUE
-    '''
-    if state_topic_key == None:   
-        
-        state_topic = Topic_States(parent=school_key, topic_key=topic_key, states_in_topic_keys=states_in_topic_keys)
-        state_topic.put()    
-        topic.states_in_topic_key = state_topic.key
-        topic.put()
-        # logging.info("CV Logs "+str(state_topic.key))
-    else:
-         
-         state_topic = state_topic_key.get()
-         state_topic.states_in_topic_keys.extend(states_in_topic_keys)
-         state_topic.put()
-    '''
     state_topic = Topic_States(parent=school_key, topic_key=topic_key, states_in_topic_keys=states_in_topic_keys)
     state_topic.put()
     topic.states_in_topic_key = state_topic.key
     topic.put()
     logging.info("CV Logs : success to assign states to topic :" + topic.name)     
     return Constant.UPDATION_SUCCESSFULL
+
+
+
 
 """
 Assigns  existing topics  to an existing state:
@@ -1705,6 +1788,31 @@ def get_states_of_topic(topic_key):
 
     return states
 
+
+
+def get_states_of_topic_type(topic_key,topic_type):
+    states = []
+    
+    try:
+        topic = topic_key.get()
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE    
+    try:
+        state_in_topic_reln_key = topic.states_in_topic_key
+        
+        states_in_topic = state_in_topic_reln_key.get()
+        state_key_list = states_in_topic.states_in_topic_keys
+        states = ndb.get_multi(state_key_list)
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_INCONSISTENT_STATE
+
+    return states
+
+
+
+
 def get_state_keys_of_topic(topic_key):
     states = []
 
@@ -1748,6 +1856,124 @@ def get_questions_of_topic(topic_key):
 
     return questions 
 
+
+def get_questions_of_topic_type(topic_key,topic_type):
+    questions = []
+    question_of_types=[]
+    try:
+        topic = topic_key.get()
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE    
+    try:
+        question_in_topic_reln_key = topic.questions_in_topic_key
+        if question_in_topic_reln_key == None:
+            return Constant.ERROR_NO_DATA_FOUND 
+        questions_in_topic = question_in_topic_reln_key.get()
+        question_key_list = questions_in_topic.questions_in_topic_keys
+        questions = ndb.get_multi(question_key_list)
+        for question in questions:
+            if question.topic_type==topic_type:
+                question_of_types.append(question.key)
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_INCONSISTENT_STATE
+
+    return question_of_types 
+
+def get_a_question_of_each_type(topic_key):
+    questions = []
+    question_of_types={}
+    question_dict={}
+    try:
+        topic = topic_key.get()
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE    
+    try:
+        question_in_topic_reln_key = topic.questions_in_topic_key
+        if question_in_topic_reln_key == None:
+            return Constant.ERROR_NO_DATA_FOUND 
+        questions_in_topic = question_in_topic_reln_key.get()
+        question_key_list = questions_in_topic.questions_in_topic_keys
+        questions = ndb.get_multi(question_key_list)
+        for question in questions:
+                type=question.topic_type
+                if type in question_of_types:
+                    question_of_types[type].append(question.key)
+                else :
+                    question_of_types[type]=[question.key]
+        for type_multi in question_of_types:
+            length=len(question_of_types[type_multi])
+            if length>1:
+                random_index=randint(0,length-1)
+                question_dict[type_multi]=question_of_types[type_multi][random_index]
+            elif length ==0:
+                question_dict[type_multi]=question_of_types[0]
+            else :
+                question_dict[type_multi]=None
+            
+        
+                    
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_INCONSISTENT_STATE
+
+    return question_dict 
+
+
+def get_random_question_of_type(topic_key,topic_type):
+    questions = []
+    question_of_types=[]
+    
+    try:
+        topic = topic_key.get()
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE    
+    try:
+        question_in_topic_reln_key = topic.questions_in_topic_key
+        if question_in_topic_reln_key == None:
+            return Constant.ERROR_NO_DATA_FOUND 
+        questions_in_topic = question_in_topic_reln_key.get()
+        question_key_list = questions_in_topic.questions_in_topic_keys
+        questions = ndb.get_multi(question_key_list)
+        for question in questions:
+                
+                if topic_type == question.topic_type:
+                    question_of_types.append(question.key)
+                
+        
+        length=len(question_of_types)
+        if length>1:
+                random_index=randint(0,length-1)
+                question=question_of_types[random_index]
+        elif length ==0:
+                question=question_of_types[0]
+        else :
+                question=None
+            
+        
+                    
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_INCONSISTENT_STATE
+
+    return question
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
 lists questions associated to a state 
 """
@@ -1771,6 +1997,29 @@ def get_questions_of_state(state_key):
         return Constant.ERROR_INCONSISTENT_STATE
 
     return questions 
+
+
+def get_types_of_state(state_key):
+    type_list = []
+    try:
+        logging.info("CV Logs : Inside get_types_of_state ")
+        state = state_key.get()
+    except Exception :
+        logging.exception("")
+        return Constant.ERROR_BAD_VALUE    
+    try:
+        type_in_state_reln_key = state.type_in_state_key 
+        type_in_state = type_in_state_reln_key.get()
+        type_list = type_in_state.types_in_state
+        
+        logging.info("CV Logs : Success to get_types_of_state ")
+    except Exception :
+        logging.exception("")
+        logging.info("CV Logs : Failed to get_types_of_state ")
+        return Constant.ERROR_INCONSISTENT_STATE
+
+    return type_list 
+
 
 
 """

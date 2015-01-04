@@ -64,7 +64,8 @@ key Property: Uses question_in_state_key: contains key of relationship entity St
 
 class State(ndb.Expando):  # Dynamic property will be applied in case of type STATE_OF_TOPIC [List of topic_ids]
     type = ndb.IntegerProperty(choices=set([Constant.STATE_IN_TOPIC, Constant.STATE_OF_TOPIC,Constant.STATE_INVALID]))  # STATE_IN_TOPIC=0,STATE_OF_TOPIC=1
-    question_in_state_key = ndb.KeyProperty(kind='State_Questions')
+    #question_in_state_key = ndb.KeyProperty(kind='State_Questions')
+    type_in_state_key=ndb.KeyProperty(kind='State_Types')
     
     
 
@@ -126,10 +127,12 @@ class Topic(ndb.Model):
     subject_key=ndb.KeyProperty(kind='Subject')
     prerequisite_topic = ndb.KeyProperty(kind='Topic', repeated=True)  # Need to verify
     student_level_count = ndb.IntegerProperty(repeated=True)  # NO_STUDENT_LEVEL_UPTO_25=0,NO_STUDENT_LEVEL_UPTO_50=1,NO_STUDENT_LEVEL_UPTO_75=2,NO_STUDENT_LEVEL_UPTO_100=3
+    states_in_type_key = ndb.KeyProperty(kind='Type_States')
     states_in_topic_key = ndb.KeyProperty(kind='Topic_States')
     questions_in_topic_key = ndb.KeyProperty(kind='Topic_Questions')
     assessments_in_topic=ndb.KeyProperty(kind='Assessment',repeated=True)
     types=ndb.StringProperty(repeated=True)
+    state_count_types=ndb.IntegerProperty(repeated=True)
     assessment_count=ndb.IntegerProperty(default=0)
     
     
@@ -144,6 +147,9 @@ class Topic_States(ndb.Model):
     topic_key = ndb.KeyProperty(kind=Topic, required=True)
     states_in_topic_keys = ndb.KeyProperty(kind=State, repeated=True)
 
+
+    
+
 """
 *******
 This class models  a one to many  State to Topic relationship
@@ -156,6 +162,13 @@ key Property: state_key: contains key of  a state
 class State_Topics(ndb.Model):   
     state_key = ndb.KeyProperty(kind=State, required=True)
     topics_in_state_keys = ndb.KeyProperty(kind=Topic, repeated=True)
+
+
+
+
+class State_Types(ndb.Model):   
+    state_key = ndb.KeyProperty(kind=State, required=True)
+    types_in_state = ndb.StringProperty(repeated=True)
 
 
 """
@@ -236,6 +249,7 @@ class Assessment_Record(ndb.Model):
     current_state=ndb.KeyProperty(kind=State,repeated=True)
     next_state=ndb.KeyProperty(kind=State,repeated=True)
     topic_scores=ndb.IntegerProperty(repeated=True)
+    topic_times=ndb.FloatProperty(repeated=True)
     question_ready_to_learn=ndb.KeyProperty(kind=Question,repeated=True)
     total_score=ndb.IntegerProperty(default=-1)
    

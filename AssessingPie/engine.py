@@ -4,8 +4,9 @@ import models
 import Query
 
 class Question:
-    def __init__(self,key,num_states,probsum,questionstring,answer):
+    def __init__(self,key,type,num_states,probsum,questionstring,answer):
         self.num_states = num_states
+        self.type=type
         self.probsum = probsum
         self.key=key
         self.questionstring = questionstring
@@ -21,7 +22,6 @@ class State :
 class  UserBuffer:
     def __init__(self,topickey):
         self.count=0
-
         self.states = {}
         self.questions = dict()
         self.minquestion = -1
@@ -31,38 +31,35 @@ class  UserBuffer:
         self.numstates=-1
 
     def initializebuffer(self,topickey):
-        question_db = Query.get_questions_of_topic(topickey)
+        types_db = topickey.get().types
+
+        question_db = Query.get_a_question_of_each_type(topickey)
         state_db =Query.get_states_of_topic(topickey)
         self.numstates=len(state_db)
         type(state_db)
         initialprob = 1/float(len(state_db) + 1)
         previous_minquestion=-1
-        for tempques in question_db:
-            num_states = tempques.no_states_contained_in
+        #preparing questions dictionary which will be asked during assessment
+        for temptype in types_db:
+            num_states = Query.get_state_count_of_types(topickey)[temptype]
+            tempques=question_db[temptype]
             questionstring=tempques.instance.problem_statement
             answer = tempques.instance.answer
             if previous_minquestion==-1:
-                previous_minquestion = abs(int(((len(state_db)+1)/2)-num_states))
-                self.minquestion=tempques.key
+                previous_minquestion = abs(int(((len(state_db)+1)/2)-num_states)) #if numberofstates in which this question is closest to 50 percent
+                self.minquestion=tempques.key #minquestion will be the first question to ask
             else:
                  if(abs(int((len(state_db)+1)/2)-num_states) < previous_minquestion):
                      previous_minquestion = abs(int(((len(state_db)+1)/2)-num_states))
-                     self.minquestion = tempques.key
-
-            self.questions[tempques.key]=Question(tempques.key,num_states,initialprob*num_states,questionstring,answer)
-
-
-
+                     self.minquestion = tempques.key #minquestion will be the first question to ask
+            self.questions[tempques.key]=Question(tempques.key,temptype,num_states,initialprob*num_states,questionstring,answer)
         self.states[0] =[State((-1,),initialprob,0)]
         for tempstate in state_db:
-
-            questions = Query.get_questions_of_state(tempstate.key)
-
+            types_in_state = Query.get_types_of_state(tempstate.key)
+            #questions = Query.get_questions_of_state(tempstate.key)
             queskeylist =[]
-            logging.error(type(questions))
-
-
-            for question in questions:
+            for types in types_in_state:
+                question=question_db[types]
                 queskeylist.append(question.key)
             questiontuple = tuple(queskeylist)
             key=tempstate.key
@@ -75,6 +72,7 @@ class  UserBuffer:
 
 readytolearn = {}
 readytolearnquestionkey = {}
+topictimespend ={}
 nextstatelist = {}
 scorelist ={}
 currentstatelist={}
