@@ -1,14 +1,6 @@
-<!DOCTYPE html>
+{% extends "Gen_templates/template_home.html" %}
 
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Critical Velos</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <script src="/js/jquery-1.11.1.js"></script>
-    <script src="/js/liteaccordion.jquery.min.js"></script>
-</head>
+{% block content %}
 
 
 <script>
@@ -216,66 +208,10 @@ $(window).load(function() {
 
 </script>
 
-<body>
-
-    <div class="template_body" style="">
-        <div class="template_inner_body" style="">
-            <a class="symbol" href="/" target="_top">
-              <img align="baseline" alt="CRITICAL VELOS" border="0" hspace="0" src="/images/logo.png" style="border-radius: 10px; box-shadow: 3px 5px 1px rgba(227, 211, 211, 1);width: 224px; height: 45px">
-              </a>
-        <div style=" float: right;; " aria-label="Quick links" role="navigation">
-            <a style="padding-right: 10px;" class="wlnk" href="/login/">LOGIN</a>
-            <a style="padding-right: 10px;" class="wlnk" href="/contact_us/">CONTACT US</a>
-            <a style="padding-right: 10px;" class="wlnk" href="/asknextquestion/">FEEDBACK</a>
-            <a style="padding-right: 10px;" class="wlnk" href="#">TAKE A FREE TOUR</a>
-        </div>
-
-        <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
-             <a href="/" class="ssb">
-                <span class="ssb active" id="but_1" style="padding: 5px;margin:2px;">
-                <span class="sub" id="sbut_1" align="center" style="text-align: center">HOME</span></span>
-            </a>
-            <a href="/home_scan/" class="ssb">
-                <span class="ssb" onmouseover="sel('2');" onmouseout="uns('2');" id="but_2" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN</span></span>
-            </a>
-
-            <a href="/vedicMaths/" class="ssb">
-                <span class="ssb" onmouseover="sel('3');" onmouseout="uns('3');" id="but_3" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_3">Vedic Maths</span></span>
-            </a>
 
 
-            <a href="/meetexperts/" class="ssb">
-                <span class="ssb" onmouseover="sel('4');" onmouseout="uns('4');" id="but_4" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_4">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
-            </a>
-          <a href="/infer" class="ssb">
-                <span class="ssb" onmouseover="sel('5');" onmouseout="uns('5');" id="but_5" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_5">Inference Login</span></span>
-            </a>
-         </div>
 
-        <script>
-            function sel(a){
-               // alert('sel'+a);
-             document.getElementById('but_'+a).className='ssbs';
-             document.getElementById('sbut_'+a).className='subs';
-
-
-            }
-
-            function uns(a){
-                  //  alert('uns '+a);
-
-             document.getElementById('but_'+a).className='ssb';
-             document.getElementById('sbut_'+a).className='sub';
-            }
-
-        </script>
-
-
-      <div id="featured_slide" style="">
+      <div id="featured_slide" style="margin: 5px;">
               <ol>
 
             <li>
@@ -356,52 +292,23 @@ $(window).load(function() {
                   -->
     </ol></div>
 
-            <!--   Footers of the page   -->
 
-        <div class="footer_div" style="">
 
-        <div class="sm_font" style=" float:right; text-align:right;; ">
-            <div style="margin-bottom: 10px">
-                <a aria-label="Facebook" href="#" target="_blank" title="Facebook">
-                    <img border="0" src="/images/facebook_icon.png">
-                </a>&nbsp;&nbsp;
-                <a aria-label="Twitter" href="#" target="_blank" title="Twitter">
-                    <img border="0" src="/images/twitter_icon.png">
-                </a>&nbsp;&nbsp;
-            </div>
-            <div style="margin-bottom: 5px">
-                SCAN® is a registered trademark of Critical Velos. </div>
-        </div>
-
-        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;">
-            <div style="margin-bottom: 10px">
-              <!--
-                <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
-                -->
-              <h3 style="border-radius: 10px; box-shadow: 3px 5px 1px rgba(227, 211, 211, 1);">{{ variable }}</h3>
-            </div>
-        </div>
-
-        <div id="id_letterheads_9_insert_shortcut_33x" style=" clear: both;; "></div>
-    </div>
-
-  </div>
-</div>
 
 
 
 <script type="text/javascript">
 $("#featured_slide").liteAccordion({
-    theme: "stitch",
+    theme: "os-tpl",
     containerWidth: $("#insert_shortcut").width()-35, // fixed (px)
-    containerHeight: 410, // fixed (px) - overall height of the slider
+    containerHeight: 440, // fixed (px) - overall height of the slider
     headerWidth: 45, // fixed (px) - slide spine title
 
     firstSlide: 5, // displays slide (n) on page load
 	activateOn: "click", // click or mouseover
     autoPlay: true, // automatically cycle through slides
     pauseOnHover: true, // pause slides on hover
-    rounded: false, // square or rounded corners
+    rounded: true, // square or rounded corners
     enumerateSlides: true, // put numbers on slides
 
     slideSpeed: 700, // slide animation speed
@@ -411,4 +318,4 @@ $("#featured_slide").liteAccordion({
 
 </script>
 
-</body>
+{% endblock %}

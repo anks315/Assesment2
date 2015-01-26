@@ -1,0 +1,314 @@
+{% extends "Gen_templates/template_home.html" %}
+
+{% block content %}
+
+<script>
+        $(document).ready(function(){
+
+
+            $("#goto_signup_form").click(function(){
+
+                $("#signup_box").slideDown("slow");
+               document.getElementById("login_box").style.display='none';
+                /* document.getElementById("signup_box").style.display='block';*/
+
+                });
+
+            $("#goto_loginbox").click(function(){
+
+               /* document.getElementById("login_box").style.display='block';*/
+                $("#login_box").slideDown("fast");
+                document.getElementById("signup_box").style.display='none';
+
+                });
+        });
+
+</script>
+
+
+
+<div id="pic_table" style="width: 100%; height: 450px; background: url(/images/slide-2.jpg);">
+
+         <!--
+         <div style="width: 900px; height: 450px; background-color: green;">
+		                 <div id="id_text1_2" style="">
+		 -->
+
+
+                    <div id="login_box" class="login_outbox" style="display: block" >
+
+                        <div class="login_innerbox" style="">
+
+                            <div style=" margin: 0px 10px;; ">
+
+                                <form name="login" id="login" style="padding: 0em; margin: 0em" method="POST" action="/dashboard/"  target="_top">
+                                    {% csrf_token %}
+                                    <p> {{ invalid_message }}</p>
+                                    <input type="hidden" name="_form_" value="login">
+                                    <label for="username" id="label_username" style="color:white; display: none">User Name</label>
+                                    <br>
+                                    <input type="text" name="username" id="username" value="" size="15" maxlength="40" style="border: 1px inset #B9B9B9; width:
+178px; height: 23px; padding: 0px; margin: 0; font:vectipedebook,Arial,sans-serif;" placeholder=" User Name">
+
+                                    <div style="PADDING-TOP: 5px">
+                                        <label for="password" id="label_password" style="color:white; display: none">Password</label>
+                                        <br>
+
+                                        <input type="password" autocomplete="off" name="password" id="password" value="" size="15" maxlength="40" style="border: 1px
+inset #B9B9B9; width:
+178px;height: 23px; padding: 0px; font:vectipedebook,Arial,sans-serif;margin: 0px" placeholder=" Password">
+                                    </div>
+
+                                    <div style="PADDING-TOP: 10px">
+                                        <font color="white" size="1"><div style="width:65px;"><button class="login_search" name="login" style="padding-bottom: 2px; padding-left: 5px; padding-right: 5px; padding-top: 2px" type="submit" value="true">LOG IN</button> </div><input type="hidden" name="opt_home_page" value="#">
+<input type="hidden" name="opt_error_page" value="">
+<input type="hidden" name="return_url" value=""></font>
+                                    </div>
+
+                                </form>
+
+
+
+
+                                <div id="id_text1_4_insert_shortcut_2_insert_shortcut_13" style=" margin: 5px 0px;; ">
+								<a class="white_link" href="#" style="font-style: italic" target="_blank">Forgot your login info?</a>
+								<br>
+								<a id="goto_signup_form" class="white_link"  style="font-style: italic" target="_blank">SIGN UP NOW</a>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                    <div id="signup_box" class="login_outbox" style="display: none"  >
+<div class="login_innerbox" style="width: 615px; height: 400px;">
+
+                                  <div style="padding: 10px">
+                                        <div style="width: 100%;">
+                                            <button style="width:100%;padding-bottom: 2px; padding-left: 220px; padding-right: 5px; padding-top: 2px" class="login_search" name="login" type="submit" value="true">SIGN UP FORM</button>
+                                        </div>
+
+                                    </div>
+
+
+                            <div style=" margin: 0px 10px;; ">
+
+
+
+                                <form name="login" id="login" style="padding: 0em; margin: 0em" method="POST" action="/#/" target="_top">
+                                    <input name="" value="" type="hidden">
+                                    <input name="_form_" value="login" type="hidden">
+
+
+
+                                <div style="padding-top: 5px;">
+                                        <table>
+                                            <tbody>
+
+                                         <tr>
+                                            <td>
+
+                                    <label for="username" id="username" style="color:white; display: none">username</label>
+                                    <br>
+                                    <input name="username" placeholder="Enter Unique Username " id="dob" value="" size="15" maxlength="40" style="border: 1px inset #B9B9B9; width:585px; height: 23px; padding: 0px; margin: 0; font:vectipedebook,Arial,sans-serif;" type="text">
+
+                                            </td>
+
+                                            </tr>
+                                         </tbody></table></div>
+
+
+
+                                    <div style="padding-top: 5px;">
+                                        <table>
+                                            <tbody>
+
+
+
+                                            <tr>
+                                            <td>
+
+                                    <label for="password_1" id="password_1" style="color:white; display: none">Password</label>
+                                    <br>
+                                    <input style="border: 1px inset rgb(185, 185, 185); height: 23px; padding: 0px; margin: 0px; width: 280px;" name="password_1" placeholder="Enter your Password" id="password_1" value="" size="15" maxlength="40" type="text">
+
+                                            </td>
+                                            <td style="padding-left:15px;">
+               <label for="password_2" id="password_2" style="color:white; display: none">Password</label>
+                                    <br>
+                                    <input style="border: 1px inset rgb(185, 185, 185); height: 23px; padding: 0px; margin: 0px; width: 280px;" name="password_2" placeholder="Re-Enter your Password" id="password_2" value="" size="15" maxlength="40" type="text">
+
+                                            </td>
+
+
+
+                                            </tr>
+                                            </tbody></table></div>
+
+                                    <div style="padding-top: 5px;">
+                                        <table>
+                                            <tbody>
+
+
+
+                                            <tr>
+                                            <td>
+
+                                    <label for="firstname" id="label_firstname" style="color:white; display: none">User Name</label>
+                                    <br>
+                                    <input style="border: 1px inset rgb(185, 185, 185); height: 23px; padding: 0px; margin: 0px; width: 280px;" name="firstname" placeholder="First Name" id="firstname" value="" size="15" maxlength="40" type="text">
+
+                                            </td>
+                                            <td style="padding-left:15px;">
+                                                 <label for="lastname" id="label_lastname" style="color:white; display: none">Password</label>
+                                        <br>
+
+                                        <input style="border: 1px inset #B9B9B9; width:280px;height: 23px; padding: 0px; font:vectipedebook,Arial,sans-serif;margin: 0px" name="lastname" placeholder="Last Name" id="lastname" autocomplete="off" value="" size="15" maxlength="40" type="text">
+
+                                            </td>
+
+
+
+                                            </tr>
+                                            </tbody></table></div>
+                                    <div style="padding-top: 5px;">
+                                        <table>
+                                            <tbody>
+
+                                         <tr>
+                                            <td>
+
+                                    <label for="dob" id="dob" style="color:white; display: none">dob</label>
+                                    <br>
+                                    <input name="dob" placeholder="Date OF Birth" id="dob" value="" size="15" maxlength="40" style="border: 1px inset #B9B9B9; width:178px; height: 23px; padding: 0px; margin: 0; font:vectipedebook,Arial,sans-serif;" type="text">
+
+                                            </td>
+                                            <td style="padding-left:15px;">
+                                                 <label for="sex" id="sex" style="color:white; display: none">sex</label>
+                                        <br>
+
+                                        <input name="sex" placeholder="Sex" id="sex" autocomplete="off" value="" size="15" maxlength="40" style="border: 1px inset #B9B9B9; width:178px;height: 23px; padding: 0px; font:vectipedebook,Arial,sans-serif;margin: 0px" type="text">
+
+                                            </td>
+
+                                                                                    <td style="padding-left:15px;">
+                                                 <label for="schoolId" id="label_schoolid" style="color:white; display: none">schoolid</label>
+                                        <br>
+
+                                        <input name="schoolId" placeholder="School ID :" id="schoolId" autocomplete="off" value="" size="15" maxlength="40" style="border: 1px inset rgb(185, 185, 185); width: 178px; height: 23px; padding: 0px; margin-right: 0px;" type="text">
+
+                                            </td>
+
+                                            </tr>
+                                         </tbody></table></div>
+
+
+                                <div style="padding-top: 5px;">
+                                        <table>
+                                            <tbody>
+
+                                         <tr>
+                                            <td>
+
+                                    <label for="address" id="address" style="color:white; display: none">address</label>
+                                    <br>
+                                    <input name="address" placeholder="Address Details" id="dob" value="" size="15" maxlength="40" style="border: 1px inset #B9B9B9; width:585px; height: 23px; padding: 0px; margin: 0; font:vectipedebook,Arial,sans-serif;" type="text">
+
+                                            </td>
+
+                                            </tr>
+                                         </tbody></table></div>
+
+
+
+                                    <div style="padding-top: 5px;">
+                                        <table>
+                                            <tbody>
+
+
+
+                                            <tr>
+                                            <td>
+
+                                    <label for="emailid" id="label_ebailid" style="color:white; display: none">Email ID</label>
+                                    <br>
+                                    <input style="border: 1px inset rgb(185, 185, 185); height: 23px; padding: 0px; margin: 0px; width: 280px;" name="emailid" placeholder="Email ID " id="email_id" value="" size="15" maxlength="40" type="text">
+
+                                            </td>
+                                            <td style="padding-left:15px;">
+                                                 <label for="Contact_Number" id="Contact_Number" style="color:white; display: none">Contact_Number</label>
+                                        <br>
+
+                                        <input style="border: 1px inset #B9B9B9; width:280px;height: 23px; padding: 0px; font:vectipedebook,Arial,sans-serif;margin: 0px" name="Contact_Number" placeholder="Contact Number" id="Contact_Number" autocomplete="off" value="" size="15" maxlength="40" type="text">
+
+                                            </td>
+
+
+
+                                            </tr>
+                                            </tbody></table></div>
+
+
+
+
+
+
+                                    <div style="padding-top: 10px">
+                                        <table>
+                                            <tbody>
+                                            <tr>
+                                                <td width="33%"></td>
+                                                <td width="33%"></td>
+                                                <td>
+                                                        <div style="width:65px;">
+                                            <button class="login_search" name="login" style="padding-bottom: 2px; padding-left: 5px; padding-right: 5px; padding-top: 2px" type="submit" value="true">SIGN UP</button>
+                                        </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <!--
+                                            <input type="hidden" name="opt_home_page" value="#">
+                                            <input type="hidden" name="opt_error_page" value="">
+                                            <input type="hidden" name="return_url" value="">-->
+                                    </div>
+
+                                </form>
+
+
+
+
+                                <div style=" margin: 5px 0px;; ">
+
+								<a id="goto_loginbox" class="white_link"  style="font-style: italic" target="_blank">Back to the Login Box</a>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+		 </div>
+
+
+
+
+
+{% endblock %}

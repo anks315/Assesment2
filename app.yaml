@@ -17,6 +17,9 @@ handlers:
 - url: /js
   static_dir: static/js
 
+- url: /js_1
+  static_dir: static/js/js_1
+
 - url: /css/(.*)
   static_files: static/css/\1
   upload: static/css/.*
@@ -111,7 +114,6 @@ handlers:
 
 - url: /mastery_by_student_by_class(.*)
   script: main.app
-
 
 - url: /gettopicwisescoreofsubject(.*)
   script: main.app

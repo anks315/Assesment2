@@ -1,14 +1,8 @@
-<!DOCTYPE html>
+{% extends "Gen_templates/template_home.html" %}
 
-<html lang="en">
+{% block content %}
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Critical Velos</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <script src="/js/jquery-1.11.1.js"></script>
-    <script src="/js/liteaccordion.jquery.min.js"></script>
-</head>
+
 
 
 <script>
@@ -216,199 +210,59 @@ $(window).load(function() {
 
 </script>
 
-<body>
-
-    <div class="template_body" style="">
-        <div class="template_inner_body" style="">
-            <a class="symbol" href="/" target="_top">
-              <img align="baseline" alt="CRITICAL VELOS" border="0" hspace="0" src="/images/logo.png" style="border-radius: 10px; box-shadow: 3px 5px 1px rgba(227, 211, 211, 1);width: 224px; height: 45px">
-              </a>
-        <div style=" float: right;; " aria-label="Quick links" role="navigation">
-            <a style="padding-right: 10px;" class="wlnk" href="/login/">LOGIN</a>
-            <a style="padding-right: 10px;" class="wlnk" href="/contact_us/">CONTACT US</a>
-            <a style="padding-right: 10px;" class="wlnk" href="/asknextquestion/">FEEDBACK</a>
-            <a style="padding-right: 10px;" class="wlnk" href="#">TAKE A FREE TOUR</a>
-        </div>
-
-        <div id="insert_shortcut" class="top_header" style="" aria-label="Content categories" role="navigation">
-             <a href="/" class="ssb">
-                <span class="ssb active" id="but_1" style="padding: 5px;margin:2px;">
-                <span class="sub" id="sbut_1" align="center" style="text-align: center">HOME</span></span>
-            </a>
-            <a href="/home_scan/" class="ssb">
-                <span class="ssb" onmouseover="sel('2');" onmouseout="uns('2');" id="but_2" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_2">WHAT&nbsp;IS&nbsp;SCAN</span></span>
-            </a>
-
-            <a href="/vedicMaths/" class="ssb">
-                <span class="ssb" onmouseover="sel('3');" onmouseout="uns('3');" id="but_3" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_3">Vedic Maths</span></span>
-            </a>
 
 
-            <a href="/meetexperts/" class="ssb">
-                <span class="ssb" onmouseover="sel('4');" onmouseout="uns('4');" id="but_4" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_4">MEET&nbsp;OUR&nbsp;EXPERTS</span></span>
-            </a>
-          <a href="/infer" class="ssb">
-                <span class="ssb" onmouseover="sel('5');" onmouseout="uns('5');" id="but_5" style="padding: 5px;margin: 1px;">
-                <span class="sub" id="sbut_5">Inference Login</span></span>
-            </a>
+
+
+<div style="width: 99%; height: 420px; background: #f1f1ff; border-radius: 5px;border: 2px ridge #E21A23;" >
+<h4 style="margin: 5px; padding: 5px 5px 5px 20px; color: #32484C" align="left">
+Contact Form</h4>
+         <div style="margin: 5px; padding: 5px 5px 5px 20px;">
+                <form id="form1" action="#" method="get">
+
+                <div class="success">Contact form submitted!<strong> We will be in touch soon.</strong></div>
+
+                    <div class="register-switch" id="account_types">
+                      <input type="radio" name="account_type" value="School" id="type_school" class="register-switch-input" checked>
+                      <label for="type_school" class="register-switch-label">School</label>
+                      <input type="radio" name="account_type" value="Teacher" id="type_teacher" class="register-switch-input">
+                      <label for="type_teacher" class="register-switch-label">Teacher</label>
+                      <input type="radio" name="account_type" value="Parent" id="type_parent" class="register-switch-input">
+                      <label for="type_parent" class="register-switch-label">Parent</label>
+                      <input type="radio" name="account_type" value="Student" id="type_student" class="register-switch-input">
+                      <label for="type_student" class="register-switch-label">Student</label>
+                      <input type="radio" name="account_type" value="Expert" id="type_expert" class="register-switch-input">
+                      <label for="type_expert" class="register-switch-label">Expert</label>
+                    </div>
+
+                <fieldset>
+                <label class="name">
+                <input type="text" value="Name:">
+                <span class="error">*This is not a valid name.</span>
+                    <span class="empty">*This field is required.</span>
+                </label>
+
+                    <label class="email">
+                <input type="text" value="E-mail:">
+                <span class="error">*This is not a valid email address.</span> <span class="empty">*This field is required.</span></label>
+                <label class="phone">
+                <input type="tel" value="Phone:">
+                <span class="error">*This is not a valid phone number.</span> <span class="empty">*This field is required.</span></label>
+                <label class="message">
+                <textarea>Message</textarea>
+                <span class="error">*The message is too short.</span> <span class="empty">*This field is required.</span> </label>
+                <div class="clear"></div>
+                <div class="link-form">
+                <a class="link1 p27" href="#" data-type="reset">Clear</a>
+                <a class="link1" href="#" data-type="submit">Send</a></div>
+                </fieldset>
+                </form>
+
+
+         </div>
          </div>
 
-        <script>
-            function sel(a){
-               // alert('sel'+a);
-             document.getElementById('but_'+a).className='ssbs';
-             document.getElementById('sbut_'+a).className='subs';
-
-
-            }
-
-            function uns(a){
-                  //  alert('uns '+a);
-
-             document.getElementById('but_'+a).className='ssb';
-             document.getElementById('sbut_'+a).className='sub';
-            }
-
-        </script>
-
-
-      <div id="featured_slide" style="">
-              <ol>
-
-            <li>
-        <h2><span>Introduction</span></h2>
-        <div><img src="/images/home/SCAN.png" alt="" style="width: 100%; height:100%;">
-        <div class="banners_home">
-{# <p style="color: rgba(57, 9, 9, 1);">The foundation that builds a person in life is to great extent based on the knowledge he gets from his teacher, if there is somebody other than parents who plays an important role in a student's mental development it is teacher.</p>#}
-{# <br>#}
-{#            <p style="color: rgba(57, 9, 9, 1);">The use of technology to improve education is a proven fact by many in the coming years..</p>#}
-{# <br>#}
-           </div>
-        </div>
-      </li>
-
-      <li>
-        <h2><span>Our thinking</span></h2>
-        <div><img src="/images/home/Infovsknowledge.png" alt="" style="width: 100%; height:100%;">
-        <div class="banners_home">
-{#                <p style="color: rgba(57, 9, 9, 1);">There is a need of Parent Teacher and Technology involvement for better student performance..</p>#}
-
-        </div>
-
-        </div>
-      </li>
-
-      <li>
-        <h2><span>Our Product SCAN</span></h2>
-        <div><img src="/images/home/Picture4.png" alt="" style="width: 80%; height:100%;padding-left: 10%;">
-
-        <div class="banners_home">
-{#           <p style="color: rgba(57, 9, 9, 1);">Team Critical Velos has come with developing a system which will involve parents , teachers and technology [Data Analytics, Machine learning and Artificial Intelligence ] with a common goal to analyse students performance and help them improve..#}
-{#            </p ><br>#}
-{#            <p style="color: rgba(57, 9, 9, 1);">This system is termed as " SCAN (Student Capability Analysis)"</p>#}
-        </div>
-            <div class="banners_home_author"> Team Critical Velos</div>
-           </div>
-      </li>
-      <li>
-        <h2><span>Our Vision</span></h2>
-        <div><img src="/images/home/Personalized.png" alt="" style="width: 100%; height:100%;">
-
-        <div class="banners_home">
-{#           <p>" Our Vision is to take education towards personalised learning, skill enhancement, growth measurement and discover learning patterns through the use of technology..  "</p>#}
-        </div>
-            </div>
-      </li>
-
-      <li>
-        <h2><span>Introductory Vedic Course </span></h2>
-        <div><img src="/images/home.png" alt="" style="width: 100%; height:100%;">
-
-        <div class="banners_home">
-
-{#            <p>Education is the most powerful weapon which you can use to change the world..</p>#}
-            <div class="banners_home_author"></div>
-
-         <!--   <button type="button"><a href="/contact_us/">Read More !!</a></button>   -->
-{#            <button style="border-radius: 5px;width: 100px;height: 30px;background-color:#434248;color: #007FFF" onclick="location.href='/vedicMaths/';"> Read More !!</button>#}
-{#            <button style="position:relative; border-radius: 5px;width: 100px;height: 30px;background-color:#434248;color: #007FFF " onclick="location.href='https://www.youtube.com/watch?v=OlK-6AdEuwk';">Video Link</button>#}
-
-</div>
-
-        </div>
-      </li>
-
-                  <!--
-      <li>
-        <h2><span>Why Us ?</span></h2>
-        <div><img src="/images/slide-2.jpg" alt="">
-
-        <div class="banners_home">
-
-</div>
-
-        </div>
-      </li>
-
-                  -->
-    </ol></div>
-
-            <!--   Footers of the page   -->
-
-        <div class="footer_div" style="">
-
-        <div class="sm_font" style=" float:right; text-align:right;; ">
-            <div style="margin-bottom: 10px">
-                <a aria-label="Facebook" href="#" target="_blank" title="Facebook">
-                    <img border="0" src="/images/facebook_icon.png">
-                </a>&nbsp;&nbsp;
-                <a aria-label="Twitter" href="#" target="_blank" title="Twitter">
-                    <img border="0" src="/images/twitter_icon.png">
-                </a>&nbsp;&nbsp;
-            </div>
-            <div style="margin-bottom: 5px">
-                SCAN® is a registered trademark of Critical Velos. </div>
-        </div>
-
-        <div id="id_letterheads_9_insert_shortcut_30" style=" float: left;">
-            <div style="margin-bottom: 10px">
-              <!--
-                <img alt="CV" border="0" src="/images/cv_icon.png" width="50">
-                -->
-              <h3 style="border-radius: 10px; box-shadow: 3px 5px 1px rgba(227, 211, 211, 1);">{{ variable }}</h3>
-            </div>
-        </div>
-
-        <div id="id_letterheads_9_insert_shortcut_33x" style=" clear: both;; "></div>
-    </div>
-
-  </div>
-</div>
 
 
 
-<script type="text/javascript">
-$("#featured_slide").liteAccordion({
-    theme: "stitch",
-    containerWidth: $("#insert_shortcut").width()-35, // fixed (px)
-    containerHeight: 410, // fixed (px) - overall height of the slider
-    headerWidth: 45, // fixed (px) - slide spine title
-
-    firstSlide: 5, // displays slide (n) on page load
-	activateOn: "click", // click or mouseover
-    autoPlay: true, // automatically cycle through slides
-    pauseOnHover: true, // pause slides on hover
-    rounded: false, // square or rounded corners
-    enumerateSlides: true, // put numbers on slides
-
-    slideSpeed: 700, // slide animation speed
-    cycleSpeed: 30000 // time between slide cycles
-
-});
-
-</script>
-
-</body>
+{% endblock %}
