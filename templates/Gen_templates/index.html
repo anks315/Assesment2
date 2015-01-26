@@ -26,40 +26,50 @@
   	  <div class="header_top">
 	   <div class="wrap">
 		 	     <div class="logo">
-						<a href="#"><img style="height: 50px;width: 250px;" src="/images/logo.png" alt="" /></a>
+						<a href="#"><img style="border: 2px solid #777daa; height: 50px;width: 250px;" src="/images/logo.png" alt="" /></a>
 					</div>	
 						<div class="menu">
 						    <ul>
 						    	<li class="current"><a href="#section-1" class="scroll">HOME</a></li>
 								<li><a href="#section-2" class="scroll">SCAN</li>
-								<li><a href="#section-3" class="scroll">VEDIC MATHS</a></li>
-								<li><a href="#section-4" class="scroll">CONTACT</a></li>
-                                <li><a href="#section-4" class="scroll">COMPANY</a></li>
+								<li><a href="#section-2a" class="scroll">VEDIC MATHS</a></li>
+								<li><a href="#section-3" class="scroll">COMPANY</a></li>
+                                <li><a href="#section-4" class="scroll">CONTACT</a></li>
 								<li class="login" >
 									<div id="loginContainer"><a href="#" id="loginButton"><span> + LOGIN</span></a>
 						                <div id="loginBox">                
-						                    <form id="loginForm">
-						                        <fieldset id="body">
+						                    <form id="loginForm" method="POST" action="/dashboard/"  target="_top">
+						                         {% csrf_token %}
+                                                <p> {{ invalid_message }}</p>
+
+                                                <fieldset id="body">
 						                        	 <fieldset>
 						                                <label for="email">User Name</label>
-						                                <input type="text" value="">
+						                             <input type="text" name="username" id="username" value="" size="15" maxlength="40" style="" placeholder=" User Name">
+
 						                            </fieldset>
+
+                                                    <!--
 						                            <fieldset>
 						                                <label for="email">Email Address</label>
 						                                <input type="text" value="">
 						                            </fieldset>
+						                            -->
 						                            <fieldset>
 						                                <label for="password">Password</label>
-						                                <input type="password" value="">
+						                                      <input type="password" autocomplete="off" name="password" id="password" value="" size="15" maxlength="40" style="" placeholder=" Password">
+
 						                            </fieldset>
-						                            <fieldset>
+						                            <!--
+                                                    <fieldset>
 						                                <label for="password">Confirm Password</label>
 						                                <input type="password" value="">
 						                            </fieldset>
-						                            <input type="submit" id="login" value="Sign Up">
+						                            -->
+						                            <input type="submit" id="login" value="Log In">
 						                            <label for="checkbox"><input type="checkbox"> <i>T & C apply</i></label>
 						                        </fieldset>
-						                        <span><a href="#">Already do u have an account ?</a></span>
+						                        <span><a href="#">Dont have an account ?</a></span>
 						                    </form>
 						                </div>
 						               </div>
@@ -81,7 +91,7 @@
 							<article><p>Find out what SCAN is?</p> <img src="/images/home/SCAN.png"  alt="" style="width: 800px;height: 450px;"/> </article>
 							<article><p>SCAN why ?</p> <img src="/images/home/Infovsknowledge.png"  alt="" style="width: 800px;height: 450px"/> </article>
 							<article><p>SCAN product</p> <img src="/images/home/Picture4.png"  alt="" style="width: 800px;height: 450px"/> </article>
-							<article><p>Somethin </p> <img src="/images/home/Personalized.png"  alt="" style="width: 800px;height: 450px"/> </article>
+							<article><p>Something </p> <img src="/images/home/Personalized.png"  alt="" style="width: 800px;height: 450px"/> </article>
                             <article><p>Vedic Maths</p> <img src="/images/home.png"  alt="" style="width: 800px;height: 450px"/> </article>
 
 							</div>
@@ -92,7 +102,7 @@
        						 $('.example1').wmuSlider();         
    						 </script> 	   
 
-                       <!--                      
+                       <!--
             		<div class="dropdown-buttons">   
             		  <div class="dropdown-button">           			
             			<select class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
@@ -144,6 +154,7 @@
                        -->
               				</div>
           				</div>
+                 <!--
         		<div class="comment_icons">
                 	<ul>
                 		<li><a class="comments" href="#"> <span>34 Comments</span> </a></li>
@@ -151,29 +162,72 @@
                 		<li><a class="like" href="#"> <span>105 Likes</span> </a></li>
                 	</ul>
                 </div>
+-->
      		 </div>
                        
-           <div class="about_desc section" id="section-2"> 
+           <div class="about_desc section" id="section-2a">
               <div class="wrap">            
                  	<div class="section group example">
 						<div class="col_1_of_2 span_1_of_2">
-						   <h3>We use 100% Real Clouds</h3>
-						   <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in aliquip ex ea commodo consequat.</span></p>
-						   <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat in voluptate velit esse cillum dolore eu fugiat.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in dolore eu fugiat in voluptate velit esse cillum dolore eu fugiat.</p>
+						   <h3>About Vedic Mathematics</h3>
+                        <p><span>Vedic Maths (originally “Vedic Ganita”) a book written by Swami Bharthi Krishna Tirtha Ji is based  on a portion of Atharvaveda (One of the four Vedas).
+ His holiness studied the Vedas and found the Ganita Sutras from a particular portion of the Atharvaveda.  These Ganita Sutras are also called Sulba Sutras (the easy mathematical formulae).</span></p>
+                        <p><br><strong>Why they were not known earlier? </strong><br><br>It can be understood easily as “Vedas are in Sanskrit and the grammar, the literature and the figures of speech in Sanskrit give great facility of expressing one’s dispositions in a number of different subjects but with the same set of words. Hence to understand the different layers of meanings encoded in one text it requires great mental abilities and high level of concentration in addition to deep knowledge of Sanskrit”.</p>
+                        <p>Vedic Mathematics was not known to the world but with an increase of interest in ancient Sanskrit text, the ancient Vedic Mathematics was rediscovered by Swami Bharati Krisna Tirthaji (the former Shankaracharya of Puri, India) in 1911. Swami Bharati Krisna Tirthaji was a great scholar of Sanskrit, Mathematics, History and Philosophy. His deep study and careful research had deciphered the great mathematical formulas known as Sutras that were completely ignored as no one could relate these to mathematics.</p>
+                        <p>Bharati Krishna Tirthaji underwent meditation for long years in the forest of Sringeri. His holiness studied old lexicons including Visva, Amara, Arnava, Sabdakalpardruma etc. With these he got the key in that way in one instance and one thing after another helped him in the elucidation of the other sutras (formulae).</p>
+                        <p>It was to His Holiness’s extreme amazement that the sutras dealt with mathematics in all its branches. He realized only sixteen sutras cover all branches of mathematics – arithmetic, algebra, geometry, trigonometry, physics, plain and spherical geometry, conics, calculus, both differential and integral, applied mathematics of various kinds, dynamics, hydrostatics, static, kinematics and all.</p>
+                        <p>Vedic Mathematics (1965) that is a pioneer work of Bharati Krishna Tirthaji, has techniques of Vedic mathematics. It is considered as a first work towards Vedic Mathematics.
+In late 1960s a copy of his book reached London and from there Vedic Mathematics was reborn. It was taken up as a new alternative system of mathematics. British mathematicians got interested in Vedic mathematics. Many lectures on this were delivered which later on were collected in the book – Introductory Lectures on Vedic Mathematics. After the visit of Andrew Nicholas to India between 1981 and 1987, interest in Vedic maths started to develop in India.</p>
+
 
 		 				</div>
 						<div class="col_1_of_2 span_1_of_2">
-						   <h3>We don't hurt kittens</h3>
-						   <p><span>Lorem ipsum dolor sit amet, sed do eiusmod tempor ut labore et dolore magna aliqua. Duis aute irure dolor in velit esse cillum dolore eu fugiat nulla pariatur.</span></p>
-						   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in aliquip ex ea commodo consequat voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-						   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in aliquip ex ea commodo consequat voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-						</div>
+						   <h3>How we are Diff and Why Us?</h3>
+	                                    <p>With so many Vedic Maths courses available Online there is a difficulty to find the best one and to differentiate between any two courses.</p>
+                        <p>To differentiate between courses we must first analyze the aim of any two organizations as course must be prepared along those lines only. </p>
+                        <p><span>We <strong>@Critical Velos</strong> lay emphasis on relationship of learner with the education and technology. We strongly believe that technology is just a tool and watching Online lectures cannot replace a teacher.</span> </p>
+                        <p>For this we have created an online classroom like environment for every student so that learning takes place instead of study. For this purpose we have made use of an artificially intelligent system named SCAN which will play the role of a teacher for the student and tell him what he has learned and what topics he is ready to learn.<br> <a class="scroll" style="color: #000;font-size: 15px;" href="#section-2"><strong>(Click here to know more about SCAN).</strong></a></p>
+                        <p>Our system helps a student to be able to track his weak points during the course and work on them closely.</p>
+                        <p>Also special emphasis have been given on reporting and for the first time learner will be able to see his learning graph, list of weak areas, Knowledge retention rate, his learning pattern and complete record of data for the course.</p>
+                        <p><br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Virtual Classroom environment for every individual.
+                        <br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Scientific Assessments using Artificially Intelligent system SCAN
+                        <br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Individualized learning according to state of every learner
+                        <br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Help learner to find weak areas during course and work on them closely
+                        <br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>24X7 teacher support available Online
+                        <br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Emphasis on Learning rather than memorizing
+                        <br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Complete learning profile available for child during course with parameters like Learning Graph, Knowledge Retention rate.
+                        <br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Efficient reporting with every minute detail on child learning
+                        <br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> Explanatory Video Lectures in simple language
+                        <br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Learning in a constructive and interesting manner
+                        <br><br><strong>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Simple UI of portal</p>
+ 	</div>
 				    </div>	        
            	  </div>             
        	  </div>  
-       	  
+
+
+           <div class="about_desc section" id="section-2">
+              <div class="wrap">
+                 	<div class="section group example">
+						<div class="col_1_of_2 span_1_of_2">
+						   <h3>Our Product SCAN</h3>
+                        <p><strong>SCAN </strong>is our first education based product which is a result of continuous research and innovation. The aim of this product is to provide a healthy environment to students, teachers and parents which will be helpful in overall development of child. Our vision is that every child in the country should get ample of opportunities for his development and his best qualities should be known at early stages so that they can be developed to professional level.  </p>
+                        <p>With this product we are targeting to change the concept of Information to knowledge and study to learning. We have also taken care that we give ample of respect to all the teachers involved with child and that teacher-child relationship becomes stronger with Indian education entering a new era.</p>
+
+		 				</div>
+						<div class="col_1_of_2 span_1_of_2">
+						   <h3>About SCAN</h3>
+	                    <p><span><strong>SCAN</strong> is an Artificially Intelligent system that prepares itself uniquely for every child so that he can be assessed as per his qualities. It is not just an assessment prepared by a group of experts in which a set of questions are designed and result is analyzed.</span> </p>
+                        <p>But we at <strong>Critical Velos </strong> strongly believe that along with experts the role of teacher directly associated with a student cannot be neglected and their inputs are necessary to assess a child and make a plan for them.  Hence we have come up with a unique system that is embedded with inputs of experts and will also take inputs from teachers that are directly associated with students. </p>
+                        <p>Based on these inputs every child is assessed uniquely at regular intervals and it helps in knowing his mistake at early stages and work on them before they turn into his weakness. </p>
+                        <p>Thus SCAN gives special care every child and helps him building his own dream future.</p>
+					</div>
+				    </div>
+           	  </div>
+       	  </div>
+
        	    <div class="features section" id="section-3">      	      	      	   	
-       	   	 	<h2>How it Works</h2>
+       	   	 	<h2>Our Team Composition</h2>
        	   
        	    <!------ Slider ------------>	 
        	    <div class="browser">  	       
@@ -186,16 +240,16 @@
 	                <li><a class="right_arrow" href="#southPark"> <i class="right_arrow"> </i></a></li>
 	              </ul>
 	              <div id="mother">
-	              	<img src="/images/images_1/browser1.png" alt="" />
+	              	<img src="/images/slide-2.jpg" alt="" />
 	              </div>
 	              <div id="parks">
-	                 <img src="/images/images_1/browser2.png" alt="" />
+	                 <img src="/images/slide-3.jpg" alt="" />
 	              </div>
 	              <div id="theOffice">
-	              	<img src="/images/images_1/browser3.png" alt="" />
+	              	<img src="/images/slide-2.jpg" alt="" />
 	              </div>
 	              <div id="southPark">
-	              	<img src="/images/images_1/browser4.png" alt="" />
+	              	<img src="/images/slide-3.jpg" alt="" />
 	              </div>             
 	            </div>
 	            <div class="clear"></div>

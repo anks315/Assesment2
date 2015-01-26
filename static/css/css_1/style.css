@@ -44,12 +44,12 @@ img{max-width:100%;}
  }
  .header_top{
 	padding:10px 0;
-	 border-bottom:8px solid #ee5f15;
+	 border-bottom:8px solid #f50026;
 	position: fixed;
 	z-index:9;
 	width: 100%;
 	clear: both;
-	background:#232d3b;
+	background: #a4b3c8;
  }
   .logo{
 	float:left;
