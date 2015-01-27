@@ -1,8 +1,4 @@
 /*
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
 */
 /* reset */
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
@@ -44,12 +40,12 @@ img{max-width:100%;}
  }
  .header_top{
 	padding:10px 0;
-	 border-bottom:8px solid #f50026;
+	 border-bottom:8px solid #ee5f15;
 	position: fixed;
 	z-index:9;
 	width: 100%;
 	clear: both;
-	background: #a4b3c8;
+	background:#232d3b;
  }
   .logo{
 	float:left;
@@ -295,7 +291,7 @@ input:focus {
 	width: 70px;
 	height: 85px;
 	text-indent: -9999px;
-	background: url(../images/sprites.png) no-repeat;
+	background: url(/images/images_1/sprites.png) no-repeat;
 	top: 50%;
 	margin-top: -40px;
 	cursor:pointer;
@@ -406,7 +402,7 @@ input:focus {
 	text-align:left;
 }
 .flat .selected{
-	background: url(../images/chart.png) no-repeat 15px 14px;
+	background: url(/images/images_1/chart.png) no-repeat 15px 14px;
 }
 .flat .selected::after{
 	content: '';
@@ -417,7 +413,7 @@ input:focus {
 	padding:20px 20px;
 	width:20px;
 	height:20px;
-	background:#7accc8 url(../images/sprites.png) no-repeat 9px  11px;
+	background:#7accc8 url(/images/images_1/sprites.png) no-repeat 9px  11px;
 	border-radius: 0 5px 5px 0;
 	-webkit-border-radius: 0 5px 5px 0;
 	-moz-border-radius: 0 5px 5px 0;
@@ -547,20 +543,20 @@ input:focus {
 		transition: all 0.3s ease;
 }
 .comment_icons li a.comments{
-	background:#36AAA4 url(../images/sprites.png) no-repeat -125px 13px;
+	background:#36AAA4 url(/images/images_1/sprites.png) no-repeat -125px 13px;
 	border-radius:3px 3px 0px 0px;
 }
 .comment_icons li a.comments:hover{
 	background-color:#229993;#5FC4BF
 }
 .comment_icons li a.email{
-	background:#80d3cf url(../images/sprites.png) no-repeat -178px 11px;
+	background:#80d3cf url(/images/images_1/sprites.png) no-repeat -178px 11px;
 }
 .comment_icons li a.email:hover{
 	background-color:#5FC4BF;#55AAA5
 }
 .comment_icons li a.like{
-	background:#5dbab5 url(../images/sprites.png) no-repeat -231px 10px;
+	background:#5dbab5 url(/images/images_1/sprites.png) no-repeat -231px 10px;
 	border-radius:0px 0px 3px 3px;
 }
 .comment_icons li a.like:hover{
@@ -688,7 +684,7 @@ input:focus {
 	width:90px;
 	height:90px;
 	display:block;
-	background:url(../images/sprites.png) no-repeat ;
+	background:url(/images/images_1/sprites.png) no-repeat ;
 }
 .features li a.cloud_icon{
 	background-color:#232d3b;
@@ -793,7 +789,7 @@ input:focus {
 	left:0px;
 	width:30px;
 	height:35px;
-	background-image: url("../images/leftPanelArrow.png");
+	background-image: url("/images/images_1/leftPanelArrow.png");
 	background-repeat: no-repeat;
 	background-position:center center;
 	cursor: pointer;opacity:0.5;
@@ -805,7 +801,7 @@ input:focus {
 	 right:0px;
 	 width:30px;
 	 height:35px;
-	 background-image: url("../images/rightPanelArrow.png');
+	 background-image: url("/images/images_1/rightPanelArrow.png');
 	 background-repeat: no-repeat;
 	 background-position:center center;
 	 cursor: pointer;opacity:0.5;
@@ -870,7 +866,7 @@ input:focus {
 	border: none;
 	outline:none;
 	cursor: pointer;
-	background:url(../images/sprites.png) no-repeat -195px -6px;
+	background:url(/images/images_1/sprites.png) no-repeat -195px -6px;
 	float: right;
 	width:36px;
 	height:36px;
@@ -896,7 +892,7 @@ input:focus {
 	-moz-transition: all 0.3s ease-in-out;
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
-	background:url(../images/sprites.png) no-repeat ;
+	background:url(/images/images_1/sprites.png) no-repeat ;
 }
 .social_icons li a:hover{
   position:relative;
@@ -1204,7 +1200,7 @@ input:focus {
     .features li a i {
 		width: 45px;
 		height: 45px;
-		background: url(../images/sprite.png) no-repeat;
+		background: url(/images/images_1/sprite.png) no-repeat;
 	}
 	.features li a i.cloud_icon{
 		background-position:-20px -78px;
