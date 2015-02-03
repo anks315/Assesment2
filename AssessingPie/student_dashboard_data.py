@@ -36,12 +36,12 @@ def getmasterybysubject(request):
     session = get_current_session()
     studentkey = session.get('studentkey',-1)
     mastery = Query.get_mastery_for_all_subjects(studentkey)
-    t = loader.get_template('Dashboard/mastery_by_subject.xml')
+    t = loader.get_template('Dashboard/average_mastery_by_subject.xml')
     c = Context({'masterdict':mastery,})
     return HttpResponse(t.render(c),
     content_type="text/xml")
 
-    #return render_to_response('Dashboard/mastery_by_subject.xml',{'masterdict':mastery,},context_instance = RequestContext(request),content_type="text/xml")
+    #return render_to_response('Dashboard/average_mastery_by_subject.xml',{'masterdict':mastery,},context_instance = RequestContext(request),content_type="text/xml")
 
 def getpendingassessment(request):
 
@@ -53,22 +53,22 @@ def getpendingassessment(request):
         pendingassessments = Query.get_pending_assessments_by_subject(studentkey,subject.key)
         logging.error(pendingassessments)
         pendingassessmentbysubject[subject.name]= pendingassessments
-    t = loader.get_template('Dashboard/pending_assessmentbysubject.xml')
+    t = loader.get_template('Dashboard/pending_assessments.xml')
     c = Context({'assessmentdict':pendingassessmentbysubject,})
     return HttpResponse(t.render(c),
     content_type="text/xml")
-    #return render_to_response('Dashboard/pending_assessmentbysubject.xml',{'assessmentdict':pendingassessmentbysubject,},context_instance = RequestContext(request),content_type="text/xml")
+    #return render_to_response('Dashboard/pending_assessments.xml',{'assessmentdict':pendingassessmentbysubject,},context_instance = RequestContext(request),content_type="text/xml")
 
 def getgrowthforallsubject(request):
 
     session = get_current_session()
     studentkey = session.get('studentkey',-1)
     growthdict = Query.get_growth_for_all_subject(studentkey)
-    t = loader.get_template('Dashboard/growth_by_subject.xml')
+    t = loader.get_template('Dashboard/growth_per_subject.xml')
     c = Context({'growthdict':growthdict,})
     return HttpResponse(t.render(c),
     content_type="text/xml")
-    #return render_to_response('Dashboard/growth_by_subject.xml',{'growthdict':growthdict,},context_instance = RequestContext(request),content_type="text/xml")
+    #return render_to_response('Dashboard/growth_per_subject.xml',{'growthdict':growthdict,},context_instance = RequestContext(request),content_type="text/xml")
 
 
 def getreadytolearnbysubject(request):
@@ -114,7 +114,7 @@ def gettopicwisescoreofsubject(request):
     key = request.GET['id']
     subjectkey = ndb.Key(urlsafe=key)
     topicwisescore=Query.get_recent_assessment_topic_scores_of_student(studentkey,subjectkey)
-    t = loader.get_template('Dashboard/topicwisescoreofsubject.xml')
+    t = loader.get_template('Dashboard/course_statistics.xml')
     c = Context({'topicwisescore':topicwisescore,})
     return HttpResponse(t.render(c),
     content_type="text/xml")
@@ -138,7 +138,7 @@ def getmasteryofsubject(request):
     key = request.GET['id']
     subjectkey = ndb.Key(urlsafe=key)
     mastery=Query.get_recent_assessment_score_of_student(studentkey,subjectkey)
-    t = loader.get_template('Dashboard/masteryofsubject.xml')
+    t = loader.get_template('Dashboard/donut_mastery.xml')
     c = Context({'mastery':mastery,})
     return HttpResponse(t.render(c),
     content_type="text/xml")
@@ -151,7 +151,7 @@ def getgrowthofsubject(request):
     key = request.GET['id']
     subjectkey = ndb.Key(urlsafe=key)
     growthdict=Query.get_learning_progress(studentkey,subjectkey)
-    t = loader.get_template('Dashboard/growthofsubject.xml')
+    t = loader.get_template('Dashboard/subject_learning_growth.xml')
     c = Context({'growth':growthdict,})
     return HttpResponse(t.render(c),
     content_type="text/xml")
