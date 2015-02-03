@@ -1,0 +1,134 @@
+{% extends "Gen_templates/template_home.html" %}
+
+{% block content %}
+
+
+        <style>
+
+
+#about-us{display:block; width:99%; line-height:1.6em;}
+#about-us h2{margin-bottom:40px; padding-bottom:20px; border-bottom:1px solid #CCCCCC;}
+
+#about-us #statements{margin-bottom:50px;}
+#about-us #statements p{margin:20px 0 0 0; padding:0;}
+#about-us #statements p:first-child{margin-top:0;}
+
+#about-us #team{margin-bottom:0;}
+#about-us #team ul{margin:0; padding:0; list-style:none;}
+#about-us #team ul li{position:relative; margin-bottom:50px;}
+#about-us #team ul li div{}
+#about-us #team ul li div:first-child{}
+#about-us #team ul li div img{padding:4px; border:1px solid #CCCCCC;}
+#about-us #team ul li p{margin:5px 0 0 0; padding:0;}
+#about-us #team ul li p:first-child{}
+#about-us #team ul li .team_name{font-weight:bold;font-size:15px;}
+#about-us #team ul li .team_title{margin:0; font-size:11px; line-height:normal;}
+#about-us #team ul li .team_description{}
+#about-us #team ul ul{position:absolute; top:0; right:0;}
+#about-us #team ul ul li{display:inline; margin:0 0 0 6px; background:none;}
+#about-us #team ul ul li:first-child{margin-left:0;}
+#about-us #team ul ul li a{}
+#about-us #team ul ul li a img{padding:0; border:none;}
+
+#about-us #client_logos{margin:0;}
+#about-us #client_logos ul{margin:0; padding:0; list-style:none;}
+#about-us #client_logos ul li{}
+#about-us #client_logos ul li:first-child{margin-left:0;}
+#about-us #client_logos ul li img{}
+
+.one_half,
+.one_third, .two_third,
+.one_quarter, .two_quarter, .three_quarter,
+.one_fifth, .two_fifth, .three_fifth, .four_fifth{display:inline-block; float:left; margin:0 0 0 20px; list-style:none;}
+
+.one_third, .two_third{margin:0 0 0 30px;}
+
+.first,
+.one_half:first-child,
+.one_third:first-child, .two_third:first-child,
+.one_quarter:first-child, .two_quarter:first-child, .three_quarter:first-child,
+.one_fifth:first-child, .two_fifth:first-child, .three_fifth:first-child, .four_fifth:first-child{margin-left:10px;}
+
+.two_half, .three_third, .four_quarter, .five_fifth{display:block; width:98%; clear:both;}
+
+/*----------------------------------------------Half Grid-------------------------------------*/
+
+.one_half{width:50%;}
+
+/*----------------------------------------------Third Grid-------------------------------------*/
+
+.one_third{width:30%;}
+.two_third{width:60%;}
+
+/*----------------------------------------------Quarter Grid-------------------------------------*/
+
+.one_quarter{width:25%;float: left}
+.two_quarter{width:50%;float: right}
+.three_quarter{width:75%;}
+
+/*----------------------------------------------Fifth Grid-------------------------------------*/
+
+.one_fifth{width:20%;}
+.two_fifth{width:40%;}
+.three_fifth{width:60%;}
+.four_fifth{width:80%;}
+
+        .clear{width: 98%;}
+
+    </style>
+
+<div id="pic_table" style="width: 99%; height: 430px; overflow:auto;box-shadow: 10px 10px 5px #888;border: 2px solid rgba(249, 240, 240, 1);">
+
+    <div style="padding: 10px;margin: 5px;" class="wrapper row2">
+        <div id="container" class="clear">
+        <div id="about-us" class="clear">
+{% comment %}
+<section id="statements" class="clear">
+        <p>We are a research based organization working on solutions that will be helpful for betterment of the society. We at Critical Velos believe that use of technology can bring revolutionary changes in the society. Hence we are working on solutions that are the need of 21st century. Our team is dedicated to develop products that can be used in various sectors of the society and take society further. We to enhance the performance of every individual with the help of our innovative and easy to use products.</p>
+        <p>In addition to technology development we take utmost care that there is balance between technology and human work and there must not be any adverse effect of any of our solution.</p>
+        <p>We understand that human values are invaluable hence use of technology should not affect the human values so one dimension of our research totally takes care of this concern. We make sure that human values should not be compromised wherever we use our technology.</p>
+      </section>
+      {% endcomment %}
+
+      <section id="team">
+        <h2>Team Critical Velos</h2>
+        <ul>
+            <div class="one_third" ><img style="width: 100%;height: 100%;" src="/images/team/kapil.jpg" alt=""></div>
+            <div class="two_third">
+              <p class="team_name"><strong>Kapil Bhandari</strong></p>
+              <p class="team_title">Chief Architect of Critical Velos Pvt Ltd</p>
+              <div class="team_description">
+                <p>Kapil Bhandari is a Graduate in CSE from PEC Chandigarh having 2 Years of Industrial Experience with Samsung Electronics on Android Framework and MDM. Have technical interests in Security and Algorithms and currently doing research work on use of  Mobile Device Management and VPN for Education system and contribute to the society.</p>
+                <p>This website is developed by mr bhandari.</p>
+              </div>
+  {% comment %}            <ul>
+                <li><a href="#"><img src="/images/icons/bar-chart.png" alt=""></a></li>
+                <li><a href="#"><img src="/images/icons/bar-chart.png"  alt=""></a></li>
+                <li><a href="#"><img src="/images/icons/bar-chart.png"  alt=""></a></li>
+                <li><a href="#"><img src="/images/icons/bar-chart.png"  alt=""></a></li>
+                <li><a href="#"><img src="/images/icons/bar-chart.png"  alt=""></a></li>
+              </ul>{% endcomment %}
+            </div>
+          </ul>
+      </section>
+
+
+
+{% comment %}            <section id="client_logos">
+        <h2>Our Partners</h2>
+        <ul class="clear" style="display: inline">
+          <li class="one_fifth first"><img src="/images/logo.png" alt=""></li>
+          <li class="one_fifth"><img src="/images/logo.png" alt=""></li>
+          <li class="one_fifth"><img src="/images/logo.png" alt=""></li>
+          <li class="one_fifth"><img src="/images/logo.png" alt=""></li>
+          <li class="one_fifth"><img src="/images/logo.png" alt=""></li>
+        </ul>
+      </section>{% endcomment %}
+
+       </div>
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from gaesessions import get_current_session
 from engine import topictimespend,nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer,maxstatesize,getnumquestions,readytolearnurl,readytolearn,completedtopics,currentstatelist,scorelist,nextstatelist,readytolearnquestionkey
-from django.template import RequestContext
+from django.template import RequestContext,loader,Context
 from google.appengine.api import users
 from dummydata import fill,flush
 from Query import login
@@ -14,6 +14,14 @@ import  Query
 import datetime
 import Constant
 from django.core.context_processors import csrf
+
+
+
+def loadwebpage(request):
+    session = get_current_session()
+    templates = loader.get_template('Gen_templates/template_home.html')
+    contexts= Context({'division_content':HttpResponse(loader.get_template('Gen_templates/template_homescan.html')),})
+    return HttpResponse(templates.render(contexts),content_type="text/http")
 
 
 # askquestion function call assessment engine to update states probabilty and choose next \
@@ -182,7 +190,7 @@ def home(request):
         if session['type'] == Constant.Constant.STUDENT:
             return render_to_response('Dashboard/dashboard.html',{},context_instance = RequestContext(request))
 
-     return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+     return render_to_response('Gen_templates/template_homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
 
 blocknumber = -1
@@ -198,7 +206,7 @@ numalreadyinferred=0
 def contactus(request):
         flush()
         fill()
-        return render_to_response('AssessingPie/contact.html',{},context_instance = RequestContext(request))
+        return render_to_response('Gen_templates/template_contactUs.html',{},context_instance = RequestContext(request))
 
 
 def topicnames(request):
@@ -206,7 +214,7 @@ def topicnames(request):
 
 
 def infer(request):
-        return render_to_response('AssessingPie/testpage.html',{},context_instance = RequestContext(request))
+        return render_to_response('Gen_templates/template_inference.html',{},context_instance = RequestContext(request))
 
 def assesstopicname(request):
         return render_to_response('AssessingPie/assesstopicname.html',{},context_instance = RequestContext(request))
@@ -468,19 +476,19 @@ def ques(request):
     return render_to_response('Home/Questions.html',{},context_instance = RequestContext(request))
 
 def whatisscan(request):
-    return render_to_response('Home/Home_scan.html',{},context_instance = RequestContext(request))
+    return render_to_response('Gen_templates/template_homescan.html',{},context_instance = RequestContext(request))
 
 def login(request):
-    return render_to_response('Home/login.html',{'invalid_message':''},context_instance = RequestContext(request))
+    return render_to_response('Gen_templates/template_login.html',{'invalid_message':''},context_instance = RequestContext(request))
 
 def meetExperts(request):
-    return render_to_response('Home/Meet_experts.html',{},context_instance = RequestContext(request))
+    return render_to_response('Gen_templates/template_meetexperts.html',{},context_instance = RequestContext(request))
 
 def vedicMaths(request):
-    return render_to_response('Home/vedicmaths.html',{},context_instance = RequestContext(request))
+    return render_to_response('Gen_templates/template_vedicMaths.html',{},context_instance = RequestContext(request))
 
 def xyz(request):
-    return render_to_response('Dashboard/dashboardaleks.html',{},context_instance = RequestContext(request))
+    return render_to_response('Gen_templates/index.html',{},context_instance = RequestContext(request))
 
 
 def testreport(request):

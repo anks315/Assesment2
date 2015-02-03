@@ -112,6 +112,11 @@ text-align: justify;
 
 }
 
+#middle_division{
+    height: 450px;
+    overflow: hidden;
+}
+
 a:link,a:visited {
 font-family:ArumSansLt, Arial, Sans-Serif;
 text-decoration:none;
@@ -1044,10 +1049,10 @@ table {
 }
 
 .detail_vedic_scan{
-    height: 350px;
-    margin: 10px;
+    height: 320px;
+    margin: 1px 5px 5px 5px;
     padding: 5px;
-    overflow-y: auto;
+    overflow-y: hidden;
     border-radius: 5px;
 }
 .p{
@@ -1057,7 +1062,7 @@ table {
     color: #1a20b7;
 }
 .detail_vedic_scan p{
-   margin:20px 0 0 0;
+
     padding:0;
     font-size: 14px;
 

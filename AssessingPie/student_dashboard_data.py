@@ -7,6 +7,10 @@ from gaesessions import get_current_session
 import logging
 from google.appengine.ext import ndb
 
+
+
+
+
 def userdetails(request):
     session = get_current_session()
     type =session.get('type',-1)
