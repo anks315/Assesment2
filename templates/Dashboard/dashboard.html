@@ -76,7 +76,7 @@
                 document.getElementById("email_id").innerHTML = email_id[0].childNodes[0].nodeValue;
                 document.getElementById("lastLogin").innerHTML = lastlogin[0].childNodes[0].nodeValue;
                 document.getElementById("contactno").innerHTML = contactno[0].childNodes[0].nodeValue;
-                document.getElementById("dashboardHeading").innerHTML= username[0].childNodes[0].nodeValue+" Dashboard ";
+                document.getElementById("dashboardHeading").innerHTML= "Hello "+username[0].childNodes[0].nodeValue.trim()+" !!";
 
 
             }
@@ -163,6 +163,82 @@
 
 </script>
 
+{% comment %}
+        List Pending assignments of all subject and populate pending_assignment id
+        input template : /pendingassessmentbysubject/
+
+{% endcomment %}
+
+<script>
+
+    function list_all_pending_assessments(){
+
+
+
+        document.getElementById('pendingassesments').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById('pendingassesments').style.display='block';
+
+        var xmlhttp;
+
+        var  div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Pending Assesments in All Subjects</th><th>Due Date</th></tr>";
+
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.overrideMimeType("text/xml");
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                xmlDoc = xmlhttp.responseXML;
+
+                no_of_assesment = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
+
+                for (i = 0; i < no_of_assesment; i++) {
+
+                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
+                    var subject_name = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
+                    //alert(subject==subject_name);
+
+                    var assesmentKey = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
+                    var assesmentid =  x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
+                    var duedate = x.getElementsByTagName("due_date")[0].childNodes[0].nodeValue.trim();
+
+                    var innerdiv = "<tr><td><a href=\"/assessment?id="+assesmentKey+"\">" + assesmentid + "</a></td><td>" + duedate + "</td></tr>";
+
+                    div_to_be_loaded += innerdiv;
+
+                }
+
+
+
+                div_to_be_loaded+="</tbody></table>";
+
+                //alert(div_to_be_loaded);
+                document.getElementById("pendingassesments").innerHTML = div_to_be_loaded;
+
+
+
+
+            }
+        }
+
+        xmlhttp.open("GET", "/pendingassessmentbysubject/", true);
+        xmlhttp.overrideMimeType("text/xml");
+        xmlhttp.send();
+
+
+
+
+
+
+
+    }
+
+
+</script>
 
 
 <!--
@@ -227,6 +303,7 @@ Input Template - /subjectdetailsofstudent/   for subjects
         xmlhttp.send();
 
     }
+
 
 
     function populate_list_of_subjects() {
@@ -594,7 +671,7 @@ Main
 
         var xmlhttp;
 
-        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
+        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Ready to Learn  </th></tr>";
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
             xmlhttp.overrideMimeType("text/xml");
@@ -606,17 +683,19 @@ Main
 
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-                no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
-
+                no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("question").length;
+                var x = xmlhttp.responseXML.documentElement.getElementsByTagName("question");
+            //    alert(no_of_topics+"asda  "+ x[0].childNodes[0].nodeValue.trim());
                 for (i = 0; i < no_of_topics; i++) {
 
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
-                    var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                    var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
+             //  var x = xmlhttp.responseXML.documentElement.getElementsByTagName("question")[i];
+                  //  var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
+                  //  var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
 
 
+                    var question = x[i].childNodes[0].nodeValue.trim()
 
-                    var innerdiv = "<tr><td><a href=\"#\">" + name + "</a></td><td>" + question + "</td></tr>";
+                    var innerdiv = "<tr><td>" + question + "</td></tr>";
 
                     div_to_be_loaded=div_to_be_loaded+innerdiv;
 
@@ -629,7 +708,8 @@ Main
             }
         };
 
-        xmlhttp.open("GET", "/readytolearnbysubject/", true);
+        //alert("/getreadytolearn_ofsubject?id="+subjectkey);
+        xmlhttp.open("GET", "/getreadytolearn_ofsubject?id="+subjectkey, true);
         xmlhttp.overrideMimeType("text/xml");
         xmlhttp.send();
 
@@ -758,7 +838,7 @@ Main
                 no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
 
                 for (i = 0; i < no_of_topics; i++) {
-                        alert('i = '+i);
+                      //  alert('i = '+i);
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
                     var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
                     var score = x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim();
@@ -773,7 +853,7 @@ Main
 
 
 
-                alert(div_to_be_loaded);
+             //   alert(div_to_be_loaded);
                 div_to_be_loaded+="</tbody></table>";
                 document.getElementById(divid).innerHTML = div_to_be_loaded;
             }
@@ -827,24 +907,25 @@ Main
 
 
 
-<body>
-<div class="template_body" style="padding-top:2px;">
+<body style="border-left: 4px solid #133A82;border-right: 4px solid #133A82">
+    <div class="template_body" style="padding: 10px;border-radius: 20px;">
 
-<div class="template_header" style="">
+<div class="template_header" style="padding: 0px;">
     <div class="template_main_header" style="border-bottom: 2px solid rgba(28, 156, 88, 1);">
 
         <table  width="100%">
             <tr >
-                <td  width="3%" >
+                <td width="3%">
+
                 </td>
-                <td  width="25%">
+                <td  width="22%">
                     <a class="symbol" href="#" target="_top">
-                        <img align="baseline" alt="Critical Velos" border="0" hspace="0" src="/images/logo.png" style="width: 254px; height: 45px">
+                        <img align="baseline" alt="Critical Velos" border="0" hspace="0" src="/images/logo.png" style="width: 224px; height: 45px">
                     </a>
                 </td>
                 <td width="50%">
                 </td>
-                <td  width="22%">
+                <td  width="25%">
                     <div style=" float: right;; " aria-label="Quick links" role="navigation">
                         <a style="padding: 20px;" class="wlnk" href="#">Help</a>
                         <a style="padding: 20px;" class="wlnk" href="/signout/">SignOut</a>
@@ -859,13 +940,12 @@ Main
 
 
         <div style="position: relative; width: 100%; padding-top: 10px; background: linear-gradient(to bottom, rgb(194, 212, 219) 0%, rgb(163, 179, 184) 100%) repeat scroll 0% 0% transparent; text-align: center; font-size: 0px;" id="sim_dir_naviguator">
-	<span style="display: inline-block; position: relative; width: 100%; text-align: left; font-size: 0px;">
+	<span style="display: inline-block; position: relative; width: 1000px; text-align: left; font-size: 0px;">
 	<div style="position: absolute; left: 88px; bottom: 100%; padding-bottom: 5px; color: rgb(24, 144, 186); font-family: Verdana,Geneva,sans-serif; font-size: 13px; font-weight: bold;">
     </div>
-	<div id="sim_dir_nav_container" style="position: relative; padding: 0px 15px;">
-		<span style="position: relative; vertical-align: bottom; display: inline-block;width:7%; margin-right: 11px;" onclick="dashboard()">
-
-            <span style="display: inline-block; position: relative; vertical-align: bottom; width: 100%; height: 63px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; overflow: hidden; border-radius: 8px 8px 0px 0px; background-color: rgb(37, 163, 16);">
+	<div id="sim_dir_nav_container" style="position: relative; padding: 0px 5px;">
+		<span style="position: relative; vertical-align: bottom; display: inline-block; margin-right: 11px;" onclick="dashboard()">
+            <span style="display: inline-block; position: relative; vertical-align: bottom; width: 50px; height: 63px; -moz-user-select: none; cursor: pointer; outline: medium none black; outline-offset: 0px; overflow: hidden; border-radius: 8px 8px 0px 0px; background-color: rgb(37, 163, 16);">
                 <input tabindex="0" style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; border: 0px solid transparent; background: none repeat scroll 0% 0% transparent; padding: 0px; margin: 0px; outline: medium none; overflow: hidden; font-size: 0px; outline-offset: 0px;" type="button">
 		<div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
             <div style="float: left; clear: both; position: relative; width: 100%; height: 100%;">
@@ -878,8 +958,8 @@ Main
 
         </span>
 
-        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 45%; margin-right: 11px;opacity: 0.3;">
-		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 98%;" cellspacing="0" cellpadding="0">
+        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px; margin-right: 11px;opacity: 0.3;">
+		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
                 <td style="vertical-align: baseline; text-align: left; font-size: 1em;">
@@ -895,8 +975,8 @@ Main
             </tr>
             <tr>
                 <td style="vertical-align: baseline; text-align: left; font-size: 1em; padding: 11px 9px 8px; background-color: rgb(235, 235, 235);">
-                    <div style="width: 100%;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
-                        <div style="width: 98%; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
+                    <div style="width: 419px;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
+                        <div style="width: 417px; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
                             <input name="classname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
                             <!--
                               <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
@@ -917,8 +997,8 @@ Main
         </table>
 		</span>
 
-        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 45%;">
-		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 98%;" cellspacing="0" cellpadding="0">
+        <span style="position: relative; vertical-align: bottom; display: inline-block; width: 437px;">
+		<table style="font-size: 0px; position: relative; border-radius: 8px 8px 0px 0px; box-shadow: 0px 6px 6px 3px rgba(0, 0, 0, 0.18); table-layout: fixed; width: 437px;" cellspacing="0" cellpadding="0">
             <tbody>
             <tr>
                 <td style="vertical-align: baseline; text-align: left; font-size: 1em;">
@@ -937,8 +1017,8 @@ Main
 
             <tr>
                 <td style="vertical-align: baseline; text-align: left; font-size: 1em; padding: 11px 9px 8px; background-color: rgb(235, 235, 235);">
-                    <div style="width: 100%;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
-                        <div style="width: 98%; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
+                    <div style="width: 419px;" class="DOM_objectSB" id="sim_nav_sel_searchbar_1">
+                        <div style="width: 417px; height: 20px;" id="sim_nav_sel_searchbar_1_select_div" class="select_divSB custom_select_divSB">
                             <input name="subjectname" style="width: 100%;" class="selectSB custom_selectSB" type="text|">
                             <!--
                               <input style="overflow: hidden; padding: 0px 0px 0px 1px; width: 0px; opacity: 0;" class="selectSB custom_selectSB" id="sim_nav_sel_searchbar_1_select" type="text">
@@ -1118,7 +1198,7 @@ Main
     }
 </script>
 
-<div class="template_main_body">
+<div class="template_main_body" style="">
 
 
 <table width=100%>
@@ -1567,7 +1647,11 @@ Main
 </table>
 </div>
 
-        <div class="footer_div" style="">
+
+
+               <!--   Footers of the page   -->
+
+         <div class="footer_div" style="">
 
         <div class="sm_font" style=" float:right; text-align:right;; ">
             <div style="margin-bottom: 10px">
@@ -1595,8 +1679,8 @@ Main
     </div>
 
 
-
 </div>
+
 <script>
 
 //subject,
@@ -1635,7 +1719,7 @@ Main
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
              var   no_of_subs = xmlhttp.responseXML.documentElement.getElementsByTagName("subject").length;
-             
+         //    alert(no_of_subs);
 
 
 
@@ -1731,81 +1815,5 @@ Main
     }
 </script>
 
-{% comment %}
-        List Pending assignments of all subject and populate pending_assignment id
-        input template : /pendingassessmentbysubject/
-
-{% endcomment %}
-
-<script>
-
-    function list_all_pending_assessments(){
-
-
-
-        document.getElementById('pendingassesments').innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
-        document.getElementById('pendingassesments').style.display='block';
-
-        var xmlhttp;
-
-        var  div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Pending Assesments in All Subjects</th><th>Due Date</th></tr>";
-
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.overrideMimeType("text/xml");
-        } else {
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-                xmlDoc = xmlhttp.responseXML;
-
-                no_of_assesment = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment").length;
-
-                for (i = 0; i < no_of_assesment; i++) {
-
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("assessment")[i];
-                    var subject_name = x.getElementsByTagName("subject")[0].childNodes[0].nodeValue.trim();
-                    //alert(subject==subject_name);
-
-                    var assesmentKey = x.getElementsByTagName("key")[0].childNodes[0].nodeValue.trim();
-                    var assesmentid =  x.getElementsByTagName("id")[0].childNodes[0].nodeValue.trim();
-                    var duedate = x.getElementsByTagName("due_date")[0].childNodes[0].nodeValue.trim();
-
-                    var innerdiv = "<tr><td><a href=\"/assessment?id="+assesmentKey+"\">" + assesmentid + "</a></td><td>" + duedate + "</td></tr>";
-
-                    div_to_be_loaded += innerdiv;
-
-                }
-
-
-
-                div_to_be_loaded+="</tbody></table>";
-
-                //alert(div_to_be_loaded);
-                document.getElementById("pendingassesments").innerHTML = div_to_be_loaded;
-
-
-
-
-            }
-        }
-
-        xmlhttp.open("GET", "/pendingassessmentbysubject/", true);
-        xmlhttp.overrideMimeType("text/xml");
-        xmlhttp.send();
-
-
-
-
-
-
-
-    }
-
-
-</script>
 
 </body>
