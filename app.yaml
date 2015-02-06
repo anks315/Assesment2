@@ -131,3 +131,6 @@ handlers:
 libraries:
 - name: django
   version: "latest"
+
+builtins:
+- remote_api: on
