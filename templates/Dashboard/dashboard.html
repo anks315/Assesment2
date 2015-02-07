@@ -9,8 +9,16 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+
 </head>
 
+<script>
+
+    function box_template(){
+
+
+    }
+</script>
 
 <script>
 
@@ -18,10 +26,13 @@
     function dashboard(){
 
         $("#dashboard_row1").show();
+        loadloginDetails();
+        loadMasteryDetails();
+        document.getElementById('div_title2').innerHTML="Avg. Mastery by Subject";
+        document.getElementById('selected_course_name').innerHTML="Enter Your Search";
         $("#dashboard_row2").show();
         $("#subject_dashboard_row1").hide();
         $("#subject_dashboard_row2").hide();
-
         list_all_pending_assessments();
         get_growthofsubject("chart_div");
 
@@ -33,8 +44,10 @@
         dashboard();
         populate_list_of_subjects();
         populate_list_of_courses();
+       // alert('document.ready');
 
     });
+
 </script>
 
 <!--
@@ -89,8 +102,6 @@
 
 
 </script>
-
-
 
 <!--
         Load Mastery Details
@@ -364,8 +375,6 @@ Input Template - /subjectdetailsofstudent/   for subjects
 
 </script>
 
-
-
 {% comment %}
 Populate and generate reports of a dashboard
 
@@ -529,7 +538,6 @@ Main
 </script>
 
 
-
 {% comment %}
 
 
@@ -671,7 +679,7 @@ Main
 
         var xmlhttp;
 
-        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Ready to Learn  </th></tr>";
+        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Ready to Learn  </th><th>Url</th></tr>";
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
             xmlhttp.overrideMimeType("text/xml");
@@ -683,19 +691,25 @@ Main
 
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-                no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("question").length;
-                var x = xmlhttp.responseXML.documentElement.getElementsByTagName("question");
+                no_of_topics = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
+             //   var x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic");
             //    alert(no_of_topics+"asda  "+ x[0].childNodes[0].nodeValue.trim());
                 for (i = 0; i < no_of_topics; i++) {
+{##}
+{#               var x = xmlhttp.responseXML.documentElement.getElementsByTagName("question")[i];#}
+{#                  //  var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();#}
+{#                    var questiontype = x.getElementsByTagName("type")[0].childNodes[0].nodeValue.trim();#}
+{#                    var url= x.getElementsByTagName("url")[0].childNodes[0].nodeValue.trim();#}
+{##}
+{#                   // var question = x[i].childNodes[0].nodeValue.trim()#}
 
-             //  var x = xmlhttp.responseXML.documentElement.getElementsByTagName("question")[i];
-                  //  var name = x.getElementsByTagName("name")[0].childNodes[0].nodeValue.trim();
-                  //  var question = x.getElementsByTagName("question")[0].childNodes[0].nodeValue.trim();
+                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
+                    var questiontype = x.getElementsByTagName("type")[0].childNodes[0].nodeValue.trim();
+                    var url = x.getElementsByTagName("url")[0].childNodes[0].nodeValue.trim();
 
 
-                    var question = x[i].childNodes[0].nodeValue.trim()
 
-                    var innerdiv = "<tr><td>" + question + "</td></tr>";
+                    var innerdiv = "<tr><td>" + questiontype + "</td><td>" + url + "</td></tr>";
 
                     div_to_be_loaded=div_to_be_loaded+innerdiv;
 
@@ -772,6 +786,7 @@ Main
                     if (subject_name==subject) {
 
                         var score = parseFloat(x.getElementsByTagName("score")[0].childNodes[0].nodeValue.trim());
+                        alert(score);
 
                     }
 
@@ -808,7 +823,6 @@ Main
 
 
 </script>
-
 
 <script>
 
@@ -872,8 +886,6 @@ Main
 
 {#     display or hide courses or subjects list    #}
 
-
-
 <script>
 
     function showcourses(){
@@ -902,9 +914,6 @@ Main
 
 
 </script>
-
-
-
 
 
 <body style="border-left: 4px solid #133A82;border-right: 4px solid #133A82">
@@ -1219,21 +1228,6 @@ Main
                    </div>
 </tr>
 
-{% comment %}
-<tr>
-
-    <div>
-
-
-        <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px ridge rgb(29, 140, 228); border-radius: 5px; background-color: rgb(224, 224, 224); font: bold 20px Arial,Sans-Serif; color: rgb(62, 45, 45);" onclick="dashboard()" align="center">
-
-            <a style="color:#133A82; font: bold 14px Verdana" id="dashboardHeading" onclick="dashboard()">Dashboard </a>
-        </h2>
-    </div>
-
-</tr>
-
-{% endcomment %}
 
 <!--  First Row.. -->
 
@@ -1276,15 +1270,6 @@ Main
                        <table style="font-size: 1em; width: 100%;" cellpadding="0" cellspacing="0" >
                            <tbody>
 
-                           <!--
-                           <tr>
-                                 <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;">
-                                    <div style="font: 12px Verdana; color: rgb(150, 175, 189); padding: 4px 0px 0px 10px;">Subjects enrolled</div>
-                                       </td>
-                                 <td id ="subjects_enrolled" style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;"></td>
-                              </tr>
-
-                              -->
                            <tr>
                                <td style="vertical-align: baseline; text-align: left; font-size: 1em; width: 50%;">
                                    <div style="font: 12px Verdana; color: rgb(150, 175, 189); padding: 4px 0px 0px 10px;">Email : </div>
@@ -1817,3 +1802,4 @@ Main
 
 
 </body>
+
