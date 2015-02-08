@@ -621,122 +621,6 @@ Main
 </script>
 
 {% comment %}
-        List learning progress in a subject datewise
-        input template :
-
-{% endcomment %}
-
-<script>
-
-    function learningprogress_bydate_sub(subject,divid){
-
-
-
-//readytoLearn
-
-        document.getElementById(divid).innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
-        document.getElementById(divid).style.display='block';
-
-
-
-        var xmlhttp;
-
-
-
-        var subjects=new Array();
-        var growth=new Array();
-
-        var data = new google.visualization.DataTable();
-         data.addColumn('string', 'Assessment Name');
-
-
-
-
-       // var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.overrideMimeType("text/xml");
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
-             var   no_of_subs = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
-             alert(no_of_subs);
-
-
-
-                for (i = 0; i < no_of_subs; i++) {
-//                        alert('i = '+i);
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
-                    var name = x.getElementsByTagName("assessment")[0].childNodes[0].nodeValue.trim();
-
-                    alert("name = "+name);
-                    data.addColumn('number', name);
-
-          }
-                    var totalrows =0;
-
-                for (i = 0; i < no_of_subs; i++) {
-
-                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
-
-                    var scorelength=x.getElementsByTagName("score").length;
-
-                    alert("scorelen = "+scorelength);
-                    for (j = 0; j < scorelength; j++) {
-
-                        if(scorelength>totalrows){
-                            data.addRows(scorelength-totalrows);
-                            totalrows=scorelength;
-                        }
-                        var score = parseInt(x.getElementsByTagName("score")[j].childNodes[0].nodeValue.trim());
-
-                        alert(score);
-
-                        data.setCell(j,i+1, score);
-
-
-                    }
-
-                }
-                for(k=0;k<totalrows;k++){
-                    data.setCell(k,0,""+1);
-
-                }
-                data.setCell(0,1,5);
-                 data.setCell(0,2,6);
-                 data.setCell(0,3,7);
-
-                var options = {
-            title: 'Your Learning Graph topic Wise',
-            animation:{
-                duration: 1000,
-                easing: 'out'
-            }
-
-        };
-
-        if(no_of_subs!=0) {
-        var chart = new google.visualization.LineChart(document.getElementById(divid));
-        chart.draw(data, options);}
-            }
-        };
-
-        xmlhttp.open("GET", "/getgrowthofsubject?id="+subject, true);
-        xmlhttp.overrideMimeType("text/xml");
-        xmlhttp.send();
-
-
-    }
-
-
-</script>
-
-{% comment %}
         Display Ready to learn state in a subject
         input template : readytolearnbysubject
 
@@ -1743,6 +1627,126 @@ Main
 
 </div>
 
+
+{% comment %}
+        List learning progress in a subject datewise
+        input template :
+
+{% endcomment %}
+
+<script>
+
+    function learningprogress_bydate_sub(subject,divid){
+
+
+
+//readytoLearn
+
+        document.getElementById(divid).innerHTML="<div style=\"position:absolute; top:70px; left:220px; width:50px; height:100px;\"><img src=\"/images/icons/blue_loader_icon.gif\"/><strong><p> Loading...</p></strong></div>";
+        document.getElementById(divid).style.display='block';
+
+
+
+        var xmlhttp;
+
+
+
+        var subjects=new Array();
+        var growth=new Array();
+
+        var data = new google.visualization.DataTable();
+         data.addColumn('string', 'Assessment Name');
+
+
+
+
+       // var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.overrideMimeType("text/xml");
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+             var   no_of_subs = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
+             alert(no_of_subs);
+
+
+
+                for (i = 0; i < no_of_subs; i++) {
+//                        alert('i = '+i);
+                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
+                    var name = x.getElementsByTagName("assessment")[0].childNodes[0].nodeValue.trim();
+
+                    alert("name = "+name);
+                    data.addColumn('number', name);
+
+          }
+                    var totalrows =0;
+
+                for (i = 0; i < no_of_subs; i++) {
+
+                    x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
+
+                    var scorelength=x.getElementsByTagName("score").length;
+
+                    alert("scorelen = "+scorelength);
+                    for (j = 0; j < scorelength; j++) {
+
+                        if(scorelength>totalrows){
+                            data.addRows(scorelength-totalrows);
+                            totalrows=scorelength;
+                        }
+                        var score = parseInt(x.getElementsByTagName("score")[j].childNodes[0].nodeValue.trim());
+
+                        alert(score);
+
+                        data.setCell(j,i+1, score);
+
+
+                    }
+
+                }
+                for(k=0;k<totalrows;k++){
+                    data.setCell(k,0,""+1);
+
+                }
+                data.setCell(0,1,5);
+
+                 data.setCell(0,2,6);
+                 data.setCell(0,3,7);
+
+                var options = {
+            title: 'Your Learning Graph topic Wise',
+            animation:{
+                duration: 1000,
+                easing: 'out'
+            }
+
+        };
+
+        if(no_of_subs!=0) {
+        var chart = new google.visualization.LineChart(document.getElementById(divid));
+        chart.draw(data, options);}
+            }
+        };
+
+        xmlhttp.open("GET", "/getgrowthofsubject?id="+subject, true);
+        xmlhttp.overrideMimeType("text/xml");
+        xmlhttp.send();
+
+
+    }
+
+
+</script>
+
+
+
 <script>
 
 //subject,
@@ -1768,7 +1772,7 @@ Main
 
 
 
-        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
+//        var div_to_be_loaded = "<table class=\"bordered\"><tbody><tr><th>Topic </th><th>Mastery in (%)</th></tr>";
         if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
             xmlhttp.overrideMimeType("text/xml");
