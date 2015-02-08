@@ -1,13 +1,13 @@
 <root>
 {% for key, value in growth.items %}
-
+<topic>
     <assessment>
     {{ key }}
     </assessment>
     <score>
     {{ value }}
     </score>
-
+</topic>
 {% endfor %}
 
 </root>
