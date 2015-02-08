@@ -1673,16 +1673,16 @@ Main
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
              var   no_of_subs = xmlhttp.responseXML.documentElement.getElementsByTagName("topic").length;
-             alert(no_of_subs);
+        //     alert(no_of_subs);
 
 
 
                 for (i = 0; i < no_of_subs; i++) {
-//                        alert('i = '+i);
+//                  //      alert('i = '+i);
                     x = xmlhttp.responseXML.documentElement.getElementsByTagName("topic")[i];
                     var name = x.getElementsByTagName("assessment")[0].childNodes[0].nodeValue.trim();
 
-                    alert("name = "+name);
+                  //  alert("name = "+name);
                     data.addColumn('number', name);
 
           }
@@ -1694,7 +1694,7 @@ Main
 
                     var scorelength=x.getElementsByTagName("score").length;
 
-                    alert("scorelen = "+scorelength);
+                //    alert("scorelen = "+scorelength);
                     for (j = 0; j < scorelength; j++) {
 
                         if(scorelength>totalrows){
@@ -1703,7 +1703,7 @@ Main
                         }
                         var score = parseInt(x.getElementsByTagName("score")[j].childNodes[0].nodeValue.trim());
 
-                        alert(score);
+                       // alert(score);
 
                         data.setCell(j,i+1, score);
 
