@@ -435,7 +435,7 @@ def dashboard(request):
         user_information= Query.login(username,password)
         logging.error(user_information)
         if user_information < 0:
-            return render_to_response('Home/login.html',{'invalid_message': "Enter Correct Credentials"},context_instance = RequestContext(request))
+            return render_to_response('Gen_templates/template_login.html',{'invalid_message': "Enter Correct Credentials"},context_instance = RequestContext(request))
 
 
         session['type'] = user_information[0]
@@ -489,7 +489,6 @@ def vedicMaths(request):
 
 def xyz(request):
     return render_to_response('Gen_templates/index.html',{},context_instance = RequestContext(request))
-
 
 def testreport(request):
     return render_to_response('AssessingPie_toBeremoved/pie.html',{'student_name':"Courage",'subject_name':"Vedic Maths",'readytolearn':["Sum is 2?","Difference divident","Hiii i am there"],'num_known': 80 ,},context_instance = RequestContext(request))
