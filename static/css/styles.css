@@ -3,13 +3,17 @@ html,body {
 border:0 none;
 margin:0;
 padding:0;
+
 }
 
 body {
+    width: 90%;
+    margin: auto;
     font-family: ArumSansRg, Arial, Sans-Serif;
     font-size: 16px;
     color: #000000;
     background-color: #ebe8da;
+
 }
 
 div.template_body {
