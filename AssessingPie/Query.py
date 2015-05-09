@@ -4505,6 +4505,7 @@ def add_states_to_topic_dummy(topic_name,states_in_topic_keys):
     logging.info("CV Logs : success to assign states to topic :"+topic.name)     
     return Constant.UPDATION_SUCCESSFULL'''
 """
+
 def get_assessment_report():
 
     dict_final_report = {}
@@ -4541,7 +4542,7 @@ def get_assessment_report():
                                 score_final= score[1]
                             else :
                                 score_final= score[0]
-                            dict_final_report[student_name].append[question_topic,question_type,question_name,score_final]
+                            dict_final_report[student_name].append([question_topic,question_type,question_name,score_final])
                             i=i+1
                     else :
 
@@ -4554,13 +4555,13 @@ def get_assessment_report():
                             question_name=question.instance.problem_statement
                             question_type=question.topic_type
                             question_topic=question.topic_key.get().name
-                            dict_final_report[student_name].append[question_topic,question_type,question_name,score[index]]
+                            dict_final_report[student_name].append([question_topic,question_type,question_name,score[index]])
                         topic_list=["Substraction","Addition"]
                         if topic_list.index(question_topic)==0:
                            index=1
                         else :
                             index=0;
-                        dict_final_report[student_name].append[topic_list[index],"NA","NA",100]
+                        dict_final_report[student_name].append([topic_list[index],"NA","NA",100])
 
         return dict_final_report
     except Exception:
