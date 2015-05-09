@@ -1384,6 +1384,7 @@ def map_state_to_questions(topic_key, state_questions_map,school_key):
             question.no_states_contained_in=0
         logging.info("CV Logs: Inside map_state_to_questions ")
         topic = topic_key.get()
+
         states=[]
         result=Constant.ERROR_OPERATION_FAIL
         for key in state_questions_map.keys():
@@ -4504,6 +4505,65 @@ def add_states_to_topic_dummy(topic_name,states_in_topic_keys):
     logging.info("CV Logs : success to assign states to topic :"+topic.name)     
     return Constant.UPDATION_SUCCESSFULL'''
 """
+def get_assessment_report():
+
+    dict_final_report = {}
+    try:
+
+        students_list=ndb.gql("select * from Student where username>='Demo_1'").fetch()
+        records=[]
+        score=[]
+        for student in students_list:
+            records=Student_Assessments.query(Student_Assessments.student_key==student.key).fetch()
+            dict_final_report[student.username]=[]
+        for record in records:
+            student_name=record.student_key.get().username
+            student_assessment_record=record.assessment_record;
+            #student_name=student_assessment_record.
+            if not student_assessment_record ==None :
+                actual_record=student_assessment_record.get()
+                topic_scores=actual_record.topic_scores
+                if len(topic_scores)==2:
+                    score[0]=topic_scores[0]
+                    score[1]=topic_scores[1]
+                    question_keys=actual_record.question_ready_to_learn
+                    if not topic_scores[0] ==100 and not topic_scores[1]==100:
 
 
+                        i=0;
+                        for question_key in question_keys:
 
+                            question=question_key.get()
+                            question_name=question.instance.problem_statement
+                            question_type=question.topic_type
+                            question_topic=question.topic_key.get().name
+                            if not i==0:
+                                score_final= score[1]
+                            else :
+                                score_final= score[0]
+                            dict_final_report[student_name].append[question_topic,question_type,question_name,score_final]
+                            i=i+1
+                    else :
+
+                        if not score[0]==100:
+                             index =0
+                        else :
+                            index = 1
+                        for question_key in question_keys:
+                            question=question_key.get()
+                            question_name=question.instance.problem_statement
+                            question_type=question.topic_type
+                            question_topic=question.topic_key.get().name
+                            dict_final_report[student_name].append[question_topic,question_type,question_name,score[index]]
+                        topic_list=["Substraction","Addition"]
+                        if topic_list.index(question_topic)==0:
+                           index=1
+                        else :
+                            index=0;
+                        dict_final_report[student_name].append[topic_list[index],"NA","NA",100]
+
+        return dict_final_report
+    except Exception:
+            logging.info("CV Logs : failed to get assessments for student :")
+            logging.exception("")
+            return Constant.ERROR_OPERATION_FAIL
