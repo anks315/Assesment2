@@ -4506,7 +4506,8 @@ def add_states_to_topic_dummy(topic_name,states_in_topic_keys):
     return Constant.UPDATION_SUCCESSFULL'''
 """
 
-def get_assessment_report(school_key):
+
+def get_assessment_report():
 
     dict_final_report = {}
     try:
@@ -4518,7 +4519,7 @@ def get_assessment_report(school_key):
         #logging.info("CV Logs :students_list :"+str(students_list[0].key))
         for student in students_list:
             #student_id=ndb.Key(urlsafe=student.key)
-            records=Student_Assessments.query(ancestor=school_key).fetch()
+            records=Student_Assessments.query().fetch()
             #logging.info("CV Logs  records :"+str(records))
             for record in records:
                 #logging.info("CV Logs  STUDENT KEY :"+str(record.student_key))
