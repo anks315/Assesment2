@@ -4551,7 +4551,7 @@ def get_assessment_report():
                         else :
                             index = 1
                         for question_key in question_keys:
-                            question=question_key.get()
+                            question= question_key.get()
                             question_name=question.instance.problem_statement
                             question_type=question.topic_type
                             question_topic=question.topic_key.get().name
