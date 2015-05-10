@@ -4506,27 +4506,43 @@ def add_states_to_topic_dummy(topic_name,states_in_topic_keys):
     return Constant.UPDATION_SUCCESSFULL'''
 """
 
-def get_assessment_report():
+def get_assessment_report(school_key):
 
     dict_final_report = {}
     try:
 
         students_list=ndb.gql("select * from Student where username>='Demo_1'").fetch()
         records=[]
+        records_final=[]
         score=[]
+        #logging.info("CV Logs :students_list :"+str(students_list[0].key))
         for student in students_list:
-            records=Student_Assessments.query(Student_Assessments.student_key==student.key).fetch()
+            #student_id=ndb.Key(urlsafe=student.key)
+            records=Student_Assessments.query(ancestor=school_key).fetch()
+            #logging.info("CV Logs  records :"+str(records))
+            for record in records:
+                #logging.info("CV Logs  STUDENT KEY :"+str(record.student_key))
+                #logging.info("CV Logs  STUDENT KEY2 :"+str(student.key))
+                if record.student_key==student.key:
+                    records_final.append(record)
+                    #logging.info("CV Logs :records_final :"+str(records_final))
             dict_final_report[student.username]=[]
-        for record in records:
+        #logging.info("CV Logs :finaL records :"+str(records_final))
+        for record in records_final:
             student_name=record.student_key.get().username
+            #logging.info("CV Logs :student_name :"+str(student_name))
             student_assessment_record=record.assessment_record;
+            #logging.info("CV Logs :student_assessment_record :"+str(student_assessment_record))
             #student_name=student_assessment_record.
             if not student_assessment_record ==None :
-                actual_record=student_assessment_record.get()
+                actual_record=student_assessment_record[0].get()
+                #logging.info("CV Logs :actual_record :"+str(actual_record))
                 topic_scores=actual_record.topic_scores
+                #logging.info("CV Logs :topic_scores :"+str(topic_scores))
                 if len(topic_scores)==2:
-                    score[0]=topic_scores[0]
-                    score[1]=topic_scores[1]
+                    score=[]
+                    score.append(topic_scores[0])
+                    score.append(topic_scores[1])
                     question_keys=actual_record.question_ready_to_learn
                     if not topic_scores[0] ==100 and not topic_scores[1]==100:
 
@@ -4543,6 +4559,7 @@ def get_assessment_report():
                             else :
                                 score_final= score[0]
                             dict_final_report[student_name].append([question_topic,question_type,question_name,score_final])
+                            #logging.info("CV Logs :dict_final_report :"+str(dict_final_report))
                             i=i+1
                     else :
 
@@ -4551,11 +4568,14 @@ def get_assessment_report():
                         else :
                             index = 1
                         for question_key in question_keys:
-                            question= question_key.get()
+                            question=question_key.get()
                             question_name=question.instance.problem_statement
                             question_type=question.topic_type
                             question_topic=question.topic_key.get().name
+
+
                             dict_final_report[student_name].append([question_topic,question_type,question_name,score[index]])
+                            #logging.info("CV Logs :dict_final_report :"+str(dict_final_report))
                         topic_list=["Substraction","Addition"]
                         if topic_list.index(question_topic)==0:
                            index=1
@@ -4565,6 +4585,6 @@ def get_assessment_report():
 
         return dict_final_report
     except Exception:
-            logging.info("CV Logs : failed to get assessments for student :")
+            logging.info("CV Logs : failed to get assessments report for student :")
             logging.exception("")
             return Constant.ERROR_OPERATION_FAIL
