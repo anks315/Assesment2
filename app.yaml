@@ -1,4 +1,4 @@
-application: assesmentaleks
+application: criticalvelosassessment
 version: 1
 runtime: python27
 api_version: 1
@@ -24,8 +24,24 @@ handlers:
   static_files: static/css/\1
   upload: static/css/.*
 
+- url: /json/(.*)
+  static_files: static/json/\1
+  upload: static/json/.*
+
 - url: /testreport(.*)
   script: main.app
+
+- url: /testmaveriks(.*)
+  script: main.app
+  login: required
+
+- url: /testbmi(.*)
+  script: main.app
+  login: required
+
+- url: /report(.*)
+  script: main.app
+  login: required
 
 - url: /assessment(.*)
   script: main.app
@@ -126,6 +142,9 @@ handlers:
 
 - url: /.*
   script: main.app
+
+builtins:
+- remote_api: on
 
 
 libraries:
