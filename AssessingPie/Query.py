@@ -4576,8 +4576,8 @@ def get_assessment_report():
 
 
                             dict_final_report[student_name].append([question_topic,question_type,question_name,score[index]])
-                            #logging.info("CV Logs :dict_final_report :"+str(dict_final_report))
-                        topic_list=["Substraction","Addition"]
+                            #logging.info("CV Logs : dict_final_report :"+str(dict_final_report))
+                        topic_list=["Multiplication","Division"]
                         if topic_list.index(question_topic)==0:
                            index=1
                         else :
