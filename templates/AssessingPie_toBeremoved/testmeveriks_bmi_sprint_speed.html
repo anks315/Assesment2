@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title></title>
+     <script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
+
+    <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
+ function drawChart() {
+
+
+
+           var dataarray =[['BMI','SPRINT_SPEED']];
+          {% for rows in result %}
+
+              {%  for key,value in rows.items %}
+
+                  i = 0;
+
+                  dataarray[dataarray.length]=[]
+                  {% for rowkeys in value %}
+                      {% for rowkey,rowvalue in rowkeys.items %}
+
+                          dataarray[dataarray.length-1][i]={{ rowvalue }};
+                          i++;
+
+                      {% endfor %}
+
+
+                  {% endfor %}
+
+
+
+              {% endfor %}
+
+          {% endfor %}
+
+
+
+      var data = google.visualization.arrayToDataTable(dataarray);
+
+
+
+        var options = {
+          title: 'BMI Sprint Speed Relation',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          animation:{
+        duration: 1000,
+        easing: 'out',
+        startup:true
+      }
+        };
+
+          var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+          chart.draw(data, options);
+
+      }
+
+
+
+    </script>
+
+
+
+
+</head>
+<body>
+
+
+
+
+
+<div id="curve_chart" style="width: 100%; height: 100%"></div>
+
+
+<p> <h4> Conclusion </h4> No relation in BMI and Sprint Speed</p>
+
+
+</body>
+</html>

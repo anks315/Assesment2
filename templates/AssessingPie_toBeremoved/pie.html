@@ -19,8 +19,8 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Knowledge', 'Fraction'],
-          ['Mastered',    100-{{ num_known }}]  ,
-          ['Not Mastered',    {{ num_known }}]
+          ['Mastered',    {{ num_known }}]  ,
+          ['Not Mastered',    100-{{ num_known }}]
 
         ]);
 

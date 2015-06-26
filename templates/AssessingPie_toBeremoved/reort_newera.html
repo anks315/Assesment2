@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/maveriks_table_assessment.css">
+    <script>
+        $(function(){
+  $('#keywords').tablesorter();
+});
+    </script>
+</head>
+<body>
+
+
+
+
+
+
+<div id="wrapper">
+  <h1>Maveriks Assessment Data</h1>
+
+  <table id="keywords" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th><span>Name Of Student</span></th>
+        <th><span>Topic Name</span></th>
+         <th><span>Question Type</span></th>
+        <th><span>Ready to learn(Question)</span></th>
+        <th><span>Total Score</span></th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+
+    {%  for key,value in rows.items %}
+
+         {% for rowkeys in value %}
+             <tr>
+             <td> {{ key }}</td>
+             {% for values in rowkeys %}
+
+                 <td>  {{ values }}</td>
+
+                 {% endfor %}
+              </tr>
+
+             {% endfor %}
+
+
+
+        {% endfor %}
+
+
+    </tbody>
+  </table>
+ </div>
+</body>
+</html>

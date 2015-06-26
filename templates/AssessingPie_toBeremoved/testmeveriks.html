@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/maveriks_table_assessment.css">
+    <script>
+        $(function(){
+  $('#keywords').tablesorter();
+});
+    </script>
+</head>
+<body>
+
+
+
+
+
+
+<div id="wrapper">
+  <h1>Maveriks Assessment Data</h1>
+
+  <table id="keywords" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th><span>Name Of Student</span></th>
+        <th><span>Class</span></th>
+         <th><span>Sex</span></th>
+        <th><span>Date of Birth</span></th>
+        <th><span>Height</span></th>
+        <th><span>Weight</span></th>
+        <th><span>BMI</span></th>
+        <th><span>Percentile</span></th>
+        <th><span>Sprint time</span></th>
+        <th><span>Sprint Speed</span></th>
+        <th><span>Descipline?</span></th>
+        <th><span>Patient?</span></th>
+        <th><span>Keen to Learn?</span></th>
+         <th><span>Score Out of Three?</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          {% for rows in result %}
+
+    {%  for key,value in rows.items %}
+
+         {% for rowkeys in value %}
+             {% for rowkey,rowvalue in rowkeys.items %}
+
+                 <td>  {{ rowvalue }}</td>
+
+                 {% endfor %}
+
+
+             {% endfor %}
+
+
+        </tr>
+        {% endfor %}
+
+    {% endfor %}
+    </tbody>
+  </table>
+ </div>
+</body>
+</html>

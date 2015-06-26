@@ -1,0 +1,30 @@
+<root>
+{% for key, value in assessmentreport.items %}
+
+   <student>
+   <name>
+
+   {{ key }}
+   </name>
+
+<topicname>
+
+   {{ value.0 }}
+   </topicname>
+   <topictype>
+
+   {{ value.1 }}
+   </topictype>
+   <question_name>
+
+   {{ value.2 }}
+   </question_name>>
+   <score>
+
+   {{ value.3}}
+   </score>
+</student>
+
+{% endfor %}
+
+</root>

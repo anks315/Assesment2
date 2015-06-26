@@ -1,0 +1,193 @@
+{% extends "Gen_templates/template_home.html" %}
+
+{% block content %}
+
+<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
+
+
+
+<script>
+
+    var title_selected=1;
+
+    var scrolposition = 100;
+
+    $(document).ready(function(){
+        generic_slidedownanimation(1);
+
+
+        // $("#header_tag").innerHTML="What is SCAN?";
+     });
+
+
+    function generic_slidedownanimation(a){
+
+        for(i=1;i<7;i++){
+
+            if(i==a){
+
+            }
+            else
+            {
+               //  alert('notequakl');
+               $("#detail_click_about_option"+i).hide();
+
+                 document.getElementById("about_option"+i).style.background="#8DABEB";
+                document.getElementById("about_option"+i).style.fontWeight="300";
+                title_selected=i;
+                // document.getElementById("span_about_option"+a).innerHTML.replace(' =>','');
+
+
+            }
+        }
+         if(a==6){
+
+
+               var el=document.getElementById("detail_click_about_option"+a);
+el.innerHTML="<iframe height=\"100%\" width=\"100%\"  src=\"/testbmi\"></iframe>";
+         }
+
+                $("#detail_click_about_option"+a).slideDown("7000");
+
+                title_selected=a;
+                 document.getElementById("about_option"+a).style.background="#1C54B7";
+                document.getElementById("about_option"+a).style.fontWeight="700";
+                text= document.getElementById("span_about_option"+a).innerHTML;
+
+
+              //  document.getElementById("span_about_option"+a).innerHTML="  => "+text;
+
+
+
+
+    }
+
+
+
+</script>
+
+
+        <!-- abc -->
+        <div style="width: 99%;height: 440px;box-shadow: 10px 10px 5px #888;border: 2px solid rgba(249, 240, 240, 1);">
+        <table style="width: 99%;height: 390px;margin: 5px;padding-left: 5px;padding-right: 5px;">
+ 	       <tbody>
+
+              <tr height="30">
+
+              </tr>
+
+
+              <tr>
+                    <td style="margin-top: 5px;" valign="top" width="30%;" align="left">
+
+
+                           <div id="about_option1" class="about_us_menu menu_left " style="top: 20%; background: none repeat scroll 0% 0% rgb(28, 84, 183); font-weight: 700;" onclick="generic_slidedownanimation(1);">
+                                <span id="span_about_option1" class="about_us_menu menu_left" style="">About Maveriks</span>
+                            </div>
+
+                            <div style="background: none repeat scroll 0% 0% rgb(141, 171, 235); font-weight: 300;" id="about_option2" class="about_us_menu menu_left " onclick="generic_slidedownanimation(2);">
+                                <span id="span_about_option2" class="about_us_menu menu_left" style="">Achievments</span>
+                            </div>
+
+                            <div style="background: none repeat scroll 0% 0% rgb(141, 171, 235); font-weight: 300;" id="about_option3" class="about_us_menu menu_left " onclick="generic_slidedownanimation(3);">
+                                <span id="span_about_option3" class="about_us_menu menu_left" style="">Asssessment</span>
+                            </div>
+
+                            <div style="background: none repeat scroll 0% 0% rgb(141, 171, 235); font-weight: 300;" id="about_option4" class="about_us_menu menu_left " onclick="generic_slidedownanimation(4);">
+                                <span id="span_about_option4" class="about_us_menu menu_left" style="">Events</span>
+                            </div>
+
+                            <div style="background: none repeat scroll 0% 0% rgb(141, 171, 235); font-weight: 300;" id="about_option5" class="about_us_menu menu_left " onclick="generic_slidedownanimation(5);">
+                                <span id="span_about_option5" class="about_us_menu menu_left" style="">Finance</span>
+                            </div>
+
+                            <div style="background: none repeat scroll 0% 0% rgb(141, 171, 235); font-weight: 300;" id="about_option6" class="about_us_menu menu_left " onclick="generic_slidedownanimation(6);">
+                                <span id="span_about_option6" class="about_us_menu menu_left" style="">Analysis</span>
+                            </div>
+
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td class="nofont"><img src="/images/icons/spacer.gif" alt="" height="80" width="1" border="0"></td>
+                                </tr></tbody>
+                        </table>
+                    </td>
+
+
+                   <td width="5%">
+                       <img src="/images/icons/spacer.gif" alt="" height="1" width="10" border="0">
+                   </td>
+
+                   <td valign="top" width="65%">
+                    <div class="detail_vedic_scan" id="detail_click_about_option1" style="">
+                         <p style="font: bold 28px Verdana;"><strong>Maveriks will provide or update</strong></p>
+
+                    </div>
+
+                    <div class="detail_vedic_scan" id="detail_click_about_option2" style="display: none">
+                         <p style="font: bold 28px Verdana;"><strong>Maveriks will provide or update</strong></p>
+                        </div>
+                    <div class="detail_vedic_scan" id="detail_click_about_option3" style="display: none">
+                         <p style="font: bold 28px Verdana;"><strong>Maveriks will provide or update</strong></p>
+
+                        </div>
+
+                    <div class="detail_vedic_scan" id="detail_click_about_option4" style="display: none">
+                   <p style="font: bold 28px Verdana;"><strong>Maveriks will provide or update</strong></p>
+                       </div>
+
+                    <div class="detail_vedic_scan" id="detail_click_about_option5" style="display: none">
+                        <p style="font: bold 28px Verdana;"><strong>Maveriks will provide or update</strong></p>
+                    </div>
+
+                    <div class="detail_vedic_scan" id="detail_click_about_option6" style="display: none">
+
+                    </div>
+
+
+
+
+
+                     </td>
+                </tr>
+ </tbody>
+            </table>
+
+
+                    <div style="position: relative;right:10px;float: right;">
+                        <button style="background-color: #4c76c7;color: #fffbff; font-weight: bolder;" onclick="jquerytextslide()">Readmore..</button>
+                    </div>
+
+</div>
+
+
+
+
+<script>
+    function jquerytextslide(){
+
+//alert(scrolposition);
+       $( "#detail_click_about_option"+ title_selected).scrollTop(scrolposition);
+        $( "#detail_click_about_option"+ title_selected).animate({top:scrolposition});
+                scrolposition=scrolposition+100;
+
+
+
+{#        var scrolindex = $( "#detail_click_about_option"+ 1).scrollTop();#}
+{#        $( "#detail_click_about_option"+ 1).scrollTop(scrolindex);#}
+{#       // alert(conntenttoscroll);#}
+
+    }
+
+</script>
+
+
+
+{% endblock %}

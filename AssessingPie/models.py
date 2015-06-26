@@ -5,7 +5,12 @@ from Constant import Constant ,Default
 from Constant import Subject_Name
 import datetime
 
+from django.contrib import auth
 
+from django.db import models
+
+from oauth2client.django_orm import FlowField
+from oauth2client.django_orm import CredentialsField
 
 """
 This class contains the basic info of a user : id 
@@ -392,4 +397,5 @@ class Student_Assessments(ndb.Model):
     assessment_record= ndb.KeyProperty(kind=Assessment_Record,repeated=True)
    
    
-    
+
+

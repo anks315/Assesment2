@@ -91,6 +91,8 @@ function remote() {
 
 </script>{% endcomment %}
 
+
+
 <script>
         $(document).ready(function(){
 ;
@@ -293,6 +295,15 @@ $(window).load(function() {
 })
 
      });
+
+
+  optionnumber=0;
+  function addanswer(){
+                    optionnumber++;
+                    document.getElementById('answers').innerHTML+= "<input style=\"margin: 5px;padding: 5px 20px 5px 20px;font: bold 14px Verdana; color: #FFFFFF;background-color: #b8eab7;border-radius: 5px;width: 380px;\" type=\"text\" name=\"answer"+ optionnumber + "\">"
+
+
+  }
 
 </script>
 
@@ -531,7 +542,7 @@ function timer() {
                     </td>
                     <td>
                                    <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(255, 255, 255); font: bold 28px Verdana; color: rgb(51, 51, 51);" onclick="dashboard()" align="left">
-             {{ nextquestion }}  ?
+             {{ nextquestion }}
 
             </h2>
 
@@ -543,6 +554,7 @@ function timer() {
                 </tr>
 
                  <form name="input" action="/assessment" method="post">
+                     {% csrf_token %}
 
               <tr>
 
@@ -557,12 +569,20 @@ function timer() {
                   <td>
                       <table>
                           <tr>
-                              <td>
-                                  {% csrf_token %}
-                  <input style="margin: 5px;padding: 5px 20px 5px 20px;font: bold 14px Verdana; color: #FFFFFF;background-color: #b8eab7;border-radius: 5px;width: 380px;" type="text" name="answer">
+                              <td id="answers">
+
+
+
+
+                  <input style="margin: 5px;padding: 5px 20px 5px 20px;font: bold 14px Verdana; color: #FFFFFF;background-color: #b8eab7;border-radius: 5px;width: 380px;" type="text" name="answer0">
+
 
                               </td>
+
+
+
                               <td>
+
                                              <input style="margin:0px 0px 5px 5px;font: bold 14px Verdana;  color:#FFFFFF; background-color:#7B6CDE; border-radius: 5px; width: 150px; padding: 5px;" value="Submit" type="submit">
 
                               </td>
