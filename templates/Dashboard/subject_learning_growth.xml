@@ -1,13 +1,60 @@
-<root>
-{% for key, value in growth.items %}
+{#<root>#}
+{#{% for key, value in growth.items %}#}
+{#<topic>#}
+{#    <assessment>#}
+{#    {{ key }}#}
+{#    </assessment>#}
+{#    <score>#}
+{#    {{ value }}#}
+{#    </score>#}
+{#</topic>#}
+{#{% endfor %}#}
+{#</root>#}
 
+
+
+<root>
+
+<topic>
     <assessment>
-    {{ key }}
+    Addition
+    </assessment>
+     <score>0</score>
+     <score>6</score>
+     <score>8</score>
+</topic>
+
+    <topic>
+    <assessment>
+    Subtraction
+    </assessment>
+        <score>1</score>
+         <score>2</score>
+         <score>9</score>
+</topic>
+
+    <topic>
+    <assessment>
+    Multiplication
     </assessment>
     <score>
-    {{ value }}
+    2
     </score>
+        <score>4</score>
+         <score>6</score>
+</topic>
 
-{% endfor %}
+    <topic>
+    <assessment>
+    Division
+    </assessment>
+    <score>
+    2
+    </score>
+         <score>3</score>
+         <score>7</score>
+</topic>
 
 </root>
+
+

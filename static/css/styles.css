@@ -3,19 +3,23 @@ html,body {
 border:0 none;
 margin:0;
 padding:0;
+
 }
 
 body {
+    width: 90%;
+    margin: auto;
     font-family: ArumSansRg, Arial, Sans-Serif;
     font-size: 16px;
     color: #000000;
     background-color: #ebe8da;
+
 }
 
 div.template_body {
 margin-right:auto;
 margin-left:auto;
-width:90%;
+width:100%;
 min-height: 100%;
 background-color: #FBFBFB;
 padding-top:15px;
@@ -55,7 +59,6 @@ div.template_main_body {
 width: 96%;
 margin: 5px 1% 5px 1%;
     padding: 1%;
-height: 380px;
     overflow-y: auto;
 padding-bottom: 20px;
 background-color: rgba(229, 246, 229, 1);

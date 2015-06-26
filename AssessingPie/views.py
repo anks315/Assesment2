@@ -190,7 +190,7 @@ def home(request):
         if session['type'] == Constant.Constant.STUDENT:
             return render_to_response('Dashboard/dashboard.html',{},context_instance = RequestContext(request))
 
-     return render_to_response('Gen_templates/template_homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+     return render_to_response('Gen_templates/template_login.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
 
 blocknumber = -1
@@ -419,7 +419,7 @@ def signout(request):
             del session['sex']
             del session['lastlogin']
 
-    return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+    return render_to_response('Gen_templates/template_login.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
 
 # dashboard gets called when username and password
@@ -435,7 +435,7 @@ def dashboard(request):
         user_information= Query.login(username,password)
         logging.error(user_information)
         if user_information < 0:
-            return render_to_response('Home/login.html',{'invalid_message': "Enter Correct Credentials"},context_instance = RequestContext(request))
+            return render_to_response('Gen_templates/template_login.html',{'invalid_message': "Enter Correct Credentials"},context_instance = RequestContext(request))
 
 
         session['type'] = user_information[0]
@@ -464,7 +464,7 @@ def dashboard(request):
             session['sex']=teacher.basic_info.sex
             session['lastlogin']=user_information[2]
             return render_to_response('Dashboard/teacherdashboard.html',{},context_instance = RequestContext(request))
-        return render_to_response('Home/homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+        return render_to_response('Gen_templates/template_login.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
     else:
         if session['type'] == Constant.Constant.TEACHER:
             return render_to_response('Dashboard/teacherdashboard.html',{},context_instance = RequestContext(request))
@@ -489,7 +489,6 @@ def vedicMaths(request):
 
 def xyz(request):
     return render_to_response('Gen_templates/index.html',{},context_instance = RequestContext(request))
-
 
 def testreport(request):
     return render_to_response('AssessingPie_toBeremoved/pie.html',{'student_name':"Courage",'subject_name':"Vedic Maths",'readytolearn':["Sum is 2?","Difference divident","Hiii i am there"],'num_known': 80 ,},context_instance = RequestContext(request))
