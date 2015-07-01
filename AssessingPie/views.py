@@ -190,7 +190,7 @@ def home(request):
         if session['type'] == Constant.Constant.STUDENT:
             return render_to_response('Dashboard/dashboard.html',{},context_instance = RequestContext(request))
 
-     return render_to_response('Gen_templates/template_login.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
+     return render_to_response('Gen_templates/template_homepage.html',{'loginurl': users.create_login_url('/'),},context_instance = RequestContext(request))
 
 
 blocknumber = -1
@@ -488,7 +488,7 @@ def vedicMaths(request):
     return render_to_response('Gen_templates/template_vedicMaths.html',{},context_instance = RequestContext(request))
 
 def xyz(request):
-    return render_to_response('Gen_templates/index.html',{},context_instance = RequestContext(request))
+    return render_to_response('QuestionPage/question_type_truefalse.html',{},context_instance = RequestContext(request))
 
 def testreport(request):
     return render_to_response('AssessingPie_toBeremoved/pie.html',{'student_name':"Courage",'subject_name':"Vedic Maths",'readytolearn':["Sum is 2?","Difference divident","Hiii i am there"],'num_known': 80 ,},context_instance = RequestContext(request))

@@ -7,7 +7,97 @@
     <script src="/js/jquery-1.11.1.js"></script>
     <script src="/js/liteaccordion.jquery.min.js"></script>
     <script async="true" src="http://www.google-analytics.com/ga.js"></script>
+
+<style>
+
+input{
+    margin:0px 0px 5px 5px;
+    font: bold 14px Verdana;
+    color:#FFFFFF;
+    background-color:#7B6CDE;
+    border-radius: 5px;
+    width: 150px;
+    padding: 5px;
+}
+
+
+label{
+        margin:0px 0px 5px 5px;
+    font: bold 14px Verdana;
+    color:#FFFFFF;
+
+
+}
+.question {
+    margin: 5px;
+    padding: 5px 5px 5px 20px;
+    border-bottom: 5px none #1D8CE4;
+    border-radius: 5px;
+    background-color: #ECE9E9;
+    font: bold 20px Verdana;
+    color: #333;
+}
+
+
+.answers {
+margin: 5px;
+padding: 5px 5px 5px 20px;
+border-bottom: 5px none #1D8CE4;
+border-radius: 5px;
+background-color: #F9F9F9;
+font: bold 14px Verdana;
+color: #574040;
+}
+
+.answers li {
+list-style: upper-alpha;
+}
+
+label {
+margin-left: 0.5em;
+cursor: pointer;
+}
+
+#nextquestion {
+background: #dddada;
+color: 000000;
+padding: 3px;
+text-align: center;
+width: 200px;
+cursor: pointer;
+border: 1px solid gray;
+}
+
+#nextquestion:hover {
+background: #3d91b8;
+color: #ffffff;
+padding: 3px;
+text-align: center;
+width: 200px;
+cursor: pointer;
+border: 1px solid gray;
+}
+
+#categorylist {
+margin-top: 6px;
+display: none;
+}
+
+#category1, #category2, #category3, #category4, #category5, #category6, #category7, #category8, #category9, #category10, #category11 {
+display: none;
+}
+
+#closing {
+display: none;
+font-style: italic;
+}
+
+
+</style>
+
+
 </head>
+
 
 {% comment %}
 
@@ -90,8 +180,6 @@ function remote() {
 
 
 </script>{% endcomment %}
-
-
 
 <script>
         $(document).ready(function(){
@@ -295,15 +383,6 @@ $(window).load(function() {
 })
 
      });
-
-
-  optionnumber=0;
-  function addanswer(){
-                    optionnumber++;
-                    document.getElementById('answers').innerHTML+= "<input style=\"margin: 5px;padding: 5px 20px 5px 20px;font: bold 14px Verdana; color: #FFFFFF;background-color: #b8eab7;border-radius: 5px;width: 380px;\" type=\"text\" name=\"answer"+ optionnumber + "\">"
-
-
-  }
 
 </script>
 
@@ -523,108 +602,103 @@ function timer() {
 }
 
      </script>
+{##}
+{##}
+{#            <table style="width: 750px; margin: auto;">#}
+{#                <tbody>#}
+{##}
+{##}
+{#                <tr style="height: 30px;">#}
+{##}
+{#                </tr>#}
+{##}
+{#                <tr>#}
+{#                    <td style="width: 150px;position:absolute;">#}
+{#                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(255, 255, 255); font: bold 14px Verdana; color: rgb(51, 51, 51);" onclick="dashboard()" align="left">#}
+{#           Question :#}
+{##}
+{#            </h2>#}
+{#                    </td>#}
+{#                    <td>#}
+{#                                   <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(255, 255, 255); font: bold 28px Verdana; color: rgb(51, 51, 51);" onclick="dashboard()" align="left">#}
+{#             {{ nextquestion }}  ?#}
+{##}
+{#            </h2>#}
+{##}
+{#                    </td>#}
+{#                </tr>#}
+{##}
+{#                <tr style="height: 20px;">#}
+{##}
+{#                </tr>#}
+{##}
+{#                 <form name="input" action="/assessment" method="post">#}
+{##}
+{#              <tr>#}
+{##}
+{##}
+{#            <td style="width: 150px; ">#}
+{#                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(244, 33, 51); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">#}
+{#            Answer :#}
+{#            </h2>#}
+{#                  </td>#}
+{##}
+{##}
+{#                  <td>#}
+{#                      <table>#}
+{#                          <tr>#}
+{#                              <td>#}
+{#                                  {% csrf_token %}#}
+{#                  <input style="margin: 5px;padding: 5px 20px 5px 20px;font: bold 14px Verdana; color: #FFFFFF;background-color: #b8eab7;border-radius: 5px;width: 380px;" type="text" name="answer">#}
+{##}
+{#                              </td>#}
+{#                              <td>#}
+{#                                             <input style="margin:0px 0px 5px 5px;font: bold 14px Verdana;  color:#FFFFFF; background-color:#7B6CDE; border-radius: 5px; width: 150px; padding: 5px;" value="Submit" type="submit">#}
+{##}
+{#                              </td>#}
+{#                          </tr>#}
+{#                      </table>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#                      <!--#}
+{#                 {% csrf_token %}#}
+{##}
+{#-->#}
+{#</td></tr>#}
+{#                                     <tr style="height: 40px;">#}
+{##}
+{#                </tr>#}
+{##}
+{##}
+{#                                     <tr>#}
+{#                    <td style="width: 150px;position:absolute;">#}
+{#                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(244, 33, 51); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">#}
+{#          Note :#}
+{##}
+{#            </h2>#}
+{#                    </td>#}
+{#                    <td>#}
+{#                                   <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border: 5px solid #1DE474; border-radius: 5px; background-color: #1EA52E;; font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">#}
+{##}
+{#1. Please answer in a proper format. <br> 2. Do not use calculators. <br> 3. Do not take help of others. <br> 4. You may use some rough sheet to perform calculations.#}
+{##}
+{#            </h2>#}
+{##}
+{#                    </td>#}
+{#                </tr>#}
+{##}
+{#             </form>#}
+{##}
+{##}
+{#                </tbody>#}
+{#            </table>#}
 
+         {% block content %}
 
-            <table style="width: 750px; margin: auto;">
-                <tbody>
-
-
-                <tr style="height: 30px;">
-
-                </tr>
-
-                <tr>
-                    <td style="width: 150px;position:absolute;">
-                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(255, 255, 255); font: bold 14px Verdana; color: rgb(51, 51, 51);" onclick="dashboard()" align="left">
-           Question :
-
-            </h2>
-                    </td>
-                    <td>
-                                   <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(255, 255, 255); font: bold 28px Verdana; color: rgb(51, 51, 51);" onclick="dashboard()" align="left">
-             {{ nextquestion }}
-
-            </h2>
-
-                    </td>
-                </tr>
-
-                <tr style="height: 20px;">
-
-                </tr>
-
-                 <form name="input" action="/assessment" method="post">
-                     {% csrf_token %}
-
-              <tr>
-
-
-            <td style="width: 150px; ">
-                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(244, 33, 51); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
-            Answer :
-            </h2>
-                  </td>
-
-
-                  <td>
-                      <table>
-                          <tr>
-                              <td id="answers">
-
-
-
-
-                  <input style="margin: 5px;padding: 5px 20px 5px 20px;font: bold 14px Verdana; color: #FFFFFF;background-color: #b8eab7;border-radius: 5px;width: 380px;" type="text" name="answer0">
-
-
-                              </td>
-
-
-
-                              <td>
-
-                                             <input style="margin:0px 0px 5px 5px;font: bold 14px Verdana;  color:#FFFFFF; background-color:#7B6CDE; border-radius: 5px; width: 150px; padding: 5px;" value="Submit" type="submit">
-
-                              </td>
-                          </tr>
-                      </table>
-
-
-
-
-
-                      <!--
-                 {% csrf_token %}
-
--->
-</td></tr>
-                                     <tr style="height: 40px;">
-
-                </tr>
-
-
-                                     <tr>
-                    <td style="width: 150px;position:absolute;">
-                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(244, 33, 51); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
-          Note :
-
-            </h2>
-                    </td>
-                    <td>
-                                   <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border: 5px solid #1DE474; border-radius: 5px; background-color: #1EA52E;; font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
-
-1. Please answer in a proper format. <br> 2. Do not use calculators. <br> 3. Do not take help of others. <br> 4. You may use some rough sheet to perform calculations.
-
-            </h2>
-
-                    </td>
-                </tr>
-
-             </form>
-
-
-                </tbody>
-            </table>
+     {% endblock %}
 
 
 </div>
@@ -666,200 +740,3 @@ function timer() {
 
 </html>
 
-
-{% comment %}
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-		<title>Critical Velos</title>
-
-		<!-- main styles -->
-			<link rel="stylesheet" href="/css/dashboard/style.css">
-			<link rel="stylesheet" href="/css/dashboard/foundation.css" />
-            <link rel="stylesheet" href="/css/web/styles.css">
-
-		<!-- Google fonts -->
-			<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' />
-			<link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' />
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Knowledge', 'Fraction'],
-          ['Dont Know',    4]  ,
-          ['Already Know',    6]
-
-        ]);
-
-        var options = {
-          title: 'Your Maths Donut',
-          pieHole: 0.6
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      }
-    </script>
-
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Assessment Number', 'Maths', 'Science'],
-          ['2004',  33,      56],
-          ['2005',  67,      67],
-          ['2006',  53,       89],
-          ['2007',  85,      96]
-        ]);
-
-
-        var options = {
-          title: 'Your History With Critical Velos',
-             animation:{
-        duration: 1000,
-        easing: 'out'
-      }
-
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-
-
-
-	</head>	
-	
-	<body class="ptrn_e grdnt_c mhover_c">
-<header class="p30">
-
-					<div class="row sepH_b">
-
-					<div class="six columns">
-                    <h1><a class="logo" href="index.html">Critical Velos</a></h1>
-                    </div>
-					<div class="six columns">
-						<div class="user_box cf">
-							<div class="user_avatar">
-								<img src="/images/user_male.png" alt="" />
-							</div>
-							<div class="user_info user_sep">
-								<p class="sepH_a">
-									<strong>Hello {{ logger }}</strong>
-								</p>
-								<span>
-									<a href="#" class="sep">Settings</a>
-									<a href="{{ logouturl }}">Log out</a>
-								</span>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-
-<div class="main">
-
-    <div id="menu">
-    <nav>
-            <ul class="my_menu">
-
-								<li><a href="/assessment" class ="active1">Assess Yourself</a></li>
-								<li><a href="#" >My Chart</a></li>
-								<li><a href="/inference/" >Inference</a></li>
-                                <li><a href="#" >Topics</a></li>
-								<li><a href="#" >Calendar</a></li>
-								<li><a href="#" >Results</a></li>
-
-            </ul>
-    </nav>
-        <div class="clear"></div>
-    </div>
-</div>
-
-
-
-</header>
-
-
-
-
-<div class="clear"></div>
-		<div class="container">
-			
-
-
-		
-		<div class="clear"></div>
-		<div class="row">
-
-				<div class="twelve columns">
-					<div class="box_c">
-						<div class="box_c_heading cf">
-							<div class="box_c_ico"><img src="/images/16-Graph.png" alt="" /></div>
-							<p>Maths Subject Question Base</p>
-						</div>
-						<div class="box_c_content">
-							<div class="inner_block">
-
-<!--
-<h3 class="p12"><a href="/code-samples/" class="current">Hello {{ logger }}</a></h3>
--->
-
-
-
-<!--
-<h3 class="p12"><a href="/code-samples/" class="current">Hello {{ logger }}</a></h3>  -->
-
-<span>Maths Subject</span>
-<p> Question : {{ nextquestion }}  ?</p>
-            <form name="input" action="/assessment" method="post">
-
-                 {% csrf_token %}
-                   Answer: <input type="text" name="answer">
-                   <input type="submit" value="Submit">
-             </form>
-<div class="clear"></div>
-
-						</div>
-						</div>
-					</div>
-				</div>
-			</div>		
-			
-
-
-            <div class="clear"></div>
-
-			
-			
-
-		</div>
-		<footer class="container" id="footer">
-			<div class="row">
-				<div class="twelve columns">
-                    Copyright &copy; CriticalVeloss
-				</div>
-			</div>
-		</footer>
-		<div class="sw_width">
-			<img class="sw_full" title="switch to full width" alt="" src="/images/blank.gif" />
-			<img style="display:none" class="sw_fixed" title="switch to fixed width (980px)" alt="" src="/images/blank.gif" />
-		</div>
-
-		<script src="js/jquery.min.js"></script>
-
-	</body>
-</html>{% endcomment %}

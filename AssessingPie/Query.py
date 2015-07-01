@@ -4605,7 +4605,7 @@ def get_school_by_name(name):
         return Constant.ERROR_BAD_VALUE
 
 
-def add_topic_from_excel(school_key,name, prerequisite_topics,subject_key,types,state_nos):
+def add_topic_from_excel(school_key,name, prerequisite_topics,subject_key,types):
 
     state_list = []
     try:
@@ -4614,7 +4614,7 @@ def add_topic_from_excel(school_key,name, prerequisite_topics,subject_key,types,
             state_list.append(addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school_key))
             count = count + 1
         topic=addTopic(school_key=school_key,name=name, prerequisite_topics=prerequisite_topics,subject_key=subject_key,types=types)
-        assign_states_to_topic(topic.key,[state_chapone_one.key,state_chapone_two.key,state_chapone_six.key,state_chapone_eight.key],school.key)
+        #assign_states_to_topic(topic.key,[state_chapone_one.key,state_chapone_two.key,state_chapone_six.key,state_chapone_eight.key],school.key)
         return topic.key.urlsafe()
     except Exception :
         logging.exception("")

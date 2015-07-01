@@ -1,0 +1,107 @@
+{% extends "QuestionPage/question_base.html" %}
+
+{% block content %}
+
+{#<p class="question">3. This is input Value question?</p>#}
+{##}
+{#<ul class="answers">#}
+{#<input type="text" name="q3" id="q3a"><label for="q3a">Answer 1</label><br/>#}
+{#</ul>#}
+
+
+
+            <table style="width: 750px; margin: auto;">
+                <tbody>
+
+
+                <tr style="height: 30px;">
+
+                </tr>
+
+                <tr>
+                    <td style="width: 150px;position:absolute;">
+                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(255, 255, 255); font: bold 14px Verdana; color: rgb(51, 51, 51);" onclick="dashboard()" align="left">
+           Question :
+
+            </h2>
+                    </td>
+                    <td>
+                                   <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(255, 255, 255); font: bold 28px Verdana; color: rgb(51, 51, 51);" onclick="dashboard()" align="left">
+             {{ nextquestion }}  ?
+
+            </h2>
+
+                    </td>
+                </tr>
+
+                <tr style="height: 20px;">
+
+                </tr>
+
+                 <form name="input" action="/assessment" method="post">
+
+              <tr>
+
+
+            <td style="width: 150px; ">
+                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(244, 33, 51); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
+            Answer :
+            </h2>
+                  </td>
+
+
+                  <td>
+                      <table>
+                          <tr>
+                              <td>
+                                  {% csrf_token %}
+                  <input style="margin: 5px;padding: 5px 20px 5px 20px;font: bold 14px Verdana; color: #FFFFFF;background-color: #b8eab7;border-radius: 5px;width: 380px;" type="text" name="answer">
+
+                              </td>
+                              <td>
+                                             <input style="margin:0px 0px 5px 5px;font: bold 14px Verdana;  color:#FFFFFF; background-color:#7B6CDE; border-radius: 5px; width: 150px; padding: 5px;" value="Submit" type="submit">
+
+                              </td>
+                          </tr>
+                      </table>
+
+
+
+
+
+                      <!--
+                 {% csrf_token %}
+
+-->
+</td></tr>
+                                     <tr style="height: 40px;">
+
+                </tr>
+
+
+                                     <tr>
+                    <td style="width: 150px;position:absolute;">
+                               <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border-bottom: 5px rgb(29, 140, 228); border-radius: 5px; background-color: rgb(244, 33, 51); font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
+          Note :
+
+            </h2>
+                    </td>
+                    <td>
+                                   <h2 style="margin: 5px; padding: 5px 5px 5px 20px; border: 5px solid #1DE474; border-radius: 5px; background-color: #1EA52E;; font: bold 14px Verdana; color: rgb(255, 255, 255);" onclick="dashboard()" align="left">
+
+1. Please answer in a proper format. <br> 2. Do not use calculators. <br> 3. Do not take help of others. <br> 4. You may use some rough sheet to perform calculations.
+
+            </h2>
+
+                    </td>
+                </tr>
+
+             </form>
+
+
+                </tbody>
+            </table>
+
+
+
+{% endblock %}
