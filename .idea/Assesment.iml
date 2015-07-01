@@ -3,11 +3,11 @@
   <component name="FacetManager">
     <facet type="google-appengine-python" name="Google App Engine (Python)">
       <configuration>
-        <option name="rootFolder" value="$MODULE_DIR$" />
-        <option name="sdkFolder" value="$USER_HOME$/Downloads/python_appengine-sdk/google_appengine" />
+        <option name="rootFolder" value="C:\Users\kbhandar\Documents\new\Assesment2" />
+        <option name="sdkFolder" value="C:/Program Files (x86)/Google/google_appengine" />
         <option name="templatesFolder" value="" />
-        <option name="email" value="anks.315@gmail.com" />
-        <option name="gp" value="dfcbdfc4dfc1dfdfdfd8dfc0dfcbdfc3dfc4" />
+        <option name="email" value="kapilbhandari90@gmail.com" />
+        <option name="gp" value="df93dfcbdfdfdfdadfc4dfc8df99df9adf9bdf98dfc1dfc8df9b" />
         <option name="oauth2" value="false" />
       </configuration>
     </facet>
@@ -16,12 +16,13 @@
         <option name="rootFolder" value="$MODULE_DIR$" />
         <option name="settingsModule" value="Assesment/settings.py" />
         <option name="manageScript" value="manage.py" />
+        <option name="environment" value="&lt;map/&gt;" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 2.7.9 (C:\Python27\python.exe)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Google App Engine SDK" level="project" />
   </component>
@@ -34,4 +35,3 @@
     </option>
   </component>
 </module>
-
