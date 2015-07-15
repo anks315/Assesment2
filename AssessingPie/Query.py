@@ -4609,10 +4609,6 @@ def add_topic_from_excel(school_key,name, prerequisite_topics,subject_key,types)
 
     state_list = []
     try:
-        count = 0;
-        while (count < st):
-            state_list.append(addState(type=Constant.Constant.STATE_IN_TOPIC,school_key=school_key))
-            count = count + 1
         topic=addTopic(school_key=school_key,name=name, prerequisite_topics=prerequisite_topics,subject_key=subject_key,types=types)
         #assign_states_to_topic(topic.key,[state_chapone_one.key,state_chapone_two.key,state_chapone_six.key,state_chapone_eight.key],school.key)
         return topic.key.urlsafe()
@@ -4623,7 +4619,7 @@ def add_topic_from_excel(school_key,name, prerequisite_topics,subject_key,types)
 
 
 def  addQuestion_from_excel(problem_statement, type, choices, answers,school_key,topic_type):
-    try:                                    `
+    try:
         questioninstance_base_one=Query.addQuestionInstance(problem_statement=problem_statement, type=type,choices=choices , answers=answers,school_key=school_key,url="")
         question_base_one=addQuestion(questioninstance_base_one,school.key)
         assign_questions_to_topic(topic_chap_one.key,[question_base_one.key],school_key,topic_type=topic_type)

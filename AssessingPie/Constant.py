@@ -46,6 +46,7 @@ class Subject_Name:
     SUB_GEOLOGY="Geology"
     SUB__SCIENCE="Science"
     SUB_VEDIC = "Vedic Maths"
+    SUB_MATHS_SIXTH = "Sixth Math"
 
 '''class Topic:
     TOPIC_ADDITION="Addition"

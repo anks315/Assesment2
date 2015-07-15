@@ -5,7 +5,7 @@ from gaesessions import get_current_session
 from engine import topictimespend,nextquestion,Question,update,maxstate,setcount,getcount,usersdict,UserBuffer,maxstatesize,getnumquestions,readytolearnurl,readytolearn,completedtopics,currentstatelist,scorelist,nextstatelist,readytolearnquestionkey
 from django.template import RequestContext,loader,Context
 from google.appengine.api import users
-from dummydata import fill,flush
+from dummydat4 import fill,flush
 from Query import login
 import logging
 import inferenceengine

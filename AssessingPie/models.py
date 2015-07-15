@@ -23,7 +23,7 @@ class User(ndb.Model):
     lastlogin=ndb.DateTimeProperty()
     
        
-    
+
 
 """
 This class contains the basic info of a question instance
@@ -397,5 +397,4 @@ class Student_Assessments(ndb.Model):
     assessment_record= ndb.KeyProperty(kind=Assessment_Record,repeated=True)
    
    
-
 

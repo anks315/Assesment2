@@ -353,7 +353,7 @@ def fill():
             Query.assign_questions_to_topic(topic_common_factors.key,[question_CFCM21.key],school.key,"6_3_CFCM2")
             Query.assign_questions_to_topic(topic_common_factors.key,[question_CFCM31.key],school.key,"6_3_CFCM3")
             Query.assign_questions_to_topic(topic_common_factors.key,[question_CFCM41.key],school.key,"6_3_CFCM4")
-            Query.assign_questions_to_topic(topic_common_factors.key,[question_CFCM51.key],school.key,"6_3_CFCM5")
+            Query.(assign_questions_to_topictopic_common_factors.key,[question_CFCM51.key],school.key,"6_3_CFCM5")
             '''
 
 
